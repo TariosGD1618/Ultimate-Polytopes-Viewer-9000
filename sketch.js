@@ -38,9 +38,9 @@ var wy = 0
 var wz = 0
 var col = 0
 var col2 = 0
-var tr = []
+var vertexData = []
 var zoom = 1
-tr = simplex
+vertexData = simplex
 d = 2/sqrt(1.6)
 f = 1
 fct = 2
@@ -66,10 +66,10 @@ function doWeird(A,b) {
 }
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight)
-  centerV.position(width/2-c,0)
-  centerC.position(width/2,0)
-  centerF.position(width/2-c,20)
-  centerE.position(width/2,20)
+  centerv.position(width/2-c,0)
+  centerc.position(width/2,0)
+  centerf.position(width/2-c,20)
+  centere.position(width/2,20)
   div7.position(0,height-20)
 }
 function changeDimension() {
@@ -109,7 +109,7 @@ function resetCamera() {
   zoom=1
   if(inp2.value()==4) {
     if(a==0) {
-      tr = simplex
+      vertexData = simplex
       d = 2/sqrt(1.6)
       f = 1
       fct = 2
@@ -121,7 +121,7 @@ function resetCamera() {
       s=1
       L2=L
     }else if(a==1){
-      tr = tesseract
+      vertexData = tesseract
       d = 2
       f = 0.5
       fct = 2
@@ -133,7 +133,7 @@ function resetCamera() {
       s=1
       L2=L
     }else if(a==2) {
-      tr = orthoplex
+      vertexData = orthoplex
       d = sqrt(2)
       f = 1
       fct = 0.75
@@ -145,7 +145,7 @@ function resetCamera() {
       s=1
       L2=L
     }else if(a==3) {
-      tr = icositetrachoron
+      vertexData = icositetrachoron
       d = sqrt(2)
       f=1/sqrt(2)
       fct = 1.1
@@ -157,7 +157,7 @@ function resetCamera() {
       s=1
       L2=L
     }else if(a==4) {
-      tr = dodecaplex
+      vertexData = dodecaplex
       d=3-sqrt(5)
       f=1/sqrt(8)
       fct = 1.1
@@ -169,7 +169,7 @@ function resetCamera() {
       s=1
       L2=L
     }else if(a==5) {
-      tr = tetraplex
+      vertexData = tetraplex
       d=phi_1
       f=1
       fct = 0.95
@@ -181,7 +181,7 @@ function resetCamera() {
       wz = atan(1/sqrt(7))
       L2=L
     }else if(a==6) {
-      tr = tetraplex
+      vertexData = tetraplex
       d=phi_1
       d2=1
       f=1
@@ -194,7 +194,7 @@ function resetCamera() {
       wy = 0
       wz = 0
     }else if(a==7) {
-      tr = tetraplex
+      vertexData = tetraplex
       d=1
       f=1
       fct = 0.95
@@ -206,7 +206,7 @@ function resetCamera() {
       wy = 0
       wz = 0
     }else if(a==8) {
-      tr = tetraplex
+      vertexData = tetraplex
       d=phi_1
       d2=phi
       f=1
@@ -219,7 +219,7 @@ function resetCamera() {
       wz = 0
       L2=720
     }else if(a==9) {
-      tr = tetraplex
+      vertexData = tetraplex
       d=phi_1
       d2=phi
       d3=phi_2
@@ -233,7 +233,7 @@ function resetCamera() {
       wz = atan(1/sqrt(7))
       L2=720
     }else if(a==10) {
-      tr = tetraplex
+      vertexData = tetraplex
       d=phi
       d2=phi_1
       f=1
@@ -246,7 +246,7 @@ function resetCamera() {
       wz = atan(1/sqrt(7))
       L2=L
     }else if(a==11) {
-      tr = tetraplex
+      vertexData = tetraplex
       d=phi
       d2=phi_1
       d3=1
@@ -260,7 +260,7 @@ function resetCamera() {
       wz = atan(1/sqrt(7))
       L2=720
     }else if(a==12) {
-      tr = tetraplex
+      vertexData = tetraplex
       d=1
       d2=phi
       f=1
@@ -273,7 +273,7 @@ function resetCamera() {
       wz = atan(1/sqrt(7))
       L2=1200
     }else if(a==13) {
-      tr = tetraplex
+      vertexData = tetraplex
       d=phi
       f=1
       fct = 0.95
@@ -285,7 +285,7 @@ function resetCamera() {
       wz = atan(1/sqrt(7))
       L2=L
     }else if(a==14) {
-      tr = num14
+      vertexData = num14
       d=phi
       d2=1
       d3=2.572553981697934/2
@@ -299,7 +299,7 @@ function resetCamera() {
       wz = atan(1/sqrt(7))
       L2=720
     }else if(a==15) {
-      tr = dodecaplex
+      vertexData = dodecaplex
       f=1/sqrt(8)
       d=4/(3-sqrt(5))
       fct = 1.1
@@ -313,21 +313,21 @@ function resetCamera() {
     }
   }else {
     if(a==0) {
-      tr = tetrahedron
+      vertexData = tetrahedron
       d = 2/sqrt(1.6)/sqrt(15/16)
       f = 1
       L = 6
       s=1
       L2=L
     }else if(a==1){
-      tr = cube
+      vertexData = cube
       d = 2
       f = sqrt(1/2)
       L=12
       s=1
       L2=L
     }else if(a==2) {
-      tr = octohedron
+      vertexData = octohedron
       d = sqrt(2)
       f = 1
       L=12
@@ -336,7 +336,7 @@ function resetCamera() {
       yz = PI/4
       L2=L
     }else if(a==3) {
-      tr = dodecahedron
+      vertexData = dodecahedron
       d = sqrt(5)-1
       f=1/sqrt(3)
       L=30
@@ -344,7 +344,7 @@ function resetCamera() {
       yz=atan(phi_1)
       L2=L
     }else if(a==4) {
-      tr = icosohedron
+      vertexData = icosohedron
       d=2
       f=1/sqrt(phi+2)
       L=30
@@ -352,7 +352,7 @@ function resetCamera() {
       xz = atan(phi_2)
       L2=L
     }else if(a==5) {
-      tr = icosohedron
+      vertexData = icosohedron
       d=2*phi
       f=1/sqrt(phi+2)
       L=30
@@ -361,7 +361,7 @@ function resetCamera() {
       xz = 0
       yz=atan(phi_1)
     }else if(a==6) {
-      tr = icosohedron
+      vertexData = icosohedron
       d=2
       d2 = 2*phi
       f=1/sqrt(phi+2)
@@ -371,7 +371,7 @@ function resetCamera() {
       xz = 0
       yz=atan(phi_1)
     }else if(a==7) {
-      tr = dodecahedron
+      vertexData = dodecahedron
       f=1/sqrt(phi+2)
       d=sqrt(5)+1
       L=30
@@ -379,7 +379,7 @@ function resetCamera() {
       yz=atan(phi_1)
       L2=30
     }else if(a==8) {
-      tr = greaticosa
+      vertexData = greaticosa
       f=1/sqrt(phi+2)
       d=2*phi
       d2 = 2.572553981697934
@@ -883,47 +883,47 @@ function draw() {
     wz=0
   }
   background(0)
-  var wack = []
-  for(var h = 0; h<tr.length; h++) {
-    wack[h]=[0,0,0,0]
-    var x = tr[h][0]
-    var y = tr[h][3]
-    wack[h][0]=x*cos(wx)-y*sin(wx)
-    wack[h][1]=tr[h][1]
-    wack[h][2]=tr[h][2]
-    wack[h][3]=y*cos(wx)+x*sin(wx)
-    var x = wack[h][1]
-    var y = wack[h][3]
-    wack[h][1]=x*cos(wy)-y*sin(wy)
-    wack[h][3]=y*cos(wy)+x*sin(wy)
-    var x = wack[h][2]
-    var y = wack[h][3]
-    wack[h][2]=x*cos(wz)-y*sin(wz)
-    wack[h][3]=y*cos(wz)+x*sin(wz)
-    var x = wack[h][0]
-    var y = wack[h][1]
-    wack[h][0]=x*cos(xy)-y*sin(xy)
-    wack[h][1]=y*cos(xy)+x*sin(xy)
-    var x = wack[h][1]
-    var y = wack[h][2]
-    wack[h][1]=x*cos(yz)-y*sin(yz)
-    wack[h][2]=y*cos(yz)+x*sin(yz)
-    var x = wack[h][0]
-    var y = wack[h][2]
-    wack[h][0]=x*cos(xz)-y*sin(xz)
-    wack[h][2]=y*cos(xz)+x*sin(xz)
+  var vertexData2 = []
+  for(var h = 0; h<vertexData.length; h++) {
+    vertexData2[h]=[0,0,0,0]
+    var x = vertexData[h][0]
+    var y = vertexData[h][3]
+    vertexData2[h][0]=x*cos(wx)-y*sin(wx)
+    vertexData2[h][1]=vertexData[h][1]
+    vertexData2[h][2]=vertexData[h][2]
+    vertexData2[h][3]=y*cos(wx)+x*sin(wx)
+    var x = vertexData2[h][1]
+    var y = vertexData2[h][3]
+    vertexData2[h][1]=x*cos(wy)-y*sin(wy)
+    vertexData2[h][3]=y*cos(wy)+x*sin(wy)
+    var x = vertexData2[h][2]
+    var y = vertexData2[h][3]
+    vertexData2[h][2]=x*cos(wz)-y*sin(wz)
+    vertexData2[h][3]=y*cos(wz)+x*sin(wz)
+    var x = vertexData2[h][0]
+    var y = vertexData2[h][1]
+    vertexData2[h][0]=x*cos(xy)-y*sin(xy)
+    vertexData2[h][1]=y*cos(xy)+x*sin(xy)
+    var x = vertexData2[h][1]
+    var y = vertexData2[h][2]
+    vertexData2[h][1]=x*cos(yz)-y*sin(yz)
+    vertexData2[h][2]=y*cos(yz)+x*sin(yz)
+    var x = vertexData2[h][0]
+    var y = vertexData2[h][2]
+    vertexData2[h][0]=x*cos(xz)-y*sin(xz)
+    vertexData2[h][2]=y*cos(xz)+x*sin(xz)
   }
-  var nwt = []
-  for(var i = 0; i<wack.length; i++) {
-    var fact = 400/(fct-wack[i][3]*f)/fct2
-    nwt[i]=[wack[i][0]*fact*f,wack[i][1]*fact*f,wack[i][2]*fact*f,1/(fct-wack[i][3]*f)*f/fct2]
+  var vertexDataProjected = []
+  for(var i = 0; i<vertexData2.length; i++) {
+    var fact = 400/(fct-vertexData2[i][3]*f)/fct2
+    vertexDataProjected[i]=[vertexData2[i][0]*fact*f,vertexData2[i][1]*fact*f,vertexData2[i][2]*fact*f,1/(fct-vertexData2[i][3]*f)*f/fct2]
   }
   var l = 0
   if(edges>0) {
-    for(var k = 0; k<tr.length;k++) {
-      for(var k2 = 0; k2<tr.length;k2++) {
-        if((areConnected(tr[k],tr[k2],d)==2||areConnected(tr[k],tr[k2],d)==1)&&k2>k) {
-          renderLine(nwt[k],nwt[k2],areConnected(tr[k],tr[k2],d))
+    for(var k = 0; k<vertexData.length;k++) {
+      for(var k2 = 0; k2<vertexData.length;k2++) {
+        if((areConnected(vertexData[k],vertexData[k2],d)==2||areConnected(vertexData[k],vertexData[k2],d)==1)&&k2>k) {
+          renderLine(vertexDataProjected[k],vertexDataProjected[k2],areConnected(vertexData[k],vertexData[k2],d))
           l++
           if(L==l) {
             break
@@ -933,9 +933,9 @@ function draw() {
     }
   }
   if(verticies>0) {
-    for(var j = 0; j<tr.length; j++) {
+    for(var j = 0; j<vertexData.length; j++) {
       if(((inp.value()>8||inp.value()<8||j<12)&&inp2.value()==3)||((inp.value()>14||inp.value()<14||j>720)&&inp2.value()==4)) {
-        renderVertex(nwt[j])
+        renderVertex(vertexDataProjected[j])
       }
     }
   }
@@ -945,7 +945,7 @@ function draw() {
   wx = 0
   wy = 0
   wz = 0
-  tr = wack
+  vertexData = vertexData2
 }
 function renderVertex(arr) {
   noStroke()
@@ -957,7 +957,7 @@ function renderVertex(arr) {
   }else {
     sphere(25*s*zoom)
   }
-  var A_ = tr.length
+  var A_ = vertexData.length
   if(inp.value()==8&&inp2.value()==3) {
     A_=12
   }else if(inp.value()==14) {
