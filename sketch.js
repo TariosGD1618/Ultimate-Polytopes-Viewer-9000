@@ -1,0 +1,1009 @@
+sq = function(x) {return x*x}
+a = 0
+sqrt=Math.sqrt
+phi = 0.5+sqrt(1.25)
+phi_1=phi-1
+phi_2=phi_1/phi
+phi2 = phi+1
+PI=Math.PI
+d2 = NaN
+var tetrahedron = [[sqrt(2/3),-sqrt(2/9),1/3,0],[-sqrt(2/3),-sqrt(2/9),1/3,0],[0,sqrt(8/9),1/3,0],[0,0,-1,0]]
+var cube = conv([[11,11,11,0]])
+var octohedron = conv([[11,0,0,0],[0,11,0,0],[0,0,11,0]])
+var dodecahedron = conv([[11,11,11,0],[0,10+phi,10+phi_1,0],[10+phi_1,0,10+phi,0],[10+phi,10+phi_1,0,0]])
+var icosohedron = conv([[0,11,10+phi,0],[11,10+phi,0,0],[10+phi,0,11,0]])
+var greaticosa = conv([[0,11,10+phi,0],[11,10+phi,0,0],[10+phi,0,11,0],[11,0,0,0],[0,11,0,0],[0,0,11,0],[10.5,10.30901699437494745,10.8090169943749475,0],[10.8090169943749475,10.5,10.30901699437494745,0],[10.30901699437494745,10.8090169943749475, 10.5,0]])
+var simplex = [[sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[-sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,sqrt(8/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,0,1*sqrt(15/16),1/4],[0,0,0,-1]]
+var tesseract = conv([[11,11,11,11]])
+var orthoplex = conv([[11,0,0,0],[0,11,0,0],[0,0,11,0],[0,0,0,11]])
+var icositetrachoron = conv([[11,11,0,0],[0,11,11,0],[0,0,11,11],[0,11,0,11],[11,0,11,0],[11,0,0,11]])
+var dodecaplex = [[12,12,0,0],[0,12,12,0],[0,0,12,12],[0,12,0,12],[12,0,12,0],[12,0,0,12],[10+sqrt(5),11,11,11],[11,10+sqrt(5),11,11],[11,11,10+sqrt(5),11],[11,11,11,10+sqrt(5)],[10+phi_2,10+phi,10+phi,10+phi],[10+phi,10+phi_2,10+phi,10+phi],[10+phi,10+phi,10+phi_2,10+phi],[10+phi,10+phi,10+phi,10+phi_2],  [10+phi2,10+phi_1,10+phi_1,10+phi_1],[10+phi_1,10+phi2,10+phi_1,10+phi_1],[10+phi_1,10+phi_1,10+phi2,10+phi_1],[10+phi_1,10+phi_1,10+phi_1,10+phi2]]
+var at = [0,10+phi_2,11,10+phi2]
+dodecaplex.push([at[0],at[1],at[2],at[3]],[at[2],at[0],at[1],at[3]],[at[1],at[2],at[0],at[3]],[at[1],at[0],at[3],at[2]],[at[0],at[3],at[1],at[2]],[at[0],at[2],at[3],at[1]],[at[3],at[0],at[2],at[1]],[at[2],at[3],at[0],at[1]],[at[2],at[1],at[3],at[0]],[at[1],at[3],at[2],at[0]],[at[3],at[2],at[1],at[0]],[at[3],at[1],at[0],at[2]])
+var ta = [0,10+phi_1,10+phi,10+sqrt(5)]
+dodecaplex.push([ta[0],ta[1],ta[2],ta[3]],[ta[2],ta[0],ta[1],ta[3]],[ta[1],ta[2],ta[0],ta[3]],[ta[1],ta[0],ta[3],ta[2]],[ta[0],ta[3],ta[1],ta[2]],[ta[0],ta[2],ta[3],ta[1]],[ta[3],ta[0],ta[2],ta[1]],[ta[2],ta[3],ta[0],ta[1]],[ta[2],ta[1],ta[3],ta[0]],[ta[1],ta[3],ta[2],ta[0]],[ta[3],ta[2],ta[1],ta[0]],[ta[3],ta[1],ta[0],ta[2]])
+var Ta = [10+phi_1,11,10+phi,12]
+dodecaplex.push([Ta[0],Ta[1],Ta[2],Ta[3]],[Ta[2],Ta[0],Ta[1],Ta[3]],[Ta[1],Ta[2],Ta[0],Ta[3]],[Ta[1],Ta[0],Ta[3],Ta[2]],[Ta[0],Ta[3],Ta[1],Ta[2]],[Ta[0],Ta[2],Ta[3],Ta[1]],[Ta[3],Ta[0],Ta[2],Ta[1]],[Ta[2],Ta[3],Ta[0],Ta[1]],[Ta[2],Ta[1],Ta[3],Ta[0]],[Ta[1],Ta[3],Ta[2],Ta[0]],[Ta[3],Ta[2],Ta[1],Ta[0]],[Ta[3],Ta[1],Ta[0],Ta[2]])
+dodecaplex=conv(dodecaplex)
+var tetraplex = [[11,0,0,0],[0,11,0,0],[0,0,11,0],[0,0,0,11],[10.5,10.5,10.5,10.5]]
+var At = [10+phi/2,10.5,10+phi_1/2,0]
+tetraplex.push([At[0],At[1],At[2],At[3]],[At[2],At[0],At[1],At[3]],[At[1],At[2],At[0],At[3]],[At[1],At[0],At[3],At[2]],[At[0],At[3],At[1],At[2]],[At[0],At[2],At[3],At[1]],[At[3],At[0],At[2],At[1]],[At[2],At[3],At[0],At[1]],[At[2],At[1],At[3],At[0]],[At[1],At[3],At[2],At[0]],[At[3],At[2],At[1],At[0]],[At[3],At[1],At[0],At[2]])
+tetraplex = conv(tetraplex)
+var num14 = doWeird(tetraplex,phi)
+var xy = 0
+var yz = 0
+var xz = 0
+var wx = 0
+var wy = 0
+var wz = 0
+var col = 0
+var col2 = 0
+var tr = []
+var zoom = 1
+tr = simplex
+d = 2/sqrt(1.6)
+f = 1
+fct = 2
+fct2 = 1
+L = 10
+wx = PI
+var s = 1
+var L2=L
+var edges = 1
+var verticies = 1
+function doWeird(A,b) {
+  var A2 = []
+  for(var X = 0; X<A.length; X++) {
+    for(var Y = 0; Y<A.length; Y++) {
+      var dist = sq(A[X][0]-A[Y][0])+sq(A[X][1]-A[Y][1])+sq(A[X][2]-A[Y][2])+sq(A[X][3]-A[Y][3])
+      if(sq(dist-b*b)<0.001&&X>Y) {
+        A2.push([(A[X][0]+A[Y][0])/2+(A[X][1]+A[Y][1])/2+(A[X][2]+A[Y][2])/2+(A[X][3]+A[Y][3])/2])
+      }
+    }
+  }
+  A2=A2.concat(A)
+  return A2
+}
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight)
+  centerv.position(width/2-c,0)
+  centerc.position(width/2,0)
+  centerf.position(width/2-c,20)
+  centere.position(width/2,20)
+}
+function doStuff2() {
+  if(inp2.value()==4) {
+    inp.html('<option value="0">pentachoron</option><option value="1">tesseract</option><option value="2">hexadecachoron</option><option value="3">icositetrachoron</option><option value="4">dodecaplex</option><option value="5">tetraplex</option>     <option value="6">icosahedral 120-cell</option><option value="7">small stellated 120-cell</option><option value="8">great 120-cell</option><option value="9">grand 120-cell</option><option value="10">great stellated 120-cell</option><option value="11">grand stellated 120-cell</option><option value="12">great grand 120-cell</option><option value="13">great icosahedral 120-cell</option><option value="14">grand 600-cell</option><option value="15">great grand stellated 120-cell</option>')
+    if(a==0) {
+      inp.selected(0)
+    }else if(a==1) {
+      inp.selected(1)
+    }else if(a==2) {
+      inp.selected(2)
+    }else if(a==3) {
+      inp.selected(4)
+    }else if(a==4) {
+      inp.selected(5)
+    }
+  }else {
+    inp.html('<option value="0">tetrahedron</option><option value="1">cube</option><option value="2">octahedron</option><option value="3">dodecahedron</option><option value="4">icosohedron</option>  <option value="5">small stellated dodecahedron</option><option value="6">great dodecahedron</option><option value="7">great stellated dodecahedron</option><option value="8">great icosahedron</option>')
+    if(a==0) {
+      inp.selected(0)
+    }else if(a==1) {
+      inp.selected(1)
+    }else if(a==2) {
+      inp.selected(2)
+    }else if(a==4) {
+      inp.selected(3)
+    }else if(a==5) {
+      inp.selected(4)
+    }
+  }
+  fct = 2
+  fct2 = 1
+  doStuff()
+}
+function centercell() {
+  if(inp2.value()==4) {
+    doStuff()
+  }
+}
+function centervertex() {
+  doStuff()
+  if(inp2.value()==4) {
+    if(a==0) {
+      fct = 2
+      fct2 = 1
+      wx = PI
+      s=1
+    }else if(a==1){
+      fct = 4
+      fct2 = 0.5
+      wx = PI/4
+      wy = PI/5
+      wz = PI/6
+      s=1
+    }else if(a==2) {
+      fct = 2
+      fct2 = 1
+      L=24
+      wx = 0
+      wy = 0
+      wz = 0
+      s=1
+    }else if(a==3) {
+      fct = 2
+      fct2 = 1
+      L=96
+      wx = atan(1)
+      wy = 0
+      wz = 0
+      s=1
+    }else if(a==4||a==15) {
+      fct = 1.1
+      fct2 = 4
+      L=1200
+      wx = atan(1/sqrt(5))
+      wy = atan(1/sqrt(6))
+      wz = atan(1/sqrt(7))
+      s=1
+    }else if(a==5||a==6||a==8||a==9||a==11||a==12||a==13||a==14||a==10||a==11||a==7) {
+      fct = 0.95
+      fct2 = 8
+      L=720
+      s=0.25
+      wx = 0
+      wy = 0
+      wz = 0
+    }
+  }else {
+    if(a==0) {
+      xz=PI
+    }else if(a==1) {
+      yz = PI/4
+      xz = PI/5
+    }else if(a==2) {
+      yz = 0
+      xz = 0
+    }else if(a==3||a==7) {
+      xz = atan(phi_2)
+      yz = 0
+    }else if(a==4||a==5||a==6||a==8) {
+      xz = 0
+      yz=atan(phi_1)
+    }
+  }
+}
+function centerE() {
+  doStuff()
+  if(inp2.value()==4) {
+    if(a==0) {
+      wx = 0
+      wy =0
+      wz = PI/sqrt(2)
+    }else if(a==1) {
+      wx = PI/4
+      wy = PI/5
+      wz = 0
+    }else if(a==2) {
+      wx = PI/4
+      wy = 0
+      wz = 0
+      fct=1.25
+      fct2=2
+    }else if(a==3) {
+      wx = atan(1)
+      wy = atan(1.5)
+      wz = 0
+    }else if(a==4||a==15) {
+      wx = atan(1/sqrt(7))
+      wy = 0
+      wz = 0
+      fct=1
+      fct2=25
+    }else if(a==5||a==6||a==8||a==9||a==11||a==12||a==13||a==14||a==10||a==11||a==7) {
+      wx = atan(phi)
+      wy = 0
+      wz = 0
+      fct=1
+      fct2=10
+    }
+  }else {
+    if(a==0) {
+      yz=PI/sqrt(2)
+    }else if(a==1) {
+      yz = PI/4
+    }else if(a==2) {
+      yz = PI/4
+      xz = 0
+    }else if(a==3||a==7) {
+      xz=0
+      yz=0
+    }else if(a==4||a==5||a==6||a==8) {
+      xz=0
+      yz=0
+    }
+  }
+}
+function centerF() {
+  doStuff()
+  if(inp2.value()==4) {
+    if(a==0) {
+      wx = 0
+      wy =0
+      wz =PI*sqrt(3)
+    }else if(a==1) {
+      wx = PI/4
+      wy = 0
+      wz = 0
+    }else if(a==2) {
+      wx = PI/4
+      wy = PI/5
+      wz = 0
+    }else if(a==3) {
+      wx = atan(1)
+      wy = atan(1/sqrt(2))
+      wz = 0
+    }else if(a==4||a==15) {
+      wx = atan(phi)
+      wy = 0
+      wz = 0
+      fct=1
+      fct2=15
+    }else if(a==5||a==6||a==8||a==9||a==11||a==12||a==13||a==14||a==10||a==11||a==7) {
+      wx = atan(1/sqrt(7))
+      wy = 0
+      wz = 0
+      fct2=30
+    }
+  }
+}
+function setup() {
+  createCanvas(windowWidth, windowHeight, WEBGL)
+  cam = createCamera()
+  colorMode(HSB)
+  b = ''
+  centerv=createButton('center vertex')
+  centerv.mousePressed(centervertex)
+  centerv.position(width/2,0)
+  c = ''
+  for(var U = 0; U<centerv.style('width').length-2;U++) {
+    c+=centerv.style('width').charAt(U)
+  }
+  centerv.position(width/2-c,0)
+  centerc=createButton('center cell')
+  centerc.mousePressed(centercell)
+  centerc.position(width/2,0)
+  centerc.style('width',centerv.style('width'))
+  centere=createButton('center edge')
+  centere.mousePressed(centerE)
+  centere.position(width/2,20)
+  centere.style('width',centerv.style('width'))
+  centerf=createButton('center face')
+  centerf.mousePressed(centerF)
+  centerf.position(width/2,0)
+  c = ''
+  for(var U = 0; U<centerv.style('width').length-2;U++) {
+    c+=centere.style('width').charAt(U)
+  }
+  centerf.position(width/2-c,20)
+  centerf.style('width',c+'px')
+  inp2 = createSelect()
+  inp2.position(0,0)
+  inp2.changed(doStuff2)
+  inp2.option('3D',3)
+  inp2.option('4D',4)
+  inp2.selected(4)
+  inp = createSelect()
+  var A = inp2.style('width')
+  A = A.charAt(0)+A.charAt(1)
+  inp.position(A,0)
+  inp.changed(doStuff)
+  div=createDiv('5 tetrahedron {3,3} cells')
+  div.position(0,20)
+  div.style('color','#ff0000')
+  div1=createDiv('10 triangle {3} faces')
+  div1.position(0,40)
+  div1.style('color','#ffff00')
+  div2=createDiv('10 edges')
+  div2.position(0,60)
+  div2.style('color','#00ff00')
+  div3=createDiv('5 verticies')
+  div3.position(0,80)
+  div3.style('color','#00ffff')
+  div4=createDiv('Schläfli symbol {3,3,3}')
+  div4.position(0,100)
+  div4.style('color','#0000ff')
+  div5=createDiv('Self-Dual')
+  div5.position(0,120)
+  div5.style('color','#ff00ff')
+  div6=createDiv('other names: 5-cell, pentatope, pentahedroid, pen, hyperpyramid, tetrahedral pyramid')
+  div6.position(0,140)
+  div6.style('color','#ffffff')
+  console.log(centerv.style('width'),centerc.style('width'))
+  doStuff2()
+}
+function doStuff() {
+  camera(0,0,(height/2)/tan(PI/6),0,0,0,0,1,0)
+  zoom=1
+  a=inp.value()
+  d2 = NaN
+  d3 = NaN
+  if(inp2.value()==4) {
+    if(a==0) {
+      div.html('5 tetrahedron {3,3} cells')
+      div1.html('10 triangle {3} faces')
+      div2.html('10 edges')
+      div3.html('5 verticies')
+      div4.html('Schläfli symbol {3,3,3}')
+      div5.html('Self-Dual')
+      div6.html('other names: 5-cell, pentatope, pentahedroid, hyperpyramid, tetrahedral pyramid')
+      tr = simplex
+      d = 2/sqrt(1.6)
+      f = 1
+      fct = 2
+      fct2 = 1
+      L = 10
+      wx = 0
+      wy = 0
+      wz = 0
+      s=1
+      L2=L
+    }else if(a==1){
+      div.html('8 cube {4,3} cells')
+      div1.html('24 square {4} faces')
+      div2.html('32 edges')
+      div3.html('16 verticies')
+      div4.html('Schläfli symbol {4,3,3}')
+      div5.html('Dual to hexadecachoron {3,3,4}')
+      div6.html('other names: 8-cell, octachoron, octahedroid, cubic prism, tetracube, 4-cube')
+      tr = tesseract
+      d = 2
+      f = 0.5
+      fct = 2
+      fct2 = 1
+      L=32
+      wx = 0
+      wy = 0
+      wz = 0
+      s=1
+      L2=L
+    }else if(a==2) {
+      div.html('16 tetrahedron {3,3} cells')
+      div1.html('32 triangle {3} faces')
+      div2.html('24 edges')
+      div3.html('8 verticies')
+      div4.html('Schläfli symbol {3,3,4}')
+      div5.html('Dual to Tesseract {4,3,3}')
+      div6.html('other names: 16-cell, hexdecahedroid, 4-orthoplex')
+      tr = orthoplex
+      d = sqrt(2)
+      f = 1
+      fct = 0.75
+      fct2 = 6
+      L=24
+      wx = PI/4
+      wy = PI/5
+      wz = PI/6
+      s=1
+      L2=L
+    }else if(a==3) {
+      div.html('24 octahedron {3,4} cells')
+      div1.html('96 triangle {3} faces')
+      div2.html('96 edges')
+      div3.html('24 verticies')
+      div4.html('Schläfli symbol {3,4,3}')
+      div5.html('Self-Dual')
+      div6.html('other names: 24-cell, octaplex, icosatetrahedroid, octacube, hyper-diamond, polyoctahedron')
+      tr = icositetrachoron
+      d = sqrt(2)
+      f=1/sqrt(2)
+      fct = 1.1
+      fct2 = 3
+      L=96
+      wx = 0
+      wy = 0
+      wz = 0
+      s=1
+      L2=L
+    }else if(a==4) {
+      div.html('120 dodecahedron {5,3} cells')
+      div1.html('720 pentagon {5} faces')
+      div2.html('1200 edges')
+      div3.html('600 verticies')
+      div4.html('Schläfli symbol {5,3,3}')
+      div5.html('Dual to tetraplex {3,3,5}')
+      div6.html('other names: 120-cell, hyperdodecahedron, polydodecahedron, hecatonicosachoron, dodecacontachoron, hecatonicosahedroid')
+      tr = dodecaplex
+      d=3-sqrt(5)
+      f=1/sqrt(8)
+      fct = 1.1
+      fct2 = 4
+      L=1200
+      wx = 0
+      wy = 0
+      wz = 0
+      s=1
+      L2=L
+    }else if(a==5) {
+      div.html('600 tetrahedron {3,3} cells')
+      div1.html('1200 triangle {3} faces')
+      div2.html('720 edges')
+      div3.html('120 verticies')
+      div4.html('Schläfli symbol {3,3,5}')
+      div5.html('Dual to dodecaplex {5,3,3}')
+      div6.html('other names: 600-cell, hexacosichoron, hexacosihedroid, polytetrahedron')
+      tr = tetraplex
+      d=phi_1
+      f=1
+      fct = 0.95
+      fct2 = 20
+      L=720
+      s=0.25
+      wx = atan(1/sqrt(5))
+      wy = atan(1/sqrt(6))
+      wz = atan(1/sqrt(7))
+      L2=L
+    }else if(a==6) {
+      div.html('600 Icosahedron {5,3} cells')
+      div1.html('1200 triangle {3} faces')
+      div2.html('720 edges')
+      div3.html('120 verticies')
+      div4.html('Schläfli symbol {3,3,5/2}')
+      div5.html('Dual to small stellated 120-cell {5/2,5,3}')
+      div6.html('other names: polyicosahedron, faceted 600-cell, icosaplex, faceted hexacosichoron')
+      tr = tetraplex
+      d=phi_1
+      d2=1
+      f=1
+      fct = 0.95
+      fct2 = 8
+      L=1920
+      s=0.25
+      L2=720
+      wx = 0
+      wy = 0
+      wz = 0
+    }else if(a==7) {
+      div.html('120 small stellated dodecahedron {5/2,5} cells')
+      div1.html('720 pentagram {5/2} faces')
+      div2.html('1200 edges')
+      div3.html('120 verticies')
+      div4.html('Schläfli symbol {5/2,5,3}')
+      div5.html('Dual to icosahedral 120-cell {3,5,5/2}')
+      div6.html('other names: stellated polydodecahedron, small stellated hecatonicosachoron')
+      tr = tetraplex
+      d=1
+      f=1
+      fct = 0.95
+      fct2 = 8
+      L=1200
+      s=0.25
+      L2=L
+      wx = 0
+      wy = 0
+      wz = 0
+    }else if(a==8) {
+      div.html('120 great dodecahedron {5,5/2} cells')
+      div1.html('720 pentagon {5} faces')
+      div2.html('720 edges')
+      div3.html('120 verticies')
+      div4.html('Schläfli symbol {5,5/2,5}')
+      div5.html('Self-Dual')
+      div6.html('other names: great polydodecahedron, great hecatonicosachoron')
+      tr = tetraplex
+      d=phi_1
+      d2=phi
+      f=1
+      fct = 0.95
+      fct2 = 8
+      L=1440
+      s=0.25
+      wx = 0
+      wy = 0
+      wz = 0
+      L2=720
+    }else if(a==9) {
+      div.html('120 dodecahedron {5,3} cells')
+      div1.html('720 pentagon {5} faces')
+      div2.html('720 edges')
+      div3.html('120 verticies')
+      div4.html('Schläfli symbol {5,3,5/2}')
+      div5.html('Dual to great stellated 120-cell {5/2,3,5}')
+      div6.html('other names: grand hecatonicosachoron, grand polydodecahedron')
+      tr = tetraplex
+      d=phi_1
+      d2=phi
+      d3=phi_2
+      f=1
+      fct = 0.95
+      fct2 = 20
+      L=1440
+      s=0.25
+      wx = atan(1/sqrt(5))
+      wy = atan(1/sqrt(6))
+      wz = atan(1/sqrt(7))
+      L2=720
+    }else if(a==10) {
+      div.html('120 great stellated dodecahedron {5/2,3} cells')
+      div1.html('720 pentagram {5/2} faces')
+      div2.html('720 edges')
+      div3.html('120 verticies')
+      div4.html('Schläfli symbol {5/2,3,5}')
+      div5.html('Dual to grand 120-cell {5,3,5/2}')
+      div6.html('other names: great stellated polydodecahedron, Great stellated hecatonicosachoron')
+      tr = tetraplex
+      d=phi
+      d2=phi_1
+      f=1
+      fct = 0.95
+      fct2 = 20
+      L=720
+      s=0.25
+      wx = atan(1/sqrt(5))
+      wy = atan(1/sqrt(6))
+      wz = atan(1/sqrt(7))
+      L2=L
+    }else if(a==11) {
+      div.html('120 small stellated dodecahedron {5/2,5} cells')
+      div1.html('720 pentagram {5/2} faces')
+      div2.html('720 edges')
+      div3.html('120 verticies')
+      div4.html('Schläfli symbol {5/2,5,5/2}')
+      div5.html('Self-Dual')
+      div6.html('other names: grand stellated polydodecahedron, grand stellated hecatonicosachoron')
+      tr = tetraplex
+      d=phi
+      d2=phi_1
+      d3=1
+      f=1
+      fct = 0.95
+      fct2 = 20
+      L=1920+720
+      s=0.25
+      wx = atan(1/sqrt(5))
+      wy = atan(1/sqrt(6))
+      wz = atan(1/sqrt(7))
+      L2=720
+    }else if(a==12) {
+      div.html('120 great dodecahedron {5,5/2} cells')
+      div1.html('720 pentagon {5} faces')
+      div2.html('1200 edges')
+      div3.html('120 verticies')
+      div4.html('Schläfli symbol {5,5/2,3}')
+      div5.html('Dual to great icosahedral 120-cell {3,5/2,5}')
+      div6.html('other names: great grand polydodecahedron, great grand hecatonicosachoron')
+      tr = tetraplex
+      d=1
+      d2=phi
+      f=1
+      fct = 0.95
+      fct2 = 20
+      L=1920
+      s=0.25
+      wx = atan(1/sqrt(5))
+      wy = atan(1/sqrt(6))
+      wz = atan(1/sqrt(7))
+      L2=1200
+    }else if(a==13) {
+      div.html('120 great icosahedron {3,5/2} cells')
+      div1.html('1200 triangle {3} faces')
+      div2.html('720 edges')
+      div3.html('120 verticies')
+      div4.html('Schläfli symbol {3,5/2,5}')
+      div5.html('Dual to great grand 120-cell {5,5/2,2}')
+      div6.html('other names: great polyicosahedron, great faceted 600-cell, great icosahedral 120-cell, great faceted hexacosichoron')
+      tr = tetraplex
+      d=phi
+      f=1
+      fct = 0.95
+      fct2 = 20
+      L=720
+      s=0.25
+      wx = atan(1/sqrt(5))
+      wy = atan(1/sqrt(6))
+      wz = atan(1/sqrt(7))
+      L2=L
+    }else if(a==14) {
+      div.html('600 tetrahedron {3,3} cells')
+      div1.html('1200 triangle {3} faces')
+      div2.html('720 edges')
+      div3.html('120 verticies')
+      div4.html('Schläfli symbol {3,3,5/2}')
+      div5.html('Dual to great grand stellated 120-cell {5/2,3,3}')
+      div6.html('other names: grand polytetrahedron, grand hexacosichoron')
+      tr = num14
+      d=phi
+      d2=1
+      d3=2.572553981697934/2
+      f=1
+      fct = 0.95
+      fct2 = 20
+      L=1920
+      s=0.25
+      wx = atan(1/sqrt(5))
+      wy = atan(1/sqrt(6))
+      wz = atan(1/sqrt(7))
+      L2=720
+    }else if(a==15) {
+      div.html('120 great stellated dodecahedron {5/2,3} cells')
+      div1.html('720 pentagram {5/2} faces')
+      div2.html('1200 edges')
+      div3.html('600 verticies')
+      div4.html('Schläfli symbol {5/2,3,3}')
+      div5.html('Dual to grand 600-cell {3,3,5/2}')
+      div6.html('other names: great grand stellated polydodecahedron, great grand stellated hecatonicosachoron')
+      tr = dodecaplex
+      f=1/sqrt(8)
+      d=4/(3-sqrt(5))
+      fct = 1.1
+      fct2 = 4
+      L=1200
+      wx = 0
+      wy = 0
+      wz = 0
+      s=1
+      L2=L
+    }
+  }else {
+    if(a==0) {
+      div.html('4 triangle {3} faces')
+      div1.html('6 edges')
+      div2.html('4 verticies')
+      div3.html('Schläfli symbol {3,3}')
+      div4.html('Self-Dual')
+      div5.html('other names: triangular pyramid, 3-simplex')
+      div6.html('')
+      tr = tetrahedron
+      d = 2/sqrt(1.6)/sqrt(15/16)
+      f = 1
+      L = 6
+      s=1
+      L2=L
+    }else if(a==1){
+      div.html('6 square {4} faces')
+      div1.html('12 edges')
+      div2.html('8 verticies')
+      div3.html('Schläfli symbol {4,3}')
+      div4.html('Dual to octohedron {3,4}')
+      div5.html('other names: 3-cube, hexahedron, square prism')
+      div6.html('')
+      tr = cube
+      d = 2
+      f = sqrt(1/2)
+      L=12
+      s=1
+      L2=L
+    }else if(a==2) {
+      div.html('8 triangle {3} faces')
+      div1.html('12 edges')
+      div2.html('6 verticies')
+      div3.html('Schläfli symbol {3,4}')
+      div4.html('Dual to cube {4,3}')
+      div5.html('other names: square bipyramid, triangular antiprism, 3-orthaplex')
+      div6.html('')
+      tr = octohedron
+      d = sqrt(2)
+      f = 1
+      L=12
+      s=1
+      xz = PI/5
+      yz = PI/4
+      L2=L
+    }else if(a==3) {
+      div.html('12 pentagon {5} faces')
+      div1.html('30 edges')
+      div2.html('20 verticies')
+      div3.html('Schläfli symbol {5,3}')
+      div4.html('Dual to icosahedron {3,5}')
+      div5.html('')
+      div6.html('')
+      tr = dodecahedron
+      d = sqrt(5)-1
+      f=1/sqrt(3)
+      L=30
+      s=1
+      yz=atan(phi_1)
+      L2=L
+    }else if(a==4) {
+      div.html('20 triangle {3} faces')
+      div1.html('30 edges')
+      div2.html('12 verticies')
+      div3.html('Schläfli symbol {3,5}')
+      div4.html('Dual to dodecahedron {5,3}')
+      div5.html('other names: gyroelongated pentagonal bipyramid, biaugmented pentagonal antiprism')
+      div6.html('')
+      tr = icosohedron
+      d=2
+      f=1/sqrt(phi+2)
+      L=30
+      s=1
+      xz = atan(phi_2)
+      L2=L
+    }else if(a==5) {
+      div5.html('')
+      div.html('12 pentagram {5/2} faces')
+      div1.html('30 edges')
+      div2.html('12 verticies')
+      div3.html('Schläfli symbol {5/2,5}')
+      div4.html('Dual to great dodecahedron {5,5/2}')
+      div6.html('')
+      tr = icosohedron
+      d=2*phi
+      f=1/sqrt(phi+2)
+      L=30
+      s=1
+      L2=L
+      xz = 0
+      yz=atan(phi_1)
+    }else if(a==6) {
+      div5.html('')
+      div.html('12 pentagon {5} faces')
+      div1.html('30 edges')
+      div2.html('12 verticies')
+      div3.html('Schläfli symbol {5,5/2}')
+      div4.html('Dual to small stellated dodecahedron {5/2,5}')
+      div6.html('')
+      tr = icosohedron
+      d=2
+      d2 = 2*phi
+      f=1/sqrt(phi+2)
+      L=60
+      s=1
+      L2=30
+      xz = 0
+      yz=atan(phi_1)
+    }else if(a==7) {
+      div5.html('')
+      div.html('12 pentagram {5/2} faces')
+      div1.html('30 edges')
+      div2.html('20 verticies')
+      div3.html('Schläfli symbol {5/2,3}')
+      div4.html('Dual to great icosahedron {3,5/2}')
+      div6.html('')
+      tr = dodecahedron
+      f=1/sqrt(phi+2)
+      d=sqrt(5)+1
+      L=30
+      s=1
+      yz=atan(phi_1)
+      L2=30
+    }else if(a==8) {
+      div5.html('')
+      div.html('20 triangle {3} faces')
+      div1.html('30 edges')
+      div2.html('12 verticies')
+      div3.html('Schläfli symbol {3,5/2}')
+      div4.html('Dual to great stellated dodecahedron {5/2,3}')
+      div6.html('')
+      tr = greaticosa
+      f=1/sqrt(phi+2)
+      d=2*phi
+      d2 = 2.572553981697934
+      L=89
+      s=1
+      xz = atan(phi_2)
+      L2=30
+    }
+  }
+}
+function keyPressed() {
+  if(keyCode==86) {
+    verticies*=-1
+  }if(keyCode==76) {
+    edges*=-1
+  }
+}
+function draw() {
+  orbitControl(5,5,5)
+  cam.centerX=0
+  cam.centerY=0
+  cam.centerZ=0
+  var mx = (height/2)/tan(PI/6)
+  var thing = sqrt(sq(cam.eyeZ)+sq(cam.eyeY)+sq(cam.eyeX))
+  cam.eyeZ/=thing/mx
+  cam.eyeY/=thing/mx
+  cam.eyeX/=thing/mx
+  col=1-((millis()/1e5*60)%1)
+  col2=(millis()/1e5*60)%1
+  if(keyIsPressed) {
+    if(key=='Q'||key=='%') {
+      xy+=1/frameRate()*PI
+    }if(key=='E'||key=='^') {
+      xy-=1/frameRate()*PI
+    }if(key=='W'||key=='@') {
+      yz-=1/frameRate()*PI
+    }if(key=='S'||key=='!') {
+      yz+=1/frameRate()*PI
+    }if(key=='A'||key=='$') {
+      xz-=1/frameRate()*PI
+    }if(key=='D'||key=='#') {
+      xz+=1/frameRate()*PI
+    }if(keyCode=='87'||key=='!') {
+      wx-=1/frameRate()*PI
+    }if(key=='s'||key=='S'||key=='@') {
+      wx+=1/frameRate()*PI
+    }if(key=='a'||key=='A'||key=='#') {
+      wy-=1/frameRate()*PI
+    }if(key=='d'||key=='D'||key=='$') {
+      wy+=1/frameRate()*PI
+    }if(key=='e'||key=='E'||key=='%') {
+      wz-=1/frameRate()*PI
+    }if(key=='q'||key=='Q'||key=='^') {
+      wz+=1/frameRate()*PI
+    }if(keyCode==187) {
+      zoom*=1.1
+    }if(keyCode==189) {
+      zoom/=1.1
+    }
+  }
+  if(inp2.value()==3) {
+    wx=0
+    wy=0
+    wz=0
+  }
+  background(0)
+  var wack = []
+  for(var h = 0; h<tr.length; h++) {
+    wack[h]=[0,0,0,0]
+    var x = tr[h][0]
+    var y = tr[h][3]
+    wack[h][0]=x*cos(wx)-y*sin(wx)
+    wack[h][1]=tr[h][1]
+    wack[h][2]=tr[h][2]
+    wack[h][3]=y*cos(wx)+x*sin(wx)
+    var x = wack[h][1]
+    var y = wack[h][3]
+    wack[h][1]=x*cos(wy)-y*sin(wy)
+    wack[h][3]=y*cos(wy)+x*sin(wy)
+    var x = wack[h][2]
+    var y = wack[h][3]
+    wack[h][2]=x*cos(wz)-y*sin(wz)
+    wack[h][3]=y*cos(wz)+x*sin(wz)
+    var x = wack[h][0]
+    var y = wack[h][1]
+    wack[h][0]=x*cos(xy)-y*sin(xy)
+    wack[h][1]=y*cos(xy)+x*sin(xy)
+    var x = wack[h][1]
+    var y = wack[h][2]
+    wack[h][1]=x*cos(yz)-y*sin(yz)
+    wack[h][2]=y*cos(yz)+x*sin(yz)
+    var x = wack[h][0]
+    var y = wack[h][2]
+    wack[h][0]=x*cos(xz)-y*sin(xz)
+    wack[h][2]=y*cos(xz)+x*sin(xz)
+  }
+  var nwt = []
+  for(var i = 0; i<wack.length; i++) {
+    var fact = 400/(fct-wack[i][3]*f)/fct2
+    nwt[i]=[wack[i][0]*fact*f,wack[i][1]*fact*f,wack[i][2]*fact*f,1/(fct-wack[i][3]*f)*f/fct2]
+  }
+  var l = 0
+  if(edges>0) {
+    for(var k = 0; k<tr.length;k++) {
+      for(var k2 = 0; k2<tr.length;k2++) {
+        if((d2p(tr[k],tr[k2],d)==2||d2p(tr[k],tr[k2],d)==1)&&k2>k) {
+          linarr(nwt[k],nwt[k2],d2p(tr[k],tr[k2],d))
+          l++
+          if(L==l) {
+            break
+          }
+        }
+      }
+    }
+  }
+  if(verticies>0) {
+    for(var j = 0; j<tr.length; j++) {
+      if(((inp.value()>8||inp.value()<8||j<12)&&inp2.value()==3)||((inp.value()>14||inp.value()<14||j>720)&&inp2.value()==4)) {
+        pointarr(nwt[j])
+      }
+    }
+  }
+  xy = 0
+  yz = 0
+  xz = 0
+  wx = 0
+  wy = 0
+  wz = 0
+  tr = wack
+}
+function pointarr(arr) {
+  noStroke()
+  push()
+  translate(arr[0]*zoom,arr[1]*zoom,arr[2]*zoom)
+  fill(360*col2%360,100,100)
+  if(inp2.value()==4) {
+    sphere(arr[3]*50*s*zoom)
+  }else {
+    sphere(25*s*zoom)
+  }
+  var A_ = tr.length
+  if(inp.value()==8&&inp2.value()==3) {
+    A_=12
+  }else if(inp.value()==14) {
+    A_=120
+  }
+  col2+=(1/A_)%1
+  pop()
+}
+function linarr(arr1,arr2,Q) {
+  fill(0,0,100)
+  stroke(0,0,100)
+  if(Q==2) {
+    stroke(360*col%360,100,100)
+    fill(360*col%360,100,100)
+    col+=1/L2
+  }
+  beginShape(TRIANGLE_STRIP)
+  if(arr1[3]==arr2[3]) {
+    strokeWeight(arr1[3]*50/sqrt(sqrt(L))*zoom)
+    line(arr1[0]*zoom,arr1[1]*zoom,arr1[2]*zoom,arr2[0]*zoom,arr2[1]*zoom,arr2[2]*zoom)
+  }else {
+    noStroke()
+    for(var i = 0; i<PI*2; i+=PI/40*sqrt(L)) {
+      for(var j = 0; j<PI*2; j+=PI/40*sqrt(L)){
+        var x = cos(i)*arr1[3]*20/sqrt(sqrt(L))*zoom
+        var y = sin(i)*arr1[3]*20*sin(j)/sqrt(sqrt(L))*zoom
+        var z = cos(j)*arr1[3]*20/sqrt(sqrt(L))*zoom
+        vertex(arr1[0]*zoom+x,arr1[1]*zoom+y,arr1[2]*zoom+z)
+        var x = cos(i)*arr2[3]*20/sqrt(sqrt(L))*zoom
+        var y = sin(i)*arr2[3]*20*sin(j)/sqrt(sqrt(L))*zoom
+        var z = cos(j)*arr2[3]*20/sqrt(sqrt(L))*zoom
+        vertex(arr2[0]*zoom+x,arr2[1]*zoom+y,arr2[2]*zoom+z)
+      }
+    }
+  }
+  endShape(CLOSE)
+}
+function d2p(arr1,arr2,d) {
+  var dist = sq(arr1[0]-arr2[0])+sq(arr1[1]-arr2[1])+sq(arr1[2]-arr2[2])+sq(arr1[3]-arr2[3])
+  //console.log(sqrt(dist))
+  if(sq(dist-d*d)<0.01) {
+    return 2
+  }if(sq(dist-d2*d2)<0.01||sq(dist-d3*d3)<0.01) {
+    return 1
+  }
+  return false
+}
+function conv(arr) {
+  var arr1 = []
+  for(var i = 0; i<arr.length; i++) {
+    if(arr[i][0]<10) {
+      arr1[arr1.length]=arr[i]
+    }else {
+      arr1[arr1.length]=[arr[i][0]-10,arr[i][1],arr[i][2],arr[i][3]]
+      arr1[arr1.length]=[10-arr[i][0],arr[i][1],arr[i][2],arr[i][3]]
+    }
+  }
+  arr = arr1
+  arr1 = []
+  for(var i = 0; i<arr.length; i++) {
+    if(arr[i][1]<10) {
+      arr1[arr1.length]=arr[i]
+    }else {
+      arr1[arr1.length]=[arr[i][0],arr[i][1]-10,arr[i][2],arr[i][3]]
+      arr1[arr1.length]=[arr[i][0],10-arr[i][1],arr[i][2],arr[i][3]]
+    }
+  }
+  arr = arr1
+  arr1 = []
+  for(var i = 0; i<arr.length; i++) {
+    if(arr[i][2]<10) {
+      arr1[arr1.length]=arr[i]
+    }else {
+      arr1[arr1.length]=[arr[i][0],arr[i][1],arr[i][2]-10,arr[i][3]]
+      arr1[arr1.length]=[arr[i][0],arr[i][1],10-arr[i][2],arr[i][3]]
+    }
+  }
+  arr = arr1
+  arr1 = []
+  for(var i = 0; i<arr.length; i++) {
+    if(arr[i][3]<10) {
+      arr1[arr1.length]=arr[i]
+    }else {
+      arr1[arr1.length]=[arr[i][0],arr[i][1],arr[i][2],arr[i][3]-10]
+      arr1[arr1.length]=[arr[i][0],arr[i][1],arr[i][2],10-arr[i][3]]
+    }
+  }
+  return arr1
+}
