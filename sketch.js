@@ -883,40 +883,36 @@ function draw() {
     wz=0
   }
   background(0)
-  var vertexData2 = []
   for(var h = 0; h<vertexData.length; h++) {
-    vertexData2[h]=[0,0,0,0]
     var x = vertexData[h][0]
     var y = vertexData[h][3]
-    vertexData2[h][0]=x*cos(wx)-y*sin(wx)
-    vertexData2[h][1]=vertexData[h][1]
-    vertexData2[h][2]=vertexData[h][2]
-    vertexData2[h][3]=y*cos(wx)+x*sin(wx)
-    var x = vertexData2[h][1]
-    var y = vertexData2[h][3]
-    vertexData2[h][1]=x*cos(wy)-y*sin(wy)
-    vertexData2[h][3]=y*cos(wy)+x*sin(wy)
-    var x = vertexData2[h][2]
-    var y = vertexData2[h][3]
-    vertexData2[h][2]=x*cos(wz)-y*sin(wz)
-    vertexData2[h][3]=y*cos(wz)+x*sin(wz)
-    var x = vertexData2[h][0]
-    var y = vertexData2[h][1]
-    vertexData2[h][0]=x*cos(xy)-y*sin(xy)
-    vertexData2[h][1]=y*cos(xy)+x*sin(xy)
-    var x = vertexData2[h][1]
-    var y = vertexData2[h][2]
-    vertexData2[h][1]=x*cos(yz)-y*sin(yz)
-    vertexData2[h][2]=y*cos(yz)+x*sin(yz)
-    var x = vertexData2[h][0]
-    var y = vertexData2[h][2]
-    vertexData2[h][0]=x*cos(xz)-y*sin(xz)
-    vertexData2[h][2]=y*cos(xz)+x*sin(xz)
+    vertexData[h][0]=x*cos(wx)-y*sin(wx)
+    vertexData[h][3]=y*cos(wx)+x*sin(wx)
+    var x = vertexData[h][1]
+    var y = vertexData[h][3]
+    vertexData[h][1]=x*cos(wy)-y*sin(wy)
+    vertexData[h][3]=y*cos(wy)+x*sin(wy)
+    var x = vertexData[h][2]
+    var y = vertexData[h][3]
+    vertexData[h][2]=x*cos(wz)-y*sin(wz)
+    vertexData[h][3]=y*cos(wz)+x*sin(wz)
+    var x = vertexData[h][0]
+    var y = vertexData[h][1]
+    vertexData[h][0]=x*cos(xy)-y*sin(xy)
+    vertexData[h][1]=y*cos(xy)+x*sin(xy)
+    var x = vertexData[h][1]
+    var y = vertexData[h][2]
+    vertexData[h][1]=x*cos(yz)-y*sin(yz)
+    vertexData[h][2]=y*cos(yz)+x*sin(yz)
+    var x = vertexData[h][0]
+    var y = vertexData[h][2]
+    vertexData[h][0]=x*cos(xz)-y*sin(xz)
+    vertexData[h][2]=y*cos(xz)+x*sin(xz)
   }
   var vertexDataProjected = []
-  for(var i = 0; i<vertexData2.length; i++) {
-    var fact = 400/(fct-vertexData2[i][3]*f)/fct2
-    vertexDataProjected[i]=[vertexData2[i][0]*fact*f,vertexData2[i][1]*fact*f,vertexData2[i][2]*fact*f,1/(fct-vertexData2[i][3]*f)*f/fct2]
+  for(var i = 0; i<vertexData.length; i++) {
+    var fact = 400/(fct-vertexData[i][3]*f)/fct2
+    vertexDataProjected[i]=[vertexData[i][0]*fact*f,vertexData[i][1]*fact*f,vertexData[i][2]*fact*f,1/(fct-vertexData[i][3]*f)*f/fct2]
   }
   var l = 0
   if(edges>0) {
@@ -945,7 +941,6 @@ function draw() {
   wx = 0
   wy = 0
   wz = 0
-  vertexData = vertexData2
 }
 function renderVertex(arr) {
   noStroke()
