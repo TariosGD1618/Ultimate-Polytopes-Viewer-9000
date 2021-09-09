@@ -70,6 +70,7 @@ function windowResized() {
   centerc.position(width/2,0)
   centerf.position(width/2-c,20)
   centere.position(width/2,20)
+  div7.position(0,height-20)
 }
 function doStuff2() {
   if(inp2.value()==4) {
@@ -322,6 +323,9 @@ function setup() {
   div6.style('color','#ffffff')
   console.log(centerv.style('width'),centerc.style('width'))
   doStuff2()
+  div7=createDiv('')
+  div7.position(0,height-20)
+  div7.style('color','#ffffff')
 }
 function doStuff() {
   camera(0,0,(height/2)/tan(PI/6),0,0,0,0,1,0)
@@ -795,6 +799,9 @@ function keyPressed() {
   }
 }
 function draw() {
+  if(frameCount%10==1) {
+    div7.html(frameRate()+'fps')
+  }
   orbitControl(5,5,5)
   cam.centerX=0
   cam.centerY=0
