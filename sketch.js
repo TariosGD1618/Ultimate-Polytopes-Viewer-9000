@@ -6,7 +6,7 @@ phi_1=phi-1
 phi_2=phi_1/phi
 phi2 = phi+1
 PI=Math.PI
-d2 = NaN
+intersectionD = NaN
 var tetrahedron = [[sqrt(2/3),-sqrt(2/9),1/3,0],[-sqrt(2/3),-sqrt(2/9),1/3,0],[0,sqrt(8/9),1/3,0],[0,0,-1,0]]
 var cube = conv([[11,11,11,0]])
 var octohedron = conv([[11,0,0,0],[0,11,0,0],[0,0,11,0]])
@@ -41,7 +41,7 @@ var col2 = 0
 var vertexData = []
 var zoom = 1
 vertexData = simplex
-d = 2/sqrt(1.6)
+edgeLength = 2/sqrt(1.6)
 f = 1
 fct = 2
 fct2 = 1
@@ -64,7 +64,7 @@ function doWeird(A,b) {
   A2=A2.concat(A)
   return A2
 }
-function windowResized() {
+function windowResized() {//do stuff when window resized
   resizeCanvas(windowWidth, windowHeight)
   centerv.position(width/2-c,0)
   centerc.position(width/2,0)
@@ -110,8 +110,8 @@ function resetCamera() {
   if(inp2.value()==4) {
     if(a==0) {
       vertexData = simplex
-      d = 2/sqrt(1.6)
-      f = 1
+      edgeLength = 2/sqrt(1.6)
+      circumR = 1
       fct = 2
       fct2 = 1
       L = 10
@@ -122,8 +122,8 @@ function resetCamera() {
       L2=L
     }else if(a==1){
       vertexData = tesseract
-      d = 2
-      f = 0.5
+      edgeLength = 2
+      circumR = 0.5
       fct = 2
       fct2 = 1
       L=32
@@ -134,8 +134,8 @@ function resetCamera() {
       L2=L
     }else if(a==2) {
       vertexData = orthoplex
-      d = sqrt(2)
-      f = 1
+      edgeLength = sqrt(2)
+      circumR = 1
       fct = 0.75
       fct2 = 6
       L=24
@@ -146,7 +146,7 @@ function resetCamera() {
       L2=L
     }else if(a==3) {
       vertexData = icositetrachoron
-      d = sqrt(2)
+      edgeLength = sqrt(2)
       f=1/sqrt(2)
       fct = 1.1
       fct2 = 3
@@ -158,7 +158,7 @@ function resetCamera() {
       L2=L
     }else if(a==4) {
       vertexData = dodecaplex
-      d=3-sqrt(5)
+      edgeLength=3-sqrt(5)
       f=1/sqrt(8)
       fct = 1.1
       fct2 = 4
@@ -170,7 +170,7 @@ function resetCamera() {
       L2=L
     }else if(a==5) {
       vertexData = tetraplex
-      d=phi_1
+      edgeLength=phi_1
       f=1
       fct = 0.95
       fct2 = 20
@@ -182,8 +182,8 @@ function resetCamera() {
       L2=L
     }else if(a==6) {
       vertexData = tetraplex
-      d=phi_1
-      d2=1
+      edgeLength=phi_1
+      intersectionD=1
       f=1
       fct = 0.95
       fct2 = 8
@@ -195,7 +195,7 @@ function resetCamera() {
       wz = 0
     }else if(a==7) {
       vertexData = tetraplex
-      d=1
+      edgeLength=1
       f=1
       fct = 0.95
       fct2 = 8
@@ -207,8 +207,8 @@ function resetCamera() {
       wz = 0
     }else if(a==8) {
       vertexData = tetraplex
-      d=phi_1
-      d2=phi
+      edgeLength=phi_1
+      intersectionD=phi
       f=1
       fct = 0.95
       fct2 = 8
@@ -220,9 +220,9 @@ function resetCamera() {
       L2=720
     }else if(a==9) {
       vertexData = tetraplex
-      d=phi_1
-      d2=phi
-      d3=phi_2
+      edgeLength=phi_1
+      intersectionD=phi
+      intersectionD2=phi_2
       f=1
       fct = 0.95
       fct2 = 20
@@ -234,8 +234,8 @@ function resetCamera() {
       L2=720
     }else if(a==10) {
       vertexData = tetraplex
-      d=phi
-      d2=phi_1
+      edgeLength=phi
+      intersectionD=phi_1
       f=1
       fct = 0.95
       fct2 = 20
@@ -247,9 +247,9 @@ function resetCamera() {
       L2=L
     }else if(a==11) {
       vertexData = tetraplex
-      d=phi
-      d2=phi_1
-      d3=1
+      edgeLength=phi
+      intersectionD=phi_1
+      intersectionD2=1
       f=1
       fct = 0.95
       fct2 = 20
@@ -261,8 +261,8 @@ function resetCamera() {
       L2=720
     }else if(a==12) {
       vertexData = tetraplex
-      d=1
-      d2=phi
+      edgeLength=1
+      intersectionD=phi
       f=1
       fct = 0.95
       fct2 = 20
@@ -274,7 +274,7 @@ function resetCamera() {
       L2=1200
     }else if(a==13) {
       vertexData = tetraplex
-      d=phi
+      edgeLength=phi
       f=1
       fct = 0.95
       fct2 = 20
@@ -286,9 +286,9 @@ function resetCamera() {
       L2=L
     }else if(a==14) {
       vertexData = num14
-      d=phi
-      d2=1
-      d3=2.572553981697934/2
+      edgeLength=phi
+      intersectionD=1
+      intersectionD2=2.572553981697934/2
       f=1
       fct = 0.95
       fct2 = 20
@@ -301,7 +301,7 @@ function resetCamera() {
     }else if(a==15) {
       vertexData = dodecaplex
       f=1/sqrt(8)
-      d=4/(3-sqrt(5))
+      edgeLength=4/(3-sqrt(5))
       fct = 1.1
       fct2 = 4
       L=1200
@@ -314,22 +314,22 @@ function resetCamera() {
   }else {
     if(a==0) {
       vertexData = tetrahedron
-      d = 2/sqrt(1.6)/sqrt(15/16)
-      f = 1
+      edgeLength = 2/sqrt(1.6)/sqrt(15/16)
+      circumR = 1
       L = 6
       s=1
       L2=L
     }else if(a==1){
       vertexData = cube
-      d = 2
-      f = sqrt(1/2)
+      edgeLength = 2
+      circumR = sqrt(1/2)
       L=12
       s=1
       L2=L
     }else if(a==2) {
       vertexData = octohedron
-      d = sqrt(2)
-      f = 1
+      edgeLength= sqrt(2)
+      circumR = 1
       L=12
       s=1
       xz = PI/5
@@ -337,7 +337,7 @@ function resetCamera() {
       L2=L
     }else if(a==3) {
       vertexData = dodecahedron
-      d = sqrt(5)-1
+      edgeLength= sqrt(5)-1
       f=1/sqrt(3)
       L=30
       s=1
@@ -345,7 +345,7 @@ function resetCamera() {
       L2=L
     }else if(a==4) {
       vertexData = icosohedron
-      d=2
+      edgeLength=2
       f=1/sqrt(phi+2)
       L=30
       s=1
@@ -353,7 +353,7 @@ function resetCamera() {
       L2=L
     }else if(a==5) {
       vertexData = icosohedron
-      d=2*phi
+      edgeLength=2*phi
       f=1/sqrt(phi+2)
       L=30
       s=1
@@ -362,8 +362,8 @@ function resetCamera() {
       yz=atan(phi_1)
     }else if(a==6) {
       vertexData = icosohedron
-      d=2
-      d2 = 2*phi
+      edgeLength=2
+      intersectionD = 2*phi
       f=1/sqrt(phi+2)
       L=60
       s=1
@@ -373,7 +373,7 @@ function resetCamera() {
     }else if(a==7) {
       vertexData = dodecahedron
       f=1/sqrt(phi+2)
-      d=sqrt(5)+1
+      edgeLength=sqrt(5)+1
       L=30
       s=1
       yz=atan(phi_1)
@@ -381,8 +381,8 @@ function resetCamera() {
     }else if(a==8) {
       vertexData = greaticosa
       f=1/sqrt(phi+2)
-      d=2*phi
-      d2 = 2.572553981697934
+      edgeLength=2*phi
+      intersectionD = 2.572553981697934
       L=89
       s=1
       xz = atan(phi_2)
@@ -575,41 +575,41 @@ function setup() {
   }
   centerf.position(width/2-c,20)
   centerf.style('width',c+'px')
-  inp2 = createSelect()
+  inp2 = createSelect()//dimention selecter
   inp2.position(0,0)
   inp2.changed(changeDimension)
   inp2.option('3D',3)
   inp2.option('4D',4)
   inp2.selected(4)
-  inp = createSelect()
+  inp = createSelect()//polytope selector
   var A = inp2.style('width')
   A = A.charAt(0)+A.charAt(1)
   inp.position(A,0)
   inp.changed(changePolytope)
   div=createDiv('5 tetrahedron {3,3} cells')
-  div.position(0,20)
+  div.position(0,20)//cell (4d) or face (3d) info
   div.style('color','#ff0000')
   div1=createDiv('10 triangle {3} faces')
-  div1.position(0,40)
+  div1.position(0,40)//face (4d) or edge (3d) info
   div1.style('color','#ffff00')
   div2=createDiv('10 edges')
-  div2.position(0,60)
+  div2.position(0,60)//edge (4d) or vertex (3d) info
   div2.style('color','#00ff00')
   div3=createDiv('5 verticies')
-  div3.position(0,80)
+  div3.position(0,80)//vertex (4d) or Schläfli symbol (3d) info
   div3.style('color','#00ffff')
   div4=createDiv('Schläfli symbol {3,3,3}')
-  div4.position(0,100)
+  div4.position(0,100)//Schläfli symbol (4d) or dual (3d) info
   div4.style('color','#0000ff')
   div5=createDiv('Self-Dual')
-  div5.position(0,120)
+  div5.position(0,120)//dual (4d) or alternate names (3d) info
   div5.style('color','#ff00ff')
-  div6=createDiv('other names: 5-cell, pentatope, pentahedroid, pen, hyperpyramid, tetrahedral pyramid')
+  div6=createDiv('other names: 5-cell, pentatope, pentahedroid, pen, hyperpyramid, tetrahedral pyramid')//alternate names info
   div6.position(0,140)
   div6.style('color','#ffffff')
   console.log(centerv.style('width'),centerc.style('width'))
   changeDimension()
-  div7=createDiv('')
+  div7=createDiv('')//fps counter
   div7.position(0,height-20)
   div7.style('color','#ffffff')
 }
@@ -617,8 +617,8 @@ function changePolytope() {
   a=inp.value()
   resetCamera()
   a=inp.value()
-  d2 = NaN
-  d3 = NaN
+  intersectionD = NaN
+  intersectionD2 = NaN
   if(inp2.value()==4) {
     if(a==0) {
       div.html('5 tetrahedron {3,3} cells')
@@ -918,8 +918,8 @@ function draw() {
   if(edges>0) {
     for(var k = 0; k<vertexData.length;k++) {
       for(var k2 = 0; k2<vertexData.length;k2++) {
-        if((areConnected(vertexData[k],vertexData[k2],d)==2||areConnected(vertexData[k],vertexData[k2],d)==1)&&k2>k) {
-          renderLine(vertexDataProjected[k],vertexDataProjected[k2],areConnected(vertexData[k],vertexData[k2],d))
+        if((areConnected(vertexData[k],vertexData[k2],edgeLength)==2||areConnected(vertexData[k],vertexData[k2],edgeLength)==1)&&k2>k) {
+          renderLine(vertexDataProjected[k],vertexDataProjected[k2],areConnected(vertexData[k],vertexData[k2],edgeLength))
           l++
           if(L==l) {
             break
@@ -995,7 +995,7 @@ function areConnected(arr1,arr2,d) {
   //console.log(sqrt(dist))
   if(sq(dist-d*d)<0.01) {
     return 2
-  }if(sq(dist-d2*d2)<0.01||sq(dist-d3*d3)<0.01) {
+  }if(sq(dist-intersectionD*intersectionD)<0.01||sq(dist-intersectionD2*intersectionD2)<0.01) {
     return 1
   }
   return false
