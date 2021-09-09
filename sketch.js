@@ -1,3 +1,4 @@
+//by TariosGD1618
 sq = function(x) {return x*x}
 a = 0
 sqrt=Math.sqrt
