@@ -66,13 +66,13 @@ function doWeird(A,b) {
 }
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight)
-  centerv.position(width/2-c,0)
-  centerc.position(width/2,0)
-  centerf.position(width/2-c,20)
-  centere.position(width/2,20)
+  centerV.position(width/2-c,0)
+  centerC.position(width/2,0)
+  centerF.position(width/2-c,20)
+  centerE.position(width/2,20)
   div7.position(0,height-20)
 }
-function doStuff2() {
+function changeDimension() {
   if(inp2.value()==4) {
     inp.html('<option value="0">pentachoron</option><option value="1">tesseract</option><option value="2">hexadecachoron</option><option value="3">icositetrachoron</option><option value="4">dodecaplex</option><option value="5">tetraplex</option>     <option value="6">icosahedral 120-cell</option><option value="7">small stellated 120-cell</option><option value="8">great 120-cell</option><option value="9">grand 120-cell</option><option value="10">great stellated 120-cell</option><option value="11">grand stellated 120-cell</option><option value="12">great grand 120-cell</option><option value="13">great icosahedral 120-cell</option><option value="14">grand 600-cell</option><option value="15">great grand stellated 120-cell</option>')
     if(a==0) {
@@ -102,15 +102,301 @@ function doStuff2() {
   }
   fct = 2
   fct2 = 1
-  doStuff()
+  changePolytope()
+}
+function resetCamera() {
+  camera(0,0,(height/2)/tan(PI/6),0,0,0,0,1,0)
+  zoom=1
+  if(inp2.value()==4) {
+    if(a==0) {
+      tr = simplex
+      d = 2/sqrt(1.6)
+      f = 1
+      fct = 2
+      fct2 = 1
+      L = 10
+      wx = 0
+      wy = 0
+      wz = 0
+      s=1
+      L2=L
+    }else if(a==1){
+      tr = tesseract
+      d = 2
+      f = 0.5
+      fct = 2
+      fct2 = 1
+      L=32
+      wx = 0
+      wy = 0
+      wz = 0
+      s=1
+      L2=L
+    }else if(a==2) {
+      tr = orthoplex
+      d = sqrt(2)
+      f = 1
+      fct = 0.75
+      fct2 = 6
+      L=24
+      wx = PI/4
+      wy = PI/5
+      wz = PI/6
+      s=1
+      L2=L
+    }else if(a==3) {
+      tr = icositetrachoron
+      d = sqrt(2)
+      f=1/sqrt(2)
+      fct = 1.1
+      fct2 = 3
+      L=96
+      wx = 0
+      wy = 0
+      wz = 0
+      s=1
+      L2=L
+    }else if(a==4) {
+      tr = dodecaplex
+      d=3-sqrt(5)
+      f=1/sqrt(8)
+      fct = 1.1
+      fct2 = 4
+      L=1200
+      wx = 0
+      wy = 0
+      wz = 0
+      s=1
+      L2=L
+    }else if(a==5) {
+      tr = tetraplex
+      d=phi_1
+      f=1
+      fct = 0.95
+      fct2 = 20
+      L=720
+      s=0.25
+      wx = atan(1/sqrt(5))
+      wy = atan(1/sqrt(6))
+      wz = atan(1/sqrt(7))
+      L2=L
+    }else if(a==6) {
+      tr = tetraplex
+      d=phi_1
+      d2=1
+      f=1
+      fct = 0.95
+      fct2 = 8
+      L=1920
+      s=0.25
+      L2=720
+      wx = 0
+      wy = 0
+      wz = 0
+    }else if(a==7) {
+      tr = tetraplex
+      d=1
+      f=1
+      fct = 0.95
+      fct2 = 8
+      L=1200
+      s=0.25
+      L2=L
+      wx = 0
+      wy = 0
+      wz = 0
+    }else if(a==8) {
+      tr = tetraplex
+      d=phi_1
+      d2=phi
+      f=1
+      fct = 0.95
+      fct2 = 8
+      L=1440
+      s=0.25
+      wx = 0
+      wy = 0
+      wz = 0
+      L2=720
+    }else if(a==9) {
+      tr = tetraplex
+      d=phi_1
+      d2=phi
+      d3=phi_2
+      f=1
+      fct = 0.95
+      fct2 = 20
+      L=1440
+      s=0.25
+      wx = atan(1/sqrt(5))
+      wy = atan(1/sqrt(6))
+      wz = atan(1/sqrt(7))
+      L2=720
+    }else if(a==10) {
+      tr = tetraplex
+      d=phi
+      d2=phi_1
+      f=1
+      fct = 0.95
+      fct2 = 20
+      L=720
+      s=0.25
+      wx = atan(1/sqrt(5))
+      wy = atan(1/sqrt(6))
+      wz = atan(1/sqrt(7))
+      L2=L
+    }else if(a==11) {
+      tr = tetraplex
+      d=phi
+      d2=phi_1
+      d3=1
+      f=1
+      fct = 0.95
+      fct2 = 20
+      L=1920+720
+      s=0.25
+      wx = atan(1/sqrt(5))
+      wy = atan(1/sqrt(6))
+      wz = atan(1/sqrt(7))
+      L2=720
+    }else if(a==12) {
+      tr = tetraplex
+      d=1
+      d2=phi
+      f=1
+      fct = 0.95
+      fct2 = 20
+      L=1920
+      s=0.25
+      wx = atan(1/sqrt(5))
+      wy = atan(1/sqrt(6))
+      wz = atan(1/sqrt(7))
+      L2=1200
+    }else if(a==13) {
+      tr = tetraplex
+      d=phi
+      f=1
+      fct = 0.95
+      fct2 = 20
+      L=720
+      s=0.25
+      wx = atan(1/sqrt(5))
+      wy = atan(1/sqrt(6))
+      wz = atan(1/sqrt(7))
+      L2=L
+    }else if(a==14) {
+      tr = num14
+      d=phi
+      d2=1
+      d3=2.572553981697934/2
+      f=1
+      fct = 0.95
+      fct2 = 20
+      L=1920
+      s=0.25
+      wx = atan(1/sqrt(5))
+      wy = atan(1/sqrt(6))
+      wz = atan(1/sqrt(7))
+      L2=720
+    }else if(a==15) {
+      tr = dodecaplex
+      f=1/sqrt(8)
+      d=4/(3-sqrt(5))
+      fct = 1.1
+      fct2 = 4
+      L=1200
+      wx = 0
+      wy = 0
+      wz = 0
+      s=1
+      L2=L
+    }
+  }else {
+    if(a==0) {
+      tr = tetrahedron
+      d = 2/sqrt(1.6)/sqrt(15/16)
+      f = 1
+      L = 6
+      s=1
+      L2=L
+    }else if(a==1){
+      tr = cube
+      d = 2
+      f = sqrt(1/2)
+      L=12
+      s=1
+      L2=L
+    }else if(a==2) {
+      tr = octohedron
+      d = sqrt(2)
+      f = 1
+      L=12
+      s=1
+      xz = PI/5
+      yz = PI/4
+      L2=L
+    }else if(a==3) {
+      tr = dodecahedron
+      d = sqrt(5)-1
+      f=1/sqrt(3)
+      L=30
+      s=1
+      yz=atan(phi_1)
+      L2=L
+    }else if(a==4) {
+      tr = icosohedron
+      d=2
+      f=1/sqrt(phi+2)
+      L=30
+      s=1
+      xz = atan(phi_2)
+      L2=L
+    }else if(a==5) {
+      tr = icosohedron
+      d=2*phi
+      f=1/sqrt(phi+2)
+      L=30
+      s=1
+      L2=L
+      xz = 0
+      yz=atan(phi_1)
+    }else if(a==6) {
+      tr = icosohedron
+      d=2
+      d2 = 2*phi
+      f=1/sqrt(phi+2)
+      L=60
+      s=1
+      L2=30
+      xz = 0
+      yz=atan(phi_1)
+    }else if(a==7) {
+      tr = dodecahedron
+      f=1/sqrt(phi+2)
+      d=sqrt(5)+1
+      L=30
+      s=1
+      yz=atan(phi_1)
+      L2=30
+    }else if(a==8) {
+      tr = greaticosa
+      f=1/sqrt(phi+2)
+      d=2*phi
+      d2 = 2.572553981697934
+      L=89
+      s=1
+      xz = atan(phi_2)
+      L2=30
+    }
+  }
 }
 function centercell() {
-  if(inp2.value()==4) {
-    doStuff()
+  if(inp2.value()==4) {//do nothing if dimention not set to 4
+    resetCamera()//resets rotation
   }
 }
 function centervertex() {
-  doStuff()
+  resetCamera()
   if(inp2.value()==4) {
     if(a==0) {
       fct = 2
@@ -176,7 +462,7 @@ function centervertex() {
   }
 }
 function centerE() {
-  doStuff()
+  resetCamera()
   if(inp2.value()==4) {
     if(a==0) {
       wx = 0
@@ -227,7 +513,7 @@ function centerE() {
   }
 }
 function centerF() {
-  doStuff()
+  resetCamera()
   if(inp2.value()==4) {
     if(a==0) {
       wx = 0
@@ -291,7 +577,7 @@ function setup() {
   centerf.style('width',c+'px')
   inp2 = createSelect()
   inp2.position(0,0)
-  inp2.changed(doStuff2)
+  inp2.changed(changeDimension)
   inp2.option('3D',3)
   inp2.option('4D',4)
   inp2.selected(4)
@@ -299,7 +585,7 @@ function setup() {
   var A = inp2.style('width')
   A = A.charAt(0)+A.charAt(1)
   inp.position(A,0)
-  inp.changed(doStuff)
+  inp.changed(changePolytope)
   div=createDiv('5 tetrahedron {3,3} cells')
   div.position(0,20)
   div.style('color','#ff0000')
@@ -322,14 +608,14 @@ function setup() {
   div6.position(0,140)
   div6.style('color','#ffffff')
   console.log(centerv.style('width'),centerc.style('width'))
-  doStuff2()
+  changeDimension()
   div7=createDiv('')
   div7.position(0,height-20)
   div7.style('color','#ffffff')
 }
-function doStuff() {
-  camera(0,0,(height/2)/tan(PI/6),0,0,0,0,1,0)
-  zoom=1
+function changePolytope() {
+  a=inp.value()
+  resetCamera()
   a=inp.value()
   d2 = NaN
   d3 = NaN
@@ -342,17 +628,6 @@ function doStuff() {
       div4.html('Schläfli symbol {3,3,3}')
       div5.html('Self-Dual')
       div6.html('other names: 5-cell, pentatope, pentahedroid, hyperpyramid, tetrahedral pyramid')
-      tr = simplex
-      d = 2/sqrt(1.6)
-      f = 1
-      fct = 2
-      fct2 = 1
-      L = 10
-      wx = 0
-      wy = 0
-      wz = 0
-      s=1
-      L2=L
     }else if(a==1){
       div.html('8 cube {4,3} cells')
       div1.html('24 square {4} faces')
@@ -361,17 +636,6 @@ function doStuff() {
       div4.html('Schläfli symbol {4,3,3}')
       div5.html('Dual to hexadecachoron {3,3,4}')
       div6.html('other names: 8-cell, octachoron, octahedroid, cubic prism, tetracube, 4-cube')
-      tr = tesseract
-      d = 2
-      f = 0.5
-      fct = 2
-      fct2 = 1
-      L=32
-      wx = 0
-      wy = 0
-      wz = 0
-      s=1
-      L2=L
     }else if(a==2) {
       div.html('16 tetrahedron {3,3} cells')
       div1.html('32 triangle {3} faces')
@@ -380,17 +644,6 @@ function doStuff() {
       div4.html('Schläfli symbol {3,3,4}')
       div5.html('Dual to Tesseract {4,3,3}')
       div6.html('other names: 16-cell, hexdecahedroid, 4-orthoplex')
-      tr = orthoplex
-      d = sqrt(2)
-      f = 1
-      fct = 0.75
-      fct2 = 6
-      L=24
-      wx = PI/4
-      wy = PI/5
-      wz = PI/6
-      s=1
-      L2=L
     }else if(a==3) {
       div.html('24 octahedron {3,4} cells')
       div1.html('96 triangle {3} faces')
@@ -399,17 +652,6 @@ function doStuff() {
       div4.html('Schläfli symbol {3,4,3}')
       div5.html('Self-Dual')
       div6.html('other names: 24-cell, octaplex, icosatetrahedroid, octacube, hyper-diamond, polyoctahedron')
-      tr = icositetrachoron
-      d = sqrt(2)
-      f=1/sqrt(2)
-      fct = 1.1
-      fct2 = 3
-      L=96
-      wx = 0
-      wy = 0
-      wz = 0
-      s=1
-      L2=L
     }else if(a==4) {
       div.html('120 dodecahedron {5,3} cells')
       div1.html('720 pentagon {5} faces')
@@ -418,17 +660,6 @@ function doStuff() {
       div4.html('Schläfli symbol {5,3,3}')
       div5.html('Dual to tetraplex {3,3,5}')
       div6.html('other names: 120-cell, hyperdodecahedron, polydodecahedron, hecatonicosachoron, dodecacontachoron, hecatonicosahedroid')
-      tr = dodecaplex
-      d=3-sqrt(5)
-      f=1/sqrt(8)
-      fct = 1.1
-      fct2 = 4
-      L=1200
-      wx = 0
-      wy = 0
-      wz = 0
-      s=1
-      L2=L
     }else if(a==5) {
       div.html('600 tetrahedron {3,3} cells')
       div1.html('1200 triangle {3} faces')
@@ -437,17 +668,6 @@ function doStuff() {
       div4.html('Schläfli symbol {3,3,5}')
       div5.html('Dual to dodecaplex {5,3,3}')
       div6.html('other names: 600-cell, hexacosichoron, hexacosihedroid, polytetrahedron')
-      tr = tetraplex
-      d=phi_1
-      f=1
-      fct = 0.95
-      fct2 = 20
-      L=720
-      s=0.25
-      wx = atan(1/sqrt(5))
-      wy = atan(1/sqrt(6))
-      wz = atan(1/sqrt(7))
-      L2=L
     }else if(a==6) {
       div.html('600 Icosahedron {5,3} cells')
       div1.html('1200 triangle {3} faces')
@@ -456,18 +676,6 @@ function doStuff() {
       div4.html('Schläfli symbol {3,3,5/2}')
       div5.html('Dual to small stellated 120-cell {5/2,5,3}')
       div6.html('other names: polyicosahedron, faceted 600-cell, icosaplex, faceted hexacosichoron')
-      tr = tetraplex
-      d=phi_1
-      d2=1
-      f=1
-      fct = 0.95
-      fct2 = 8
-      L=1920
-      s=0.25
-      L2=720
-      wx = 0
-      wy = 0
-      wz = 0
     }else if(a==7) {
       div.html('120 small stellated dodecahedron {5/2,5} cells')
       div1.html('720 pentagram {5/2} faces')
@@ -476,17 +684,6 @@ function doStuff() {
       div4.html('Schläfli symbol {5/2,5,3}')
       div5.html('Dual to icosahedral 120-cell {3,5,5/2}')
       div6.html('other names: stellated polydodecahedron, small stellated hecatonicosachoron')
-      tr = tetraplex
-      d=1
-      f=1
-      fct = 0.95
-      fct2 = 8
-      L=1200
-      s=0.25
-      L2=L
-      wx = 0
-      wy = 0
-      wz = 0
     }else if(a==8) {
       div.html('120 great dodecahedron {5,5/2} cells')
       div1.html('720 pentagon {5} faces')
@@ -495,18 +692,6 @@ function doStuff() {
       div4.html('Schläfli symbol {5,5/2,5}')
       div5.html('Self-Dual')
       div6.html('other names: great polydodecahedron, great hecatonicosachoron')
-      tr = tetraplex
-      d=phi_1
-      d2=phi
-      f=1
-      fct = 0.95
-      fct2 = 8
-      L=1440
-      s=0.25
-      wx = 0
-      wy = 0
-      wz = 0
-      L2=720
     }else if(a==9) {
       div.html('120 dodecahedron {5,3} cells')
       div1.html('720 pentagon {5} faces')
@@ -515,19 +700,6 @@ function doStuff() {
       div4.html('Schläfli symbol {5,3,5/2}')
       div5.html('Dual to great stellated 120-cell {5/2,3,5}')
       div6.html('other names: grand hecatonicosachoron, grand polydodecahedron')
-      tr = tetraplex
-      d=phi_1
-      d2=phi
-      d3=phi_2
-      f=1
-      fct = 0.95
-      fct2 = 20
-      L=1440
-      s=0.25
-      wx = atan(1/sqrt(5))
-      wy = atan(1/sqrt(6))
-      wz = atan(1/sqrt(7))
-      L2=720
     }else if(a==10) {
       div.html('120 great stellated dodecahedron {5/2,3} cells')
       div1.html('720 pentagram {5/2} faces')
@@ -536,18 +708,6 @@ function doStuff() {
       div4.html('Schläfli symbol {5/2,3,5}')
       div5.html('Dual to grand 120-cell {5,3,5/2}')
       div6.html('other names: great stellated polydodecahedron, Great stellated hecatonicosachoron')
-      tr = tetraplex
-      d=phi
-      d2=phi_1
-      f=1
-      fct = 0.95
-      fct2 = 20
-      L=720
-      s=0.25
-      wx = atan(1/sqrt(5))
-      wy = atan(1/sqrt(6))
-      wz = atan(1/sqrt(7))
-      L2=L
     }else if(a==11) {
       div.html('120 small stellated dodecahedron {5/2,5} cells')
       div1.html('720 pentagram {5/2} faces')
@@ -556,19 +716,6 @@ function doStuff() {
       div4.html('Schläfli symbol {5/2,5,5/2}')
       div5.html('Self-Dual')
       div6.html('other names: grand stellated polydodecahedron, grand stellated hecatonicosachoron')
-      tr = tetraplex
-      d=phi
-      d2=phi_1
-      d3=1
-      f=1
-      fct = 0.95
-      fct2 = 20
-      L=1920+720
-      s=0.25
-      wx = atan(1/sqrt(5))
-      wy = atan(1/sqrt(6))
-      wz = atan(1/sqrt(7))
-      L2=720
     }else if(a==12) {
       div.html('120 great dodecahedron {5,5/2} cells')
       div1.html('720 pentagon {5} faces')
@@ -577,18 +724,6 @@ function doStuff() {
       div4.html('Schläfli symbol {5,5/2,3}')
       div5.html('Dual to great icosahedral 120-cell {3,5/2,5}')
       div6.html('other names: great grand polydodecahedron, great grand hecatonicosachoron')
-      tr = tetraplex
-      d=1
-      d2=phi
-      f=1
-      fct = 0.95
-      fct2 = 20
-      L=1920
-      s=0.25
-      wx = atan(1/sqrt(5))
-      wy = atan(1/sqrt(6))
-      wz = atan(1/sqrt(7))
-      L2=1200
     }else if(a==13) {
       div.html('120 great icosahedron {3,5/2} cells')
       div1.html('1200 triangle {3} faces')
@@ -597,17 +732,6 @@ function doStuff() {
       div4.html('Schläfli symbol {3,5/2,5}')
       div5.html('Dual to great grand 120-cell {5,5/2,2}')
       div6.html('other names: great polyicosahedron, great faceted 600-cell, great icosahedral 120-cell, great faceted hexacosichoron')
-      tr = tetraplex
-      d=phi
-      f=1
-      fct = 0.95
-      fct2 = 20
-      L=720
-      s=0.25
-      wx = atan(1/sqrt(5))
-      wy = atan(1/sqrt(6))
-      wz = atan(1/sqrt(7))
-      L2=L
     }else if(a==14) {
       div.html('600 tetrahedron {3,3} cells')
       div1.html('1200 triangle {3} faces')
@@ -616,19 +740,6 @@ function doStuff() {
       div4.html('Schläfli symbol {3,3,5/2}')
       div5.html('Dual to great grand stellated 120-cell {5/2,3,3}')
       div6.html('other names: grand polytetrahedron, grand hexacosichoron')
-      tr = num14
-      d=phi
-      d2=1
-      d3=2.572553981697934/2
-      f=1
-      fct = 0.95
-      fct2 = 20
-      L=1920
-      s=0.25
-      wx = atan(1/sqrt(5))
-      wy = atan(1/sqrt(6))
-      wz = atan(1/sqrt(7))
-      L2=720
     }else if(a==15) {
       div.html('120 great stellated dodecahedron {5/2,3} cells')
       div1.html('720 pentagram {5/2} faces')
@@ -637,17 +748,6 @@ function doStuff() {
       div4.html('Schläfli symbol {5/2,3,3}')
       div5.html('Dual to grand 600-cell {3,3,5/2}')
       div6.html('other names: great grand stellated polydodecahedron, great grand stellated hecatonicosachoron')
-      tr = dodecaplex
-      f=1/sqrt(8)
-      d=4/(3-sqrt(5))
-      fct = 1.1
-      fct2 = 4
-      L=1200
-      wx = 0
-      wy = 0
-      wz = 0
-      s=1
-      L2=L
     }
   }else {
     if(a==0) {
@@ -658,12 +758,6 @@ function doStuff() {
       div4.html('Self-Dual')
       div5.html('other names: triangular pyramid, 3-simplex')
       div6.html('')
-      tr = tetrahedron
-      d = 2/sqrt(1.6)/sqrt(15/16)
-      f = 1
-      L = 6
-      s=1
-      L2=L
     }else if(a==1){
       div.html('6 square {4} faces')
       div1.html('12 edges')
@@ -672,12 +766,6 @@ function doStuff() {
       div4.html('Dual to octohedron {3,4}')
       div5.html('other names: 3-cube, hexahedron, square prism')
       div6.html('')
-      tr = cube
-      d = 2
-      f = sqrt(1/2)
-      L=12
-      s=1
-      L2=L
     }else if(a==2) {
       div.html('8 triangle {3} faces')
       div1.html('12 edges')
@@ -686,14 +774,6 @@ function doStuff() {
       div4.html('Dual to cube {4,3}')
       div5.html('other names: square bipyramid, triangular antiprism, 3-orthaplex')
       div6.html('')
-      tr = octohedron
-      d = sqrt(2)
-      f = 1
-      L=12
-      s=1
-      xz = PI/5
-      yz = PI/4
-      L2=L
     }else if(a==3) {
       div.html('12 pentagon {5} faces')
       div1.html('30 edges')
@@ -702,13 +782,6 @@ function doStuff() {
       div4.html('Dual to icosahedron {3,5}')
       div5.html('')
       div6.html('')
-      tr = dodecahedron
-      d = sqrt(5)-1
-      f=1/sqrt(3)
-      L=30
-      s=1
-      yz=atan(phi_1)
-      L2=L
     }else if(a==4) {
       div.html('20 triangle {3} faces')
       div1.html('30 edges')
@@ -717,13 +790,6 @@ function doStuff() {
       div4.html('Dual to dodecahedron {5,3}')
       div5.html('other names: gyroelongated pentagonal bipyramid, biaugmented pentagonal antiprism')
       div6.html('')
-      tr = icosohedron
-      d=2
-      f=1/sqrt(phi+2)
-      L=30
-      s=1
-      xz = atan(phi_2)
-      L2=L
     }else if(a==5) {
       div5.html('')
       div.html('12 pentagram {5/2} faces')
@@ -731,15 +797,6 @@ function doStuff() {
       div2.html('12 verticies')
       div3.html('Schläfli symbol {5/2,5}')
       div4.html('Dual to great dodecahedron {5,5/2}')
-      div6.html('')
-      tr = icosohedron
-      d=2*phi
-      f=1/sqrt(phi+2)
-      L=30
-      s=1
-      L2=L
-      xz = 0
-      yz=atan(phi_1)
     }else if(a==6) {
       div5.html('')
       div.html('12 pentagon {5} faces')
@@ -748,15 +805,6 @@ function doStuff() {
       div3.html('Schläfli symbol {5,5/2}')
       div4.html('Dual to small stellated dodecahedron {5/2,5}')
       div6.html('')
-      tr = icosohedron
-      d=2
-      d2 = 2*phi
-      f=1/sqrt(phi+2)
-      L=60
-      s=1
-      L2=30
-      xz = 0
-      yz=atan(phi_1)
     }else if(a==7) {
       div5.html('')
       div.html('12 pentagram {5/2} faces')
@@ -765,13 +813,6 @@ function doStuff() {
       div3.html('Schläfli symbol {5/2,3}')
       div4.html('Dual to great icosahedron {3,5/2}')
       div6.html('')
-      tr = dodecahedron
-      f=1/sqrt(phi+2)
-      d=sqrt(5)+1
-      L=30
-      s=1
-      yz=atan(phi_1)
-      L2=30
     }else if(a==8) {
       div5.html('')
       div.html('20 triangle {3} faces')
@@ -780,14 +821,6 @@ function doStuff() {
       div3.html('Schläfli symbol {3,5/2}')
       div4.html('Dual to great stellated dodecahedron {5/2,3}')
       div6.html('')
-      tr = greaticosa
-      f=1/sqrt(phi+2)
-      d=2*phi
-      d2 = 2.572553981697934
-      L=89
-      s=1
-      xz = atan(phi_2)
-      L2=30
     }
   }
 }
@@ -889,8 +922,8 @@ function draw() {
   if(edges>0) {
     for(var k = 0; k<tr.length;k++) {
       for(var k2 = 0; k2<tr.length;k2++) {
-        if((d2p(tr[k],tr[k2],d)==2||d2p(tr[k],tr[k2],d)==1)&&k2>k) {
-          linarr(nwt[k],nwt[k2],d2p(tr[k],tr[k2],d))
+        if((areConnected(tr[k],tr[k2],d)==2||areConnected(tr[k],tr[k2],d)==1)&&k2>k) {
+          renderLine(nwt[k],nwt[k2],areConnected(tr[k],tr[k2],d))
           l++
           if(L==l) {
             break
@@ -902,7 +935,7 @@ function draw() {
   if(verticies>0) {
     for(var j = 0; j<tr.length; j++) {
       if(((inp.value()>8||inp.value()<8||j<12)&&inp2.value()==3)||((inp.value()>14||inp.value()<14||j>720)&&inp2.value()==4)) {
-        pointarr(nwt[j])
+        renderVertex(nwt[j])
       }
     }
   }
@@ -914,7 +947,7 @@ function draw() {
   wz = 0
   tr = wack
 }
-function pointarr(arr) {
+function renderVertex(arr) {
   noStroke()
   push()
   translate(arr[0]*zoom,arr[1]*zoom,arr[2]*zoom)
@@ -933,7 +966,7 @@ function pointarr(arr) {
   col2+=(1/A_)%1
   pop()
 }
-function linarr(arr1,arr2,Q) {
+function renderLine(arr1,arr2,Q) {
   fill(0,0,100)
   stroke(0,0,100)
   if(Q==2) {
@@ -962,7 +995,7 @@ function linarr(arr1,arr2,Q) {
   }
   endShape(CLOSE)
 }
-function d2p(arr1,arr2,d) {
+function areConnected(arr1,arr2,d) {
   var dist = sq(arr1[0]-arr2[0])+sq(arr1[1]-arr2[1])+sq(arr1[2]-arr2[2])+sq(arr1[3]-arr2[3])
   //console.log(sqrt(dist))
   if(sq(dist-d*d)<0.01) {
