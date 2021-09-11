@@ -661,12 +661,12 @@ function setup() {
   Ortho.position(0,160)
   Ortho.style('color','#ffffff')
   Ortho.checked(false)
-  Ortho.changed(e)
+  Ortho.changed(toggOrtho)
 }
 var eRan = 1
 var vRan = 1
 var orthoOn = -1
-function e() {
+function toggOrtho() {
   orthoOn*=-1
   zoom=1
   if(orthoOn>0&&inp2.value()==4&&(a==4||a==15)) {
