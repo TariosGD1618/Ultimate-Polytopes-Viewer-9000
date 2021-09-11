@@ -78,6 +78,7 @@ function windowResized() {//do stuff when window resized
   rainbowVerticies.position(0,height-40)
   verCol.position(width/2-50,height-30)
   edgeCol.position(width/2,height-30)
+  Ortho.position(width-140,40)
 }
 function changeDimension() {
   if(inp2.value()==4) {
@@ -658,7 +659,7 @@ function setup() {
   verCol.position(width/2-50,height-30)
   rainbowVerticies.changed(vS)
   Ortho = createCheckbox('ortographic mode', true)
-  Ortho.position(0,160)
+  Ortho.position(width-140,40)
   Ortho.style('color','#ffffff')
   Ortho.checked(false)
   Ortho.changed(toggOrtho)
