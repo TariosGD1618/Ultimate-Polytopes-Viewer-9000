@@ -15,7 +15,7 @@ var dodecahedron = conv([[11,11,11,0],[0,10+phi,10+phi_1,0],[10+phi_1,0,10+phi,0
 var icosohedron = conv([[0,11,10+phi,0],[11,10+phi,0,0],[10+phi,0,11,0]])
 var greaticosa = conv([[0,11,10+phi,0],[11,10+phi,0,0],[10+phi,0,11,0],[11,0,0,0],[0,11,0,0],[0,0,11,0],[10.5,10.30901699437494745,10.8090169943749475,0],[10.8090169943749475,10.5,10.30901699437494745,0],[10.30901699437494745,10.8090169943749475, 10.5,0]])
 var simplex = [[sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[-sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,sqrt(8/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,0,1*sqrt(15/16),1/4],[0,0,0,-1]]
-var tesseract = conv([[11,11,11,11]])
+var tesseract = conv([[10.5,10.5,10.5,10.5]])
 var orthoplex = conv([[11,0,0,0],[0,11,0,0],[0,0,11,0],[0,0,0,11]])
 var icositetrachoron = conv([[11,11,0,0],[0,11,11,0],[0,0,11,11],[0,11,0,11],[11,0,11,0],[11,0,0,11]])
 var dodecaplex = [[12,12,0,0],[0,12,12,0],[0,0,12,12],[0,12,0,12],[12,0,12,0],[12,0,0,12],[10+sqrt(5),11,11,11],[11,10+sqrt(5),11,11],[11,11,10+sqrt(5),11],[11,11,11,10+sqrt(5)],[10+phi_2,10+phi,10+phi,10+phi],[10+phi,10+phi_2,10+phi,10+phi],[10+phi,10+phi,10+phi_2,10+phi],[10+phi,10+phi,10+phi,10+phi_2],  [10+phi2,10+phi_1,10+phi_1,10+phi_1],[10+phi_1,10+phi2,10+phi_1,10+phi_1],[10+phi_1,10+phi_1,10+phi2,10+phi_1],[10+phi_1,10+phi_1,10+phi_1,10+phi2]]
@@ -125,8 +125,8 @@ function resetCamera() {
       L2=L
     }else if(a==1){
       vertexData = tesseract
-      edgeLength = 2
-      circumR = 0.5
+      edgeLength = 1
+      circumR = 1
       fct = 2
       fct2 = 1
       L=32
@@ -399,6 +399,7 @@ function resetCamera() {
     L=edgesFile.length
     s=1
     L2=L
+    circumR=1
   }
 }
 function centercell() {
@@ -974,9 +975,9 @@ function renderVertex(arr) {
   translate(arr[0]*zoom,arr[1]*zoom,arr[2]*zoom)
   fill(360*col2%360,100,100)
   if(inp2.value()==4) {
-    sphere(arr[3]*50*s*zoom)
+    sphere(arr[3]*50*s*zoom/circumR)
   }else {
-    sphere(25*s*zoom)
+    sphere(25*s*zoom/circumR)
   }
   var A_ = vertexData.length
   if(inp.value()==8&&inp2.value()==3) {
