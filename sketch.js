@@ -47,7 +47,6 @@ vertexData = simplex
 edgeLength = 2/sqrt(1.6)
 f = 1
 fct = 2
-fct2 = 1
 L = 10
 wx = PI
 var s = 1
@@ -104,7 +103,6 @@ function changeDimension() {
     }
   }
   fct = 2
-  fct2 = 1
   changePolytope()
 }
 function resetCamera() {
@@ -116,7 +114,6 @@ function resetCamera() {
       edgeLength = 2/sqrt(1.6)
       circumR = 1
       fct = 2
-      fct2 = 1
       L = 10
       wx = 0
       wy = 0
@@ -128,7 +125,6 @@ function resetCamera() {
       edgeLength = 1
       circumR = 1
       fct = 2
-      fct2 = 1
       L=32
       wx = 0
       wy = 0
@@ -140,7 +136,7 @@ function resetCamera() {
       edgeLength = sqrt(2)
       circumR = 1
       fct = 0.75
-      fct2 = 6
+      zoom = 1/6
       L=24
       wx = PI/4
       wy = PI/5
@@ -152,7 +148,7 @@ function resetCamera() {
       edgeLength = sqrt(2)
       f=1/sqrt(2)
       fct = 1.1
-      fct2 = 3
+      zoom = 1/3
       L=96
       wx = 0
       wy = 0
@@ -164,7 +160,7 @@ function resetCamera() {
       edgeLength=3-sqrt(5)
       f=1/sqrt(8)
       fct = 1.1
-      fct2 = 4
+      zoom = 1/4
       L=1200
       wx = 0
       wy = 0
@@ -176,7 +172,7 @@ function resetCamera() {
       edgeLength=phi_1
       f=1
       fct = 0.95
-      fct2 = 20
+      zoom = 1/20
       L=720
       s=0.25
       wx = atan(1/sqrt(5))
@@ -189,7 +185,7 @@ function resetCamera() {
       intersectionD=1
       f=1
       fct = 0.95
-      fct2 = 8
+      zoom = 1/8
       L=1920
       s=0.25
       L2=720
@@ -201,7 +197,7 @@ function resetCamera() {
       edgeLength=1
       f=1
       fct = 0.95
-      fct2 = 8
+      zoom = 1/8
       L=1200
       s=0.25
       L2=L
@@ -214,7 +210,7 @@ function resetCamera() {
       intersectionD=phi
       f=1
       fct = 0.95
-      fct2 = 8
+      zoom = 1/8
       L=1440
       s=0.25
       wx = 0
@@ -228,7 +224,7 @@ function resetCamera() {
       intersectionD2=phi_2
       f=1
       fct = 0.95
-      fct2 = 20
+      zoom = 1/20
       L=1440
       s=0.25
       wx = atan(1/sqrt(5))
@@ -241,7 +237,7 @@ function resetCamera() {
       intersectionD=phi_1
       f=1
       fct = 0.95
-      fct2 = 20
+      zoom = 1/20
       L=720
       s=0.25
       wx = atan(1/sqrt(5))
@@ -255,7 +251,7 @@ function resetCamera() {
       intersectionD2=1
       f=1
       fct = 0.95
-      fct2 = 20
+      zoom = 1/20
       L=1920+720
       s=0.25
       wx = atan(1/sqrt(5))
@@ -268,7 +264,7 @@ function resetCamera() {
       intersectionD=phi
       f=1
       fct = 0.95
-      fct2 = 20
+      zoom = 1/20
       L=1920
       s=0.25
       wx = atan(1/sqrt(5))
@@ -280,7 +276,7 @@ function resetCamera() {
       edgeLength=phi
       f=1
       fct = 0.95
-      fct2 = 20
+      zoom = 1/20
       L=720
       s=0.25
       wx = atan(1/sqrt(5))
@@ -294,7 +290,7 @@ function resetCamera() {
       intersectionD2=2.572553981697934/2
       f=1
       fct = 0.95
-      fct2 = 20
+      zoom = 1/20
       L=1920
       s=0.25
       wx = atan(1/sqrt(5))
@@ -306,7 +302,7 @@ function resetCamera() {
       f=1/sqrt(8)
       edgeLength=4/(3-sqrt(5))
       fct = 1.1
-      fct2 = 4
+      zoom = 1/4
       L=1200
       wx = 0
       wy = 0
@@ -395,7 +391,6 @@ function resetCamera() {
   if(a==-1){
     vertexData = file
     fct = 2
-    fct2 = 1
     L=edgesFile.length
     s=1
     L2=L
@@ -412,19 +407,17 @@ function centervertex() {
   if(inp2.value()==4) {
     if(a==0) {
       fct = 2
-      fct2 = 1
       wx = PI
       s=1
     }else if(a==1){
       fct = 4
-      fct2 = 0.5
+      zoom = 2
       wx = PI/4
       wy = PI/5
       wz = PI/6
       s=1
     }else if(a==2) {
       fct = 2
-      fct2 = 1
       L=24
       wx = 0
       wy = 0
@@ -432,7 +425,6 @@ function centervertex() {
       s=1
     }else if(a==3) {
       fct = 2
-      fct2 = 1
       L=96
       wx = atan(1)
       wy = 0
@@ -440,7 +432,7 @@ function centervertex() {
       s=1
     }else if(a==4||a==15) {
       fct = 1.1
-      fct2 = 4
+      zoom = 1/4
       L=1200
       wx = atan(1/sqrt(5))
       wy = atan(1/sqrt(6))
@@ -448,7 +440,7 @@ function centervertex() {
       s=1
     }else if(a==5||a==6||a==8||a==9||a==11||a==12||a==13||a==14||a==10||a==11||a==7) {
       fct = 0.95
-      fct2 = 8
+      zoom = 1/8
       L=720
       s=0.25
       wx = 0
@@ -489,7 +481,7 @@ function centerE() {
       wy = 0
       wz = 0
       fct=1.25
-      fct2=2
+      zoom=1/2
     }else if(a==3) {
       wx = atan(1)
       wy = atan(1.5)
@@ -499,13 +491,13 @@ function centerE() {
       wy = 0
       wz = 0
       fct=1
-      fct2=25
+      zoom=1/25
     }else if(a==5||a==6||a==8||a==9||a==11||a==12||a==13||a==14||a==10||a==11||a==7) {
       wx = atan(phi)
       wy = 0
       wz = 0
       fct=1
-      fct2=10
+      zoom=0.1
     }
   }else {
     if(a==0) {
@@ -932,8 +924,8 @@ function draw() {
   }
   var vertexDataProjected = []
   for(var i = 0; i<vertexData.length; i++) {
-    var fact = 400/(fct-vertexData[i][3]*f)/fct2
-    vertexDataProjected[i]=[vertexData[i][0]*fact*f,vertexData[i][1]*fact*f,vertexData[i][2]*fact*f,1/(fct-vertexData[i][3]*f)*f/fct2]
+    var fact = 400/(fct-vertexData[i][3]*f)
+    vertexDataProjected[i]=[vertexData[i][0]*fact*f,vertexData[i][1]*fact*f,vertexData[i][2]*fact*f,1/(fct-vertexData[i][3]*f)*f]
   }
   if(a>-1) {
   var l = 0
