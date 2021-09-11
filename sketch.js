@@ -18,6 +18,7 @@ var wy = 0
 var wz = 0
 var col = 0
 var col2 = 0
+circumR=1
 var vertexData = [[sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[-sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,sqrt(8/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,0,1*sqrt(15/16),1/4],[0,0,0,-1]]
 var zoom = 1
 edgeLength = 2/sqrt(1.6)
@@ -105,7 +106,8 @@ function resetCamera() {
   camera(0,0,(height/2)/tan(PI/6),0,0,0,0,1,0)
   zoom=1
   if(inp2.value()==4) {
-    if(polytopeID==0) {
+    switch(polytopeID) {
+      case 0:
       vertexData = [[sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[-sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,sqrt(8/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,0,1*sqrt(15/16),1/4],[0,0,0,-1]]
   var tesseract = conv([[10.5,10.5,10.5,10.5]])
       edgeLength = 2/sqrt(1.6)
@@ -117,7 +119,8 @@ function resetCamera() {
       wz = 0
       s=1
       L2=L
-    }else if(polytopeID==1){
+      break
+      case 1:
       vertexData = conv([[10.5,10.5,10.5,10.5]])
       edgeLength = 1
       circumR = 1
@@ -128,7 +131,8 @@ function resetCamera() {
       wz = 0
       s=1
       L2=L
-    }else if(polytopeID==2) {
+      break
+      case 2:
       vertexData = conv([[11,0,0,0],[0,11,0,0],[0,0,11,0],[0,0,0,11]])
       edgeLength = sqrt(2)
       circumR = 1
@@ -140,7 +144,8 @@ function resetCamera() {
       wz = PI/6
       s=1
       L2=L
-    }else if(polytopeID==3) {
+      break
+      case 3:
       vertexData = conv([[11,11,0,0],[0,11,11,0],[0,0,11,11],[0,11,0,11],[11,0,11,0],[11,0,0,11]])
       edgeLength = sqrt(2)
       f=1/sqrt(2)
@@ -152,7 +157,8 @@ function resetCamera() {
       wz = 0
       s=1
       L2=L
-    }else if(polytopeID==4) {
+      break      
+      case 4:
       vertexData = dodecaplex
       edgeLength=3-sqrt(5)
       f=1/sqrt(8)
@@ -167,7 +173,8 @@ function resetCamera() {
       if(orthoOn>0) {
         s = 0.2
       }
-    }else if(polytopeID==5) {
+      break
+      case 5:
       vertexData = tetraplex
       edgeLength=phi_1
       f=1
@@ -179,7 +186,8 @@ function resetCamera() {
       wy = atan(1/sqrt(6))
       wz = atan(1/sqrt(7))
       L2=L
-    }else if(polytopeID==6) {
+      break
+      case 6:
       vertexData = tetraplex
       edgeLength=phi_1
       intersectionD=1
@@ -192,7 +200,8 @@ function resetCamera() {
       wx = 0
       wy = 0
       wz = 0
-    }else if(polytopeID==7) {
+      break
+      case 7:
       vertexData = tetraplex
       edgeLength=1
       f=1
@@ -204,7 +213,8 @@ function resetCamera() {
       wx = 0
       wy = 0
       wz = 0
-    }else if(polytopeID==8) {
+      break
+      case 8:
       vertexData = tetraplex
       edgeLength=phi_1
       intersectionD=phi
@@ -217,7 +227,8 @@ function resetCamera() {
       wy = 0
       wz = 0
       L2=720
-    }else if(polytopeID==9) {
+      break
+      case 9:
       vertexData = tetraplex
       edgeLength=phi_1
       intersectionD=phi
@@ -231,7 +242,8 @@ function resetCamera() {
       wy = atan(1/sqrt(6))
       wz = atan(1/sqrt(7))
       L2=720
-    }else if(polytopeID==10) {
+      break
+      case 10:
       vertexData = tetraplex
       edgeLength=phi
       intersectionD=phi_1
@@ -244,7 +256,8 @@ function resetCamera() {
       wy = atan(1/sqrt(6))
       wz = atan(1/sqrt(7))
       L2=L
-    }else if(polytopeID==11) {
+      break
+      case 11:
       vertexData = tetraplex
       edgeLength=phi
       intersectionD=phi_1
@@ -258,7 +271,8 @@ function resetCamera() {
       wy = atan(1/sqrt(6))
       wz = atan(1/sqrt(7))
       L2=720
-    }else if(polytopeID==12) {
+      break
+      case 12:
       vertexData = tetraplex
       edgeLength=1
       intersectionD=phi
@@ -271,7 +285,8 @@ function resetCamera() {
       wy = atan(1/sqrt(6))
       wz = atan(1/sqrt(7))
       L2=1200
-    }else if(polytopeID==13) {
+      break
+      case 13:
       vertexData = tetraplex
       edgeLength=phi
       f=1
@@ -283,7 +298,8 @@ function resetCamera() {
       wy = atan(1/sqrt(6))
       wz = atan(1/sqrt(7))
       L2=L
-    }else if(polytopeID==14) {
+      break
+      case 14:
       vertexData = doWeird(tetraplex,phi)
       edgeLength=phi
       intersectionD=1
@@ -297,7 +313,8 @@ function resetCamera() {
       wy = atan(1/sqrt(6))
       wz = atan(1/sqrt(7))
       L2=720
-    }else if(polytopeID==15) {
+      break
+      case 15:
       vertexData = dodecaplex
       f=1/sqrt(8)
       edgeLength=4/(3-sqrt(5))
@@ -312,23 +329,27 @@ function resetCamera() {
       if(orthoOn>0) {
         s = 0.2
       }
+      break
     }
   }else {
-    if(polytopeID==0) {
+    switch(polytopeID) {
+      case 0:
       vertexData = [[sqrt(2/3),-sqrt(2/9),1/3,0],[-sqrt(2/3),-sqrt(2/9),1/3,0],[0,sqrt(8/9),1/3,0],[0,0,-1,0]]
       edgeLength = 2/sqrt(1.6)/sqrt(15/16)
       circumR = 1
       L = 6
       s=1
       L2=L
-    }else if(polytopeID==1){
+      break
+      case 1:
       vertexData = conv([[11,11,11,0]])
       edgeLength = 2
       circumR = sqrt(1/2)
       L=12
       s=1
       L2=L
-    }else if(polytopeID==2) {
+      break
+      case 2:
       vertexData = conv([[11,0,0,0],[0,11,0,0],[0,0,11,0]])
       edgeLength= sqrt(2)
       circumR = 1
@@ -337,7 +358,8 @@ function resetCamera() {
       xz = PI/5
       yz = PI/4
       L2=L
-    }else if(polytopeID==3) {
+      break
+      case 3:
       vertexData = dodecahedron
       edgeLength= sqrt(5)-1
       f=1/sqrt(3)
@@ -345,7 +367,8 @@ function resetCamera() {
       s=1
       yz=atan(phi_1)
       L2=L
-    }else if(polytopeID==4) {
+      break
+      case 4:
       vertexData = icosohedron
       edgeLength=2
       f=1/sqrt(phi+2)
@@ -353,7 +376,8 @@ function resetCamera() {
       s=1
       xz = atan(phi_2)
       L2=L
-    }else if(polytopeID==5) {
+      break
+      case 5:
       vertexData = icosohedron
       edgeLength=2*phi
       f=1/sqrt(phi+2)
@@ -362,7 +386,8 @@ function resetCamera() {
       L2=L
       xz = 0
       yz=atan(phi_1)
-    }else if(polytopeID==6) {
+      break
+      case 6:
       vertexData = icosohedron
       edgeLength=2
       intersectionD = 2*phi
@@ -372,7 +397,8 @@ function resetCamera() {
       L2=30
       xz = 0
       yz=atan(phi_1)
-    }else if(polytopeID==7) {
+      break
+      case 7:
       vertexData = dodecahedron
       f=1/sqrt(phi+2)
       edgeLength=sqrt(5)+1
@@ -380,7 +406,8 @@ function resetCamera() {
       s=1
       yz=atan(phi_1)
       L2=30
-    }else if(polytopeID==8) {
+      break
+      case 8:
       vertexData = conv([[0,11,10+phi,0],[11,10+phi,0,0],[10+phi,0,11,0],[11,0,0,0],[0,11,0,0],[0,0,11,0],[10.5,10.30901699437494745,10.8090169943749475,0],[10.8090169943749475,10.5,10.30901699437494745,0],[10.30901699437494745,10.8090169943749475, 10.5,0]])
       f=1/sqrt(phi+2)
       edgeLength=2*phi
@@ -389,6 +416,7 @@ function resetCamera() {
       s=1
       xz = atan(phi_2)
       L2=30
+      break
     }
   }
   if(polytopeID==-1){
@@ -412,32 +440,38 @@ function centercell() {
 function centervertex() {
   resetCamera()
   if(inp2.value()==4) {
-    if(polytopeID==0) {
+    switch(polytopeID) {
+      case 0:
       fct = 2
       wx = PI
       s=1
-    }else if(polytopeID==1){
+      break
+      case 1:
       fct = 4
       zoom = 2
       wx = PI/4
       wy = PI/5
       wz = PI/6
       s=1
-    }else if(polytopeID==2) {
+      break
+      case 2:
       fct = 2
       L=24
       wx = 0
       wy = 0
       wz = 0
       s=1
-    }else if(polytopeID==3) {
+      break
+      case 3:
       fct = 2
       L=96
       wx = atan(1)
       wy = 0
       wz = 0
       s=1
-    }else if(polytopeID==4||polytopeID==15) {
+      break
+      case 4:
+      case 15:
       fct = 1.1
       zoom = 1/4
       L=1200
@@ -445,7 +479,18 @@ function centervertex() {
       wy = atan(1/sqrt(6))
       wz = atan(1/sqrt(7))
       s=1
-    }else if(polytopeID==5||polytopeID==6||polytopeID==8||polytopeID==9||polytopeID==11||polytopeID==12||polytopeID==13||polytopeID==14||polytopeID==10||polytopeID==11||polytopeID==7) {
+      break
+      case 5:
+      case 6:
+      case 8:
+      case 9:
+      case 11:
+      case 12:
+      case 13:
+      case 14:
+      case 10:
+      case 11:
+      case 7:
       fct = 0.95
       zoom = 1/8
       L=720
@@ -455,20 +500,29 @@ function centervertex() {
       wz = 0
     }
   }else {
-    if(polytopeID==0) {
+    switch(polytopeID) {
+      case 0:
       xz=PI
-    }else if(polytopeID==1) {
+      case 1:
       yz = PI/4
       xz = PI/5
-    }else if(polytopeID==2) {
+      break
+      case 2:
       yz = 0
       xz = 0
-    }else if(polytopeID==3||polytopeID==7) {
+      break
+      case 3:
+      case 7:
       xz = atan(phi_2)
       yz = 0
-    }else if(polytopeID==4||polytopeID==5||polytopeID==6||polytopeID==8) {
+      break
+      case 4:
+      case 5:
+      case 6:
+      case 7:
       xz = 0
       yz=atan(phi_1)
+      break
     }
   }
   if(orthoOn>0) {
@@ -478,51 +532,79 @@ function centervertex() {
 function centerE() {
   resetCamera()
   if(inp2.value()==4) {
-    if(polytopeID==0) {
+    switch(polytopeID) {
+      case 0:
       wx = 0
       wy =0
       wz = PI/sqrt(2)
-    }else if(polytopeID==1) {
+      break
+      case 1:
       wx = PI/4
       wy = PI/5
       wz = 0
-    }else if(polytopeID==2) {
+      break
+      case 2:
       wx = PI/4
       wy = 0
       wz = 0
       fct=1.25
       zoom=1/2
-    }else if(polytopeID==3) {
+      break
+      case 3:
       wx = atan(1)
       wy = atan(1.5)
       wz = 0
-    }else if(polytopeID==4||polytopeID==15) {
+      break
+      case 4:
+      case 15:
       wx = atan(1/sqrt(7))
       wy = 0
       wz = 0
       fct=1
       zoom=1/25
-    }else if(polytopeID==5||polytopeID==6||polytopeID==8||polytopeID==9||polytopeID==11||polytopeID==12||polytopeID==13||polytopeID==14||polytopeID==10||polytopeID==11||polytopeID==7) {
+      break
+      case 5:
+      case 6:
+      case 8:
+      case 9:
+      case 11:
+      case 12:
+      case 13:
+      case 14:
+      case 10:
+      case 11:
+      case 7:
       wx = atan(phi)
       wy = 0
       wz = 0
       fct=1
       zoom=0.1
+      break
     }
   }else {
-    if(polytopeID==0) {
+    switch(polytopeID) {
+      case 0:
       yz=PI/sqrt(2)
-    }else if(polytopeID==1) {
+      break
+      case 1:
       yz = PI/4
-    }else if(polytopeID==2) {
+      break
+      case 2:
       yz = PI/4
       xz = 0
-    }else if(polytopeID==3||polytopeID==7) {
+      break
+      case 3:
+      case 7:
       xz=0
       yz=0
-    }else if(polytopeID==4||polytopeID==5||polytopeID==6||polytopeID==8) {
+      break
+      case 4:
+      case 5:
+      case 6:
+      case 8:
       xz=0
       yz=0
+      break
     }
   }
   if(orthoOn>0) {
@@ -532,33 +614,51 @@ function centerE() {
 function centerF() {
   resetCamera()
   if(inp2.value()==4) {
-    if(polytopeID==0) {
+    switch(polytopeID) {
+      case 0:
       wx = 0
       wy =0
       wz =PI*sqrt(3)
-    }else if(polytopeID==1) {
+      break
+      case 1:
       wx = PI/4
       wy = 0
       wz = 0
-    }else if(polytopeID==2) {
+      break
+      case 2:
       wx = PI/4
       wy = PI/5
       wz = 0
-    }else if(polytopeID==3) {
+      break
+      case 3:
       wx = atan(1)
       wy = atan(1/sqrt(2))
       wz = 0
-    }else if(polytopeID==4||polytopeID==15) {
+      break
+      case 4:
+      case 15:
       wx = atan(phi)
       wy = 0
       wz = 0
       fct=1
       zoom=1/15
-    }else if(polytopeID==5||polytopeID==6||polytopeID==8||polytopeID==9||polytopeID==11||polytopeID==12||polytopeID==13||polytopeID==14||polytopeID==10||polytopeID==11||polytopeID==7) {
+      break
+      case 5:
+      case 6:
+      case 8:
+      case 9:
+      case 11:
+      case 12:
+      case 13:
+      case 14:
+      case 10:
+      case 11:
+      case 7:
       wx = atan(1/sqrt(7))
       wy = 0
       wz = 0
       zoom=1/30
+      break
     }
   }
   if(orthoOn>0) {
@@ -672,12 +772,13 @@ function vS() {
   vRan*=-1
 }
 function changePolytope() {
-  polytopeID=inp.value()
+  polytopeID=inp.value()*1
   resetCamera()
   intersectionD = NaN
   intersectionD2 = NaN
   if(inp2.value()==4) {
-    if(polytopeID==0) {
+    switch(polytopeID) {
+      case 0:
       div.html('5 tetrahedron {3,3} cells')
       div1.html('10 triangle {3} faces')
       div2.html('10 edges')
@@ -685,7 +786,8 @@ function changePolytope() {
       div4.html('Schläfli symbol {3,3,3}')
       div5.html('Self-Dual')
       div6.html('other names: 5-cell, pentatope, pentahedroid, hyperpyramid, tetrahedral pyramid')
-    }else if(polytopeID==1){
+      break
+      case 1:
       div.html('8 cube {4,3} cells')
       div1.html('24 square {4} faces')
       div2.html('32 edges')
@@ -693,7 +795,8 @@ function changePolytope() {
       div4.html('Schläfli symbol {4,3,3}')
       div5.html('Dual to hexadecachoron {3,3,4}')
       div6.html('other names: 8-cell, octachoron, octahedroid, cubic prism, tetracube, 4-cube')
-    }else if(polytopeID==2) {
+      break
+      case 2:
       div.html('16 tetrahedron {3,3} cells')
       div1.html('32 triangle {3} faces')
       div2.html('24 edges')
@@ -701,7 +804,8 @@ function changePolytope() {
       div4.html('Schläfli symbol {3,3,4}')
       div5.html('Dual to Tesseract {4,3,3}')
       div6.html('other names: 16-cell, hexdecahedroid, 4-orthoplex')
-    }else if(polytopeID==3) {
+      break
+      case 3:
       div.html('24 octahedron {3,4} cells')
       div1.html('96 triangle {3} faces')
       div2.html('96 edges')
@@ -709,7 +813,8 @@ function changePolytope() {
       div4.html('Schläfli symbol {3,4,3}')
       div5.html('Self-Dual')
       div6.html('other names: 24-cell, octaplex, icosatetrahedroid, octacube, hyper-diamond, polyoctahedron')
-    }else if(polytopeID==4) {
+      break
+      case 4:
       div.html('120 dodecahedron {5,3} cells')
       div1.html('720 pentagon {5} faces')
       div2.html('1200 edges')
@@ -717,7 +822,8 @@ function changePolytope() {
       div4.html('Schläfli symbol {5,3,3}')
       div5.html('Dual to tetraplex {3,3,5}')
       div6.html('other names: 120-cell, hyperdodecahedron, polydodecahedron, hecatonicosachoron, dodecacontachoron, hecatonicosahedroid')
-    }else if(polytopeID==5) {
+      break
+      case 5:
       div.html('600 tetrahedron {3,3} cells')
       div1.html('1200 triangle {3} faces')
       div2.html('720 edges')
@@ -725,7 +831,8 @@ function changePolytope() {
       div4.html('Schläfli symbol {3,3,5}')
       div5.html('Dual to dodecaplex {5,3,3}')
       div6.html('other names: 600-cell, hexacosichoron, hexacosihedroid, polytetrahedron')
-    }else if(polytopeID==6) {
+      break
+      case 6:
       div.html('600 Icosahedron {5,3} cells')
       div1.html('1200 triangle {3} faces')
       div2.html('720 edges')
@@ -733,7 +840,8 @@ function changePolytope() {
       div4.html('Schläfli symbol {3,3,5/2}')
       div5.html('Dual to small stellated 120-cell {5/2,5,3}')
       div6.html('other names: polyicosahedron, faceted 600-cell, icosaplex, faceted hexacosichoron')
-    }else if(polytopeID==7) {
+      break
+      case 7:
       div.html('120 small stellated dodecahedron {5/2,5} cells')
       div1.html('720 pentagram {5/2} faces')
       div2.html('1200 edges')
@@ -741,7 +849,8 @@ function changePolytope() {
       div4.html('Schläfli symbol {5/2,5,3}')
       div5.html('Dual to icosahedral 120-cell {3,5,5/2}')
       div6.html('other names: stellated polydodecahedron, small stellated hecatonicosachoron')
-    }else if(polytopeID==8) {
+      break
+      case 8:
       div.html('120 great dodecahedron {5,5/2} cells')
       div1.html('720 pentagon {5} faces')
       div2.html('720 edges')
@@ -749,7 +858,8 @@ function changePolytope() {
       div4.html('Schläfli symbol {5,5/2,5}')
       div5.html('Self-Dual')
       div6.html('other names: great polydodecahedron, great hecatonicosachoron')
-    }else if(polytopeID==9) {
+      break
+      case 9:
       div.html('120 dodecahedron {5,3} cells')
       div1.html('720 pentagon {5} faces')
       div2.html('720 edges')
@@ -757,7 +867,8 @@ function changePolytope() {
       div4.html('Schläfli symbol {5,3,5/2}')
       div5.html('Dual to great stellated 120-cell {5/2,3,5}')
       div6.html('other names: grand hecatonicosachoron, grand polydodecahedron')
-    }else if(polytopeID==10) {
+      break
+      case 10:
       div.html('120 great stellated dodecahedron {5/2,3} cells')
       div1.html('720 pentagram {5/2} faces')
       div2.html('720 edges')
@@ -765,7 +876,8 @@ function changePolytope() {
       div4.html('Schläfli symbol {5/2,3,5}')
       div5.html('Dual to grand 120-cell {5,3,5/2}')
       div6.html('other names: great stellated polydodecahedron, Great stellated hecatonicosachoron')
-    }else if(polytopeID==11) {
+      break
+      case 11:
       div.html('120 small stellated dodecahedron {5/2,5} cells')
       div1.html('720 pentagram {5/2} faces')
       div2.html('720 edges')
@@ -773,7 +885,8 @@ function changePolytope() {
       div4.html('Schläfli symbol {5/2,5,5/2}')
       div5.html('Self-Dual')
       div6.html('other names: grand stellated polydodecahedron, grand stellated hecatonicosachoron')
-    }else if(polytopeID==12) {
+      break
+      case 12:
       div.html('120 great dodecahedron {5,5/2} cells')
       div1.html('720 pentagon {5} faces')
       div2.html('1200 edges')
@@ -781,7 +894,8 @@ function changePolytope() {
       div4.html('Schläfli symbol {5,5/2,3}')
       div5.html('Dual to great icosahedral 120-cell {3,5/2,5}')
       div6.html('other names: great grand polydodecahedron, great grand hecatonicosachoron')
-    }else if(polytopeID==13) {
+      break
+      case 13:
       div.html('120 great icosahedron {3,5/2} cells')
       div1.html('1200 triangle {3} faces')
       div2.html('720 edges')
@@ -789,7 +903,8 @@ function changePolytope() {
       div4.html('Schläfli symbol {3,5/2,5}')
       div5.html('Dual to great grand 120-cell {5,5/2,2}')
       div6.html('other names: great polyicosahedron, great faceted 600-cell, great icosahedral 120-cell, great faceted hexacosichoron')
-    }else if(polytopeID==14) {
+      break
+      case 14:
       div.html('600 tetrahedron {3,3} cells')
       div1.html('1200 triangle {3} faces')
       div2.html('720 edges')
@@ -797,7 +912,8 @@ function changePolytope() {
       div4.html('Schläfli symbol {3,3,5/2}')
       div5.html('Dual to great grand stellated 120-cell {5/2,3,3}')
       div6.html('other names: grand polytetrahedron, grand hexacosichoron')
-    }else if(polytopeID==15) {
+      break
+      case 15:
       div.html('120 great stellated dodecahedron {5/2,3} cells')
       div1.html('720 pentagram {5/2} faces')
       div2.html('1200 edges')
@@ -805,9 +921,11 @@ function changePolytope() {
       div4.html('Schläfli symbol {5/2,3,3}')
       div5.html('Dual to grand 600-cell {3,3,5/2}')
       div6.html('other names: great grand stellated polydodecahedron, great grand stellated hecatonicosachoron')
+      break
     }
   }else {
-    if(polytopeID==0) {
+    switch(polytopeID) {
+      case 0:
       div.html('4 triangle {3} faces')
       div1.html('6 edges')
       div2.html('4 verticies')
@@ -815,7 +933,8 @@ function changePolytope() {
       div4.html('Self-Dual')
       div5.html('other names: triangular pyramid, 3-simplex')
       div6.html('')
-    }else if(polytopeID==1){
+      break
+      case 1:
       div.html('6 square {4} faces')
       div1.html('12 edges')
       div2.html('8 verticies')
@@ -823,7 +942,8 @@ function changePolytope() {
       div4.html('Dual to octohedron {3,4}')
       div5.html('other names: 3-cube, hexahedron, square prism')
       div6.html('')
-    }else if(polytopeID==2) {
+      break
+      case 2:
       div.html('8 triangle {3} faces')
       div1.html('12 edges')
       div2.html('6 verticies')
@@ -831,7 +951,8 @@ function changePolytope() {
       div4.html('Dual to cube {4,3}')
       div5.html('other names: square bipyramid, triangular antiprism, 3-orthaplex')
       div6.html('')
-    }else if(polytopeID==3) {
+      break
+      case 3:
       div.html('12 pentagon {5} faces')
       div1.html('30 edges')
       div2.html('20 verticies')
@@ -839,7 +960,8 @@ function changePolytope() {
       div4.html('Dual to icosahedron {3,5}')
       div5.html('')
       div6.html('')
-    }else if(polytopeID==4) {
+      break
+      case 4:
       div.html('20 triangle {3} faces')
       div1.html('30 edges')
       div2.html('12 verticies')
@@ -847,14 +969,16 @@ function changePolytope() {
       div4.html('Dual to dodecahedron {5,3}')
       div5.html('other names: gyroelongated pentagonal bipyramid, biaugmented pentagonal antiprism')
       div6.html('')
-    }else if(polytopeID==5) {
+      break
+      case 5:
       div5.html('')
       div.html('12 pentagram {5/2} faces')
       div1.html('30 edges')
       div2.html('12 verticies')
       div3.html('Schläfli symbol {5/2,5}')
       div4.html('Dual to great dodecahedron {5,5/2}')
-    }else if(polytopeID==6) {
+      break
+      case 6:
       div5.html('')
       div.html('12 pentagon {5} faces')
       div1.html('30 edges')
@@ -862,7 +986,8 @@ function changePolytope() {
       div3.html('Schläfli symbol {5,5/2}')
       div4.html('Dual to small stellated dodecahedron {5/2,5}')
       div6.html('')
-    }else if(polytopeID==7) {
+      break
+      case 7:
       div5.html('')
       div.html('12 pentagram {5/2} faces')
       div1.html('30 edges')
@@ -870,7 +995,8 @@ function changePolytope() {
       div3.html('Schläfli symbol {5/2,3}')
       div4.html('Dual to great icosahedron {3,5/2}')
       div6.html('')
-    }else if(polytopeID==8) {
+      break
+      case 8:
       div5.html('')
       div.html('20 triangle {3} faces')
       div1.html('30 edges')
@@ -878,6 +1004,7 @@ function changePolytope() {
       div3.html('Schläfli symbol {3,5/2}')
       div4.html('Dual to great stellated dodecahedron {5/2,3}')
       div6.html('')
+      break
     }
   }
   if(polytopeID==-1) {
@@ -1008,7 +1135,7 @@ function draw() {
       vertexDataProjected[i][3]=1
     }
   }
-  if(a>-1) {
+  if(polytopeID>-1) {
   var l = 0
   if(edges>0) {
     for(var k = 0; k<vertexData.length;k++) {
