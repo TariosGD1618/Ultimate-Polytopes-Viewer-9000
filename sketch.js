@@ -73,6 +73,7 @@ function windowResized() {//do stuff when window resized
   centerf.position(width/2-c,20)
   centere.position(width/2,20)
   div7.position(0,height-20)
+  mrSlider.position(width-mrSlider.width-5,0)
 }
 function changeDimension() {
   if(inp2.value()==4) {
@@ -396,6 +397,7 @@ function resetCamera() {
     L2=L
     circumR=1
   }
+  mrSlider.value(fct)
 }
 function centercell() {
   if(inp2.value()==4) {//do nothing if dimention not set to 4
@@ -612,10 +614,15 @@ function setup() {
   div6.position(0,140)
   div6.style('color','#ffffff')
   console.log(centerv.style('width'),centerc.style('width'))
+  mrSlider=createSlider(0,10,2,0.05)
+  mrSlider.position(width-mrSlider.width-5,0)
   changeDimension()
   div7=createDiv('')//fps counter
   div7.position(0,height-20)
   div7.style('color','#ffffff')
+  joeDiv=createDiv('2')
+  joeDiv.position(width-13,20)
+  joeDiv.style('color','#ffffff')
 }
 function changePolytope() {
   a=inp.value()
@@ -845,6 +852,14 @@ function keyPressed() {
   }
 }
 function draw() {
+  fct = mrSlider.value()
+  joeDiv.html(fct)
+  var W =joeDiv.style('width')
+  var r = ''
+  for(var i = 0; i<W.length-2;i++) {
+    r+=W.charAt(i)
+  }
+  joeDiv.position(width-5-r,20)
   if(frameCount%10==1) {
     div7.html(frameRate()+'fps')
   }
