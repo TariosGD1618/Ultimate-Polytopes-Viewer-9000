@@ -164,7 +164,7 @@ function resetCamera() {
       vertexData = dodecaplex
       edgeLength=3-sqrt(5)
       f=1/sqrt(8)
-      fct = 1.1
+      fct = 1.05
       zoom = 1/4
       L=1200
       wx = 0
@@ -172,6 +172,9 @@ function resetCamera() {
       wz = 0
       s=1
       L2=L
+      if(orthoOn>0) {
+        s = 0.2
+      }
     }else if(a==5) {
       vertexData = tetraplex
       edgeLength=phi_1
@@ -306,7 +309,7 @@ function resetCamera() {
       vertexData = dodecaplex
       f=1/sqrt(8)
       edgeLength=4/(3-sqrt(5))
-      fct = 1.1
+      fct = 1.05
       zoom = 1/4
       L=1200
       wx = 0
@@ -314,6 +317,9 @@ function resetCamera() {
       wz = 0
       s=1
       L2=L
+      if(orthoOn>0) {
+        s = 0.2
+      }
     }
   }else {
     if(a==0) {
@@ -402,6 +408,9 @@ function resetCamera() {
     circumR=1
   }
   mrSlider.value(fct)
+  if(orthoOn>0) {
+    zoom = 1
+  }
 }
 function centercell() {
   if(inp2.value()==4) {//do nothing if dimention not set to 4
@@ -470,6 +479,9 @@ function centervertex() {
       yz=atan(phi_1)
     }
   }
+  if(orthoOn>0) {
+    zoom = 1
+  }
 }
 function centerE() {
   resetCamera()
@@ -521,6 +533,9 @@ function centerE() {
       yz=0
     }
   }
+  if(orthoOn>0) {
+    zoom = 1
+  }
 }
 function centerF() {
   resetCamera()
@@ -546,13 +561,16 @@ function centerF() {
       wy = 0
       wz = 0
       fct=1
-      fct2=15
+      zoom=1/15
     }else if(a==5||a==6||a==8||a==9||a==11||a==12||a==13||a==14||a==10||a==11||a==7) {
       wx = atan(1/sqrt(7))
       wy = 0
       wz = 0
-      fct2=30
+      zoom=1/30
     }
+  }
+  if(orthoOn>0) {
+    zoom = 1
   }
 }
 function setup() {
@@ -639,9 +657,22 @@ function setup() {
   verCol=createColorPicker('#00ffff')
   verCol.position(width/2-50,height-30)
   rainbowVerticies.changed(vS)
+  Ortho = createCheckbox('ortographic mode', true)
+  Ortho.position(0,160)
+  Ortho.style('color','#ffffff')
+  Ortho.checked(false)
+  Ortho.changed(e)
 }
 var eRan = 1
 var vRan = 1
+var orthoOn = -1
+function e() {
+  orthoOn*=-1
+  zoom=1
+  if(orthoOn>0&&inp2.value()==4&&(a==4||a==15)) {
+    s=0.2
+  }
+}
 function eS() {
   eRan*=-1
 }
@@ -964,7 +995,13 @@ function draw() {
   var vertexDataProjected = []
   for(var i = 0; i<vertexData.length; i++) {
     var fact = 400/(fct-vertexData[i][3]*f)
+    if(orthoOn>0) {
+      fact = 400
+    }
     vertexDataProjected[i]=[vertexData[i][0]*fact*f,vertexData[i][1]*fact*f,vertexData[i][2]*fact*f,1/(fct-vertexData[i][3]*f)*f]
+    if(orthoOn>0) {
+      vertexDataProjected[i][3]=1
+    }
   }
   if(a>-1) {
   var l = 0
