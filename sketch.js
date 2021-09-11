@@ -30,6 +30,8 @@ var tetraplex = [[11,0,0,0],[0,11,0,0],[0,0,11,0],[0,0,0,11],[10.5,10.5,10.5,10.
 var At = [10+phi/2,10.5,10+phi_1/2,0]
 tetraplex.push([At[0],At[1],At[2],At[3]],[At[2],At[0],At[1],At[3]],[At[1],At[2],At[0],At[3]],[At[1],At[0],At[3],At[2]],[At[0],At[3],At[1],At[2]],[At[0],At[2],At[3],At[1]],[At[3],At[0],At[2],At[1]],[At[2],At[3],At[0],At[1]],[At[2],At[1],At[3],At[0]],[At[1],At[3],At[2],At[0]],[At[3],At[2],At[1],At[0]],[At[3],At[1],At[0],At[2]])
 tetraplex = conv(tetraplex)
+var file=[[sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[-sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,sqrt(8/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,0,1*sqrt(15/16),1/4],[0,0,0,-1]]
+var edgesFile=[[0,1],[0,2],[0,3],[0,4],[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]
 var num14 = doWeird(tetraplex,phi)
 var xy = 0
 var yz = 0
@@ -75,7 +77,7 @@ function windowResized() {//do stuff when window resized
 }
 function changeDimension() {
   if(inp2.value()==4) {
-    inp.html('<option value="0">pentachoron</option><option value="1">tesseract</option><option value="2">hexadecachoron</option><option value="3">icositetrachoron</option><option value="4">dodecaplex</option><option value="5">tetraplex</option>     <option value="6">icosahedral 120-cell</option><option value="7">small stellated 120-cell</option><option value="8">great 120-cell</option><option value="9">grand 120-cell</option><option value="10">great stellated 120-cell</option><option value="11">grand stellated 120-cell</option><option value="12">great grand 120-cell</option><option value="13">great icosahedral 120-cell</option><option value="14">grand 600-cell</option><option value="15">great grand stellated 120-cell</option>')
+    inp.html('<option value="0">pentachoron</option><option value="1">tesseract</option><option value="2">hexadecachoron</option><option value="3">icositetrachoron</option><option value="4">dodecaplex</option><option value="5">tetraplex</option>     <option value="6">icosahedral 120-cell</option><option value="7">small stellated 120-cell</option><option value="8">great 120-cell</option><option value="9">grand 120-cell</option><option value="10">great stellated 120-cell</option><option value="11">grand stellated 120-cell</option><option value="12">great grand 120-cell</option><option value="13">great icosahedral 120-cell</option><option value="14">grand 600-cell</option><option value="15">great grand stellated 120-cell</option><option value="-1">load from file</option>')
     if(a==0) {
       inp.selected(0)
     }else if(a==1) {
@@ -88,7 +90,7 @@ function changeDimension() {
       inp.selected(5)
     }
   }else {
-    inp.html('<option value="0">tetrahedron</option><option value="1">cube</option><option value="2">octahedron</option><option value="3">dodecahedron</option><option value="4">icosohedron</option>  <option value="5">small stellated dodecahedron</option><option value="6">great dodecahedron</option><option value="7">great stellated dodecahedron</option><option value="8">great icosahedron</option>')
+    inp.html('<option value="0">tetrahedron</option><option value="1">cube</option><option value="2">octahedron</option><option value="3">dodecahedron</option><option value="4">icosohedron</option>  <option value="5">small stellated dodecahedron</option><option value="6">great dodecahedron</option><option value="7">great stellated dodecahedron</option><option value="8">great icosahedron</option><option value="-1">load from file</option>')
     if(a==0) {
       inp.selected(0)
     }else if(a==1) {
@@ -389,6 +391,14 @@ function resetCamera() {
       xz = atan(phi_2)
       L2=30
     }
+  }
+  if(a==-1){
+    vertexData = file
+    fct = 2
+    fct2 = 1
+    L=edgesFile.length
+    s=1
+    L2=L
   }
 }
 function centercell() {
@@ -824,6 +834,15 @@ function changePolytope() {
       div6.html('')
     }
   }
+  if(a==-1) {
+    div5.html('')
+    div.html('')
+    div1.html('')
+    div2.html('')
+    div3.html('')
+    div4.html('')
+    div6.html('')
+  }
 }
 function keyPressed() {
   if(keyCode==86) {
@@ -915,6 +934,7 @@ function draw() {
     var fact = 400/(fct-vertexData[i][3]*f)/fct2
     vertexDataProjected[i]=[vertexData[i][0]*fact*f,vertexData[i][1]*fact*f,vertexData[i][2]*fact*f,1/(fct-vertexData[i][3]*f)*f/fct2]
   }
+  if(a>-1) {
   var l = 0
   if(edges>0) {
     for(var k = 0; k<vertexData.length;k++) {
@@ -927,6 +947,11 @@ function draw() {
           }
         }
       }
+    }
+  }
+  }else {
+    for(var i = 0; i<edgesFile.length; i++) {
+      renderLine(vertexDataProjected[edgesFile[i][0]],vertexDataProjected[edgesFile[i][1]],areConnected(vertexData[edgesFile[i][0]],vertexData[edgesFile[i][1]],edgeLength))
     }
   }
   if(verticies>0) {
