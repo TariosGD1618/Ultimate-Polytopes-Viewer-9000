@@ -74,6 +74,9 @@ function windowResized() {//do stuff when window resized
   centere.position(width/2,20)
   div7.position(0,height-20)
   mrSlider.position(width-mrSlider.width-5,0)
+  rainbowEdges.position(0,height-60)
+  rainbowVerticies.position(0,height-40)
+  verCol.position(width/2-50,height-30)
 }
 function changeDimension() {
   if(inp2.value()==4) {
@@ -623,6 +626,26 @@ function setup() {
   joeDiv=createDiv('2')
   joeDiv.position(width-13,20)
   joeDiv.style('color','#ffffff')
+  rainbowVerticies = createCheckbox('rainbow verticies', true)
+  rainbowVerticies.position(0,height-40)
+  rainbowVerticies.style('color','#ffffff')
+  rainbowEdges = createCheckbox('rainbow edges', true)
+  rainbowEdges.position(0,height-60)
+  rainbowEdges.style('color','#ffffff')
+  edgeCol=createColorPicker('#ff0000')
+  edgeCol.position(width/2,height-30)
+  rainbowEdges.changed(eS)
+  verCol=createColorPicker('#00ffff')
+  verCol.position(width/2-50,height-30)
+  rainbowVerticies.changed(vS)
+}
+var eRan = 1
+var vRan = 1
+function eS() {
+  eRan*=-1
+}
+function vS() {
+  vRan*=-1
 }
 function changePolytope() {
   a=inp.value()
@@ -980,7 +1003,11 @@ function renderVertex(arr) {
   noStroke()
   push()
   translate(arr[0]*zoom,arr[1]*zoom,arr[2]*zoom)
-  fill(360*col2%360,100,100)
+  if(vRan>0) {
+    fill(360*col2%360,100,100)
+  }else {
+    fill(verCol.value())
+  }
   if(inp2.value()==4) {
     sphere(arr[3]*50*s*zoom/circumR)
   }else {
@@ -999,8 +1026,13 @@ function renderLine(arr1,arr2,Q) {
   fill(0,0,100)
   stroke(0,0,100)
   if(Q==2) {
-    stroke(360*col%360,100,100)
-    fill(360*col%360,100,100)
+    if(eRan>0) {
+      stroke(360*col%360,100,100)
+      fill(360*col%360,100,100)
+    }else {
+      stroke(edgeCol.value())
+      fill(edgeCol.value())
+    }
     col+=1/L2
   }
   beginShape(TRIANGLE_STRIP)
