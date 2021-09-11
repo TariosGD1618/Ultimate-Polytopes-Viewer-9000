@@ -77,6 +77,7 @@ function windowResized() {//do stuff when window resized
   rainbowEdges.position(0,height-60)
   rainbowVerticies.position(0,height-40)
   verCol.position(width/2-50,height-30)
+  edgeCol.position(width/2,height-30)
 }
 function changeDimension() {
   if(inp2.value()==4) {
