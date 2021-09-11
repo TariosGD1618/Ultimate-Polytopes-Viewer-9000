@@ -8,31 +8,8 @@ phi_2=phi_1/phi
 phi2 = phi+1
 PI=Math.PI
 intersectionD = NaN
-var tetrahedron = [[sqrt(2/3),-sqrt(2/9),1/3,0],[-sqrt(2/3),-sqrt(2/9),1/3,0],[0,sqrt(8/9),1/3,0],[0,0,-1,0]]
-var cube = conv([[11,11,11,0]])
-var octohedron = conv([[11,0,0,0],[0,11,0,0],[0,0,11,0]])
-var dodecahedron = conv([[11,11,11,0],[0,10+phi,10+phi_1,0],[10+phi_1,0,10+phi,0],[10+phi,10+phi_1,0,0]])
-var icosohedron = conv([[0,11,10+phi,0],[11,10+phi,0,0],[10+phi,0,11,0]])
-var greaticosa = conv([[0,11,10+phi,0],[11,10+phi,0,0],[10+phi,0,11,0],[11,0,0,0],[0,11,0,0],[0,0,11,0],[10.5,10.30901699437494745,10.8090169943749475,0],[10.8090169943749475,10.5,10.30901699437494745,0],[10.30901699437494745,10.8090169943749475, 10.5,0]])
-var simplex = [[sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[-sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,sqrt(8/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,0,1*sqrt(15/16),1/4],[0,0,0,-1]]
-var tesseract = conv([[10.5,10.5,10.5,10.5]])
-var orthoplex = conv([[11,0,0,0],[0,11,0,0],[0,0,11,0],[0,0,0,11]])
-var icositetrachoron = conv([[11,11,0,0],[0,11,11,0],[0,0,11,11],[0,11,0,11],[11,0,11,0],[11,0,0,11]])
-var dodecaplex = [[12,12,0,0],[0,12,12,0],[0,0,12,12],[0,12,0,12],[12,0,12,0],[12,0,0,12],[10+sqrt(5),11,11,11],[11,10+sqrt(5),11,11],[11,11,10+sqrt(5),11],[11,11,11,10+sqrt(5)],[10+phi_2,10+phi,10+phi,10+phi],[10+phi,10+phi_2,10+phi,10+phi],[10+phi,10+phi,10+phi_2,10+phi],[10+phi,10+phi,10+phi,10+phi_2],  [10+phi2,10+phi_1,10+phi_1,10+phi_1],[10+phi_1,10+phi2,10+phi_1,10+phi_1],[10+phi_1,10+phi_1,10+phi2,10+phi_1],[10+phi_1,10+phi_1,10+phi_1,10+phi2]]
-var at = [0,10+phi_2,11,10+phi2]
-dodecaplex.push([at[0],at[1],at[2],at[3]],[at[2],at[0],at[1],at[3]],[at[1],at[2],at[0],at[3]],[at[1],at[0],at[3],at[2]],[at[0],at[3],at[1],at[2]],[at[0],at[2],at[3],at[1]],[at[3],at[0],at[2],at[1]],[at[2],at[3],at[0],at[1]],[at[2],at[1],at[3],at[0]],[at[1],at[3],at[2],at[0]],[at[3],at[2],at[1],at[0]],[at[3],at[1],at[0],at[2]])
-var ta = [0,10+phi_1,10+phi,10+sqrt(5)]
-dodecaplex.push([ta[0],ta[1],ta[2],ta[3]],[ta[2],ta[0],ta[1],ta[3]],[ta[1],ta[2],ta[0],ta[3]],[ta[1],ta[0],ta[3],ta[2]],[ta[0],ta[3],ta[1],ta[2]],[ta[0],ta[2],ta[3],ta[1]],[ta[3],ta[0],ta[2],ta[1]],[ta[2],ta[3],ta[0],ta[1]],[ta[2],ta[1],ta[3],ta[0]],[ta[1],ta[3],ta[2],ta[0]],[ta[3],ta[2],ta[1],ta[0]],[ta[3],ta[1],ta[0],ta[2]])
-var Ta = [10+phi_1,11,10+phi,12]
-dodecaplex.push([Ta[0],Ta[1],Ta[2],Ta[3]],[Ta[2],Ta[0],Ta[1],Ta[3]],[Ta[1],Ta[2],Ta[0],Ta[3]],[Ta[1],Ta[0],Ta[3],Ta[2]],[Ta[0],Ta[3],Ta[1],Ta[2]],[Ta[0],Ta[2],Ta[3],Ta[1]],[Ta[3],Ta[0],Ta[2],Ta[1]],[Ta[2],Ta[3],Ta[0],Ta[1]],[Ta[2],Ta[1],Ta[3],Ta[0]],[Ta[1],Ta[3],Ta[2],Ta[0]],[Ta[3],Ta[2],Ta[1],Ta[0]],[Ta[3],Ta[1],Ta[0],Ta[2]])
-dodecaplex=conv(dodecaplex)
-var tetraplex = [[11,0,0,0],[0,11,0,0],[0,0,11,0],[0,0,0,11],[10.5,10.5,10.5,10.5]]
-var At = [10+phi/2,10.5,10+phi_1/2,0]
-tetraplex.push([At[0],At[1],At[2],At[3]],[At[2],At[0],At[1],At[3]],[At[1],At[2],At[0],At[3]],[At[1],At[0],At[3],At[2]],[At[0],At[3],At[1],At[2]],[At[0],At[2],At[3],At[1]],[At[3],At[0],At[2],At[1]],[At[2],At[3],At[0],At[1]],[At[2],At[1],At[3],At[0]],[At[1],At[3],At[2],At[0]],[At[3],At[2],At[1],At[0]],[At[3],At[1],At[0],At[2]])
-tetraplex = conv(tetraplex)
 var file=[[sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[-sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,sqrt(8/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,0,1*sqrt(15/16),1/4],[0,0,0,-1]]
 var edgesFile=[[0,1],[0,2],[0,3],[0,4],[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]
-var num14 = doWeird(tetraplex,phi)
 var xy = 0
 var yz = 0
 var xz = 0
@@ -41,9 +18,8 @@ var wy = 0
 var wz = 0
 var col = 0
 var col2 = 0
-var vertexData = []
+var vertexData = [[sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[-sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,sqrt(8/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,0,1*sqrt(15/16),1/4],[0,0,0,-1]]
 var zoom = 1
-vertexData = simplex
 edgeLength = 2/sqrt(1.6)
 f = 1
 fct = 2
@@ -112,11 +88,26 @@ function changeDimension() {
   changePolytope()
 }
 function resetCamera() {
+  var dodecahedron = conv([[11,11,11,0],[0,10+phi,10+phi_1,0],[10+phi_1,0,10+phi,0],[10+phi,10+phi_1,0,0]])
+  var icosohedron = conv([[0,11,10+phi,0],[11,10+phi,0,0],[10+phi,0,11,0]])
+  var dodecaplex = [[12,12,0,0],[0,12,12,0],[0,0,12,12],[0,12,0,12],[12,0,12,0],[12,0,0,12],[10+sqrt(5),11,11,11],[11,10+sqrt(5),11,11],[11,11,10+sqrt(5),11],[11,11,11,10+sqrt(5)],[10+phi_2,10+phi,10+phi,10+phi],[10+phi,10+phi_2,10+phi,10+phi],[10+phi,10+phi,10+phi_2,10+phi],[10+phi,10+phi,10+phi,10+phi_2],  [10+phi2,10+phi_1,10+phi_1,10+phi_1],[10+phi_1,10+phi2,10+phi_1,10+phi_1],[10+phi_1,10+phi_1,10+phi2,10+phi_1],[10+phi_1,10+phi_1,10+phi_1,10+phi2]]
+  var at = [0,10+phi_2,11,10+phi2]
+  dodecaplex.push([at[0],at[1],at[2],at[3]],[at[2],at[0],at[1],at[3]],[at[1],at[2],at[0],at[3]],[at[1],at[0],at[3],at[2]],[at[0],at[3],at[1],at[2]],[at[0],at[2],at[3],at[1]],[at[3],at[0],at[2],at[1]],[at[2],at[3],at[0],at[1]],[at[2],at[1],at[3],at[0]],[at[1],at[3],at[2],at[0]],[at[3],at[2],at[1],at[0]],[at[3],at[1],at[0],at[2]])
+  var ta = [0,10+phi_1,10+phi,10+sqrt(5)]
+  dodecaplex.push([ta[0],ta[1],ta[2],ta[3]],[ta[2],ta[0],ta[1],ta[3]],[ta[1],ta[2],ta[0],ta[3]],[ta[1],ta[0],ta[3],ta[2]],[ta[0],ta[3],ta[1],ta[2]],[ta[0],ta[2],ta[3],ta[1]],[ta[3],ta[0],ta[2],ta[1]],[ta[2],ta[3],ta[0],ta[1]],[ta[2],ta[1],ta[3],ta[0]],[ta[1],ta[3],ta[2],ta[0]],[ta[3],ta[2],ta[1],ta[0]],[ta[3],ta[1],ta[0],ta[2]])
+  var Ta = [10+phi_1,11,10+phi,12]
+  dodecaplex.push([Ta[0],Ta[1],Ta[2],Ta[3]],[Ta[2],Ta[0],Ta[1],Ta[3]],[Ta[1],Ta[2],Ta[0],Ta[3]],[Ta[1],Ta[0],Ta[3],Ta[2]],[Ta[0],Ta[3],Ta[1],Ta[2]],[Ta[0],Ta[2],Ta[3],Ta[1]],[Ta[3],Ta[0],Ta[2],Ta[1]],[Ta[2],Ta[3],Ta[0],Ta[1]],[Ta[2],Ta[1],Ta[3],Ta[0]],[Ta[1],Ta[3],Ta[2],Ta[0]],[Ta[3],Ta[2],Ta[1],Ta[0]],[Ta[3],Ta[1],Ta[0],Ta[2]])
+  dodecaplex=conv(dodecaplex)
+  var tetraplex = [[11,0,0,0],[0,11,0,0],[0,0,11,0],[0,0,0,11],[10.5,10.5,10.5,10.5]]
+  var At = [10+phi/2,10.5,10+phi_1/2,0]
+  tetraplex.push([At[0],At[1],At[2],At[3]],[At[2],At[0],At[1],At[3]],[At[1],At[2],At[0],At[3]],[At[1],At[0],At[3],At[2]],[At[0],At[3],At[1],At[2]],[At[0],At[2],At[3],At[1]],[At[3],At[0],At[2],At[1]],[At[2],At[3],At[0],At[1]],[At[2],At[1],At[3],At[0]],[At[1],At[3],At[2],At[0]],[At[3],At[2],At[1],At[0]],[At[3],At[1],At[0],At[2]])
+  tetraplex = conv(tetraplex)
   camera(0,0,(height/2)/tan(PI/6),0,0,0,0,1,0)
   zoom=1
   if(inp2.value()==4) {
     if(a==0) {
-      vertexData = simplex
+      vertexData = [[sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[-sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,sqrt(8/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,0,1*sqrt(15/16),1/4],[0,0,0,-1]]
+  var tesseract = conv([[10.5,10.5,10.5,10.5]])
       edgeLength = 2/sqrt(1.6)
       circumR = 1
       fct = 2
@@ -127,7 +118,7 @@ function resetCamera() {
       s=1
       L2=L
     }else if(a==1){
-      vertexData = tesseract
+      vertexData = conv([[10.5,10.5,10.5,10.5]])
       edgeLength = 1
       circumR = 1
       fct = 2
@@ -138,7 +129,7 @@ function resetCamera() {
       s=1
       L2=L
     }else if(a==2) {
-      vertexData = orthoplex
+      vertexData = conv([[11,0,0,0],[0,11,0,0],[0,0,11,0],[0,0,0,11]])
       edgeLength = sqrt(2)
       circumR = 1
       fct = 0.75
@@ -150,7 +141,7 @@ function resetCamera() {
       s=1
       L2=L
     }else if(a==3) {
-      vertexData = icositetrachoron
+      vertexData = conv([[11,11,0,0],[0,11,11,0],[0,0,11,11],[0,11,0,11],[11,0,11,0],[11,0,0,11]])
       edgeLength = sqrt(2)
       f=1/sqrt(2)
       fct = 1.1
@@ -293,7 +284,7 @@ function resetCamera() {
       wz = atan(1/sqrt(7))
       L2=L
     }else if(a==14) {
-      vertexData = num14
+      vertexData = doWeird(tetraplex,phi)
       edgeLength=phi
       intersectionD=1
       intersectionD2=2.572553981697934/2
@@ -324,21 +315,21 @@ function resetCamera() {
     }
   }else {
     if(a==0) {
-      vertexData = tetrahedron
+      vertexData = [[sqrt(2/3),-sqrt(2/9),1/3,0],[-sqrt(2/3),-sqrt(2/9),1/3,0],[0,sqrt(8/9),1/3,0],[0,0,-1,0]]
       edgeLength = 2/sqrt(1.6)/sqrt(15/16)
       circumR = 1
       L = 6
       s=1
       L2=L
     }else if(a==1){
-      vertexData = cube
+      vertexData = conv([[11,11,11,0]])
       edgeLength = 2
       circumR = sqrt(1/2)
       L=12
       s=1
       L2=L
     }else if(a==2) {
-      vertexData = octohedron
+      vertexData = conv([[11,0,0,0],[0,11,0,0],[0,0,11,0]])
       edgeLength= sqrt(2)
       circumR = 1
       L=12
@@ -390,7 +381,7 @@ function resetCamera() {
       yz=atan(phi_1)
       L2=30
     }else if(a==8) {
-      vertexData = greaticosa
+      vertexData = conv([[0,11,10+phi,0],[11,10+phi,0,0],[10+phi,0,11,0],[11,0,0,0],[0,11,0,0],[0,0,11,0],[10.5,10.30901699437494745,10.8090169943749475,0],[10.8090169943749475,10.5,10.30901699437494745,0],[10.30901699437494745,10.8090169943749475, 10.5,0]])
       f=1/sqrt(phi+2)
       edgeLength=2*phi
       intersectionD = 2.572553981697934
@@ -683,7 +674,6 @@ function vS() {
 function changePolytope() {
   a=inp.value()
   resetCamera()
-  a=inp.value()
   intersectionD = NaN
   intersectionD2 = NaN
   if(inp2.value()==4) {
@@ -967,31 +957,45 @@ function draw() {
     wz=0
   }
   background(0)
-  for(var h = 0; h<vertexData.length; h++) {
-    var x = vertexData[h][0]
-    var y = vertexData[h][3]
-    vertexData[h][0]=x*cos(wx)-y*sin(wx)
-    vertexData[h][3]=y*cos(wx)+x*sin(wx)
-    var x = vertexData[h][1]
-    var y = vertexData[h][3]
-    vertexData[h][1]=x*cos(wy)-y*sin(wy)
-    vertexData[h][3]=y*cos(wy)+x*sin(wy)
-    var x = vertexData[h][2]
-    var y = vertexData[h][3]
-    vertexData[h][2]=x*cos(wz)-y*sin(wz)
-    vertexData[h][3]=y*cos(wz)+x*sin(wz)
-    var x = vertexData[h][0]
-    var y = vertexData[h][1]
-    vertexData[h][0]=x*cos(xy)-y*sin(xy)
-    vertexData[h][1]=y*cos(xy)+x*sin(xy)
-    var x = vertexData[h][1]
-    var y = vertexData[h][2]
-    vertexData[h][1]=x*cos(yz)-y*sin(yz)
-    vertexData[h][2]=y*cos(yz)+x*sin(yz)
-    var x = vertexData[h][0]
-    var y = vertexData[h][2]
-    vertexData[h][0]=x*cos(xz)-y*sin(xz)
-    vertexData[h][2]=y*cos(xz)+x*sin(xz)
+  if(wx!==0||wy!==0||wz!==0||xy!==0||yz!==0||xz!==0) {
+    var cwx = cos(wx)
+    var swx = sin(wx)
+    var cwy = cos(wy)
+    var swy = sin(wy)
+    var cwz = cos(wz)
+    var swz = sin(wz)
+    var cxy = cos(xy)
+    var sxy = sin(xy)
+    var cyz = cos(yz)
+    var syz = sin(yz)
+    var cxz = cos(xz)
+    var sxz = sin(xz)
+    for(var h = 0; h<vertexData.length; h++) {
+      var x = vertexData[h][0]
+      var y = vertexData[h][3]
+      vertexData[h][0]=x*cwx-y*swx
+      vertexData[h][3]=y*cwx+x*swx
+      var x = vertexData[h][1]
+      var y = vertexData[h][3]
+      vertexData[h][1]=x*cwy-y*swy
+      vertexData[h][3]=y*cwy+x*swy
+      var x = vertexData[h][2]
+      var y = vertexData[h][3]
+      vertexData[h][2]=x*cwz-y*swz
+      vertexData[h][3]=y*cwz+x*swz
+      var x = vertexData[h][0]
+      var y = vertexData[h][1]
+      vertexData[h][0]=x*cxy-y*sxy
+      vertexData[h][1]=y*cxy+x*sxy
+      var x = vertexData[h][1]
+      var y = vertexData[h][2]
+      vertexData[h][1]=x*cyz-y*syz
+      vertexData[h][2]=y*cyz+x*syz
+      var x = vertexData[h][0]
+      var y = vertexData[h][2]
+      vertexData[h][0]=x*cxz-y*sxz
+      vertexData[h][2]=y*cxz+x*sxz
+    }
   }
   var vertexDataProjected = []
   for(var i = 0; i<vertexData.length; i++) {
