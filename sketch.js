@@ -8,6 +8,7 @@ phi_2=phi_1/phi
 phi2 = phi+1
 PI=Math.PI
 intersectionD = NaN
+dimentionCount=4
 var file=[[sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[-sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,sqrt(8/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,0,1*sqrt(15/16),1/4],[0,0,0,-1]]
 var edgesFile=[[0,1],[0,2],[0,3],[0,4],[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]
 var xy = 0
@@ -58,7 +59,8 @@ function windowResized() {//do stuff when window resized
   Ortho.position(width-140,40)
 }
 function changeDimension() {
-  if(inp2.value()==4) {
+  dimentionCount=inp2.value()*1
+  if(dimentionCount==4) {
     inp.html('<option value="0">pentachoron</option><option value="1">tesseract</option><option value="2">hexadecachoron</option><option value="3">icositetrachoron</option><option value="4">dodecaplex</option><option value="5">tetraplex</option>     <option value="6">icosahedral 120-cell</option><option value="7">small stellated 120-cell</option><option value="8">great 120-cell</option><option value="9">grand 120-cell</option><option value="10">great stellated 120-cell</option><option value="11">grand stellated 120-cell</option><option value="12">great grand 120-cell</option><option value="13">great icosahedral 120-cell</option><option value="14">grand 600-cell</option><option value="15">great grand stellated 120-cell</option><option value="-1">load from file</option>')
     if(polytopeID ==0) {
       inp.selected(0)
@@ -72,7 +74,7 @@ function changeDimension() {
       inp.selected(5)
     }
   }else {
-    inp.html('<option value="0">tetrahedron</option><option value="1">cube</option><option value="2">octahedron</option><option value="3">dodecahedron</option><option value="4">icosohedron</option>  <option value="5">small stellated dodecahedron</option><option value="6">great dodecahedron</option><option value="7">great stellated dodecahedron</option><option value="8">great icosahedron</option><option value="-1">load from file</option>')
+    inp.html('<option value="0">tetrahedron</option><option value="1">cube</option><option value="2">octahedron</option><option value="3">dodecahedron</option><option value="4">icosohedron</option>  <option value="5">small stellated dodecahedron</option><option value="6">great dodecahedron</option><option value="7">great stellated dodecahedron</option><option value="8">great icosahedron</option>')
     if(polytopeID==0) {
       inp.selected(0)
     }else if(polytopeID==1) {
@@ -105,7 +107,7 @@ function resetCamera() {
   tetraplex = conv(tetraplex)
   camera(0,0,(height/2)/tan(PI/6),0,0,0,0,1,0)
   zoom=1
-  if(inp2.value()==4) {
+  if(dimentionCount==4) {
     switch(polytopeID) {
       case 0:
       vertexData = [[sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[-sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,sqrt(8/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,0,1*sqrt(15/16),1/4],[0,0,0,-1]]
@@ -433,13 +435,13 @@ function resetCamera() {
   }
 }
 function centercell() {
-  if(inp2.value()==4) {//do nothing if dimention not set to 4
+  if(dimentionCount==4) {//do nothing if dimention not set to 4
     resetCamera()//resets rotation
   }
 }
 function centervertex() {
   resetCamera()
-  if(inp2.value()==4) {
+  if(dimentionCount==4) {
     switch(polytopeID) {
       case 0:
       fct = 2
@@ -531,7 +533,7 @@ function centervertex() {
 }
 function centerE() {
   resetCamera()
-  if(inp2.value()==4) {
+  if(dimentionCount==4) {
     switch(polytopeID) {
       case 0:
       wx = 0
@@ -613,7 +615,7 @@ function centerE() {
 }
 function centerF() {
   resetCamera()
-  if(inp2.value()==4) {
+  if(dimentionCount==4) {
     switch(polytopeID) {
       case 0:
       wx = 0
@@ -665,7 +667,88 @@ function centerF() {
     zoom = 1
   }
 }
+function interpretOFF(off) {
+  dimentionCount=0
+  var jjjj = off.data
+  var str = ''
+  for(var i = 37; i<jjjj.length-2; i++) {
+    str+=jjjj.charAt(i)
+  }
+  str=trim(atob(str))
+  var arr = []
+  var j = 0
+  if(str.substring(0,4)=='4OFF') {
+    dimentionCount=4
+    str=str.substring(4,str.length)
+  }else if(str.substring(0,3)=='OFF') {
+    str=str.substring(3,str.length)
+  }
+  if(dimentionCount==0) {
+    dimentionCount=4
+    console.log('joe')
+    return 0
+  }
+  arr=splitTokens(str)
+  var arr2 = []
+  for(var i = 0; i<arr.length; i++) {
+    if(arr[i]*1==arr[i]*1) {
+      arr2[arr2.length]=arr[i]*1
+    }
+  }
+  arr=arr2
+  var verTotal=arr[0]
+  L=arr[2]
+  file=[]
+  for(var i = dimentionCount; i<(verTotal+1)*dimentionCount; i++) {
+    if(i%dimentionCount==0) {
+      file[i/dimentionCount-1]=[]
+      if(dimentionCount==3) {
+        file[i/dimentionCount-1][3]=0
+      }
+    }
+    file[floor(i/dimentionCount-1)][i%dimentionCount]=arr[i]
+  }
+  var bob=(verTotal+1)*dimentionCount
+  var dbob=arr[bob]+1
+  var arrA = []
+  for(var r = 0; r<arr[1]; r++) {
+    for(var i = bob+1; i<dbob+bob; i++) {
+      arrA[arrA.length]=arr[i]
+    }
+    bob+=dbob
+    dbob=arr[bob]+1
+  }
+  var farr=[]
+  for(var i = 0; i<arrA.length; i++) {
+    var v1 = arrA[i]
+    var v2 = arrA[(i+1)%arrA.length]
+    if(v1>v2) {
+      farr[i]=[arrA[i],arrA[(i+1)%arrA.length]]
+    }else {
+      farr[i]=[arrA[(i+1)%arrA.length],arrA[i]]
+    }
+  }
+  farr=farr.sort()
+  edgesFile=[]
+  for(var i = 0; i<farr.length; i++) {
+    for(;isSame(farr[i],farr[i-1]);i++){}
+    edgesFile[edgesFile.length]=farr[i]
+  }
+  //console.log(edgesFile)
+  L=L2
+  resetCamera()
+}
+function isSame(arr1,arr2) {
+  if(arr2==undefined) {
+    return false
+  }
+  return (arr1[0]==arr2[0])&&(arr1[1]==arr2[1])
+}
 function setup() {
+  joe = createFileInput(interpretOFF,false)
+  joe.position(0,20)
+  joe.style('color', '#ffffff')
+  joe.hide()
   createCanvas(windowWidth, windowHeight, WEBGL)
   cam = createCamera()
   colorMode(HSB)
@@ -761,7 +844,7 @@ var orthoOn = -1
 function toggOrtho() {
   orthoOn*=-1
   zoom=1
-  if(orthoOn>0&&inp2.value()==4&&(polytopeID==4||polytopeID==15)) {
+  if(orthoOn>0&&dimentionCount==4&&(polytopeID==4||polytopeID==15)) {
     s=0.2
   }
 }
@@ -776,7 +859,7 @@ function changePolytope() {
   resetCamera()
   intersectionD = NaN
   intersectionD2 = NaN
-  if(inp2.value()==4) {
+  if(dimentionCount==4) {
     switch(polytopeID) {
       case 0:
       div.html('5 tetrahedron {3,3} cells')
@@ -1015,6 +1098,9 @@ function changePolytope() {
     div3.html('')
     div4.html('')
     div6.html('')
+    joe.show()
+  }else {
+    joe.hide()
   }
 }
 function keyPressed() {
@@ -1078,7 +1164,7 @@ function draw() {
       zoom/=1.1
     }
   }
-  if(inp2.value()==3) {
+  if(dimentionCount==3) {
     wx=0
     wy=0
     wz=0
@@ -1152,12 +1238,12 @@ function draw() {
   }
   }else {
     for(var i = 0; i<edgesFile.length; i++) {
-      renderLine(vertexDataProjected[edgesFile[i][0]],vertexDataProjected[edgesFile[i][1]],areConnected(vertexData[edgesFile[i][0]],vertexData[edgesFile[i][1]],edgeLength))
+      renderLine(vertexDataProjected[edgesFile[i][0]],vertexDataProjected[edgesFile[i][1]],2)
     }
   }
   if(verticies>0) {
     for(var j = 0; j<vertexData.length; j++) {
-      if(((inp.value()>8||inp.value()<8||j<12)&&inp2.value()==3)||((inp.value()>14||inp.value()<14||j>720)&&inp2.value()==4)) {
+      if(((inp.value()>8||inp.value()<8||j<12)&&dimentionCount==3)||((inp.value()>14||inp.value()<14||j>720)&&dimentionCount==4)) {
         renderVertex(vertexDataProjected[j])
       }
     }
@@ -1178,13 +1264,13 @@ function renderVertex(arr) {
   }else {
     fill(verCol.value())
   }
-  if(inp2.value()==4) {
+  if(dimentionCount==4) {
     sphere(arr[3]*50*s*zoom/circumR)
   }else {
     sphere(25*s*zoom/circumR)
   }
   var A_ = vertexData.length
-  if(inp.value()==8&&inp2.value()==3) {
+  if(inp.value()==8&&dimentionCount==3) {
     A_=12
   }else if(inp.value()==14) {
     A_=120
