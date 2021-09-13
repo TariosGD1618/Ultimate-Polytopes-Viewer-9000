@@ -424,9 +424,7 @@ function resetCamera() {
   if(polytopeID==-1){
     vertexData = file
     fct = 2
-    L=edgesFile.length
     s=1
-    L2=L
     circumR=1
   }
   mrSlider.value(fct)
@@ -709,37 +707,34 @@ function interpretOFF(off) {
     file[floor(i/dimentionCount-1)][i%dimentionCount]=arr[i]
   }
   var bob=(verTotal+1)*dimentionCount
-  var dbob=arr[bob]+1
+  var dbob=0
   var arrA = []
   for(var r = 0; r<arr[1]; r++) {
     for(var i = bob+1; i<dbob+bob; i++) {
-      arrA[arrA.length]=arr[i]
+      var a = arr[i]
+      var b = arr[(i-bob)%(dbob-1)+bob+1]
+      if(a>b) {
+        arrA[arrA.length]=[a,b]
+      }else {
+        arrA[arrA.length]=[b,a]
+      }
     }
     bob+=dbob
     dbob=arr[bob]+1
   }
-  var farr=[]
+  arrA=arrA.sort()
+  edgesFile=[]
   for(var i = 0; i<arrA.length; i++) {
-    var v1 = arrA[i]
-    var v2 = arrA[(i+1)%arrA.length]
-    if(v1>v2) {
-      farr[i]=[arrA[i],arrA[(i+1)%arrA.length]]
-    }else {
-      farr[i]=[arrA[(i+1)%arrA.length],arrA[i]]
+    for(;isSame(arrA[i],arrA[i-1])&&i<arrA.length;i++){}
+    if(arrA[i]==undefined) {}else {
+      edgesFile[edgesFile.length]=arrA[i]
     }
   }
-  farr=farr.sort()
-  edgesFile=[]
-  for(var i = 0; i<farr.length; i++) {
-    for(;isSame(farr[i],farr[i-1]);i++){}
-    edgesFile[edgesFile.length]=farr[i]
-  }
-  //console.log(edgesFile)
-  L=L2
+  L2=L
   resetCamera()
 }
 function isSame(arr1,arr2) {
-  if(arr2==undefined) {
+  if(arr2==undefined||arr1==undefined) {
     return false
   }
   return (arr1[0]==arr2[0])&&(arr1[1]==arr2[1])
