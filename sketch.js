@@ -26,7 +26,6 @@ edgeLength = 2/sqrt(1.6)
 f = 1
 fct = 2
 L = 10
-wx = PI
 var s = 1
 var L2=L
 var edges = 1
@@ -59,9 +58,11 @@ function windowResized() {//do stuff when window resized
   Ortho.position(width-140,40)
 }
 function changeDimension() {
+  inp3.hide()
+  inp.show()
   dimentionCount=inp2.value()*1
   if(dimentionCount==4) {
-    inp.html('<option value="0">pentachoron</option><option value="1">tesseract</option><option value="2">hexadecachoron</option><option value="3">icositetrachoron</option><option value="4">dodecaplex</option><option value="5">tetraplex</option>     <option value="6">icosahedral 120-cell</option><option value="7">small stellated 120-cell</option><option value="8">great 120-cell</option><option value="9">grand 120-cell</option><option value="10">great stellated 120-cell</option><option value="11">grand stellated 120-cell</option><option value="12">great grand 120-cell</option><option value="13">great icosahedral 120-cell</option><option value="14">grand 600-cell</option><option value="15">great grand stellated 120-cell</option><option value="-1">load from file</option>')
+    inp.html('<option value="0">pentachoron</option><option value="1">tesseract</option><option value="2">hexadecachoron</option><option value="3">icositetrachoron</option><option value="4">dodecaplex</option><option value="5">tetraplex</option>     <option value="6">icosahedral 120-cell</option><option value="7">small stellated 120-cell</option><option value="8">great 120-cell</option><option value="9">grand 120-cell</option><option value="10">great stellated 120-cell</option><option value="11">grand stellated 120-cell</option><option value="12">great grand 120-cell</option><option value="13">great icosahedral 120-cell</option><option value="14">grand 600-cell</option><option value="15">great grand stellated 120-cell</option>')
     if(polytopeID ==0) {
       inp.selected(0)
     }else if(polytopeID==1) {
@@ -73,7 +74,9 @@ function changeDimension() {
     }else if(polytopeID==4) {
       inp.selected(5)
     }
-  }else {
+    inp2.style('width','40px')
+    inp.position(40,0)
+  }else if(dimentionCount==3){
     inp.html('<option value="0">tetrahedron</option><option value="1">cube</option><option value="2">octahedron</option><option value="3">dodecahedron</option><option value="4">icosohedron</option>  <option value="5">small stellated dodecahedron</option><option value="6">great dodecahedron</option><option value="7">great stellated dodecahedron</option><option value="8">great icosahedron</option>')
     if(polytopeID==0) {
       inp.selected(0)
@@ -86,6 +89,22 @@ function changeDimension() {
     }else if(polytopeID==5) {
       inp.selected(4)
     }
+    inp2.style('width','40px')
+    inp.position(40,0)
+  }else if(inp2.value()==5) {
+    dimentionCount=inp3.value()*1
+    if(inp.html()=='<option value="0">simplex</option><option value="1">hypercube</option><option value="2">orthoplex</option>') {}else {
+      inp.html('<option value="0">simplex</option><option value="1">hypercube</option><option value="2">orthoplex</option>')
+    }
+    inp3.show()
+    inp2.style('width','50px')
+    inp.position(50,0)
+  }else {
+    poltopeID=-1
+    dimentionCount=4
+    inp.html('')
+    inp.hide()
+    inp2.style('width','100px')
   }
   fct = 2
   changePolytope()
@@ -111,7 +130,6 @@ function resetCamera() {
     switch(polytopeID) {
       case 0:
       vertexData = [[sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[-sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,sqrt(8/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,0,1*sqrt(15/16),1/4],[0,0,0,-1]]
-  var tesseract = conv([[10.5,10.5,10.5,10.5]])
       edgeLength = 2/sqrt(1.6)
       circumR = 1
       fct = 2
@@ -150,7 +168,7 @@ function resetCamera() {
       case 3:
       vertexData = conv([[11,11,0,0],[0,11,11,0],[0,0,11,11],[0,11,0,11],[11,0,11,0],[11,0,0,11]])
       edgeLength = sqrt(2)
-      f=1/sqrt(2)
+      circumR=sqrt(2)
       fct = 1.1
       zoom = 1/3
       L=96
@@ -163,7 +181,7 @@ function resetCamera() {
       case 4:
       vertexData = dodecaplex
       edgeLength=3-sqrt(5)
-      f=1/sqrt(8)
+      circumR=sqrt(8)
       fct = 1.05
       zoom = 1/4
       L=1200
@@ -179,7 +197,7 @@ function resetCamera() {
       case 5:
       vertexData = tetraplex
       edgeLength=phi_1
-      f=1
+      circumR=1
       fct = 0.95
       zoom = 1/20
       L=720
@@ -193,7 +211,7 @@ function resetCamera() {
       vertexData = tetraplex
       edgeLength=phi_1
       intersectionD=1
-      f=1
+      circumR=1
       fct = 0.95
       zoom = 1/8
       L=1920
@@ -206,7 +224,7 @@ function resetCamera() {
       case 7:
       vertexData = tetraplex
       edgeLength=1
-      f=1
+      circumR=1
       fct = 0.95
       zoom = 1/8
       L=1200
@@ -220,7 +238,7 @@ function resetCamera() {
       vertexData = tetraplex
       edgeLength=phi_1
       intersectionD=phi
-      f=1
+      circumR=1
       fct = 0.95
       zoom = 1/8
       L=1440
@@ -235,7 +253,7 @@ function resetCamera() {
       edgeLength=phi_1
       intersectionD=phi
       intersectionD2=phi_2
-      f=1
+      circumR=1
       fct = 0.95
       zoom = 1/20
       L=1440
@@ -249,7 +267,7 @@ function resetCamera() {
       vertexData = tetraplex
       edgeLength=phi
       intersectionD=phi_1
-      f=1
+      circumR=1
       fct = 0.95
       zoom = 1/20
       L=720
@@ -264,7 +282,7 @@ function resetCamera() {
       edgeLength=phi
       intersectionD=phi_1
       intersectionD2=1
-      f=1
+      circumR=1
       fct = 0.95
       zoom = 1/20
       L=1920+720
@@ -278,7 +296,7 @@ function resetCamera() {
       vertexData = tetraplex
       edgeLength=1
       intersectionD=phi
-      f=1
+      circumR=1
       fct = 0.95
       zoom = 1/20
       L=1920
@@ -291,7 +309,7 @@ function resetCamera() {
       case 13:
       vertexData = tetraplex
       edgeLength=phi
-      f=1
+      circumR=1
       fct = 0.95
       zoom = 1/20
       L=720
@@ -306,7 +324,7 @@ function resetCamera() {
       edgeLength=phi
       intersectionD=1
       intersectionD2=2.572553981697934/2
-      f=1
+      circumR=1
       fct = 0.95
       zoom = 1/20
       L=1920
@@ -318,7 +336,7 @@ function resetCamera() {
       break
       case 15:
       vertexData = dodecaplex
-      f=1/sqrt(8)
+      circumR=sqrt(8)
       edgeLength=4/(3-sqrt(5))
       fct = 1.05
       zoom = 1/4
@@ -333,7 +351,7 @@ function resetCamera() {
       }
       break
     }
-  }else {
+  }else if(dimentionCount==3) {
     switch(polytopeID) {
       case 0:
       vertexData = [[sqrt(2/3),-sqrt(2/9),1/3,0],[-sqrt(2/3),-sqrt(2/9),1/3,0],[0,sqrt(8/9),1/3,0],[0,0,-1,0]]
@@ -346,7 +364,7 @@ function resetCamera() {
       case 1:
       vertexData = conv([[11,11,11,0]])
       edgeLength = 2
-      circumR = sqrt(1/2)
+      circumR = sqrt(3)
       L=12
       s=1
       L2=L
@@ -364,7 +382,7 @@ function resetCamera() {
       case 3:
       vertexData = dodecahedron
       edgeLength= sqrt(5)-1
-      f=1/sqrt(3)
+      circumR=sqrt(3)
       L=30
       s=1
       yz=atan(phi_1)
@@ -373,7 +391,7 @@ function resetCamera() {
       case 4:
       vertexData = icosohedron
       edgeLength=2
-      f=1/sqrt(phi+2)
+      circumR=sqrt(phi+2)
       L=30
       s=1
       xz = atan(phi_2)
@@ -382,7 +400,7 @@ function resetCamera() {
       case 5:
       vertexData = icosohedron
       edgeLength=2*phi
-      f=1/sqrt(phi+2)
+      circumR=sqrt(phi+2)
       L=30
       s=1
       L2=L
@@ -393,7 +411,7 @@ function resetCamera() {
       vertexData = icosohedron
       edgeLength=2
       intersectionD = 2*phi
-      f=1/sqrt(phi+2)
+      circumR=sqrt(phi+2)
       L=60
       s=1
       L2=30
@@ -402,7 +420,7 @@ function resetCamera() {
       break
       case 7:
       vertexData = dodecahedron
-      f=1/sqrt(phi+2)
+      circumR=sqrt(phi+2)
       edgeLength=sqrt(5)+1
       L=30
       s=1
@@ -411,7 +429,7 @@ function resetCamera() {
       break
       case 8:
       vertexData = conv([[0,11,10+phi,0],[11,10+phi,0,0],[10+phi,0,11,0],[11,0,0,0],[0,11,0,0],[0,0,11,0],[10.5,10.30901699437494745,10.8090169943749475,0],[10.8090169943749475,10.5,10.30901699437494745,0],[10.30901699437494745,10.8090169943749475, 10.5,0]])
-      f=1/sqrt(phi+2)
+      circumR=sqrt(phi+2)
       edgeLength=2*phi
       intersectionD = 2.572553981697934
       L=89
@@ -420,12 +438,76 @@ function resetCamera() {
       L2=30
       break
     }
-  }
-  if(polytopeID==-1){
+  }else if(polytopeID==-1){
     vertexData = file
     fct = 2
     s=1
     circumR=1
+  }else {
+    switch(polytopeID) {
+      case 0:
+      edgeLength=2/sqrt(1.6)
+      arr=[[sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[-sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,sqrt(8/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,0,1*sqrt(15/16),1/4],[0,0,0,-1]]
+      for(var i = 4; i<dimentionCount; i++) {
+        var D = i+1
+        for(var j = 0; j<arr.length; j++) {
+          for(var k = 0; k<arr[j].length; k++) {
+            arr[j][k]*=sqrt(1-1/sq(D))
+          }
+          arr[j][arr[j].length]=1/D
+        }
+        edgeLength*=sqrt(1-1/sq(D))
+        var AS = arr.length
+        arr[AS]=[]
+        for(var l = 0; l<D; l++) {
+          arr[AS][l]=0
+        }
+        arr[AS][D-1]=-1
+      }
+      circumR=1
+      L=0.5*sq(dimentionCount)+0.5*dimentionCount
+      L2=L
+      vertexData=arr
+      break
+      case 1:
+      var ed = 4
+      for(var i = 2; i<dimentionCount; i++) {
+        ed*=2
+        ed+=pow(2,i)
+      }
+      var array = []
+      for(var i = 0; i<2**dimentionCount; i++) {
+        array[i]=[]
+        var str = (i+pow(2,dimentionCount)).toString(2)
+        for(var j = 0; j<dimentionCount; j++) {
+          array[i][j]=str.charAt(j+1)*2-1
+        }
+      }
+      vertexData=array
+      circumR=sqrt(dimentionCount)
+      edgeLength=2
+      L=ed
+      L2=L
+      break
+      case 2:
+      var array=[]
+      for(var i = 0; i<dimentionCount; i++) {
+        array[i*2]=[]
+        array[i*2+1]=[]
+        for(var j = 0; j<dimentionCount; j++) {
+          array[i*2][j]=0
+          array[i*2+1][j]=0
+        }
+        array[i*2][i]=1
+        array[i*2+1][i]=-1
+      }
+      vertexData=array
+      edgeLength=sqrt(2)
+      circumR=1
+      L=2*sq(dimentionCount)-2*dimentionCount
+      L2=L
+      break
+    }
   }
   mrSlider.value(fct)
   if(orthoOn>0) {
@@ -499,7 +581,7 @@ function centervertex() {
       wy = 0
       wz = 0
     }
-  }else {
+  }else if(polytopeID==3) {
     switch(polytopeID) {
       case 0:
       xz=PI
@@ -581,7 +663,7 @@ function centerE() {
       zoom=0.1
       break
     }
-  }else {
+  }else if(polytopeID==3){
     switch(polytopeID) {
       case 0:
       yz=PI/sqrt(2)
@@ -675,11 +757,14 @@ function interpretOFF(off) {
   str=trim(atob(str))
   var arr = []
   var j = 0
-  if(str.substring(0,4)=='4OFF') {
-    dimentionCount=4
+  if(str.substring(1,4)=='OFF') {
+    dimentionCount=str.charAt(0)*1
     str=str.substring(4,str.length)
   }else if(str.substring(0,3)=='OFF') {
     str=str.substring(3,str.length)
+  }else if(str.substring(2,5)=='OFF') {
+    dimentionCount=str.substring(0,2)*1
+    str=str.substring(5,str.length)
   }
   if(dimentionCount==0) {
     dimentionCount=4
@@ -740,6 +825,10 @@ function isSame(arr1,arr2) {
   return (arr1[0]==arr2[0])&&(arr1[1]==arr2[1])
 }
 function setup() {
+  inp3=createInput('5','number')
+  inp3.style('width','40px')
+  inp3.position(137,-2)
+  inp3.changed(changeDimension)
   joe = createFileInput(interpretOFF,false)
   joe.position(0,20)
   joe.style('color', '#ffffff')
@@ -778,7 +867,10 @@ function setup() {
   inp2.changed(changeDimension)
   inp2.option('3D',3)
   inp2.option('4D',4)
+  inp2.option('5D+',5)
+  inp2.option('load from file',-1)
   inp2.selected(4)
+  inp2.style('width','40px')
   inp = createSelect()//polytope selector
   var A = inp2.style('width')
   A = A.charAt(0)+A.charAt(1)
@@ -1001,7 +1093,7 @@ function changePolytope() {
       div6.html('other names: great grand stellated polydodecahedron, great grand stellated hecatonicosachoron')
       break
     }
-  }else {
+  }else if(dimentionCount==3){
     switch(polytopeID) {
       case 0:
       div.html('4 triangle {3} faces')
@@ -1084,8 +1176,47 @@ function changePolytope() {
       div6.html('')
       break
     }
+  }else {
+    var shclaf='3'
+    for(var i = 0; i<dimentionCount-3; i++) {
+      shclaf+=',3'
+    }
+    switch(polytopeID) {
+      case 0:
+      div.html(dimentionCount+1+' '+(dimentionCount-1)+'-simplex faces')
+      div1.html(0.5*sq(dimentionCount)+0.5*dimentionCount+' edges')
+      div2.html(dimentionCount+1+' verticies')
+      div3.html('Self-Dual')
+      div4.html('Schläfli symbol {'+shclaf+',3}')
+      div5.html('')
+      div6.html('')
+      break
+      case 1:
+      var ed = 4
+      for(var i = 2; i<dimentionCount; i++) {
+        ed*=2
+        ed+=pow(2,i)
+      }
+      div.html(dimentionCount*2+' '+(dimentionCount-1)+'-hypercube faces')
+      div1.html(ed+' edges')
+      div2.html(pow(2,dimentionCount)+' verticies')
+      div3.html('Dual to '+dimentionCount+'-orthoplex')
+      div4.html('Schläfli symbol {4,'+shclaf+'}')
+      div5.html('')
+      div6.html('')
+      break
+      case 2:
+      div.html(pow(2,dimentionCount)+' '+(dimentionCount-1)+'-simplex faces')
+      div1.html(2*sq(dimentionCount)-2*dimentionCount+' edges')
+      div2.html(dimentionCount*2+' verticies')
+      div3.html('Dual to '+dimentionCount+'-hypercube')
+      div4.html('Schläfli symbol {'+shclaf+',4}')
+      div5.html('')
+      div6.html('')
+      break
+    }
   }
-  if(polytopeID==-1) {
+  if(inp2.value()==-1) {
     div5.html('')
     div.html('')
     div1.html('')
@@ -1207,14 +1338,14 @@ function draw() {
   }
   var vertexDataProjected = []
   for(var i = 0; i<vertexData.length; i++) {
-    var fact = 400/(fct-vertexData[i][3]*f)
-    if(orthoOn>0) {
-      fact = 400
+    vertexDataProjected[i]=[]
+    for(var j = 0; j<vertexData[i].length; j++) {
+      vertexDataProjected[i][j]=vertexData[i][j]/circumR
     }
-    vertexDataProjected[i]=[vertexData[i][0]*fact*f,vertexData[i][1]*fact*f,vertexData[i][2]*fact*f,1/(fct-vertexData[i][3]*f)*f]
-    if(orthoOn>0) {
-      vertexDataProjected[i][3]=1
-    }
+    vertexDataProjected[i][dimentionCount]=1
+  }
+  for(var i = 0; i<dimentionCount-3; i++) {
+    vertexDataProjected = project(vertexDataProjected)
   }
   if(polytopeID>-1) {
   var l = 0
@@ -1238,7 +1369,7 @@ function draw() {
   }
   if(verticies>0) {
     for(var j = 0; j<vertexData.length; j++) {
-      if(((inp.value()>8||inp.value()<8||j<12)&&dimentionCount==3)||((inp.value()>14||inp.value()<14||j>720)&&dimentionCount==4)) {
+      if(((inp.value()>8||inp.value()<8||j<12)&&dimentionCount==3)||((inp.value()>14||inp.value()<14||j>720)&&dimentionCount==4)||dimentionCount>4) {
         renderVertex(vertexDataProjected[j])
       }
     }
@@ -1250,20 +1381,42 @@ function draw() {
   wy = 0
   wz = 0
 }
+function project(aa) {
+  var vertexDProjected=[]
+  for(var i = 0; i<aa.length; i++) {
+    var fact = 1/(fct-aa[i][aa[i].length-2]*f)
+    if(orthoOn>0) {
+      fact = 1
+    }if(dimentionCount==3) {
+      fact = 0.5
+    }
+    if(dimentionCount==3) {
+      vertexDProjected[i]=[aa[i][0]*fact*f,aa[i][1]*fact*f,aa[i][2]*fact*f,fact]
+    }else {
+      vertexDProjected[i]=[]
+      for(var j = 0; j<aa[i].length-2; j++) {
+        vertexDProjected[i][j]=aa[i][j]*fact
+      }
+      vertexDProjected[i][vertexDProjected[i].length]=aa[i][aa[i].length-1]*fact
+    }
+    if(orthoOn>0) {
+      vertexDProjected[i][3]=1
+    }if(dimentionCount==3) {
+      vertexDProjected[i][3] = 0.5
+    }
+  }
+  return vertexDProjected
+}
 function renderVertex(arr) {
   noStroke()
   push()
-  translate(arr[0]*zoom,arr[1]*zoom,arr[2]*zoom)
+  translate(arr[0]*zoom*400,arr[1]*zoom*400,arr[2]*zoom*400)
   if(vRan>0) {
     fill(360*col2%360,100,100)
   }else {
     fill(verCol.value())
   }
-  if(dimentionCount==4) {
-    sphere(arr[3]*50*s*zoom/circumR)
-  }else {
-    sphere(25*s*zoom/circumR)
-  }
+  sphere(arr[3]*50*s*zoom/circumR)
   var A_ = vertexData.length
   if(inp.value()==8&&dimentionCount==3) {
     A_=12
@@ -1289,27 +1442,29 @@ function renderLine(arr1,arr2,Q) {
   beginShape(TRIANGLE_STRIP)
   if(arr1[3]==arr2[3]) {
     strokeWeight(arr1[3]*50/sqrt(sqrt(L))*zoom)
-    line(arr1[0]*zoom,arr1[1]*zoom,arr1[2]*zoom,arr2[0]*zoom,arr2[1]*zoom,arr2[2]*zoom)
+    line(arr1[0]*zoom*400,arr1[1]*zoom*400,arr1[2]*zoom*400,arr2[0]*zoom*400,arr2[1]*zoom*400,arr2[2]*zoom*400)
   }else {
     noStroke()
     for(var i = 0; i<PI*2; i+=PI/40*sqrt(L)) {
       for(var j = 0; j<PI*2; j+=PI/40*sqrt(L)){
-        var x = cos(i)*arr1[3]*20/sqrt(sqrt(L))*zoom
-        var y = sin(i)*arr1[3]*20*sin(j)/sqrt(sqrt(L))*zoom
-        var z = cos(j)*arr1[3]*20/sqrt(sqrt(L))*zoom
-        vertex(arr1[0]*zoom+x,arr1[1]*zoom+y,arr1[2]*zoom+z)
-        var x = cos(i)*arr2[3]*20/sqrt(sqrt(L))*zoom
-        var y = sin(i)*arr2[3]*20*sin(j)/sqrt(sqrt(L))*zoom
-        var z = cos(j)*arr2[3]*20/sqrt(sqrt(L))*zoom
-        vertex(arr2[0]*zoom+x,arr2[1]*zoom+y,arr2[2]*zoom+z)
+        var x = cos(i)*arr1[3]*25/sqrt(sqrt(L))*zoom
+        var y = sin(i)*arr1[3]*25*sin(j)/sqrt(sqrt(L))*zoom
+        var z = cos(j)*arr1[3]*25/sqrt(sqrt(L))*zoom
+        vertex(arr1[0]*zoom*400+x,arr1[1]*zoom*400+y,arr1[2]*zoom*400+z)
+        var x = cos(i)*arr2[3]*25/sqrt(sqrt(L))*zoom
+        var y = sin(i)*arr2[3]*25*sin(j)/sqrt(sqrt(L))*zoom
+        var z = cos(j)*arr2[3]*25/sqrt(sqrt(L))*zoom
+        vertex(arr2[0]*zoom*400+x,arr2[1]*zoom*400+y,arr2[2]*zoom*400+z)
       }
     }
   }
   endShape(CLOSE)
 }
 function areConnected(arr1,arr2,d) {
-  var dist = sq(arr1[0]-arr2[0])+sq(arr1[1]-arr2[1])+sq(arr1[2]-arr2[2])+sq(arr1[3]-arr2[3])
-  //console.log(sqrt(dist))
+  var dist = 0
+  for(var i = 0; i<arr1.length; i++) {
+    dist+=sq(arr1[i]-arr2[i])
+  }
   if(sq(dist-d*d)<0.01) {
     return 2
   }if(sq(dist-intersectionD*intersectionD)<0.01||sq(dist-intersectionD2*intersectionD2)<0.01) {
