@@ -9,6 +9,7 @@ phi2 = phi+1
 PI=Math.PI
 intersectionD = NaN
 dimentionCount=4
+simpleM=-1
 var file=[[sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[-sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,sqrt(8/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,0,1*sqrt(15/16),1/4],[0,0,0,-1]]
 var edgesFile=[[0,1],[0,2],[0,3],[0,4],[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]
 var xy = 0
@@ -56,6 +57,7 @@ function windowResized() {//do stuff when window resized
   verCol.position(width/2-50,height-30)
   edgeCol.position(width/2,height-30)
   Ortho.position(width-140,40)
+  opt.position(0,height/2-10)
 }
 function changeDimension() {
   inp3.hide()
@@ -124,7 +126,6 @@ function resetCamera() {
   var At = [10+phi/2,10.5,10+phi_1/2,0]
   tetraplex.push([At[0],At[1],At[2],At[3]],[At[2],At[0],At[1],At[3]],[At[1],At[2],At[0],At[3]],[At[1],At[0],At[3],At[2]],[At[0],At[3],At[1],At[2]],[At[0],At[2],At[3],At[1]],[At[3],At[0],At[2],At[1]],[At[2],At[3],At[0],At[1]],[At[2],At[1],At[3],At[0]],[At[1],At[3],At[2],At[0]],[At[3],At[2],At[1],At[0]],[At[3],At[1],At[0],At[2]])
   tetraplex = conv(tetraplex)
-  camera(0,0,(height/2)/tan(PI/6),0,0,0,0,1,0)
   zoom=1
   if(dimentionCount==4) {
     switch(polytopeID) {
@@ -834,7 +835,6 @@ function setup() {
   joe.style('color', '#ffffff')
   joe.hide()
   createCanvas(windowWidth, windowHeight, WEBGL)
-  cam = createCamera()
   colorMode(HSB)
   b = ''
   centerv=createButton('center vertex')
@@ -924,6 +924,14 @@ function setup() {
   Ortho.style('color','#ffffff')
   Ortho.checked(false)
   Ortho.changed(toggOrtho)
+  opt = createCheckbox('simpler graphics', true)
+  opt.position(0,height/2-10)
+  opt.style('color','#ffffff')
+  opt.checked(false)
+  opt.changed(simpgraph)
+}
+function simpgraph() {
+  simpleM*=-1
 }
 var eRan = 1
 var vRan = 1
@@ -1236,6 +1244,10 @@ function keyPressed() {
     edges*=-1
   }
 }
+function mouseDragged() {
+  xz-=movedX/100
+  yz-=movedY/100
+}
 function draw() {
   fct = mrSlider.value()
   joeDiv.html(fct)
@@ -1248,15 +1260,7 @@ function draw() {
   if(frameCount%10==1) {
     div7.html(frameRate()+'fps')
   }
-  orbitControl(5,5,5)
-  cam.centerX=0
-  cam.centerY=0
-  cam.centerZ=0
   var mx = (height/2)/tan(PI/6)
-  var thing = sqrt(sq(cam.eyeZ)+sq(cam.eyeY)+sq(cam.eyeX))
-  cam.eyeZ/=thing/mx
-  cam.eyeY/=thing/mx
-  cam.eyeX/=thing/mx
   col=1-((millis()/1e5*60)%1)
   col2=(millis()/1e5*60)%1
   if(keyIsPressed) {
@@ -1416,7 +1420,11 @@ function renderVertex(arr) {
   }else {
     fill(verCol.value())
   }
-  sphere(arr[3]*50*s*zoom/circumR)
+  if(simpleM>0) {
+    sphere(arr[3]*10*s*zoom/circumR)
+  }else {
+    sphere(arr[3]*50*s*zoom/circumR)
+  }
   var A_ = vertexData.length
   if(inp.value()==8&&dimentionCount==3) {
     A_=12
@@ -1439,26 +1447,27 @@ function renderLine(arr1,arr2,Q) {
     }
     col+=1/L2
   }
-  beginShape(TRIANGLE_STRIP)
+  if(simpleM>0) {
+    strokeWeight(1)
+   line(arr1[0]*zoom*400,arr1[1]*zoom*400,arr1[2]*zoom*400,arr2[0]*zoom*400,arr2[1]*zoom*400,arr2[2]*zoom*400)
+  }else {
   if(arr1[3]==arr2[3]) {
     strokeWeight(arr1[3]*50/sqrt(sqrt(L))*zoom)
     line(arr1[0]*zoom*400,arr1[1]*zoom*400,arr1[2]*zoom*400,arr2[0]*zoom*400,arr2[1]*zoom*400,arr2[2]*zoom*400)
   }else {
+    beginShape(TRIANGLE_STRIP)
     noStroke()
-    for(var i = 0; i<PI*2; i+=PI/40*sqrt(L)) {
-      for(var j = 0; j<PI*2; j+=PI/40*sqrt(L)){
-        var x = cos(i)*arr1[3]*25/sqrt(sqrt(L))*zoom
-        var y = sin(i)*arr1[3]*25*sin(j)/sqrt(sqrt(L))*zoom
-        var z = cos(j)*arr1[3]*25/sqrt(sqrt(L))*zoom
-        vertex(arr1[0]*zoom*400+x,arr1[1]*zoom*400+y,arr1[2]*zoom*400+z)
-        var x = cos(i)*arr2[3]*25/sqrt(sqrt(L))*zoom
-        var y = sin(i)*arr2[3]*25*sin(j)/sqrt(sqrt(L))*zoom
-        var z = cos(j)*arr2[3]*25/sqrt(sqrt(L))*zoom
-        vertex(arr2[0]*zoom*400+x,arr2[1]*zoom*400+y,arr2[2]*zoom*400+z)
-      }
+    for(var i = 0; i<PI*2; i+=PI/9) {
+      var x = cos(i)*arr1[3]*25/sqrt(sqrt(L))*zoom
+      var y = sin(i)*arr1[3]*25/sqrt(sqrt(L))*zoom
+      vertex(arr1[0]*zoom*400+x,arr1[1]*zoom*400+y,arr1[2]*zoom*400)
+      var x = cos(i)*arr2[3]*25/sqrt(sqrt(L))*zoom
+      var y = sin(i)*arr2[3]*25/sqrt(sqrt(L))*zoom
+      vertex(arr2[0]*zoom*400+x,arr2[1]*zoom*400+y,arr2[2]*zoom*400)
     }
   }
   endShape(CLOSE)
+  }
 }
 function areConnected(arr1,arr2,d) {
   var dist = 0
