@@ -1288,10 +1288,6 @@ function draw() {
       wz-=1/frameRate()*PI
     }if(key=='q'||key=='Q'||key=='^') {
       wz+=1/frameRate()*PI
-    }if(keyCode==187) {
-      zoom*=1.1
-    }if(keyCode==189) {
-      zoom/=1.1
     }
   }
   if(dimentionCount==3) {
@@ -1451,23 +1447,24 @@ function renderLine(arr1,arr2,Q) {
     strokeWeight(1)
    line(arr1[0]*zoom*400,arr1[1]*zoom*400,arr1[2]*zoom*400,arr2[0]*zoom*400,arr2[1]*zoom*400,arr2[2]*zoom*400)
   }else {
-  if(arr1[3]==arr2[3]) {
-    strokeWeight(arr1[3]*50/sqrt(sqrt(L))*zoom)
-    line(arr1[0]*zoom*400,arr1[1]*zoom*400,arr1[2]*zoom*400,arr2[0]*zoom*400,arr2[1]*zoom*400,arr2[2]*zoom*400)
-  }else {
     beginShape(TRIANGLE_STRIP)
     noStroke()
-    for(var i = 0; i<PI*2; i+=PI/9) {
-      var x = cos(i)*arr1[3]*25/sqrt(sqrt(L))*zoom
-      var y = sin(i)*arr1[3]*25/sqrt(sqrt(L))*zoom
+    var res=24
+    for(var i = 0; i<PI*2+0.001; i+=PI/res*2) {
+      var ci = cos(i)
+      var si = sin(i)
+      var x = ci*arr1[3]*25/sqrt(sqrt(L))*zoom
+      var y = si*arr1[3]*25/sqrt(sqrt(L))*zoom
       vertex(arr1[0]*zoom*400+x,arr1[1]*zoom*400+y,arr1[2]*zoom*400)
-      var x = cos(i)*arr2[3]*25/sqrt(sqrt(L))*zoom
-      var y = sin(i)*arr2[3]*25/sqrt(sqrt(L))*zoom
+      var x = ci*arr2[3]*25/sqrt(sqrt(L))*zoom
+      var y = si*arr2[3]*25/sqrt(sqrt(L))*zoom
       vertex(arr2[0]*zoom*400+x,arr2[1]*zoom*400+y,arr2[2]*zoom*400)
     }
+    endShape(CLOSE)
   }
-  endShape(CLOSE)
-  }
+}
+function mouseWheel(e) {
+  zoom*=pow(1.1,-e.delta/100)
 }
 function areConnected(arr1,arr2,d) {
   var dist = 0
