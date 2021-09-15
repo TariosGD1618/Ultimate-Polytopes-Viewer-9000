@@ -101,7 +101,7 @@ function changeDimension() {
     inp3.show()
     inp2.style('width','50px')
     inp.position(50,0)
-  }else {
+  }if(inp2.value()==-1) {
     poltopeID=-1
     dimentionCount=4
     inp.html('')
@@ -127,7 +127,7 @@ function resetCamera() {
   tetraplex.push([At[0],At[1],At[2],At[3]],[At[2],At[0],At[1],At[3]],[At[1],At[2],At[0],At[3]],[At[1],At[0],At[3],At[2]],[At[0],At[3],At[1],At[2]],[At[0],At[2],At[3],At[1]],[At[3],At[0],At[2],At[1]],[At[2],At[3],At[0],At[1]],[At[2],At[1],At[3],At[0]],[At[1],At[3],At[2],At[0]],[At[3],At[2],At[1],At[0]],[At[3],At[1],At[0],At[2]])
   tetraplex = conv(tetraplex)
   zoom=1
-  if(dimentionCount==4) {
+  if(dimentionCount==4&&inp2.value()==4) {
     switch(polytopeID) {
       case 0:
       vertexData = [[sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[-sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,sqrt(8/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,0,1*sqrt(15/16),1/4],[0,0,0,-1]]
@@ -352,7 +352,7 @@ function resetCamera() {
       }
       break
     }
-  }else if(dimentionCount==3) {
+  }else if(dimentionCount==3&&inp2.value()==3) {
     switch(polytopeID) {
       case 0:
       vertexData = [[sqrt(2/3),-sqrt(2/9),1/3,0],[-sqrt(2/3),-sqrt(2/9),1/3,0],[0,sqrt(8/9),1/3,0],[0,0,-1,0]]
@@ -439,7 +439,7 @@ function resetCamera() {
       L2=30
       break
     }
-  }else if(polytopeID==-1){
+  }else if(inp2.value()==-1){
     vertexData = file
     fct = 2
     s=1
@@ -763,6 +763,7 @@ function interpretOFF(off) {
     str=str.substring(4,str.length)
   }else if(str.substring(0,3)=='OFF') {
     str=str.substring(3,str.length)
+    dimentionCount=3
   }else if(str.substring(2,5)=='OFF') {
     dimentionCount=str.substring(0,2)*1
     str=str.substring(5,str.length)
@@ -954,7 +955,7 @@ function changePolytope() {
   resetCamera()
   intersectionD = NaN
   intersectionD2 = NaN
-  if(dimentionCount==4) {
+  if(dimentionCount==4&&inp2.value()==4) {
     switch(polytopeID) {
       case 0:
       div.html('5 tetrahedron {3,3} cells')
@@ -1347,7 +1348,7 @@ function draw() {
   for(var i = 0; i<dimentionCount-3; i++) {
     vertexDataProjected = project(vertexDataProjected)
   }
-  if(polytopeID>-1) {
+  if(inp2.value()>-1) {
   var l = 0
   if(edges>0) {
     for(var k = 0; k<vertexData.length;k++) {
