@@ -1348,9 +1348,9 @@ function draw() {
   for(var i = 0; i<dimentionCount-3; i++) {
     vertexDataProjected = project(vertexDataProjected)
   }
+  if(edges>0) {
   if(inp2.value()>-1) {
   var l = 0
-  if(edges>0) {
     for(var k = 0; k<vertexData.length;k++) {
       for(var k2 = 0; k2<vertexData.length;k2++) {
         if((areConnected(vertexData[k],vertexData[k2],edgeLength)==2||areConnected(vertexData[k],vertexData[k2],edgeLength)==1)&&k2>k) {
@@ -1362,11 +1362,11 @@ function draw() {
         }
       }
     }
-  }
   }else {
     for(var i = 0; i<edgesFile.length; i++) {
       renderLine(vertexDataProjected[edgesFile[i][0]],vertexDataProjected[edgesFile[i][1]],2)
     }
+  }
   }
   if(verticies>0) {
     for(var j = 0; j<vertexData.length; j++) {
