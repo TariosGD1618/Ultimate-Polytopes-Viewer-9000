@@ -10,7 +10,8 @@ PI=Math.PI
 intersectionD = NaN
 dimentionCount=4
 simpleM=-1
-var file=[[sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[-sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,sqrt(8/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,0,1*sqrt(15/16),1/4],[0,0,0,-1]]
+faces=-1
+var faceData=[[]]
 var edgesFile=[[0,1],[0,2],[0,3],[0,4],[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]
 var xy = 0
 var yz = 0
@@ -61,6 +62,8 @@ function windowResized() {//do stuff when window resized
 }
 function changeDimension() {
   inp3.hide()
+  inp4.hide()
+  inp5.hide()
   inp.show()
   dimentionCount=inp2.value()*1
   if(dimentionCount==4) {
@@ -101,6 +104,10 @@ function changeDimension() {
     inp3.show()
     inp2.style('width','50px')
     inp.position(50,0)
+  }else if(inp2.value()==2) {
+    inp.hide()
+    inp4.show()
+    inp5.show()
   }if(inp2.value()==-1) {
     poltopeID=-1
     dimentionCount=4
@@ -112,7 +119,10 @@ function changeDimension() {
   changePolytope()
 }
 function resetCamera() {
-  var dodecahedron = conv([[11,11,11,0],[0,10+phi,10+phi_1,0],[10+phi_1,0,10+phi,0],[10+phi,10+phi_1,0,0]])
+  if(inp2.value()==-1) {}else {
+    faceData=[[]]
+  }
+  var dodecahedron = conv([[11,11,11,0],[10+phi_1,0,10+phi,0],[0,10+phi,10+phi_1,0],[10+phi,10+phi_1,0,0]])
   var icosohedron = conv([[0,11,10+phi,0],[11,10+phi,0,0],[10+phi,0,11,0]])
   var dodecaplex = [[12,12,0,0],[0,12,12,0],[0,0,12,12],[0,12,0,12],[12,0,12,0],[12,0,0,12],[10+sqrt(5),11,11,11],[11,10+sqrt(5),11,11],[11,11,10+sqrt(5),11],[11,11,11,10+sqrt(5)],[10+phi_2,10+phi,10+phi,10+phi],[10+phi,10+phi_2,10+phi,10+phi],[10+phi,10+phi,10+phi_2,10+phi],[10+phi,10+phi,10+phi,10+phi_2],  [10+phi2,10+phi_1,10+phi_1,10+phi_1],[10+phi_1,10+phi2,10+phi_1,10+phi_1],[10+phi_1,10+phi_1,10+phi2,10+phi_1],[10+phi_1,10+phi_1,10+phi_1,10+phi2]]
   var at = [0,10+phi_2,11,10+phi2]
@@ -130,41 +140,44 @@ function resetCamera() {
   if(dimentionCount==4&&inp2.value()==4) {
     switch(polytopeID) {
       case 0:
-      vertexData = [[sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[-sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,sqrt(8/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,0,1*sqrt(15/16),1/4],[0,0,0,-1]]
-      edgeLength = 2/sqrt(1.6)
-      circumR = 1
-      fct = 2
-      L = 10
-      wx = 0
-      wy = 0
-      wz = 0
-      s=1
-      L2=L
+        vertexData = [[sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[-sqrt(2/3)*sqrt(15/16),-sqrt(2/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,sqrt(8/9)*sqrt(15/16),-1/3*sqrt(15/16),1/4],[0,0,1*sqrt(15/16),1/4],[0,0,0,-1]]
+        edgeLength = 2/sqrt(1.6)
+        circumR = 1
+        fct = 2
+        L = 10
+        wx = 0
+        wy = 0
+        wz = 0
+        s=1
+        L2=L
+        faceData=[[0,1,2],[0,2,3],[0,3,1],[0,3,4],[1,2,3],[1,3,4],[2,3,4],[4,1,2],[0,1,4],[0,2,4]]
       break
       case 1:
-      vertexData = conv([[10.5,10.5,10.5,10.5]])
-      edgeLength = 1
-      circumR = 1
-      fct = 2
-      L=32
-      wx = 0
-      wy = 0
-      wz = 0
-      s=1
-      L2=L
+        vertexData = conv([[10.5,10.5,10.5,10.5]])
+        edgeLength = 1
+        circumR = 1
+        fct = 2
+        L=32
+        wx = 0
+        wy = 0
+        wz = 0
+        s=1
+        L2=L
+        faceData=[[8,10,14,12],[8,9,13,12],[12,13,15,14],[8,9,11,10],[10,11,15,14],[9,11,15,13],[0,4,12,8],[4,6,14,12],[0,2,10,8],[0,2,6,4],[2,6,14,10],[4,5,13,12],[0,1,9,8],[0,1,5,4],[1,5,13,9],[4,5,7,6],[6,7,15,14],[5,7,15,13],[0,1,3,2],[2,3,11,10],[1,3,11,9],[2,3,7,6],[1,3,7,5],[3,7,15,11]]
       break
       case 2:
-      vertexData = conv([[11,0,0,0],[0,11,0,0],[0,0,11,0],[0,0,0,11]])
-      edgeLength = sqrt(2)
-      circumR = 1
-      fct = 0.75
-      zoom = 1/6
-      L=24
-      wx = PI/4
-      wy = PI/5
-      wz = PI/6
-      s=1
-      L2=L
+        vertexData = conv([[11,0,0,0],[0,11,0,0],[0,0,11,0],[0,0,0,11]])
+        edgeLength = sqrt(2)
+        circumR = 1
+        fct = 0.75
+        zoom = 1/6
+        L=24
+        wx = PI/4
+        wy = PI/5
+        wz = PI/6
+        s=1
+        L2=L
+        faceData=[[7,5,3],[1,5,3],[1,7,3],[1,7,5],[0,5,3],[0,7,3],[0,7,5],[6,5,3],[6,1,3],[6,1,5],[0,6,3],[0,6,5],[4,7,3],[0,4,3],[0,4,7],[4,1,3],[4,1,7],[6,4,3],[0,6,4],[6,4,1],[2,7,5],[2,1,5],[2,1,7],[0,2,5],[0,2,7],[6,2,5],[0,6,2],[6,2,1],[6,4,2],[4,2,1],[0,4,2],[4,2,7]]
       break
       case 3:
       vertexData = conv([[11,11,0,0],[0,11,11,0],[0,0,11,11],[0,11,0,11],[11,0,11,0],[11,0,0,11]])
@@ -355,95 +368,123 @@ function resetCamera() {
   }else if(dimentionCount==3&&inp2.value()==3) {
     switch(polytopeID) {
       case 0:
-      vertexData = [[sqrt(2/3),-sqrt(2/9),1/3,0],[-sqrt(2/3),-sqrt(2/9),1/3,0],[0,sqrt(8/9),1/3,0],[0,0,-1,0]]
-      edgeLength = 2/sqrt(1.6)/sqrt(15/16)
-      circumR = 1
-      L = 6
-      s=1
-      L2=L
+        vertexData = [[sqrt(2/3),-sqrt(2/9),1/3,0],[-sqrt(2/3),-sqrt(2/9),1/3,0],[0,sqrt(8/9),1/3,0],[0,0,-1,0]]
+        edgeLength = 2/sqrt(1.6)/sqrt(15/16)
+        circumR = 1
+        L = 6
+        s=1
+        L2=L
+        faceData=[[0,1,2],[0,2,3],[0,3,1],[1,2,3]]
       break
       case 1:
-      vertexData = conv([[11,11,11,0]])
-      edgeLength = 2
-      circumR = sqrt(3)
-      L=12
-      s=1
-      L2=L
+        vertexData = conv([[11,11,11,0]])
+        edgeLength = 2
+        circumR = sqrt(3)
+        L=12
+        s=1
+        L2=L
+        faceData=[[1,0,2,3],[5,4,6,7],[3,2,6,7],[1,0,4,5],[2,0,4,6],[3,1,5,7]]
       break
       case 2:
-      vertexData = conv([[11,0,0,0],[0,11,0,0],[0,0,11,0]])
-      edgeLength= sqrt(2)
-      circumR = 1
-      L=12
-      s=1
-      xz = PI/5
-      yz = PI/4
-      L2=L
+        vertexData = conv([[11,0,0,0],[0,11,0,0],[0,0,11,0]])
+        edgeLength= sqrt(2)
+        circumR = 1
+        L=12
+        s=1
+        xz = PI/5
+        yz = PI/4
+        L2=L
+        faceData=[[0,2,4],[0,3,4],[0,2,5],[0,3,5],[1,2,4],[1,3,4],[1,2,5],[1,3,5]]
       break
       case 3:
-      vertexData = dodecahedron
-      edgeLength= sqrt(5)-1
-      circumR=sqrt(3)
-      L=30
-      s=1
-      yz=atan(phi_1)
-      L2=L
+        vertexData = dodecahedron
+        edgeLength= sqrt(5)-1
+        circumR=sqrt(3)
+        L=30
+        s=1
+        yz=atan(phi_1)
+        L2=L
+        faceData=[[1,16,0,12,13],[12,0,8,10,4],[15,3,9,11,7],[19,6,14,15,7],[14,2,8,10,6],[13,1,9,11,5],[18,4,10,6,19],[16,1,9,3,17],[16,0,8,2,17],[18,5,11,7,19],[18,4,12,13,5],[17,2,14,15,3]]
       break
       case 4:
-      vertexData = icosohedron
-      edgeLength=2
-      circumR=sqrt(phi+2)
-      L=30
-      s=1
-      xz = atan(phi_2)
-      L2=L
+        vertexData = icosohedron
+        edgeLength=2
+        circumR=sqrt(phi+2)
+        L=30
+        s=1
+        xz = atan(phi_2)
+        L2=L
+        faceData=[[0,2,8],[1,3,11],[0,2,10],[1,3,9],[2,5,8],[1,6,11],[1,4,6],[2,5,7],[2,7,10],[1,4,9],[0,6,10],[3,5,9],[0,4,6],[3,5,7],[0,4,8],[3,7,11],[6,10,11],[5,8,9],[4,8,9],[7,10,11]]
       break
       case 5:
-      vertexData = icosohedron
-      edgeLength=2*phi
-      circumR=sqrt(phi+2)
-      L=30
-      s=1
-      L2=L
-      xz = 0
-      yz=atan(phi_1)
+        vertexData = icosohedron
+        edgeLength=2*phi
+        circumR=sqrt(phi+2)
+        L=30
+        s=1
+        L2=L
+        xz = 0
+        yz=atan(phi_1)
+        faceData=[[4,2,6,8,10],[5,1,7,9,11],[11,2,6,7,0],[8,3,4,5,1],[5,0,7,8,10],[4,3,6,9,11],[9,2,4,5,0],[10,3,6,7,1],[0,1,8,6,9],[2,3,10,5,11],[0,1,10,4,11],[2,3,8,7,9]]
       break
       case 6:
-      vertexData = icosohedron
-      edgeLength=2
-      intersectionD = 2*phi
-      circumR=sqrt(phi+2)
-      L=60
-      s=1
-      L2=30
-      xz = 0
-      yz=atan(phi_1)
+        vertexData = icosohedron
+        edgeLength=2
+        intersectionD = 2*phi
+        circumR=sqrt(phi+2)
+        L=60
+        s=1
+        L2=30
+        xz = 0
+        faceData=[[4,8,2,10,6],[5,9,1,11,7],[11,7,2,0,6],[8,5,3,1,4],[5,8,0,10,7],[4,9,3,11,6],[9,5,2,0,4],[10,7,3,1,6],[0,6,1,9,8],[2,5,3,11,10],[0,4,1,11,10],[2,7,3,9,8]]
+        yz=atan(phi_1)
       break
       case 7:
-      vertexData = dodecahedron
-      circumR=sqrt(phi+2)
-      edgeLength=sqrt(5)+1
-      L=30
-      s=1
-      yz=atan(phi_1)
-      L2=30
+        vertexData = dodecahedron
+        circumR=sqrt(phi+2)
+        edgeLength=sqrt(5)+1
+        L=30
+        s=1
+        yz=atan(phi_1)
+        L2=30
+        faceData=[[2,13,6,16,18],[1,14,5,17,19],[0,15,4,17,19],[3,12,7,16,18],[19,1,10,11,0],[16,7,8,9,6],[4,9,6,13,15],[1,10,3,12,14],[17,5,8,9,4],[18,3,10,11,2],[0,11,2,13,15],[5,8,7,12,14]]
       break
       case 8:
-      vertexData = conv([[0,11,10+phi,0],[11,10+phi,0,0],[10+phi,0,11,0],[11,0,0,0],[0,11,0,0],[0,0,11,0],[10.5,10.30901699437494745,10.8090169943749475,0],[10.8090169943749475,10.5,10.30901699437494745,0],[10.30901699437494745,10.8090169943749475, 10.5,0]])
-      circumR=sqrt(phi+2)
-      edgeLength=2*phi
-      intersectionD = 2.572553981697934
-      L=89
-      s=1
-      xz = atan(phi_2)
-      L2=30
+        vertexData = conv([[0,11,10+phi,0],[11,10+phi,0,0],[10+phi,0,11,0],[11,0,0,0],[0,11,0,0],[0,0,11,0],[10.5,10.30901699437494745,10.8090169943749475,0],[10.8090169943749475,10.5,10.30901699437494745,0],[10.30901699437494745,10.8090169943749475, 10.5,0]])
+        circumR=sqrt(phi+2)
+        edgeLength=2*phi
+        intersectionD = 2.572553981697934
+        L=89
+        s=1
+        xz = atan(phi_2)
+        L2=30
+        faceData=[[4,5,10],[6,7,9],[0,1,7],[2,3,4],[0,9,11],[3,8,10],[2,6,9],[1,5,10],[3,6,8],[0,5,11],[2,4,11],[1,7,8],[6,7,8],[4,5,11],[2,3,6],[0,1,5],[2,9,11],[1,8,10],[3,4,10],[0,7,9]]
       break
     }
   }else if(inp2.value()==-1){
-    vertexData = file
     fct = 2
     s=1
     circumR=1
+  }else if(inp2.value()==2) {
+    var A = inp4.value()*1
+    var B = inp5.value()*1%A
+    var gcm = 1
+    for(var i = 1; i<A; i++) {
+      if(floor(B/i)==B/i&&floor(A/i)==A/i) {
+        gcm=i
+      }
+    }
+    vertexData=[]
+    for(var i = 0; i<A; i++) {
+      vertexData[i]=[cos(PI*2/A*i),sin(PI*2/A*i),0,0]
+    }
+    for(var i = 0; i<gcm; i++) {
+      faceData[i]=[]
+      for(var j = 0; j<A*B/gcm; j+=B) {
+        faceData[i][j/B]=(j+i)%A
+      }
+    }
+    edgeLength=sqrt(sq(1-cos(PI*2/A*B))+sq(sin(PI*2/A*B)))
   }else {
     switch(polytopeID) {
       case 0:
@@ -783,23 +824,31 @@ function interpretOFF(off) {
   arr=arr2
   var verTotal=arr[0]
   L=arr[2]
-  file=[]
+  vertexData=[]
   for(var i = dimentionCount; i<(verTotal+1)*dimentionCount; i++) {
     if(i%dimentionCount==0) {
-      file[i/dimentionCount-1]=[]
+      vertexData[i/dimentionCount-1]=[]
       if(dimentionCount==3) {
-        file[i/dimentionCount-1][3]=0
+        vertexData[i/dimentionCount-1][3]=0
       }
     }
-    file[floor(i/dimentionCount-1)][i%dimentionCount]=arr[i]
+    vertexData[floor(i/dimentionCount-1)][i%dimentionCount]=arr[i]
   }
+  faceData=[]
   var bob=(verTotal+1)*dimentionCount
   var dbob=0
   var arrA = []
-  for(var r = 0; r<arr[1]; r++) {
+  for(var r = 0; r<arr[1]+1; r++) {
+    if(r>0) {
+      faceData[r-1]=[]
+    }
     for(var i = bob+1; i<dbob+bob; i++) {
       var a = arr[i]
       var b = arr[(i-bob)%(dbob-1)+bob+1]
+      if(r>0) {
+        faceData[r-1][faceData[r-1].length]=a
+      }
+      console.log(a)
       if(a>b) {
         arrA[arrA.length]=[a,b]
       }else {
@@ -830,6 +879,12 @@ function setup() {
   inp3=createInput('5','number')
   inp3.style('width','40px')
   inp3.position(137,-2)
+  inp4=createInput('3','number')
+  inp4.style('width','40px')
+  inp4.position(40,-2)
+  inp5=createInput('1','number')
+  inp5.style('width','40px')
+  inp5.position(85,-2)
   inp3.changed(changeDimension)
   joe = createFileInput(interpretOFF,false)
   joe.position(0,20)
@@ -866,6 +921,7 @@ function setup() {
   inp2 = createSelect()//dimention selecter
   inp2.position(0,0)
   inp2.changed(changeDimension)
+  inp2.option('2D',2)
   inp2.option('3D',3)
   inp2.option('4D',4)
   inp2.option('5D+',5)
@@ -930,6 +986,8 @@ function setup() {
   opt.style('color','#ffffff')
   opt.checked(false)
   opt.changed(simpgraph)
+  inp4.changed(changePolytope)
+  inp5.changed(changePolytope)
 }
 function simpgraph() {
   simpleM*=-1
@@ -952,9 +1010,9 @@ function vS() {
 }
 function changePolytope() {
   polytopeID=inp.value()*1
-  resetCamera()
   intersectionD = NaN
   intersectionD2 = NaN
+  resetCamera()
   if(dimentionCount==4&&inp2.value()==4) {
     switch(polytopeID) {
       case 0:
@@ -1243,6 +1301,8 @@ function keyPressed() {
     verticies*=-1
   }if(keyCode==76) {
     edges*=-1
+  }if(keyCode==70) {
+    faces*=-1
   }
 }
 function mouseDragged() {
@@ -1264,6 +1324,7 @@ function draw() {
   var mx = (height/2)/tan(PI/6)
   col=1-((millis()/1e5*60)%1)
   col2=(millis()/1e5*60)%1
+  col3=(millis()/2e5*60)%1
   if(keyIsPressed) {
     if(key=='Q'||key=='%') {
       xy+=1/frameRate()*PI
@@ -1289,12 +1350,20 @@ function draw() {
       wz-=1/frameRate()*PI
     }if(key=='q'||key=='Q'||key=='^') {
       wz+=1/frameRate()*PI
+    }if(keyCode==187) {
+      xy+=1/frameRate()*PI
+    }if(keyCode==189) {
+      xy-=1/frameRate()*PI
     }
   }
-  if(dimentionCount==3) {
+  if(dimentionCount<4) {
     wx=0
     wy=0
     wz=0
+    if(dimentionCount<3) {
+      xz=0
+      yz=0
+    }
   }
   background(0)
   if(wx!==0||wy!==0||wz!==0||xy!==0||yz!==0||xz!==0) {
@@ -1343,7 +1412,7 @@ function draw() {
     for(var j = 0; j<vertexData[i].length; j++) {
       vertexDataProjected[i][j]=vertexData[i][j]/circumR
     }
-    vertexDataProjected[i][dimentionCount]=1
+    vertexDataProjected[i][max(dimentionCount,3)]=1
   }
   for(var i = 0; i<dimentionCount-3; i++) {
     vertexDataProjected = project(vertexDataProjected)
@@ -1370,9 +1439,22 @@ function draw() {
   }
   if(verticies>0) {
     for(var j = 0; j<vertexData.length; j++) {
-      if(((inp.value()>8||inp.value()<8||j<12)&&dimentionCount==3)||((inp.value()>14||inp.value()<14||j>720)&&dimentionCount==4)||dimentionCount>4) {
+      if(((inp.value()>8||inp.value()<8||j<12)&&dimentionCount==3)||((inp.value()>14||inp.value()<14||j>720)&&dimentionCount==4)||dimentionCount>4||dimentionCount==2) {
         renderVertex(vertexDataProjected[j])
       }
+    }
+  }
+  if(faces>0) {
+    for(var i = 0; i<faceData.length; i++) {
+      fill(360*col3%360,100,100)
+      beginShape(TESS)
+      noStroke()
+      for(var j = 0; j<faceData[i].length; j++) {
+        var J = faceData[i][j]
+        vertex(vertexDataProjected[J][0]*zoom*400,vertexDataProjected[J][1]*zoom*400,vertexDataProjected[J][2]*zoom*400)
+      }
+      col3+=1/faceData.length
+      endShape()
     }
   }
   xy = 0
@@ -1388,10 +1470,10 @@ function project(aa) {
     var fact = 1/(fct-aa[i][aa[i].length-2]*f)
     if(orthoOn>0) {
       fact = 1
-    }if(dimentionCount==3) {
+    }if(dimentionCount<4) {
       fact = 0.5
     }
-    if(dimentionCount==3) {
+    if(dimentionCount<4) {
       vertexDProjected[i]=[aa[i][0]*fact*f,aa[i][1]*fact*f,aa[i][2]*fact*f,fact]
     }else {
       vertexDProjected[i]=[]
