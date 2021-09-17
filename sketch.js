@@ -124,18 +124,6 @@ function resetCamera() {
   }
   var dodecahedron = conv([[11,11,11,0],[10+phi_1,0,10+phi,0],[0,10+phi,10+phi_1,0],[10+phi,10+phi_1,0,0]])
   var icosohedron = conv([[0,11,10+phi,0],[11,10+phi,0,0],[10+phi,0,11,0]])
-  var dodecaplex = [[12,12,0,0],[0,12,12,0],[0,0,12,12],[0,12,0,12],[12,0,12,0],[12,0,0,12],[10+sqrt(5),11,11,11],[11,10+sqrt(5),11,11],[11,11,10+sqrt(5),11],[11,11,11,10+sqrt(5)],[10+phi_2,10+phi,10+phi,10+phi],[10+phi,10+phi_2,10+phi,10+phi],[10+phi,10+phi,10+phi_2,10+phi],[10+phi,10+phi,10+phi,10+phi_2],  [10+phi2,10+phi_1,10+phi_1,10+phi_1],[10+phi_1,10+phi2,10+phi_1,10+phi_1],[10+phi_1,10+phi_1,10+phi2,10+phi_1],[10+phi_1,10+phi_1,10+phi_1,10+phi2]]
-  var at = [0,10+phi_2,11,10+phi2]
-  dodecaplex.push([at[0],at[1],at[2],at[3]],[at[2],at[0],at[1],at[3]],[at[1],at[2],at[0],at[3]],[at[1],at[0],at[3],at[2]],[at[0],at[3],at[1],at[2]],[at[0],at[2],at[3],at[1]],[at[3],at[0],at[2],at[1]],[at[2],at[3],at[0],at[1]],[at[2],at[1],at[3],at[0]],[at[1],at[3],at[2],at[0]],[at[3],at[2],at[1],at[0]],[at[3],at[1],at[0],at[2]])
-  var ta = [0,10+phi_1,10+phi,10+sqrt(5)]
-  dodecaplex.push([ta[0],ta[1],ta[2],ta[3]],[ta[2],ta[0],ta[1],ta[3]],[ta[1],ta[2],ta[0],ta[3]],[ta[1],ta[0],ta[3],ta[2]],[ta[0],ta[3],ta[1],ta[2]],[ta[0],ta[2],ta[3],ta[1]],[ta[3],ta[0],ta[2],ta[1]],[ta[2],ta[3],ta[0],ta[1]],[ta[2],ta[1],ta[3],ta[0]],[ta[1],ta[3],ta[2],ta[0]],[ta[3],ta[2],ta[1],ta[0]],[ta[3],ta[1],ta[0],ta[2]])
-  var Ta = [10+phi_1,11,10+phi,12]
-  dodecaplex.push([Ta[0],Ta[1],Ta[2],Ta[3]],[Ta[2],Ta[0],Ta[1],Ta[3]],[Ta[1],Ta[2],Ta[0],Ta[3]],[Ta[1],Ta[0],Ta[3],Ta[2]],[Ta[0],Ta[3],Ta[1],Ta[2]],[Ta[0],Ta[2],Ta[3],Ta[1]],[Ta[3],Ta[0],Ta[2],Ta[1]],[Ta[2],Ta[3],Ta[0],Ta[1]],[Ta[2],Ta[1],Ta[3],Ta[0]],[Ta[1],Ta[3],Ta[2],Ta[0]],[Ta[3],Ta[2],Ta[1],Ta[0]],[Ta[3],Ta[1],Ta[0],Ta[2]])
-  dodecaplex=conv(dodecaplex)
-  var tetraplex = [[11,0,0,0],[0,11,0,0],[0,0,11,0],[0,0,0,11],[10.5,10.5,10.5,10.5]]
-  var At = [10+phi/2,10.5,10+phi_1/2,0]
-  tetraplex.push([At[0],At[1],At[2],At[3]],[At[2],At[0],At[1],At[3]],[At[1],At[2],At[0],At[3]],[At[1],At[0],At[3],At[2]],[At[0],At[3],At[1],At[2]],[At[0],At[2],At[3],At[1]],[At[3],At[0],At[2],At[1]],[At[2],At[3],At[0],At[1]],[At[2],At[1],At[3],At[0]],[At[1],At[3],At[2],At[0]],[At[3],At[2],At[1],At[0]],[At[3],At[1],At[0],At[2]])
-  tetraplex = conv(tetraplex)
   zoom=1
   if(dimentionCount==4&&inp2.value()==4) {
     switch(polytopeID) {
@@ -180,52 +168,55 @@ function resetCamera() {
         faceData=[[7,5,3],[1,5,3],[1,7,3],[1,7,5],[0,5,3],[0,7,3],[0,7,5],[6,5,3],[6,1,3],[6,1,5],[0,6,3],[0,6,5],[4,7,3],[0,4,3],[0,4,7],[4,1,3],[4,1,7],[6,4,3],[0,6,4],[6,4,1],[2,7,5],[2,1,5],[2,1,7],[0,2,5],[0,2,7],[6,2,5],[0,6,2],[6,2,1],[6,4,2],[4,2,1],[0,4,2],[4,2,7]]
       break
       case 3:
-      vertexData = conv([[11,11,0,0],[0,11,11,0],[0,0,11,11],[0,11,0,11],[11,0,11,0],[11,0,0,11]])
-      edgeLength = sqrt(2)
-      circumR=sqrt(2)
-      fct = 1.1
-      zoom = 1/3
-      L=96
-      wx = 0
-      wy = 0
-      wz = 0
-      s=1
-      L2=L
-      break      
+        vertexData = frag(ico,4)
+        edgeLength = 1
+        circumR=1
+        fct = 1.1
+        zoom = 1/3
+        L=96
+        wx = atan(1)
+        wy = 0
+        wz = 0
+        s=1
+        L2=L
+        faceData = frag(icof,3)
+      break 
       case 4:
-      vertexData = dodecaplex
-      edgeLength=3-sqrt(5)
-      circumR=sqrt(8)
-      fct = 1.05
-      zoom = 1/4
-      L=1200
-      wx = 0
-      wy = 0
-      wz = 0
-      s=1
-      L2=L
-      if(orthoOn>0) {
-        s = 0.2
-      }
+        vertexData = frag(heca,4)
+        edgeLength=(3-sqrt(5))*phi2/2
+        circumR=phi2*sqrt(2)
+        fct = 1.05
+        zoom = 1/4
+        L=1200
+        wx = 0
+        wy = 0
+        wz = 0
+        s=1
+        L2=L
+        faceData = frag(hecaF,5)
+        if(orthoOn>0) {
+          s = 0.2
+        }
       break
       case 5:
-      vertexData = tetraplex
-      edgeLength=phi_1
-      circumR=1
-      fct = 0.95
-      zoom = 1/20
-      L=720
-      s=0.25
-      wx = atan(1/sqrt(5))
-      wy = atan(1/sqrt(6))
-      wz = atan(1/sqrt(7))
-      L2=L
+        vertexData = frag(ex,4)
+        edgeLength=1
+        circumR=phi
+        fct = 0.95
+        zoom = 1/20
+        L=720
+        s=0.25
+        wx = atan(1/sqrt(5))
+        wy = atan(1/sqrt(6))
+        wz = atan(1/sqrt(7))
+        L2=L
+        faceData=frag(exf,3)
       break
       case 6:
-      vertexData = tetraplex
-      edgeLength=phi_1
+      vertexData = frag(ex,4)
+      edgeLength=1
       intersectionD=1
-      circumR=1
+      circumR=phi
       fct = 0.95
       zoom = 1/8
       L=1920
@@ -236,9 +227,9 @@ function resetCamera() {
       wz = 0
       break
       case 7:
-      vertexData = tetraplex
-      edgeLength=1
-      circumR=1
+      vertexData = frag(ex,4)
+      edgeLength=phi
+      circumR=phi
       fct = 0.95
       zoom = 1/8
       L=1200
@@ -249,10 +240,10 @@ function resetCamera() {
       wz = 0
       break
       case 8:
-      vertexData = tetraplex
-      edgeLength=phi_1
-      intersectionD=phi
-      circumR=1
+      vertexData = frag(ex,4)
+      edgeLength=1
+      intersectionD=phi2
+      circumR=phi
       fct = 0.95
       zoom = 1/8
       L=1440
@@ -263,25 +254,26 @@ function resetCamera() {
       L2=720
       break
       case 9:
-      vertexData = tetraplex
-      edgeLength=phi_1
-      intersectionD=phi
-      intersectionD2=phi_2
-      circumR=1
-      fct = 0.95
-      zoom = 1/20
-      L=1440
-      s=0.25
-      wx = atan(1/sqrt(5))
-      wy = atan(1/sqrt(6))
-      wz = atan(1/sqrt(7))
-      L2=720
+        vertexData = frag(gax,4)
+        edgeLength=phi_2*13.708203932499361
+        intersectionD=phi*13.708203932499361
+        intersectionD2=phi_2*13.708203932499361
+        circumR=13.708203932499361
+        fct = 0.95
+        zoom = 1/20
+        L=1440
+        s=0.25
+        wx = atan(1/sqrt(5))
+        wy = atan(1/sqrt(6))
+        wz = atan(1/sqrt(7))
+        L2=720
+        faceData = frag(gaxf,3)
       break
       case 10:
-      vertexData = tetraplex
-      edgeLength=phi
-      intersectionD=phi_1
-      circumR=1
+      vertexData = frag(ex,4)
+      edgeLength=phi2
+      intersectionD=phi
+      circumR=phi
       fct = 0.95
       zoom = 1/20
       L=720
@@ -292,11 +284,11 @@ function resetCamera() {
       L2=L
       break
       case 11:
-      vertexData = tetraplex
-      edgeLength=phi
-      intersectionD=phi_1
-      intersectionD2=1
-      circumR=1
+      vertexData = frag(ex,4)
+      edgeLength=phi2
+      intersectionD=phi
+      intersectionD2=phi
+      circumR=phi
       fct = 0.95
       zoom = 1/20
       L=1920+720
@@ -307,10 +299,10 @@ function resetCamera() {
       L2=720
       break
       case 12:
-      vertexData = tetraplex
-      edgeLength=1
-      intersectionD=phi
-      circumR=1
+      vertexData = frag(ex,4)
+      edgeLength=phi
+      intersectionD=phi2
+      circumR=phi
       fct = 0.95
       zoom = 1/20
       L=1920
@@ -321,9 +313,9 @@ function resetCamera() {
       L2=1200
       break
       case 13:
-      vertexData = tetraplex
-      edgeLength=phi
-      circumR=1
+      vertexData = frag(ex,4)
+      edgeLength=phi2
+      circumR=phi
       fct = 0.95
       zoom = 1/20
       L=720
@@ -334,11 +326,11 @@ function resetCamera() {
       L2=L
       break
       case 14:
-      vertexData = doWeird(tetraplex,phi)
-      edgeLength=phi
-      intersectionD=1
-      intersectionD2=2.572553981697934/2
-      circumR=1
+      vertexData = doWeird(frag(ex,4),phi2)
+      edgeLength=phi2
+      intersectionD=phi
+      intersectionD2=2.572553981697934/2*phi
+      circumR=phi
       fct = 0.95
       zoom = 1/20
       L=1920
@@ -349,20 +341,18 @@ function resetCamera() {
       L2=720
       break
       case 15:
-      vertexData = dodecaplex
-      circumR=sqrt(8)
-      edgeLength=4/(3-sqrt(5))
-      fct = 1.05
-      zoom = 1/4
-      L=1200
-      wx = 0
-      wy = 0
-      wz = 0
-      s=1
-      L2=L
-      if(orthoOn>0) {
-        s = 0.2
-      }
+        vertexData = frag(gogishi,4)
+        circumR=phi_2
+        edgeLength=1
+        fct = 1.5
+        zoom = 1/4
+        L=1200
+        wx = 0
+        wy = 0
+        wz = 0
+        s=0.1
+        L2=L
+        faceData=frag(gogishif,5)
       break
     }
   }else if(dimentionCount==3&&inp2.value()==3) {
@@ -589,13 +579,12 @@ function centervertex() {
       case 3:
       fct = 2
       L=96
-      wx = atan(1)
+      wx = 0
       wy = 0
       wz = 0
       s=1
       break
       case 4:
-      case 15:
       fct = 1.1
       zoom = 1/4
       L=1200
@@ -676,7 +665,7 @@ function centerE() {
       break
       case 3:
       wx = atan(1)
-      wy = atan(1.5)
+      wy = atan(1/sqrt(2))
       wz = 0
       break
       case 4:
@@ -756,7 +745,7 @@ function centerF() {
       break
       case 3:
       wx = atan(1)
-      wy = atan(1/sqrt(2))
+      wy = atan(1.5)
       wz = 0
       break
       case 4:
