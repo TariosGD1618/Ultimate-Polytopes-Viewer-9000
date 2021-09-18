@@ -456,23 +456,29 @@ function resetCamera() {
     s=1
     circumR=1
   }else if(inp2.value()==2) {
-    var A = inp4.value()*1
-    var B = inp5.value()*1%A
+    A = inp4.value()*1
+    B = inp5.value()*1%A
+    if(B>A/2) {
+      B=A-B
+      inp5.value(B)
+    }
     var gcm = 1
     for(var i = 1; i<A; i++) {
       if(floor(B/i)==B/i&&floor(A/i)==A/i) {
         gcm=i
       }
     }
+    A/=gcm
+    B/=gcm
+    L=A
+    L2=A
     vertexData=[]
     for(var i = 0; i<A; i++) {
       vertexData[i]=[cos(PI*2/A*i),sin(PI*2/A*i),0,0]
     }
-    for(var i = 0; i<gcm; i++) {
-      faceData[i]=[]
-      for(var j = 0; j<A*B/gcm; j+=B) {
-        faceData[i][j/B]=(j+i)%A
-      }
+    faceData=[[]]
+    for(var j = 0; j<A*B/gcm; j+=B) {
+      faceData[0][j/B]=j%A
     }
     edgeLength=sqrt(sq(1-cos(PI*2/A*B))+sq(sin(PI*2/A*B)))
   }else {
@@ -1003,11 +1009,11 @@ function changePolytope() {
   intersectionD2 = NaN
   resetCamera()
   if(dimentionCount==4&&inp2.value()==4) {
+    div2.html(L2+' edges')
     switch(polytopeID) {
       case 0:
       div.html('5 tetrahedron {3,3} cells')
       div1.html('10 triangle {3} faces')
-      div2.html('10 edges')
       div3.html('5 verticies')
       div4.html('Schläfli symbol {3,3,3}')
       div5.html('Self-Dual')
@@ -1016,7 +1022,6 @@ function changePolytope() {
       case 1:
       div.html('8 cube {4,3} cells')
       div1.html('24 square {4} faces')
-      div2.html('32 edges')
       div3.html('16 verticies')
       div4.html('Schläfli symbol {4,3,3}')
       div5.html('Dual to hexadecachoron {3,3,4}')
@@ -1025,7 +1030,6 @@ function changePolytope() {
       case 2:
       div.html('16 tetrahedron {3,3} cells')
       div1.html('32 triangle {3} faces')
-      div2.html('24 edges')
       div3.html('8 verticies')
       div4.html('Schläfli symbol {3,3,4}')
       div5.html('Dual to Tesseract {4,3,3}')
@@ -1034,7 +1038,6 @@ function changePolytope() {
       case 3:
       div.html('24 octahedron {3,4} cells')
       div1.html('96 triangle {3} faces')
-      div2.html('96 edges')
       div3.html('24 verticies')
       div4.html('Schläfli symbol {3,4,3}')
       div5.html('Self-Dual')
@@ -1043,7 +1046,6 @@ function changePolytope() {
       case 4:
       div.html('120 dodecahedron {5,3} cells')
       div1.html('720 pentagon {5} faces')
-      div2.html('1200 edges')
       div3.html('600 verticies')
       div4.html('Schläfli symbol {5,3,3}')
       div5.html('Dual to tetraplex {3,3,5}')
@@ -1052,7 +1054,6 @@ function changePolytope() {
       case 5:
       div.html('600 tetrahedron {3,3} cells')
       div1.html('1200 triangle {3} faces')
-      div2.html('720 edges')
       div3.html('120 verticies')
       div4.html('Schläfli symbol {3,3,5}')
       div5.html('Dual to dodecaplex {5,3,3}')
@@ -1061,7 +1062,6 @@ function changePolytope() {
       case 6:
       div.html('600 Icosahedron {5,3} cells')
       div1.html('1200 triangle {3} faces')
-      div2.html('720 edges')
       div3.html('120 verticies')
       div4.html('Schläfli symbol {3,3,5/2}')
       div5.html('Dual to small stellated 120-cell {5/2,5,3}')
@@ -1070,7 +1070,6 @@ function changePolytope() {
       case 7:
       div.html('120 small stellated dodecahedron {5/2,5} cells')
       div1.html('720 pentagram {5/2} faces')
-      div2.html('1200 edges')
       div3.html('120 verticies')
       div4.html('Schläfli symbol {5/2,5,3}')
       div5.html('Dual to icosahedral 120-cell {3,5,5/2}')
@@ -1079,7 +1078,6 @@ function changePolytope() {
       case 8:
       div.html('120 great dodecahedron {5,5/2} cells')
       div1.html('720 pentagon {5} faces')
-      div2.html('720 edges')
       div3.html('120 verticies')
       div4.html('Schläfli symbol {5,5/2,5}')
       div5.html('Self-Dual')
@@ -1088,7 +1086,6 @@ function changePolytope() {
       case 9:
       div.html('120 dodecahedron {5,3} cells')
       div1.html('720 pentagon {5} faces')
-      div2.html('720 edges')
       div3.html('120 verticies')
       div4.html('Schläfli symbol {5,3,5/2}')
       div5.html('Dual to great stellated 120-cell {5/2,3,5}')
@@ -1097,7 +1094,6 @@ function changePolytope() {
       case 10:
       div.html('120 great stellated dodecahedron {5/2,3} cells')
       div1.html('720 pentagram {5/2} faces')
-      div2.html('720 edges')
       div3.html('120 verticies')
       div4.html('Schläfli symbol {5/2,3,5}')
       div5.html('Dual to grand 120-cell {5,3,5/2}')
@@ -1106,7 +1102,6 @@ function changePolytope() {
       case 11:
       div.html('120 small stellated dodecahedron {5/2,5} cells')
       div1.html('720 pentagram {5/2} faces')
-      div2.html('720 edges')
       div3.html('120 verticies')
       div4.html('Schläfli symbol {5/2,5,5/2}')
       div5.html('Self-Dual')
@@ -1115,7 +1110,6 @@ function changePolytope() {
       case 12:
       div.html('120 great dodecahedron {5,5/2} cells')
       div1.html('720 pentagon {5} faces')
-      div2.html('1200 edges')
       div3.html('120 verticies')
       div4.html('Schläfli symbol {5,5/2,3}')
       div5.html('Dual to great icosahedral 120-cell {3,5/2,5}')
@@ -1124,7 +1118,6 @@ function changePolytope() {
       case 13:
       div.html('120 great icosahedron {3,5/2} cells')
       div1.html('1200 triangle {3} faces')
-      div2.html('720 edges')
       div3.html('120 verticies')
       div4.html('Schläfli symbol {3,5/2,5}')
       div5.html('Dual to great grand 120-cell {5,5/2,2}')
@@ -1133,7 +1126,6 @@ function changePolytope() {
       case 14:
       div.html('600 tetrahedron {3,3} cells')
       div1.html('1200 triangle {3} faces')
-      div2.html('720 edges')
       div3.html('120 verticies')
       div4.html('Schläfli symbol {3,3,5/2}')
       div5.html('Dual to great grand stellated 120-cell {5/2,3,3}')
@@ -1142,7 +1134,6 @@ function changePolytope() {
       case 15:
       div.html('120 great stellated dodecahedron {5/2,3} cells')
       div1.html('720 pentagram {5/2} faces')
-      div2.html('1200 edges')
       div3.html('600 verticies')
       div4.html('Schläfli symbol {5/2,3,3}')
       div5.html('Dual to grand 600-cell {3,3,5/2}')
@@ -1150,10 +1141,10 @@ function changePolytope() {
       break
     }
   }else if(dimentionCount==3){
+    div1.html(L2+' edges')
     switch(polytopeID) {
       case 0:
       div.html('4 triangle {3} faces')
-      div1.html('6 edges')
       div2.html('4 verticies')
       div3.html('Schläfli symbol {3,3}')
       div4.html('Self-Dual')
@@ -1162,7 +1153,6 @@ function changePolytope() {
       break
       case 1:
       div.html('6 square {4} faces')
-      div1.html('12 edges')
       div2.html('8 verticies')
       div3.html('Schläfli symbol {4,3}')
       div4.html('Dual to octohedron {3,4}')
@@ -1171,7 +1161,6 @@ function changePolytope() {
       break
       case 2:
       div.html('8 triangle {3} faces')
-      div1.html('12 edges')
       div2.html('6 verticies')
       div3.html('Schläfli symbol {3,4}')
       div4.html('Dual to cube {4,3}')
@@ -1180,7 +1169,6 @@ function changePolytope() {
       break
       case 3:
       div.html('12 pentagon {5} faces')
-      div1.html('30 edges')
       div2.html('20 verticies')
       div3.html('Schläfli symbol {5,3}')
       div4.html('Dual to icosahedron {3,5}')
@@ -1189,7 +1177,6 @@ function changePolytope() {
       break
       case 4:
       div.html('20 triangle {3} faces')
-      div1.html('30 edges')
       div2.html('12 verticies')
       div3.html('Schläfli symbol {3,5}')
       div4.html('Dual to dodecahedron {5,3}')
@@ -1199,7 +1186,6 @@ function changePolytope() {
       case 5:
       div5.html('')
       div.html('12 pentagram {5/2} faces')
-      div1.html('30 edges')
       div2.html('12 verticies')
       div3.html('Schläfli symbol {5/2,5}')
       div4.html('Dual to great dodecahedron {5,5/2}')
@@ -1207,7 +1193,6 @@ function changePolytope() {
       case 6:
       div5.html('')
       div.html('12 pentagon {5} faces')
-      div1.html('30 edges')
       div2.html('12 verticies')
       div3.html('Schläfli symbol {5,5/2}')
       div4.html('Dual to small stellated dodecahedron {5/2,5}')
@@ -1216,7 +1201,6 @@ function changePolytope() {
       case 7:
       div5.html('')
       div.html('12 pentagram {5/2} faces')
-      div1.html('30 edges')
       div2.html('20 verticies')
       div3.html('Schläfli symbol {5/2,3}')
       div4.html('Dual to great icosahedron {3,5/2}')
@@ -1225,13 +1209,24 @@ function changePolytope() {
       case 8:
       div5.html('')
       div.html('20 triangle {3} faces')
-      div1.html('30 edges')
       div2.html('12 verticies')
       div3.html('Schläfli symbol {3,5/2}')
       div4.html('Dual to great stellated dodecahedron {5/2,3}')
       div6.html('')
       break
     }
+  }else if(dimentionCount==2&&inp2.value()==2) {
+    div.html(A+' edges')
+    div1.html(A+' verticies')
+    if(B==1) {
+      div2.html('Schläfli symbol {'+A+'}')
+    }else {
+      div2.html('Schläfli symbol {'+A+'/'+B+'}')
+    }
+    div3.html('Self-dual')
+    div4.html('Self-dual')
+    div5.html('')
+    div6.html('')
   }else {
     var shclaf='3'
     for(var i = 0; i<dimentionCount-3; i++) {
