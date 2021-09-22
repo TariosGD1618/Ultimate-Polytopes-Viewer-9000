@@ -1224,7 +1224,141 @@ function changePolytope() {
       div2.html('Schläfli symbol {'+A+'/'+B+'}')
     }
     div3.html('Self-dual')
-    div4.html('Self-dual')
+    if(A<5) {
+      if(A==2) {
+        div4.html('Dyad')
+      }if(A==3) {
+        div4.html('Triangle')
+      }if(A==4) {
+        div4.html('Square')
+      }
+    }else {
+      var str = ''
+      var a = ''
+      if(A%100==12||A%100==11||A%100==19) {
+        switch(A%100) {
+          case 11:
+            a='hendeca'
+          break
+          case 12:
+            a='dodeca'
+          break
+          case 19:
+            a='enneadeca'
+          break
+        }
+      }else {
+        switch(floor((A%1000)/100)) {
+          case 1:
+            str+='hecto'
+          break
+          case 2:
+            str+='diacos'
+          break
+          case 3:
+            str+='triacos'
+          break
+          case 4:
+            str+='tetracos'
+          break
+          case 5:
+            str+='pentacos'
+          break
+          case 6:
+            str+='hexacos'
+          break
+          case 7:
+            str+='heptacos'
+          break
+          case 8:
+            str+='octacos'
+          break
+          case 9:
+            str+='eneacos'
+          break
+        }
+        if(A%100==0) {
+          if(floor((A%1000)/100)==1) {}else {
+            str+='a'
+          }
+        }else {
+          if(floor((A%1000)/100)==1) {
+            str+='n'
+          }else {
+            str+='i'
+          }
+        }
+        switch(floor((A%100)/10)) {
+          case 1:
+            str+='deca'
+          break
+          case 2:
+            if(A%10==0) {
+              str+='icosa'
+            }else {
+              str+='icosi'
+            }
+          break
+          case 3:
+            str+='triaconta'
+          break
+          case 4:
+            str+='tetraconta'
+          break
+          case 5:
+            str+='pentaconta'
+          break
+          case 6:
+            str+='hexaconta'
+          break
+          case 7:
+            str+='heptaconta'
+          break
+          case 8:
+            str+='octaconta'
+          break
+          case 9:
+            str+='enneaconta'
+          break
+        }
+        switch(A%10) {
+          case 1:
+            str+='hena'
+          break
+          case 2:
+            str+='di'
+          break
+          case 3:
+            str+='tri'
+          break
+          case 4:
+            str+='tetra'
+          break
+          case 5:
+            str+='penta'
+          break
+          case 6:
+            str+='hexa'
+          break
+          case 7:
+            str+='hepta'
+          break
+          case 8:
+            str+='octa'
+          break
+          case 9:
+            str+='nona'
+          break
+        }
+      }
+      str+=a
+      if(B==1) {
+        str+='gon'
+      }else {
+        str+='gram'
+      }
+      div4.html(str)
+    }
     div5.html('')
     div6.html('')
   }else {
@@ -1278,6 +1412,7 @@ function changePolytope() {
     joe.show()
   }else {
     joe.hide()
+    shuffle(faceData,true)
   }
 }
 function keyPressed() {
@@ -1338,6 +1473,10 @@ function draw() {
       xy+=1/frameRate()*PI
     }if(keyCode==189) {
       xy-=1/frameRate()*PI
+    }if(keyCode==38) {
+      zoom*=1.1
+    }if(keyCode==40) {
+      zoom/=1.1
     }
   }
   if(dimentionCount<4) {
@@ -1429,13 +1568,14 @@ function draw() {
     }
   }
   if(faces>0) {
+    var frct = zoom*height/tan(PI/6)/4
     for(var i = 0; i<faceData.length; i++) {
       fill(360*col3%360,100,100)
       beginShape(TESS)
       noStroke()
       for(var j = 0; j<faceData[i].length; j++) {
         var J = faceData[i][j]
-        vertex(vertexDataProjected[J][0]*zoom*400,vertexDataProjected[J][1]*zoom*400,vertexDataProjected[J][2]*zoom*400)
+        vertex(vertexDataProjected[J][0]*frct,vertexDataProjected[J][1]*frct,vertexDataProjected[J][2]*frct)
       }
       col3+=1/faceData.length
       endShape()
@@ -1475,18 +1615,19 @@ function project(aa) {
   return vertexDProjected
 }
 function renderVertex(arr) {
+  var frct = zoom*height/tan(PI/6)/4
   noStroke()
   push()
-  translate(arr[0]*zoom*400,arr[1]*zoom*400,arr[2]*zoom*400)
+  translate(arr[0]*frct,arr[1]*frct,arr[2]*frct)
   if(vRan>0) {
     fill(360*col2%360,100,100)
   }else {
     fill(verCol.value())
   }
   if(simpleM>0) {
-    sphere(arr[3]*10*s*zoom/circumR)
+    sphere(arr[3]*s*frct/40/circumR)
   }else {
-    sphere(arr[3]*50*s*zoom/circumR)
+    sphere(arr[3]*frct/10*s/circumR)
   }
   var A_ = vertexData.length
   if(inp.value()==8&&dimentionCount==3) {
@@ -1510,23 +1651,25 @@ function renderLine(arr1,arr2,Q) {
     }
     col+=1/L2
   }
+  var frct = zoom*height/tan(PI/6)/4
   if(simpleM>0) {
     strokeWeight(1)
-   line(arr1[0]*zoom*400,arr1[1]*zoom*400,arr1[2]*zoom*400,arr2[0]*zoom*400,arr2[1]*zoom*400,arr2[2]*zoom*400)
+   line(arr1[0]*frct,arr1[1]*frct,arr1[2]*frct,arr2[0]*frct,arr2[1]*frct,arr2[2]*frct)
   }else {
-    beginShape(TRIANGLE_STRIP)
+    beginShape()
     noStroke()
     var res=24
-    for(var i = 0; i<PI*2+0.001; i+=PI/res*2) {
-      var ci = cos(i)
-      var si = sin(i)
-      var x = ci*arr1[3]*25/sqrt(sqrt(L))*zoom
-      var y = si*arr1[3]*25/sqrt(sqrt(L))*zoom
-      vertex(arr1[0]*zoom*400+x,arr1[1]*zoom*400+y,arr1[2]*zoom*400)
-      var x = ci*arr2[3]*25/sqrt(sqrt(L))*zoom
-      var y = si*arr2[3]*25/sqrt(sqrt(L))*zoom
-      vertex(arr2[0]*zoom*400+x,arr2[1]*zoom*400+y,arr2[2]*zoom*400)
-    }
+    var ft1 = 1/(arr1[2]*frct-height/2/tan(PI/6))
+    var ft2 = 1/(arr2[2]*frct-height/2/tan(PI/6))
+    var a = atan((arr1[1]*ft1-arr2[1]*ft2)/(arr1[0]*ft1-arr2[0]*ft2))+PI/2
+    var ci = cos(a)
+    var si = sin(a)
+    var x = ci/sqrt(sqrt(L))*frct/16
+    var y = si/sqrt(sqrt(L))*frct/16
+    vertex(arr1[0]*frct+x*arr1[3],arr1[1]*frct+y*arr1[3],arr1[2]*frct)
+    vertex(arr1[0]*frct-x*arr1[3],arr1[1]*frct-y*arr1[3],arr1[2]*frct)
+    vertex(arr2[0]*frct-x*arr2[3],arr2[1]*frct-y*arr2[3],arr2[2]*frct)
+    vertex(arr2[0]*frct+x*arr2[3],arr2[1]*frct+y*arr2[3],arr2[2]*frct)
     endShape(CLOSE)
   }
 }
