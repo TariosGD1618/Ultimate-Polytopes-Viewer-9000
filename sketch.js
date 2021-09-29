@@ -32,18 +32,35 @@ var s = 1
 var L2=L
 var edges = 1
 var verticies = 1
-function doWeird(A,b) {
+function doWeird(A,_b) {
   var A2 = []
-  for(var X = 0; X<A.length; X++) {
-    for(var Y = 0; Y<A.length; Y++) {
-      var dist = sq(A[X][0]-A[Y][0])+sq(A[X][1]-A[Y][1])+sq(A[X][2]-A[Y][2])+sq(A[X][3]-A[Y][3])
-      if(sq(dist-b*b)<0.001&&X>Y) {
-        A2.push([(A[X][0]+A[Y][0])/2+(A[X][1]+A[Y][1])/2+(A[X][2]+A[Y][2])/2+(A[X][3]+A[Y][3])/2])
+  for(var _X = 0; _X<A.length; _X++) {
+    for(var _Y = 0; _Y<A.length; _Y++) {
+      var dist = sq(A[_X][0]-A[_Y][0])+sq(A[_X][1]-A[_Y][1])+sq(A[_X][2]-A[_Y][2])+sq(A[_X][3]-A[_Y][3])
+      if(sq(dist-_b*_b)<0.001&&_X>_Y) {
+        var d1 = (A[_X][0]-A[_Y][0])
+        var d2 = (A[_X][1]-A[_Y][1])
+        var d3 = (A[_X][2]-A[_Y][2])
+        var d4 = (A[_X][3]-A[_Y][3])
+        A2.push([d1/phi+A[_Y][0],d2/phi+A[_Y][1],d3/phi+A[_Y][2],d4/phi+A[_Y][3]])
+        A2.push([d1/phi2+A[_Y][0],d2/phi2+A[_Y][1],d3/phi2+A[_Y][2],d4/phi2+A[_Y][3]])
       }
     }
   }
-  A2=A2.concat(A)
+  A2=deDup(A2)
+  A2=A.concat(A2)
   return A2
+}
+function deDup(arr) {
+  arr=arr.sort()
+  arr2=[]
+  for(var i = 0; i<arr.length; i++) {
+    for(;isSame(arr[i],arr[i-1])&&i<arr.length;i++){}
+    if(arr[i]==undefined) {}else {
+      arr2[arr2.length]=arr[i]
+    }
+  }
+  return arr2
 }
 function windowResized() {//do stuff when window resized
   resizeCanvas(windowWidth, windowHeight)
@@ -67,7 +84,7 @@ function changeDimension() {
   inp.show()
   dimentionCount=inp2.value()*1
   if(dimentionCount==4) {
-    inp.html('<option value="0">pentachoron</option><option value="1">tesseract</option><option value="2">hexadecachoron</option><option value="3">icositetrachoron</option><option value="4">dodecaplex</option><option value="5">tetraplex</option>     <option value="6">icosahedral 120-cell</option><option value="7">small stellated 120-cell</option><option value="8">great 120-cell</option><option value="9">grand 120-cell</option><option value="10">great stellated 120-cell</option><option value="11">grand stellated 120-cell</option><option value="12">great grand 120-cell</option><option value="13">great icosahedral 120-cell</option><option value="14">grand 600-cell</option><option value="15">great grand stellated 120-cell</option>')
+    inp.html('<option value="0">pen</option><option value="1">tes</option><option value="2">hex</option><option value="3">ico</option><option value="4">hi</option><option value="5">ex</option><option value="6">fix</option><option value="7">sishi</option><option value="8">gohi</option><option value="9">gahi</option><option value="10">gishi</option><option value="11">gashi</option><option value="12">gaghi</option><option value="13">gofix</option><option value="14">gax</option><option value="15">gogishi</option>')
     if(polytopeID ==0) {
       inp.selected(0)
     }else if(polytopeID==1) {
@@ -82,7 +99,7 @@ function changeDimension() {
     inp2.style('width','40px')
     inp.position(40,0)
   }else if(dimentionCount==3){
-    inp.html('<option value="0">tetrahedron</option><option value="1">cube</option><option value="2">octahedron</option><option value="3">dodecahedron</option><option value="4">icosohedron</option>  <option value="5">small stellated dodecahedron</option><option value="6">great dodecahedron</option><option value="7">great stellated dodecahedron</option><option value="8">great icosahedron</option>')
+    inp.html('<option value="0">tet</option><option value="1">cube</option><option value="2">oct</option><option value="3">doe</option><option value="4">ike</option>  <option value="5">sissid</option><option value="6">gad</option><option value="7">gissid</option><option value="8">gike</option>')
     if(polytopeID==0) {
       inp.selected(0)
     }else if(polytopeID==1) {
@@ -213,18 +230,19 @@ function resetCamera() {
         faceData=frag(exf,3)
       break
       case 6:
-      vertexData = frag(ex,4)
-      edgeLength=1
-      intersectionD=1
-      circumR=phi
-      fct = 0.95
-      zoom = 1/8
-      L=1920
-      s=0.25
-      L2=720
-      wx = 0
-      wy = 0
-      wz = 0
+        vertexData = frag(ex,4)
+        edgeLength=1
+        intersectionD=phi
+        circumR=phi
+        fct = 0.95
+        zoom = 1/8
+        L=1920
+        s=0.25
+        L2=720
+        wx = 0
+        wy = 0
+        wz = 0
+        faceData=frag(exf,3)
       break
       case 7:
       vertexData = frag(ex,4)
@@ -254,20 +272,19 @@ function resetCamera() {
       L2=720
       break
       case 9:
-        vertexData = frag(gax,4)
-        edgeLength=phi_2*13.708203932499361
-        intersectionD=phi*13.708203932499361
-        intersectionD2=phi_2*13.708203932499361
-        circumR=13.708203932499361
-        fct = 0.95
-        zoom = 1/20
-        L=1440
-        s=0.25
-        wx = atan(1/sqrt(5))
-        wy = atan(1/sqrt(6))
-        wz = atan(1/sqrt(7))
-        L2=720
-        faceData = frag(gaxf,3)
+      vertexData = frag(ex,4)
+      edgeLength=1
+      intersectionD=phi2
+      intersectionD2=2.8284271247461903*phi/2
+      circumR=phi
+      fct = 0.95
+      zoom = 1/20
+      L=1440
+      s=0.25
+      wx = atan(1/sqrt(5))
+      wy = atan(1/sqrt(6))
+      wz = atan(1/sqrt(7))
+      L2=720
       break
       case 10:
       vertexData = frag(ex,4)
@@ -326,19 +343,20 @@ function resetCamera() {
       L2=L
       break
       case 14:
-      vertexData = doWeird(frag(ex,4),phi2)
-      edgeLength=phi2
-      intersectionD=phi
-      intersectionD2=2.572553981697934/2*phi
-      circumR=phi
-      fct = 0.95
-      zoom = 1/20
-      L=1920
-      s=0.25
-      wx = atan(1/sqrt(5))
-      wy = atan(1/sqrt(6))
-      wz = atan(1/sqrt(7))
-      L2=720
+        vertexData = frag(gax,4)
+        edgeLength=(sqrt(5)+3)*phi2*phi
+        intersectionD=(sqrt(5)+3)*phi2
+        intersectionD2=2.8284271247461903/2*(sqrt(5)+3)*phi2
+        circumR=(sqrt(5)+3)*phi2
+        fct = 0.95
+        zoom = 1/20
+        L=1440
+        s=1
+        wx = atan(1/sqrt(5))
+        wy = atan(1/sqrt(6))
+        wz = atan(1/sqrt(7))
+        L2=720
+        faceData = frag(gaxf,3)
       break
       case 15:
         vertexData = frag(gogishi,4)
@@ -440,11 +458,11 @@ function resetCamera() {
         faceData=[[2,13,6,16,18],[1,14,5,17,19],[0,15,4,17,19],[3,12,7,16,18],[19,1,10,11,0],[16,7,8,9,6],[4,9,6,13,15],[1,10,3,12,14],[17,5,8,9,4],[18,3,10,11,2],[0,11,2,13,15],[5,8,7,12,14]]
       break
       case 8:
-        vertexData = conv([[0,11,10+phi,0],[11,10+phi,0,0],[10+phi,0,11,0],[11,0,0,0],[0,11,0,0],[0,0,11,0],[10.5,10.30901699437494745,10.8090169943749475,0],[10.8090169943749475,10.5,10.30901699437494745,0],[10.30901699437494745,10.8090169943749475, 10.5,0]])
+        vertexData = doWeird(icosohedron,2*phi)
         circumR=sqrt(phi+2)
         edgeLength=2*phi
-        intersectionD = 2.572553981697934
-        L=89
+        intersectionD = 2.8284271247461903
+        L=240
         s=1
         xz = atan(phi_2)
         L2=30
@@ -843,7 +861,6 @@ function interpretOFF(off) {
       if(r>0) {
         faceData[r-1][faceData[r-1].length]=a
       }
-      console.log(a)
       if(a>b) {
         arrA[arrA.length]=[a,b]
       }else {
@@ -868,7 +885,323 @@ function isSame(arr1,arr2) {
   if(arr2==undefined||arr1==undefined) {
     return false
   }
-  return (arr1[0]==arr2[0])&&(arr1[1]==arr2[1])
+  var a_ = true
+  for(var i = 0; i<arr1.length; i++) {
+    if(arr1[i]!==arr2[i]) {
+      a_=false
+    }
+  }
+  return a_
+}
+function dual() {
+  if(inp2.value()==5) {
+    switch(inp.value()*1) {
+      case 1:
+        inp.value(2)
+      break
+      case 2:
+        inp.value(1)
+      break
+    }
+    changePolytope()
+  }else if(inp2.value()==3) {
+    switch(polytopeID) {
+      case 1:
+        inp.value(2)
+        changePolytope()
+      break
+      case 2:
+        inp.value(1)
+      break
+      case 3:
+        inp.value(4)
+      break
+      case 4:
+        inp.value(3)
+      break
+      case 5:
+        inp.value(6)
+      break
+      case 6:
+        inp.value(5)
+      break
+      case 7:
+        inp.value(8)
+      break
+      case 8:
+        inp.value(7)
+      break
+    }
+    changePolytope()
+  }else {
+    switch(polytopeID) {
+      case 1:
+        inp.value(2)
+      break
+      case 2:
+        inp.value(1)
+      break
+      case 4:
+        inp.value(5)
+      break
+      case 5:
+        inp.value(4)
+      break
+      case 6:
+        inp.value(7)
+      break
+      case 7:
+        inp.value(6)
+      break
+      case 9:
+        inp.value(10)
+      break
+      case 10:
+        inp.value(9)
+      break
+      case 12:
+        inp.value(13)
+      break
+      case 13:
+        inp.value(12)
+      break
+      case 14:
+        inp.value(15)
+      break
+      case 15:
+        inp.value(14)
+      break
+      changePolytope()
+    }
+  }
+}
+function verf() {
+  if(inp2.value()==5) {
+    inp3.value(inp3.value()-1)
+    switch(inp.value()*1) {
+      case 0:
+      case 1:
+        inp.value(0)
+      break
+    }
+    changeDimension()
+  }else if(inp2.value()==3) {
+    inp2.value(2)
+    inp5.value(1)
+    switch(polytopeID) {
+      case 0:
+      case 1:
+      case 3:
+      case 7:
+        inp4.value(3)
+      break
+      case 2:
+        inp4.value(4)
+      break
+      case 4:
+      case 5:
+        inp4.value(5)
+      break
+      case 6:
+      case 8:
+        inp4.value(5)
+        inp5.value(2)
+      break
+    }
+    changeDimension()
+  }else {
+    var poly = polytopeID
+    inp2.value(3)
+    changeDimension()
+    switch(poly) {
+      case 0:
+      case 1:
+      case 4:
+      case 15:
+        inp.value(0)
+      break
+      case 2:
+        inp.value(2)
+      break
+      case 3:
+        inp.value(1)
+      break
+      case 5:
+      case 7:
+      case 10:
+        inp.value(4)
+      break
+      case 6:
+      case 11:
+        inp.value(6)
+      break
+      case 8:
+      case 13:
+        inp.value(5)
+      break
+      case 9:
+      case 14:
+        inp.value(8)
+      break
+      case 12:
+        inp.value(7)
+      break
+    }
+    changePolytope()
+  }
+}
+function div3clicked() {
+  if(inp2.value()==5) {
+    dual()
+  }
+}
+function div4clicked() {
+  if(inp2.value()==3) {
+    dual()
+  }
+}
+function div5clicked() {
+  if(inp2.value()==4) {
+    dual()
+  }else if(inp2.value()==5) {
+    verf()
+  }
+}
+function div6clicked() {
+  if(inp2.value()==3) {
+    verf()
+  }
+}
+function div8clicked() {
+  if(inp2.value()==4) {
+    verf()
+  }
+}
+function divclicked() {
+  if(inp2.value()==4) {
+    STC()
+  }else if(inp2.value()==3) {
+    STF()    
+  }else if(inp2.value()==5) {
+    STFCT()
+  }
+}
+function div1clicked() {
+  if(inp2.value()==4) {
+    STF()
+  }
+}
+function STF() {
+  var val = inp2.value()
+  inp2.value(2)
+  if(val==3) {
+    inp5.value(1)
+    switch(polytopeID) {
+      case 0:
+      case 2:
+      case 4:
+      case 8:
+        inp4.value(3)
+      break
+      case 1:
+        inp4.value(4)
+      break
+      case 3:
+      case 6:
+        inp4.value(5)
+      break
+      case 5:
+      case 7:
+        inp4.value(5)
+        inp5.value(2)
+      break
+    }
+  }else {
+    inp5.value(1)
+    switch(polytopeID) {
+      case 0:
+      case 2:
+      case 3:
+      case 5:
+      case 6:
+      case 13:
+      case 14:
+        inp4.value(3)
+      break
+      case 1:
+        inp4.value(4)
+      break
+      case 4:
+      case 8:
+      case 9:
+      case 12:
+        inp4.value(5)
+      break
+      case 7:
+      case 10:
+      case 11:
+      case 15:
+        inp4.value(5)
+        inp5.value(2)
+      break
+    }
+  }
+  changeDimension()
+}
+function STC() {
+  inp2.value(3)
+  var don = polytopeID
+  changeDimension()
+  switch(don) {
+    case 0:
+    case 2:
+    case 5:
+    case 14:
+      inp.value(0)
+    break
+    case 1:
+      inp.value(1)
+    break
+    case 3:
+      inp.value(2)
+    break
+    case 4:
+    case 9:
+      inp.value(3)
+    break
+    case 6:
+      inp.value(4)
+    break
+    case 7:
+    case 11:
+      inp.value(5)
+    break
+    case 8:
+    case 12:
+      inp.value(6)
+    break
+    case 10:
+    case 15:
+      inp.value(7)
+    break
+    case 13:
+      inp.value(8)
+    break
+  }
+  changePolytope()
+}
+function STFCT() {
+  inp3.value(inp3.value()-1)
+  switch(inp.value()*1) {
+    case 0:
+    case 2:
+      inp.value(0)
+    break
+    case 1:
+      inp.value(1)
+    break
+  }
+  changeDimension()
 }
 function setup() {
   inp3=createInput('5','number')
@@ -931,24 +1264,34 @@ function setup() {
   div=createDiv('5 tetrahedron {3,3} cells')
   div.position(0,20)//cell (4d) or face (3d) info
   div.style('color','#ff0000')
+  div.mouseClicked(divclicked)
   div1=createDiv('10 triangle {3} faces')
   div1.position(0,40)//face (4d) or edge (3d) info
   div1.style('color','#ffff00')
+  div1.mouseClicked(div1clicked)
   div2=createDiv('10 edges')
   div2.position(0,60)//edge (4d) or vertex (3d) info
   div2.style('color','#00ff00')
   div3=createDiv('5 verticies')
   div3.position(0,80)//vertex (4d) or Schläfli symbol (3d) info
   div3.style('color','#00ffff')
+  div3.mouseClicked(div3clicked)
   div4=createDiv('Schläfli symbol {3,3,3}')
   div4.position(0,100)//Schläfli symbol (4d) or dual (3d) info
   div4.style('color','#0000ff')
+  div4.mouseClicked(div4clicked)
   div5=createDiv('Self-Dual')
-  div5.position(0,120)//dual (4d) or alternate names (3d) info
+  div5.position(0,120)//dual (4d) or names (3d) info
   div5.style('color','#ff00ff')
-  div6=createDiv('other names: 5-cell, pentatope, pentahedroid, pen, hyperpyramid, tetrahedral pyramid')//alternate names info
+  div5.mouseClicked(div5clicked)
+  div6=createDiv()//names info (4d) or verf (3d)
   div6.position(0,140)
-  div6.style('color','#ffffff')
+  div6.style('color','#ff8000')
+  div6.mouseClicked(div6clicked)
+  div8=createDiv('')//verf (4d)
+  div8.position(0,160)
+  div8.style('color','#80ff00')
+  div8.mouseClicked(div8clicked)
   console.log(centerv.style('width'),centerc.style('width'))
   mrSlider=createSlider(0,10,2,0.05)
   mrSlider.position(width-mrSlider.width-5,0)
@@ -1012,210 +1355,237 @@ function changePolytope() {
     div2.html(L2+' edges')
     switch(polytopeID) {
       case 0:
-      div.html('5 tetrahedron {3,3} cells')
-      div1.html('10 triangle {3} faces')
-      div3.html('5 verticies')
-      div4.html('Schläfli symbol {3,3,3}')
-      div5.html('Self-Dual')
-      div6.html('other names: 5-cell, pentatope, pentahedroid, hyperpyramid, tetrahedral pyramid')
+        div.html('5 tet {3,3} cells')
+        div1.html('10 triangle {3} faces')
+        div3.html('5 verticies')
+        div4.html('Schläfli symbol {3,3,3}')
+        div5.html('Self-Dual')
+        div6.html('names: pentachoron, 5-cell, pentatope, pentahedroid, hyperpyramid, tetrahedral pyramid')
+        div8.html('vertex figure: tet {3,3}')
       break
       case 1:
-      div.html('8 cube {4,3} cells')
-      div1.html('24 square {4} faces')
-      div3.html('16 verticies')
-      div4.html('Schläfli symbol {4,3,3}')
-      div5.html('Dual to hexadecachoron {3,3,4}')
-      div6.html('other names: 8-cell, octachoron, octahedroid, cubic prism, tetracube, 4-cube')
+        div.html('8 cube {4,3} cells')
+        div1.html('24 square {4} faces')
+        div3.html('16 verticies')
+        div4.html('Schläfli symbol {4,3,3}')
+        div5.html('Dual to hex {3,3,4}')
+        div6.html('names: tesseract, 8-cell, octachoron, octahedroid, cubic prism, tetracube, 4-cube')
+        div8.html('vertex figure: tet {3,3}')
       break
       case 2:
-      div.html('16 tetrahedron {3,3} cells')
-      div1.html('32 triangle {3} faces')
-      div3.html('8 verticies')
-      div4.html('Schläfli symbol {3,3,4}')
-      div5.html('Dual to Tesseract {4,3,3}')
-      div6.html('other names: 16-cell, hexdecahedroid, 4-orthoplex')
+        div.html('16 tet {3,3} cells')
+        div1.html('32 triangle {3} faces')
+        div3.html('8 verticies')
+        div4.html('Schläfli symbol {3,3,4}')
+        div5.html('Dual to tes {4,3,3}')
+        div6.html('names: hexadecachoron, 16-cell, hexdecahedroid, 4-orthoplex')
+        div8.html('vertex figure: oct {3,4}')
       break
       case 3:
-      div.html('24 octahedron {3,4} cells')
-      div1.html('96 triangle {3} faces')
-      div3.html('24 verticies')
-      div4.html('Schläfli symbol {3,4,3}')
-      div5.html('Self-Dual')
-      div6.html('other names: 24-cell, octaplex, icosatetrahedroid, octacube, hyper-diamond, polyoctahedron')
+        div.html('24 oct {3,4} cells')
+        div1.html('96 triangle {3} faces')
+        div3.html('24 verticies')
+        div4.html('Schläfli symbol {3,4,3}')
+        div5.html('Self-Dual')
+        div6.html('names: icosiotetrachoron, 24-cell, octaplex, icosatetrahedroid, octacube, hyper-diamond, polyoctahedron')
+        div8.html('vertex figure: cube {4,3}')
       break
       case 4:
-      div.html('120 dodecahedron {5,3} cells')
-      div1.html('720 pentagon {5} faces')
-      div3.html('600 verticies')
-      div4.html('Schläfli symbol {5,3,3}')
-      div5.html('Dual to tetraplex {3,3,5}')
-      div6.html('other names: 120-cell, hyperdodecahedron, polydodecahedron, hecatonicosachoron, dodecacontachoron, hecatonicosahedroid')
+        div.html('120 doe {5,3} cells')
+        div1.html('720 pentagon {5} faces')
+        div3.html('600 verticies')
+        div4.html('Schläfli symbol {5,3,3}')
+        div5.html('Dual to ex {3,3,5}')
+        div6.html('names: dodecaplex, 120-cell, hyperdodecahedron, polydodecahedron, hecatonicosachoron, dodecacontachoron, hecatonicosahedroid')
+        div8.html('vertex figure: tet {3,3}')
       break
       case 5:
-      div.html('600 tetrahedron {3,3} cells')
-      div1.html('1200 triangle {3} faces')
-      div3.html('120 verticies')
-      div4.html('Schläfli symbol {3,3,5}')
-      div5.html('Dual to dodecaplex {5,3,3}')
-      div6.html('other names: 600-cell, hexacosichoron, hexacosihedroid, polytetrahedron')
+        div.html('600 tet {3,3} cells')
+        div1.html('1200 triangle {3} faces')
+        div3.html('120 verticies')
+        div4.html('Schläfli symbol {3,3,5}')
+        div5.html('Dual to hi {5,3,3}')
+        div6.html('names: tetraplex, 600-cell, hexacosichoron, hexacosihedroid, polytetrahedron')
+        div8.html('vertex figure: ike {3,5}')
       break
       case 6:
-      div.html('600 Icosahedron {5,3} cells')
-      div1.html('1200 triangle {3} faces')
-      div3.html('120 verticies')
-      div4.html('Schläfli symbol {3,3,5/2}')
-      div5.html('Dual to small stellated 120-cell {5/2,5,3}')
-      div6.html('other names: polyicosahedron, faceted 600-cell, icosaplex, faceted hexacosichoron')
+        div.html('600 ike {5,3} cells')
+        div1.html('1200 triangle {3} faces')
+        div3.html('120 verticies')
+        div4.html('Schläfli symbol {3,5,5/2}')
+        div5.html('Dual to sishi {5/2,5,3}')
+        div6.html('names: icosahedral 600-cell, polyicosahedron, faceted 600-cell, icosaplex, faceted hexacosichoron')
+        div8.html('vertex figure: gad {5,5/2}')
       break
       case 7:
-      div.html('120 small stellated dodecahedron {5/2,5} cells')
-      div1.html('720 pentagram {5/2} faces')
-      div3.html('120 verticies')
-      div4.html('Schläfli symbol {5/2,5,3}')
-      div5.html('Dual to icosahedral 120-cell {3,5,5/2}')
-      div6.html('other names: stellated polydodecahedron, small stellated hecatonicosachoron')
+        div.html('120 sissid {5/2,5} cells')
+        div1.html('720 pentagram {5/2} faces')
+        div3.html('120 verticies')
+        div4.html('Schläfli symbol {5/2,5,3}')
+        div5.html('Dual to fix {3,5,5/2}')
+        div6.html('names: small stellated 120-cell, stellated polydodecahedron, small stellated hecatonicosachoron')
+        div8.html('vertex figure: ike {5,3}')
       break
       case 8:
-      div.html('120 great dodecahedron {5,5/2} cells')
-      div1.html('720 pentagon {5} faces')
-      div3.html('120 verticies')
-      div4.html('Schläfli symbol {5,5/2,5}')
-      div5.html('Self-Dual')
-      div6.html('other names: great polydodecahedron, great hecatonicosachoron')
+        div.html('120 gad {5,5/2} cells')
+        div1.html('720 pentagon {5} faces')
+        div3.html('120 verticies')
+        div4.html('Schläfli symbol {5,5/2,5}')
+        div5.html('Self-Dual')
+        div6.html('names: great 120-cell, great polydodecahedron, great hecatonicosachoron')
+        div8.html('vertex figure: sissid {5/2,5}')
       break
       case 9:
-      div.html('120 dodecahedron {5,3} cells')
-      div1.html('720 pentagon {5} faces')
-      div3.html('120 verticies')
-      div4.html('Schläfli symbol {5,3,5/2}')
-      div5.html('Dual to great stellated 120-cell {5/2,3,5}')
-      div6.html('other names: grand hecatonicosachoron, grand polydodecahedron')
+        div.html('120 doe {5,3} cells')
+        div1.html('720 pentagon {5} faces')
+        div3.html('120 verticies')
+        div4.html('Schläfli symbol {5,3,5/2}')
+        div5.html('Dual to gishi {5/2,3,5}')
+        div6.html('names: grand 120-cell, grand hecatonicosachoron, grand polydodecahedron')
+        div8.html('vertex figure: gike {3,5/2}')
       break
       case 10:
-      div.html('120 great stellated dodecahedron {5/2,3} cells')
-      div1.html('720 pentagram {5/2} faces')
-      div3.html('120 verticies')
-      div4.html('Schläfli symbol {5/2,3,5}')
-      div5.html('Dual to grand 120-cell {5,3,5/2}')
-      div6.html('other names: great stellated polydodecahedron, Great stellated hecatonicosachoron')
+        div.html('120 gissid {5/2,3} cells')
+        div1.html('720 pentagram {5/2} faces')
+        div3.html('120 verticies')
+        div4.html('Schläfli symbol {5/2,3,5}')
+        div5.html('Dual to gahi {5,3,5/2}')
+        div6.html('names: great stellated 120-cell, great stellated polydodecahedron, Great stellated hecatonicosachoron')
+        div8.html('vertex figure: ike {3,5}')
       break
       case 11:
-      div.html('120 small stellated dodecahedron {5/2,5} cells')
-      div1.html('720 pentagram {5/2} faces')
-      div3.html('120 verticies')
-      div4.html('Schläfli symbol {5/2,5,5/2}')
-      div5.html('Self-Dual')
-      div6.html('other names: grand stellated polydodecahedron, grand stellated hecatonicosachoron')
+        div.html('120 sissid {5/2,5} cells')
+        div1.html('720 pentagram {5/2} faces')
+        div3.html('120 verticies')
+        div4.html('Schläfli symbol {5/2,5,5/2}')
+        div5.html('Self-Dual')
+        div6.html('names: grand stellated 120-cell, grand stellated polydodecahedron, grand stellated hecatonicosachoron')
+        div8.html('vertex figure: gad {5,5/2}')
       break
       case 12:
-      div.html('120 great dodecahedron {5,5/2} cells')
-      div1.html('720 pentagon {5} faces')
-      div3.html('120 verticies')
-      div4.html('Schläfli symbol {5,5/2,3}')
-      div5.html('Dual to great icosahedral 120-cell {3,5/2,5}')
-      div6.html('other names: great grand polydodecahedron, great grand hecatonicosachoron')
+        div.html('120 gad {5,5/2} cells')
+        div1.html('720 pentagon {5} faces')
+        div3.html('120 verticies')
+        div4.html('Schläfli symbol {5,5/2,3}')
+        div5.html('Dual to gofix {3,5/2,5}')
+        div6.html('names: great grand 120-cell, great grand polydodecahedron, great grand hecatonicosachoron')
+        div8.html('vertex figure: gissid {5/2,3}')
       break
       case 13:
-      div.html('120 great icosahedron {3,5/2} cells')
-      div1.html('1200 triangle {3} faces')
-      div3.html('120 verticies')
-      div4.html('Schläfli symbol {3,5/2,5}')
-      div5.html('Dual to great grand 120-cell {5,5/2,2}')
-      div6.html('other names: great polyicosahedron, great faceted 600-cell, great icosahedral 120-cell, great faceted hexacosichoron')
+        div.html('120 gike {3,5/2} cells')
+        div1.html('1200 triangle {3} faces')
+        div3.html('120 verticies')
+        div4.html('Schläfli symbol {3,5/2,5}')
+        div5.html('Dual to gaghi {5,5/2,2}')
+        div6.html('names: great icosahedral 120-cell, great polyicosahedron, great faceted 600-cell, great icosahedral 120-cell, great faceted hexacosichoron')
+        div8.html('vertex figure: sissid {5/2,5}')
       break
       case 14:
-      div.html('600 tetrahedron {3,3} cells')
-      div1.html('1200 triangle {3} faces')
-      div3.html('120 verticies')
-      div4.html('Schläfli symbol {3,3,5/2}')
-      div5.html('Dual to great grand stellated 120-cell {5/2,3,3}')
-      div6.html('other names: grand polytetrahedron, grand hexacosichoron')
+        div.html('600 tet {3,3} cells')
+        div1.html('1200 triangle {3} faces')
+        div3.html('120 verticies')
+        div4.html('Schläfli symbol {3,3,5/2}')
+        div5.html('Dual to gogishi {5/2,3,3}')
+        div6.html('names: grand 600-cell, grand polytetrahedron, grand hexacosichoron')
+        div8.html('vertex figure: gike {3,5/2}')
       break
       case 15:
-      div.html('120 great stellated dodecahedron {5/2,3} cells')
-      div1.html('720 pentagram {5/2} faces')
-      div3.html('600 verticies')
-      div4.html('Schläfli symbol {5/2,3,3}')
-      div5.html('Dual to grand 600-cell {3,3,5/2}')
-      div6.html('other names: great grand stellated polydodecahedron, great grand stellated hecatonicosachoron')
+        div.html('120 gissid {5/2,3} cells')
+        div1.html('720 pentagram {5/2} faces')
+        div3.html('600 verticies')
+        div4.html('Schläfli symbol {5/2,3,3}')
+        div5.html('Dual to gax {3,3,5/2}')
+        div6.html('names: great grand stellated 120-cell, great grand stellated polydodecahedron, great grand stellated hecatonicosachoron')
+        div8.html('vertex figure: tet {3,3}')
       break
     }
   }else if(dimentionCount==3){
     div1.html(L2+' edges')
     switch(polytopeID) {
       case 0:
-      div.html('4 triangle {3} faces')
-      div2.html('4 verticies')
-      div3.html('Schläfli symbol {3,3}')
-      div4.html('Self-Dual')
-      div5.html('other names: triangular pyramid, 3-simplex')
-      div6.html('')
+        div.html('4 triangle {3} faces')
+        div2.html('4 verticies')
+        div3.html('Schläfli symbol {3,3}')
+        div4.html('Self-Dual')
+        div5.html('names: tetrahedron, triangular pyramid, 3-simplex')
+        div6.html('vertex figure: triangle {3}')
+        div8.html('')
       break
       case 1:
-      div.html('6 square {4} faces')
-      div2.html('8 verticies')
-      div3.html('Schläfli symbol {4,3}')
-      div4.html('Dual to octohedron {3,4}')
-      div5.html('other names: 3-cube, hexahedron, square prism')
-      div6.html('')
+        div.html('6 square {4} faces')
+        div2.html('8 verticies')
+        div3.html('Schläfli symbol {4,3}')
+        div4.html('Dual to oct {3,4}')
+        div5.html('names: cube, 3-cube, hexahedron, square prism')
+        div6.html('vertex figure: triangle {3}')
+        div8.html('')
       break
       case 2:
-      div.html('8 triangle {3} faces')
-      div2.html('6 verticies')
-      div3.html('Schläfli symbol {3,4}')
-      div4.html('Dual to cube {4,3}')
-      div5.html('other names: square bipyramid, triangular antiprism, 3-orthaplex')
-      div6.html('')
+        div.html('8 triangle {3} faces')
+        div2.html('6 verticies')
+        div3.html('Schläfli symbol {3,4}')
+        div4.html('Dual to cube {4,3}')
+        div5.html('names: octahedron, square bipyramid, triangular antiprism, 3-orthaplex')
+        div6.html('vertex figure: square {4}')
+        div8.html('')
       break
       case 3:
-      div.html('12 pentagon {5} faces')
-      div2.html('20 verticies')
-      div3.html('Schläfli symbol {5,3}')
-      div4.html('Dual to icosahedron {3,5}')
-      div5.html('')
-      div6.html('')
+        div.html('12 pentagon {5} faces')
+        div2.html('20 verticies')
+        div3.html('Schläfli symbol {5,3}')
+        div4.html('Dual to ike {3,5}')
+        div5.html('dodecahedron')
+        div6.html('vertex figure: triangle {3}')
+        div8.html('')
       break
       case 4:
-      div.html('20 triangle {3} faces')
-      div2.html('12 verticies')
-      div3.html('Schläfli symbol {3,5}')
-      div4.html('Dual to dodecahedron {5,3}')
-      div5.html('other names: gyroelongated pentagonal bipyramid, biaugmented pentagonal antiprism')
-      div6.html('')
+        div.html('20 triangle {3} faces')
+        div2.html('12 verticies')
+        div3.html('Schläfli symbol {3,5}')
+        div4.html('Dual to doe {5,3}')
+        div5.html('names: icosahedron, gyroelongated pentagonal bipyramid, biaugmented pentagonal antiprism')
+        div6.html('vertex figure: pentagon {5}')
+        div8.html('')
       break
       case 5:
-      div5.html('')
-      div.html('12 pentagram {5/2} faces')
-      div2.html('12 verticies')
-      div3.html('Schläfli symbol {5/2,5}')
-      div4.html('Dual to great dodecahedron {5,5/2}')
+        div.html('12 pentagram {5/2} faces')
+        div2.html('12 verticies')
+        div3.html('Schläfli symbol {5/2,5}')
+        div4.html('Dual to gad {5,5/2}')
+        div5.html('small stellated dodecahedron')
+        div6.html('vertex figure: pentagon {5}')
+        div8.html('')
       break
       case 6:
-      div5.html('')
-      div.html('12 pentagon {5} faces')
-      div2.html('12 verticies')
-      div3.html('Schläfli symbol {5,5/2}')
-      div4.html('Dual to small stellated dodecahedron {5/2,5}')
-      div6.html('')
+        div.html('12 pentagon {5} faces')
+        div2.html('12 verticies')
+        div3.html('Schläfli symbol {5,5/2}')
+        div4.html('Dual to sissid {5/2,5}')
+        div5.html('great dodecahedron')
+        div6.html('vertex figure: pentagram {5/2}')
+        div8.html('')
       break
       case 7:
-      div5.html('')
-      div.html('12 pentagram {5/2} faces')
-      div2.html('20 verticies')
-      div3.html('Schläfli symbol {5/2,3}')
-      div4.html('Dual to great icosahedron {3,5/2}')
-      div6.html('')
+        div.html('12 pentagram {5/2} faces')
+        div2.html('20 verticies')
+        div3.html('Schläfli symbol {5/2,3}')
+        div4.html('Dual to gike {3,5/2}')
+        div5.html('great stellated dodecahedron')
+        div6.html('vertex figure: trangle {3}')
+        div8.html('')
       break
       case 8:
-      div5.html('')
-      div.html('20 triangle {3} faces')
-      div2.html('12 verticies')
-      div3.html('Schläfli symbol {3,5/2}')
-      div4.html('Dual to great stellated dodecahedron {5/2,3}')
-      div6.html('')
+        div.html('20 triangle {3} faces')
+        div2.html('12 verticies')
+        div3.html('Schläfli symbol {3,5/2}')
+        div4.html('Dual to gissid {5/2,3}')
+        div5.html('great icosahedron')
+        div6.html('vertex figure: pentagram {5/2}')
+        div8.html('')
       break
     }
   }else if(dimentionCount==2&&inp2.value()==2) {
+    div8.html('')
     div.html(A+' edges')
     div1.html(A+' verticies')
     if(B==1) {
@@ -1284,7 +1654,7 @@ function changePolytope() {
         }else {
           if(floor((A%1000)/100)==1) {
             str+='n'
-          }else {
+          }else if(A>=100) {
             str+='i'
           }
         }
@@ -1368,36 +1738,39 @@ function changePolytope() {
     }
     switch(polytopeID) {
       case 0:
-      div.html(dimentionCount+1+' '+(dimentionCount-1)+'-simplex faces')
-      div1.html(0.5*sq(dimentionCount)+0.5*dimentionCount+' edges')
-      div2.html(dimentionCount+1+' verticies')
-      div3.html('Self-Dual')
-      div4.html('Schläfli symbol {'+shclaf+',3}')
-      div5.html('')
-      div6.html('')
+        div.html(dimentionCount+1+' '+(dimentionCount-1)+'-simplex facets')
+        div1.html(0.5*sq(dimentionCount)+0.5*dimentionCount+' edges')
+        div2.html(dimentionCount+1+' verticies')
+        div3.html('Self-Dual')
+        div4.html('Schläfli symbol {'+shclaf+',3}')
+        div5.html('vertex figure: '+(dimentionCount-1)+'-simplex {'+shclaf+'}')
+        div6.html('')
+        div8.html('')
       break
       case 1:
-      var ed = 4
-      for(var i = 2; i<dimentionCount; i++) {
-        ed*=2
-        ed+=pow(2,i)
-      }
-      div.html(dimentionCount*2+' '+(dimentionCount-1)+'-hypercube faces')
-      div1.html(ed+' edges')
-      div2.html(pow(2,dimentionCount)+' verticies')
-      div3.html('Dual to '+dimentionCount+'-orthoplex')
-      div4.html('Schläfli symbol {4,'+shclaf+'}')
-      div5.html('')
-      div6.html('')
+        var ed = 4
+        for(var i = 2; i<dimentionCount; i++) {
+          ed*=2
+          ed+=pow(2,i)
+        }
+        div.html(dimentionCount*2+' '+(dimentionCount-1)+'-hypercube facets')
+        div1.html(ed+' edges')
+        div2.html(pow(2,dimentionCount)+' verticies')
+        div3.html('Dual to '+dimentionCount+'-orthoplex')
+        div4.html('Schläfli symbol {4,'+shclaf+'}')
+        div5.html('vertex figure: '+(dimentionCount-1)+'-simplex {'+shclaf+'}')
+        div8.html('')
+        div6.html('')
       break
       case 2:
-      div.html(pow(2,dimentionCount)+' '+(dimentionCount-1)+'-simplex faces')
-      div1.html(2*sq(dimentionCount)-2*dimentionCount+' edges')
-      div2.html(dimentionCount*2+' verticies')
-      div3.html('Dual to '+dimentionCount+'-hypercube')
-      div4.html('Schläfli symbol {'+shclaf+',4}')
-      div5.html('')
-      div6.html('')
+        div.html(pow(2,dimentionCount)+' '+(dimentionCount-1)+'-simplex facets')
+        div1.html(2*sq(dimentionCount)-2*dimentionCount+' edges')
+        div2.html(dimentionCount*2+' verticies')
+        div3.html('Dual to '+dimentionCount+'-hypercube')
+        div4.html('Schläfli symbol {'+shclaf+',4}')
+        div8.html('')
+        div6.html('')
+        div5.html('vertex figure: '+(dimentionCount-1)+'-orthoplex {'+shclaf.substring(2,shclaf.length)+',4'+'}')
       break
     }
   }
@@ -1424,11 +1797,17 @@ function keyPressed() {
     faces*=-1
   }
 }
-function mouseDragged() {
-  xz-=movedX/100
-  yz-=movedY/100
-}
+var X = 0
+var Y = 0
 function draw() {
+  if(mouseIsPressed) {
+    X=(pmouseX-mouseX)/100
+    Y=(pmouseY-mouseY)/100
+  }
+  yz+=Y
+  xz+=X
+  Y/=1.05
+  X/=1.05
   fct = mrSlider.value()
   joeDiv.html(fct)
   var W =joeDiv.style('width')
@@ -1548,10 +1927,10 @@ function draw() {
         if((areConnected(vertexData[k],vertexData[k2],edgeLength)==2||areConnected(vertexData[k],vertexData[k2],edgeLength)==1)&&k2>k) {
           renderLine(vertexDataProjected[k],vertexDataProjected[k2],areConnected(vertexData[k],vertexData[k2],edgeLength))
           l++
-          if(L==l) {
-            break
-          }
         }
+      }
+      if(L==l) {
+        break
       }
     }
   }else {
@@ -1562,7 +1941,7 @@ function draw() {
   }
   if(verticies>0) {
     for(var j = 0; j<vertexData.length; j++) {
-      if(((inp.value()>8||inp.value()<8||j<12)&&dimentionCount==3)||((inp.value()>14||inp.value()<14||j>720)&&dimentionCount==4)||dimentionCount>4||dimentionCount==2) {
+      if(((inp.value()>8||inp.value()<8||j<12)&&dimentionCount==3)||((inp.value()>14||inp.value()<14||j<120)&&dimentionCount==4)||dimentionCount>4||dimentionCount==2) {
         renderVertex(vertexDataProjected[j])
       }
     }
@@ -1677,13 +2056,13 @@ function mouseWheel(e) {
   zoom*=pow(1.1,-e.delta/100)
 }
 function areConnected(arr1,arr2,d) {
-  var dist = 0
+  var Dist = 0
   for(var i = 0; i<arr1.length; i++) {
-    dist+=sq(arr1[i]-arr2[i])
+    Dist+=sq(arr1[i]-arr2[i])
   }
-  if(sq(dist-d*d)<0.01) {
+  if(sq(Dist-d*d)<0.000001) {
     return 2
-  }if(sq(dist-intersectionD*intersectionD)<0.01||sq(dist-intersectionD2*intersectionD2)<0.01) {
+  }if(sq(Dist-intersectionD*intersectionD)<0.000001||sq(Dist-intersectionD2*intersectionD2)<0.000001) {
     return 1
   }
   return false
