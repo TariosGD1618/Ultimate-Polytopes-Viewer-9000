@@ -13,12 +13,6 @@ simpleM=-1
 faces=-1
 var faceData=[[]]
 var edgesFile=[[0,1],[0,2],[0,3],[0,4],[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]
-var xy = 0
-var yz = 0
-var xz = 0
-var wx = 0
-var wy = 0
-var wz = 0
 var col = 0
 var col2 = 0
 circumR=1
@@ -32,6 +26,7 @@ var s = 1
 var L2=L
 var edges = 1
 var verticies = 1
+var rotArr=[[0],[0,0],[0,0,0]]
 function doWeird(A,_b) {
   var A2 = []
   for(var _X = 0; _X<A.length; _X++) {
@@ -63,7 +58,15 @@ function deDup(arr) {
   return arr2
 }
 function windowResized() {//do stuff when window resized
+  lspeed.position(0,windowHeight/2+20)
+  vspeed.position(0,windowHeight/2+40)
+  fspeed.position(0,windowHeight/2+60)
   resizeCanvas(windowWidth, windowHeight)
+  ldiv.position(0,height-120)
+  vdiv.position(0,height-100)
+  fdiv.position(0,height-80)
+  inpy.position(width-96,height-23)
+  inpy2.position(width-48,height-23)
   centerv.position(width/2-c,0)
   centerc.position(width/2,0)
   centerf.position(width/2-c,20)
@@ -78,6 +81,8 @@ function windowResized() {//do stuff when window resized
   opt.position(0,height/2-10)
 }
 function changeDimension() {
+  inpy.hide()
+  inpy2.hide()
   inp3.hide()
   inp4.hide()
   inp5.hide()
@@ -121,6 +126,8 @@ function changeDimension() {
     inp3.show()
     inp2.style('width','50px')
     inp.position(50,0)
+    inpy.show()
+    inpy2.show()
   }else if(inp2.value()==2) {
     inp.hide()
     inp4.show()
@@ -131,11 +138,20 @@ function changeDimension() {
     inp.html('')
     inp.hide()
     inp2.style('width','100px')
+    inpy.show()
+    inpy2.show()
   }
   fct = 2
   changePolytope()
 }
 function resetCamera() {
+  rotArr=[]
+  for(var i = 1; i<dimentionCount; i++) {
+    rotArr[i-1]=[]
+    for(var j = 0; j<i; j++) {
+      rotArr[i-1][j]=0
+    }
+  }
   if(inp2.value()==-1) {}else {
     faceData=[[]]
   }
@@ -150,9 +166,6 @@ function resetCamera() {
         circumR = 1
         fct = 2
         L = 10
-        wx = 0
-        wy = 0
-        wz = 0
         s=1
         L2=L
         faceData=[[0,1,2],[0,2,3],[0,3,1],[0,3,4],[1,2,3],[1,3,4],[2,3,4],[4,1,2],[0,1,4],[0,2,4]]
@@ -163,9 +176,6 @@ function resetCamera() {
         circumR = 1
         fct = 2
         L=32
-        wx = 0
-        wy = 0
-        wz = 0
         s=1
         L2=L
         faceData=[[8,10,14,12],[8,9,13,12],[12,13,15,14],[8,9,11,10],[10,11,15,14],[9,11,15,13],[0,4,12,8],[4,6,14,12],[0,2,10,8],[0,2,6,4],[2,6,14,10],[4,5,13,12],[0,1,9,8],[0,1,5,4],[1,5,13,9],[4,5,7,6],[6,7,15,14],[5,7,15,13],[0,1,3,2],[2,3,11,10],[1,3,11,9],[2,3,7,6],[1,3,7,5],[3,7,15,11]]
@@ -177,9 +187,9 @@ function resetCamera() {
         fct = 0.75
         zoom = 1/6
         L=24
-        wx = PI/4
-        wy = PI/5
-        wz = PI/6
+        rotArr[2][0] = PI/4
+        rotArr[2][1] = PI/5
+        rotArr[2][2] = PI/6
         s=1
         L2=L
         faceData=[[7,5,3],[1,5,3],[1,7,3],[1,7,5],[0,5,3],[0,7,3],[0,7,5],[6,5,3],[6,1,3],[6,1,5],[0,6,3],[0,6,5],[4,7,3],[0,4,3],[0,4,7],[4,1,3],[4,1,7],[6,4,3],[0,6,4],[6,4,1],[2,7,5],[2,1,5],[2,1,7],[0,2,5],[0,2,7],[6,2,5],[0,6,2],[6,2,1],[6,4,2],[4,2,1],[0,4,2],[4,2,7]]
@@ -191,9 +201,7 @@ function resetCamera() {
         fct = 1.1
         zoom = 1/3
         L=96
-        wx = atan(1)
-        wy = 0
-        wz = 0
+        rotArr[2][0] = atan(1)
         s=1
         L2=L
         faceData = frag(icof,3)
@@ -205,9 +213,6 @@ function resetCamera() {
         fct = 1.05
         zoom = 1/4
         L=1200
-        wx = 0
-        wy = 0
-        wz = 0
         s=1
         L2=L
         faceData = frag(hecaF,5)
@@ -223,9 +228,9 @@ function resetCamera() {
         zoom = 1/20
         L=720
         s=0.25
-        wx = atan(1/sqrt(5))
-        wy = atan(1/sqrt(6))
-        wz = atan(1/sqrt(7))
+        rotArr[2][0] = atan(1/sqrt(5))
+        rotArr[2][1] = atan(1/sqrt(6))
+        rotArr[2][2] = atan(1/sqrt(7))
         L2=L
         faceData=frag(exf,3)
       break
@@ -234,41 +239,32 @@ function resetCamera() {
         edgeLength=1
         intersectionD=phi
         circumR=phi
-        fct = 0.95
+        fct = 1.1
         zoom = 1/8
         L=1920
         s=0.25
         L2=720
-        wx = 0
-        wy = 0
-        wz = 0
         faceData=frag(exf,3)
       break
       case 7:
       vertexData = frag(ex,4)
       edgeLength=phi
       circumR=phi
-      fct = 0.95
+      fct = 1.1
       zoom = 1/8
       L=1200
       s=0.25
       L2=L
-      wx = 0
-      wy = 0
-      wz = 0
       break
       case 8:
       vertexData = frag(ex,4)
       edgeLength=1
       intersectionD=phi2
       circumR=phi
-      fct = 0.95
+      fct = 1.1
       zoom = 1/8
       L=1440
       s=0.25
-      wx = 0
-      wy = 0
-      wz = 0
       L2=720
       break
       case 9:
@@ -281,9 +277,9 @@ function resetCamera() {
       zoom = 1/20
       L=1440
       s=0.25
-      wx = atan(1/sqrt(5))
-      wy = atan(1/sqrt(6))
-      wz = atan(1/sqrt(7))
+      rotArr[2][0] = atan(1/sqrt(5))
+      rotArr[2][1] = atan(1/sqrt(6))
+      rotArr[2][2] = atan(1/sqrt(7))
       L2=720
       break
       case 10:
@@ -295,9 +291,9 @@ function resetCamera() {
       zoom = 1/20
       L=720
       s=0.25
-      wx = atan(1/sqrt(5))
-      wy = atan(1/sqrt(6))
-      wz = atan(1/sqrt(7))
+      rotArr[2][0] = atan(1/sqrt(5))
+      rotArr[2][1] = atan(1/sqrt(6))
+      rotArr[2][2] = atan(1/sqrt(7))
       L2=L
       break
       case 11:
@@ -310,9 +306,9 @@ function resetCamera() {
       zoom = 1/20
       L=1920+720
       s=0.25
-      wx = atan(1/sqrt(5))
-      wy = atan(1/sqrt(6))
-      wz = atan(1/sqrt(7))
+      rotArr[2][0] = atan(1/sqrt(5))
+      rotArr[2][1] = atan(1/sqrt(6))
+      rotArr[2][2] = atan(1/sqrt(7))
       L2=720
       break
       case 12:
@@ -324,9 +320,9 @@ function resetCamera() {
       zoom = 1/20
       L=1920
       s=0.25
-      wx = atan(1/sqrt(5))
-      wy = atan(1/sqrt(6))
-      wz = atan(1/sqrt(7))
+      rotArr[2][0] = atan(1/sqrt(5))
+      rotArr[2][1] = atan(1/sqrt(6))
+      rotArr[2][2] = atan(1/sqrt(7))
       L2=1200
       break
       case 13:
@@ -337,24 +333,20 @@ function resetCamera() {
       zoom = 1/20
       L=720
       s=0.25
-      wx = atan(1/sqrt(5))
-      wy = atan(1/sqrt(6))
-      wz = atan(1/sqrt(7))
+      rotArr[2][0] = atan(1/sqrt(5))
+      rotArr[2][1] = atan(1/sqrt(6))
+      rotArr[2][2] = atan(1/sqrt(7))
       L2=L
       break
       case 14:
         vertexData = frag(gax,4)
         edgeLength=(sqrt(5)+3)*phi2*phi
-        intersectionD=(sqrt(5)+3)*phi2
-        intersectionD2=2.8284271247461903/2*(sqrt(5)+3)*phi2
+        intersectionD=2.8284271247461903/2*(sqrt(5)+3)*phi2
         circumR=(sqrt(5)+3)*phi2
-        fct = 0.95
+        fct = 1.1
         zoom = 1/20
         L=1440
         s=1
-        wx = atan(1/sqrt(5))
-        wy = atan(1/sqrt(6))
-        wz = atan(1/sqrt(7))
         L2=720
         faceData = frag(gaxf,3)
       break
@@ -365,9 +357,6 @@ function resetCamera() {
         fct = 1.5
         zoom = 1/4
         L=1200
-        wx = 0
-        wy = 0
-        wz = 0
         s=0.1
         L2=L
         faceData=frag(gogishif,5)
@@ -399,8 +388,8 @@ function resetCamera() {
         circumR = 1
         L=12
         s=1
-        xz = PI/5
-        yz = PI/4
+        rotArr[1][0] = PI/4
+        rotArr[1][1] = PI/5
         L2=L
         faceData=[[0,2,4],[0,3,4],[0,2,5],[0,3,5],[1,2,4],[1,3,4],[1,2,5],[1,3,5]]
       break
@@ -410,7 +399,7 @@ function resetCamera() {
         circumR=sqrt(3)
         L=30
         s=1
-        yz=atan(phi_1)
+        rotArr[1][1]=atan(phi_1)
         L2=L
         faceData=[[1,16,0,12,13],[12,0,8,10,4],[15,3,9,11,7],[19,6,14,15,7],[14,2,8,10,6],[13,1,9,11,5],[18,4,10,6,19],[16,1,9,3,17],[16,0,8,2,17],[18,5,11,7,19],[18,4,12,13,5],[17,2,14,15,3]]
       break
@@ -420,7 +409,7 @@ function resetCamera() {
         circumR=sqrt(phi+2)
         L=30
         s=1
-        xz = atan(phi_2)
+        rotArr[1][0] = atan(phi_2)
         L2=L
         faceData=[[0,2,8],[1,3,11],[0,2,10],[1,3,9],[2,5,8],[1,6,11],[1,4,6],[2,5,7],[2,7,10],[1,4,9],[0,6,10],[3,5,9],[0,4,6],[3,5,7],[0,4,8],[3,7,11],[6,10,11],[5,8,9],[4,8,9],[7,10,11]]
       break
@@ -431,8 +420,8 @@ function resetCamera() {
         L=30
         s=1
         L2=L
-        xz = 0
-        yz=atan(phi_1)
+        rotArr[1][0] = 0
+        rotArr[1][1]=atan(phi_1)
         faceData=[[4,2,6,8,10],[5,1,7,9,11],[11,2,6,7,0],[8,3,4,5,1],[5,0,7,8,10],[4,3,6,9,11],[9,2,4,5,0],[10,3,6,7,1],[0,1,8,6,9],[2,3,10,5,11],[0,1,10,4,11],[2,3,8,7,9]]
       break
       case 6:
@@ -443,9 +432,9 @@ function resetCamera() {
         L=60
         s=1
         L2=30
-        xz = 0
+        rotArr[1][0] = 0
         faceData=[[4,8,2,10,6],[5,9,1,11,7],[11,7,2,0,6],[8,5,3,1,4],[5,8,0,10,7],[4,9,3,11,6],[9,5,2,0,4],[10,7,3,1,6],[0,6,1,9,8],[2,5,3,11,10],[0,4,1,11,10],[2,7,3,9,8]]
-        yz=atan(phi_1)
+        rotArr[1][1]=atan(phi_1)
       break
       case 7:
         vertexData = dodecahedron
@@ -453,7 +442,7 @@ function resetCamera() {
         edgeLength=sqrt(5)+1
         L=30
         s=1
-        yz=atan(phi_1)
+        rotArr[1][1]=atan(phi_1)
         L2=30
         faceData=[[2,13,6,16,18],[1,14,5,17,19],[0,15,4,17,19],[3,12,7,16,18],[19,1,10,11,0],[16,7,8,9,6],[4,9,6,13,15],[1,10,3,12,14],[17,5,8,9,4],[18,3,10,11,2],[0,11,2,13,15],[5,8,7,12,14]]
       break
@@ -464,7 +453,7 @@ function resetCamera() {
         intersectionD = 2.8284271247461903
         L=240
         s=1
-        xz = atan(phi_2)
+        rotArr[1][0] = atan(phi_2)
         L2=30
         faceData=[[4,5,10],[6,7,9],[0,1,7],[2,3,4],[0,9,11],[3,8,10],[2,6,9],[1,5,10],[3,6,8],[0,5,11],[2,4,11],[1,7,8],[6,7,8],[4,5,11],[2,3,6],[0,1,5],[2,9,11],[1,8,10],[3,4,10],[0,7,9]]
       break
@@ -474,6 +463,7 @@ function resetCamera() {
     s=1
     circumR=1
   }else if(inp2.value()==2) {
+    rotArr=[0]
     A = inp4.value()*1
     B = inp5.value()*1%A
     if(B>A/2) {
@@ -562,6 +552,11 @@ function resetCamera() {
       circumR=1
       L=2*sq(dimentionCount)-2*dimentionCount
       L2=L
+      for(var i = 1; i<dimentionCount; i++) {
+        for(var j = 0; j<i; j++) {
+          rotArr[i-1][j]=PI/(4+j)
+        }
+      }
       break
     }
   }
@@ -578,43 +573,42 @@ function centercell() {
 function centervertex() {
   resetCamera()
   if(dimentionCount==4) {
+    mrSlider.value(1)
     switch(polytopeID) {
       case 0:
-      fct = 2
-      wx = PI
-      s=1
+        mrSlider.value(2)
+        rotArr[2][0] = PI
+        s=1
       break
       case 1:
-      fct = 4
-      zoom = 2
-      wx = PI/4
-      wy = PI/5
-      wz = PI/6
+      zoom = 0.5
+      rotArr[2][0] = PI/4
+      rotArr[2][1] = atan(sqrt(0.5))
+      rotArr[2][2] = PI/6
       s=1
       break
       case 2:
-      fct = 2
-      L=24
-      wx = 0
-      wy = 0
-      wz = 0
-      s=1
+        mrSlider.value(2)
+        L=24
+        zoom=1
+        rotArr[2][0] = 0
+        rotArr[2][1] = 0
+        rotArr[2][2] = 0
+        s=1
       break
       case 3:
-      fct = 2
       L=96
-      wx = 0
-      wy = 0
-      wz = 0
+      rotArr[2][0] = 0
+      rotArr[2][1] = 0
+      rotArr[2][2] = 0
       s=1
       break
       case 4:
-      fct = 1.1
       zoom = 1/4
       L=1200
-      wx = atan(1/sqrt(5))
-      wy = atan(1/sqrt(6))
-      wz = atan(1/sqrt(7))
+      rotArr[2][0] = atan(-1.131224095251652/phi2)
+      rotArr[2][1] = atan(-0.6570593885126689/2.8519764935790763)
+      rotArr[2][2] = atan(-2.2677537283706792/2.9266870280165325)
       s=1
       break
       case 5:
@@ -628,37 +622,38 @@ function centervertex() {
       case 10:
       case 11:
       case 7:
-      fct = 0.95
-      zoom = 1/8
-      L=720
-      s=0.25
-      wx = 0
-      wy = 0
-      wz = 0
+        mrSlider.value(1.1)
+        zoom = 1/8
+        s=0.25
+        rotArr[2][0] = 0
+        rotArr[2][1] = 0
+        rotArr[2][2] = 0
+      break
     }
   }else if(polytopeID==3) {
     switch(polytopeID) {
       case 0:
-      xz=PI
+      rotArr[1][0]=PI
       case 1:
-      yz = PI/4
-      xz = PI/5
+      rotArr[1][1] = PI/4
+      rotArr[1][0] = atan(sqrt(0.5))
       break
       case 2:
-      yz = 0
-      xz = 0
+      rotArr[1][1] = 0
+      rotArr[1][0] = 0
       break
       case 3:
       case 7:
-      xz = atan(phi_2)
-      yz = 0
+      rotArr[1][0] = atan(phi_2)
+      rotArr[1][1] = 0
       break
       case 4:
       case 5:
       case 6:
       case 7:
-      xz = 0
-      yz=atan(phi_1)
+      rotArr[2][0] = atan(1/sqrt(5))/2
+      rotArr[2][1] = atan(1/sqrt(6))/2
+      rotArr[2][2] = atan(1/sqrt(7))/2
       break
     }
   }
@@ -671,32 +666,27 @@ function centerE() {
   if(dimentionCount==4) {
     switch(polytopeID) {
       case 0:
-      wx = 0
-      wy =0
-      wz = PI/sqrt(2)
+      rotArr[2][2] = PI/sqrt(2)
       break
       case 1:
-      wx = PI/4
-      wy = PI/5
-      wz = 0
+      rotArr[2][2] = 0
       break
       case 2:
-      wx = PI/4
-      wy = 0
-      wz = 0
+      rotArr[2][1] = 0
+      rotArr[2][2] = 0
       fct=1.25
       zoom=1/2
       break
       case 3:
-      wx = atan(1)
-      wy = atan(1/sqrt(2))
-      wz = 0
+      rotArr[2][0] = atan(1)
+      rotArr[2][1] = atan(1/sqrt(2))
+      rotArr[2][2] = 0
       break
       case 4:
       case 15:
-      wx = atan(1/sqrt(7))
-      wy = 0
-      wz = 0
+      rotArr[2][0] = atan(1/sqrt(7))
+      rotArr[2][1] = 0
+      rotArr[2][2] = 0
       fct=1
       zoom=1/25
       break
@@ -711,9 +701,9 @@ function centerE() {
       case 10:
       case 11:
       case 7:
-      wx = atan(phi)
-      wy = 0
-      wz = 0
+      rotArr[2][0] = atan(phi)
+      rotArr[2][1] = 0
+      rotArr[2][2] = 0
       fct=1
       zoom=0.1
       break
@@ -721,62 +711,57 @@ function centerE() {
   }else if(polytopeID==3){
     switch(polytopeID) {
       case 0:
-      yz=PI/sqrt(2)
+      rotArr[1][1]=PI/sqrt(2)
       break
       case 1:
-      yz = PI/4
+      rotArr[1][1] = PI/4
       break
       case 2:
-      yz = PI/4
-      xz = 0
+      rotArr[1][1] = PI/4
+      rotArr[1][0] = 0
       break
       case 3:
       case 7:
-      xz=0
-      yz=0
+      rotArr[1][0]=0
+      rotArr[1][1]=0
       break
       case 4:
       case 5:
       case 6:
       case 8:
-      xz=0
-      yz=0
+      rotArr[1][0]=0
+      rotArr[1][1]=0
       break
     }
   }
   if(orthoOn>0) {
     zoom = 1
   }
+  mrSlider.value(fct)
 }
 function centerF() {
   resetCamera()
   if(dimentionCount==4) {
     switch(polytopeID) {
       case 0:
-      wx = 0
-      wy =0
-      wz =PI*sqrt(3)
+      rotArr[2][2] =PI*sqrt(3)
       break
       case 1:
-      wx = PI/4
-      wy = 0
-      wz = 0
+      rotArr[2][0] = PI/4
       break
       case 2:
-      wx = PI/4
-      wy = PI/5
-      wz = 0
+      rotArr[2][2] = 0
       break
       case 3:
-      wx = atan(1)
-      wy = atan(1.5)
-      wz = 0
+      rotArr[2][0] = atan(1)
+      rotArr[2][1] = atan(1.5)
+      rotArr[2][2] = 0
       break
       case 4:
       case 15:
-      wx = atan(phi)
-      wy = 0
-      wz = 0
+      rotArr[2][0] = atan(phi)
+      rotArr[2][1] = 0
+      rotArr[2][2] = 0
       fct=1
       zoom=1/15
       break
@@ -791,9 +776,9 @@ function centerF() {
       case 10:
       case 11:
       case 7:
-      wx = atan(1/sqrt(7))
-      wy = 0
-      wz = 0
+      rotArr[2][0] = atan(1/sqrt(7))
+      rotArr[2][1] = 0
+      rotArr[2][2] = 0
       zoom=1/30
       break
     }
@@ -801,6 +786,7 @@ function centerF() {
   if(orthoOn>0) {
     zoom = 1
   }
+  mrSlider.value(fct)
 }
 function interpretOFF(off) {
   dimentionCount=0
@@ -903,12 +889,10 @@ function dual() {
         inp.value(1)
       break
     }
-    changePolytope()
   }else if(inp2.value()==3) {
     switch(polytopeID) {
       case 1:
         inp.value(2)
-        changePolytope()
       break
       case 2:
         inp.value(1)
@@ -932,7 +916,6 @@ function dual() {
         inp.value(7)
       break
     }
-    changePolytope()
   }else {
     switch(polytopeID) {
       case 1:
@@ -971,9 +954,9 @@ function dual() {
       case 15:
         inp.value(14)
       break
-      changePolytope()
     }
   }
+  changePolytope()
 }
 function verf() {
   if(inp2.value()==5) {
@@ -983,6 +966,9 @@ function verf() {
       case 1:
         inp.value(0)
       break
+    }
+    if(inp3.value()==4) {
+      inp2.value(4)
     }
     changeDimension()
   }else if(inp2.value()==3) {
@@ -1165,45 +1151,28 @@ function STC() {
     case 3:
       inp.value(2)
     break
-    case 4:
-    case 9:
-      inp.value(3)
-    break
-    case 6:
-      inp.value(4)
-    break
-    case 7:
-    case 11:
-      inp.value(5)
-    break
-    case 8:
-    case 12:
-      inp.value(6)
-    break
-    case 10:
-    case 15:
-      inp.value(7)
-    break
-    case 13:
-      inp.value(8)
-    break
   }
   changePolytope()
 }
 function STFCT() {
   inp3.value(inp3.value()-1)
   switch(inp.value()*1) {
-    case 0:
     case 2:
       inp.value(0)
     break
-    case 1:
-      inp.value(1)
-    break
+  }
+  if(inp3.value()==4) {
+    inp2.value(4)
   }
   changeDimension()
 }
 function setup() {
+  lspeed=createSlider(-5,log(60)/log(10),0,0)
+  lspeed.position(0,windowHeight/2+20)
+  vspeed=createSlider(-5,log(60)/log(10),0,0)
+  vspeed.position(0,windowHeight/2+40)
+  fspeed=createSlider(-5,log(60)/log(10),-log(2)/log(10),0)
+  fspeed.position(0,windowHeight/2+60)
   inp3=createInput('5','number')
   inp3.style('width','40px')
   inp3.position(137,-2)
@@ -1219,6 +1188,12 @@ function setup() {
   joe.style('color', '#ffffff')
   joe.hide()
   createCanvas(windowWidth, windowHeight, WEBGL)
+  inpy=createInput('5','number')
+  inpy.style('width','40px')
+  inpy2=createInput('4','number')
+  inpy2.style('width','40px')
+  inpy.position(width-96,height-23)
+  inpy2.position(width-48,height-23)
   colorMode(HSB)
   b = ''
   centerv=createButton('center vertex')
@@ -1326,6 +1301,15 @@ function setup() {
   opt.changed(simpgraph)
   inp4.changed(changePolytope)
   inp5.changed(changePolytope)
+  ldiv=createDiv('l')
+  ldiv.style('color','#ff0000')
+  vdiv=createDiv('v')
+  vdiv.style('color','#00ff00')
+  fdiv=createDiv('f')
+  fdiv.style('color','#0000ff')
+  ldiv.position(0,height-120)
+  vdiv.position(0,height-100)
+  fdiv.position(0,height-80)
 }
 function simpgraph() {
   simpleM*=-1
@@ -1347,17 +1331,18 @@ function vS() {
   vRan*=-1
 }
 function changePolytope() {
+  frameArr=[]
   polytopeID=inp.value()*1
   intersectionD = NaN
   intersectionD2 = NaN
   resetCamera()
   if(dimentionCount==4&&inp2.value()==4) {
     div2.html(L2+' edges')
+    div3.html(vertexData.length+' verticies')
     switch(polytopeID) {
       case 0:
         div.html('5 tet {3,3} cells')
         div1.html('10 triangle {3} faces')
-        div3.html('5 verticies')
         div4.html('Schläfli symbol {3,3,3}')
         div5.html('Self-Dual')
         div6.html('names: pentachoron, 5-cell, pentatope, pentahedroid, hyperpyramid, tetrahedral pyramid')
@@ -1366,7 +1351,6 @@ function changePolytope() {
       case 1:
         div.html('8 cube {4,3} cells')
         div1.html('24 square {4} faces')
-        div3.html('16 verticies')
         div4.html('Schläfli symbol {4,3,3}')
         div5.html('Dual to hex {3,3,4}')
         div6.html('names: tesseract, 8-cell, octachoron, octahedroid, cubic prism, tetracube, 4-cube')
@@ -1375,7 +1359,6 @@ function changePolytope() {
       case 2:
         div.html('16 tet {3,3} cells')
         div1.html('32 triangle {3} faces')
-        div3.html('8 verticies')
         div4.html('Schläfli symbol {3,3,4}')
         div5.html('Dual to tes {4,3,3}')
         div6.html('names: hexadecachoron, 16-cell, hexdecahedroid, 4-orthoplex')
@@ -1384,7 +1367,6 @@ function changePolytope() {
       case 3:
         div.html('24 oct {3,4} cells')
         div1.html('96 triangle {3} faces')
-        div3.html('24 verticies')
         div4.html('Schläfli symbol {3,4,3}')
         div5.html('Self-Dual')
         div6.html('names: icosiotetrachoron, 24-cell, octaplex, icosatetrahedroid, octacube, hyper-diamond, polyoctahedron')
@@ -1393,7 +1375,6 @@ function changePolytope() {
       case 4:
         div.html('120 doe {5,3} cells')
         div1.html('720 pentagon {5} faces')
-        div3.html('600 verticies')
         div4.html('Schläfli symbol {5,3,3}')
         div5.html('Dual to ex {3,3,5}')
         div6.html('names: dodecaplex, 120-cell, hyperdodecahedron, polydodecahedron, hecatonicosachoron, dodecacontachoron, hecatonicosahedroid')
@@ -1402,25 +1383,22 @@ function changePolytope() {
       case 5:
         div.html('600 tet {3,3} cells')
         div1.html('1200 triangle {3} faces')
-        div3.html('120 verticies')
         div4.html('Schläfli symbol {3,3,5}')
         div5.html('Dual to hi {5,3,3}')
         div6.html('names: tetraplex, 600-cell, hexacosichoron, hexacosihedroid, polytetrahedron')
         div8.html('vertex figure: ike {3,5}')
       break
       case 6:
-        div.html('600 ike {5,3} cells')
+        div.html('120 ike {5,3} cells')
         div1.html('1200 triangle {3} faces')
-        div3.html('120 verticies')
         div4.html('Schläfli symbol {3,5,5/2}')
         div5.html('Dual to sishi {5/2,5,3}')
-        div6.html('names: icosahedral 600-cell, polyicosahedron, faceted 600-cell, icosaplex, faceted hexacosichoron')
+        div6.html('names: icosahedral 120-cell, polyicosahedron, faceted 600-cell, icosaplex, faceted hexacosichoron')
         div8.html('vertex figure: gad {5,5/2}')
       break
       case 7:
         div.html('120 sissid {5/2,5} cells')
         div1.html('720 pentagram {5/2} faces')
-        div3.html('120 verticies')
         div4.html('Schläfli symbol {5/2,5,3}')
         div5.html('Dual to fix {3,5,5/2}')
         div6.html('names: small stellated 120-cell, stellated polydodecahedron, small stellated hecatonicosachoron')
@@ -1429,7 +1407,6 @@ function changePolytope() {
       case 8:
         div.html('120 gad {5,5/2} cells')
         div1.html('720 pentagon {5} faces')
-        div3.html('120 verticies')
         div4.html('Schläfli symbol {5,5/2,5}')
         div5.html('Self-Dual')
         div6.html('names: great 120-cell, great polydodecahedron, great hecatonicosachoron')
@@ -1438,7 +1415,6 @@ function changePolytope() {
       case 9:
         div.html('120 doe {5,3} cells')
         div1.html('720 pentagon {5} faces')
-        div3.html('120 verticies')
         div4.html('Schläfli symbol {5,3,5/2}')
         div5.html('Dual to gishi {5/2,3,5}')
         div6.html('names: grand 120-cell, grand hecatonicosachoron, grand polydodecahedron')
@@ -1447,7 +1423,6 @@ function changePolytope() {
       case 10:
         div.html('120 gissid {5/2,3} cells')
         div1.html('720 pentagram {5/2} faces')
-        div3.html('120 verticies')
         div4.html('Schläfli symbol {5/2,3,5}')
         div5.html('Dual to gahi {5,3,5/2}')
         div6.html('names: great stellated 120-cell, great stellated polydodecahedron, Great stellated hecatonicosachoron')
@@ -1456,7 +1431,6 @@ function changePolytope() {
       case 11:
         div.html('120 sissid {5/2,5} cells')
         div1.html('720 pentagram {5/2} faces')
-        div3.html('120 verticies')
         div4.html('Schläfli symbol {5/2,5,5/2}')
         div5.html('Self-Dual')
         div6.html('names: grand stellated 120-cell, grand stellated polydodecahedron, grand stellated hecatonicosachoron')
@@ -1465,7 +1439,6 @@ function changePolytope() {
       case 12:
         div.html('120 gad {5,5/2} cells')
         div1.html('720 pentagon {5} faces')
-        div3.html('120 verticies')
         div4.html('Schläfli symbol {5,5/2,3}')
         div5.html('Dual to gofix {3,5/2,5}')
         div6.html('names: great grand 120-cell, great grand polydodecahedron, great grand hecatonicosachoron')
@@ -1474,7 +1447,6 @@ function changePolytope() {
       case 13:
         div.html('120 gike {3,5/2} cells')
         div1.html('1200 triangle {3} faces')
-        div3.html('120 verticies')
         div4.html('Schläfli symbol {3,5/2,5}')
         div5.html('Dual to gaghi {5,5/2,2}')
         div6.html('names: great icosahedral 120-cell, great polyicosahedron, great faceted 600-cell, great icosahedral 120-cell, great faceted hexacosichoron')
@@ -1483,7 +1455,6 @@ function changePolytope() {
       case 14:
         div.html('600 tet {3,3} cells')
         div1.html('1200 triangle {3} faces')
-        div3.html('120 verticies')
         div4.html('Schläfli symbol {3,3,5/2}')
         div5.html('Dual to gogishi {5/2,3,3}')
         div6.html('names: grand 600-cell, grand polytetrahedron, grand hexacosichoron')
@@ -1492,7 +1463,6 @@ function changePolytope() {
       case 15:
         div.html('120 gissid {5/2,3} cells')
         div1.html('720 pentagram {5/2} faces')
-        div3.html('600 verticies')
         div4.html('Schläfli symbol {5/2,3,3}')
         div5.html('Dual to gax {3,3,5/2}')
         div6.html('names: great grand stellated 120-cell, great grand stellated polydodecahedron, great grand stellated hecatonicosachoron')
@@ -1501,10 +1471,10 @@ function changePolytope() {
     }
   }else if(dimentionCount==3){
     div1.html(L2+' edges')
+    div2.html(vertexData.length+' verticies')
     switch(polytopeID) {
       case 0:
         div.html('4 triangle {3} faces')
-        div2.html('4 verticies')
         div3.html('Schläfli symbol {3,3}')
         div4.html('Self-Dual')
         div5.html('names: tetrahedron, triangular pyramid, 3-simplex')
@@ -1513,7 +1483,6 @@ function changePolytope() {
       break
       case 1:
         div.html('6 square {4} faces')
-        div2.html('8 verticies')
         div3.html('Schläfli symbol {4,3}')
         div4.html('Dual to oct {3,4}')
         div5.html('names: cube, 3-cube, hexahedron, square prism')
@@ -1522,7 +1491,6 @@ function changePolytope() {
       break
       case 2:
         div.html('8 triangle {3} faces')
-        div2.html('6 verticies')
         div3.html('Schläfli symbol {3,4}')
         div4.html('Dual to cube {4,3}')
         div5.html('names: octahedron, square bipyramid, triangular antiprism, 3-orthaplex')
@@ -1531,7 +1499,6 @@ function changePolytope() {
       break
       case 3:
         div.html('12 pentagon {5} faces')
-        div2.html('20 verticies')
         div3.html('Schläfli symbol {5,3}')
         div4.html('Dual to ike {3,5}')
         div5.html('dodecahedron')
@@ -1540,7 +1507,6 @@ function changePolytope() {
       break
       case 4:
         div.html('20 triangle {3} faces')
-        div2.html('12 verticies')
         div3.html('Schläfli symbol {3,5}')
         div4.html('Dual to doe {5,3}')
         div5.html('names: icosahedron, gyroelongated pentagonal bipyramid, biaugmented pentagonal antiprism')
@@ -1549,7 +1515,6 @@ function changePolytope() {
       break
       case 5:
         div.html('12 pentagram {5/2} faces')
-        div2.html('12 verticies')
         div3.html('Schläfli symbol {5/2,5}')
         div4.html('Dual to gad {5,5/2}')
         div5.html('small stellated dodecahedron')
@@ -1558,7 +1523,6 @@ function changePolytope() {
       break
       case 6:
         div.html('12 pentagon {5} faces')
-        div2.html('12 verticies')
         div3.html('Schläfli symbol {5,5/2}')
         div4.html('Dual to sissid {5/2,5}')
         div5.html('great dodecahedron')
@@ -1567,7 +1531,6 @@ function changePolytope() {
       break
       case 7:
         div.html('12 pentagram {5/2} faces')
-        div2.html('20 verticies')
         div3.html('Schläfli symbol {5/2,3}')
         div4.html('Dual to gike {3,5/2}')
         div5.html('great stellated dodecahedron')
@@ -1576,7 +1539,6 @@ function changePolytope() {
       break
       case 8:
         div.html('20 triangle {3} faces')
-        div2.html('12 verticies')
         div3.html('Schläfli symbol {3,5/2}')
         div4.html('Dual to gissid {5/2,3}')
         div5.html('great icosahedron')
@@ -1799,13 +1761,29 @@ function keyPressed() {
 }
 var X = 0
 var Y = 0
+var frameArr=[]
 function draw() {
+  directionalLight(0,0,100,0,1,-1)
+  directionalLight(0,0,100,0,1,-1)
+  specularMaterial(0,0,100)
+  shininess(20)
+  if(frameArr.length>=60) {
+    frameArr.shift()
+  }
+  frameArr[frameArr.length]=frameRate()
+  var frmrt = 0
+  for(var i = 0; i<frameArr.length; i++) {
+    frmrt+=frameArr[i]/frameArr.length
+  }
+  var dArr=rotArr
   if(mouseIsPressed) {
     X=(pmouseX-mouseX)/100
     Y=(pmouseY-mouseY)/100
   }
-  yz+=Y
-  xz+=X
+  if(dimentionCount>2) {
+    rotArr[1][1]+=Y
+    rotArr[1][0]+=X
+  } 
   Y/=1.05
   X/=1.05
   fct = mrSlider.value()
@@ -1816,96 +1794,79 @@ function draw() {
     r+=W.charAt(i)
   }
   joeDiv.position(width-5-r,20)
-  if(frameCount%10==1) {
-    div7.html(frameRate()+'fps')
-  }
+  div7.html(frmrt+'fps')
   var mx = (height/2)/tan(PI/6)
-  col=1-((millis()/1e5*60)%1)
-  col2=(millis()/1e5*60)%1
-  col3=(millis()/2e5*60)%1
+  col=1-((millis()/1e3*(10**lspeed.value()))%1)
+  col2=(millis()/1e3*(10**vspeed.value()))%1
+  col3=(millis()/1e3*(10**fspeed.value()))%1
+  ldiv.html(10**lspeed.value()+' cycles of edge color/second')
+  fdiv.html(10**fspeed.value()+' cycles of face color/second')
+  vdiv.html(10**vspeed.value()+' cycles of vertex color/second')
   if(keyIsPressed) {
     if(key=='Q'||key=='%') {
-      xy+=1/frameRate()*PI
+      rotArr[0][0]+=1/frameRate()*PI
     }if(key=='E'||key=='^') {
-      xy-=1/frameRate()*PI
+      rotArr[0][0]-=1/frameRate()*PI
     }if(key=='W'||key=='@') {
-      yz-=1/frameRate()*PI
+      rotArr[1][1]-=1/frameRate()*PI
     }if(key=='S'||key=='!') {
-      yz+=1/frameRate()*PI
+      rotArr[1][1]+=1/frameRate()*PI
     }if(key=='A'||key=='$') {
-      xz-=1/frameRate()*PI
+      rotArr[1][0]-=1/frameRate()*PI
     }if(key=='D'||key=='#') {
-      xz+=1/frameRate()*PI
-    }if(keyCode=='87'||key=='!') {
-      wx-=1/frameRate()*PI
-    }if(key=='s'||key=='S'||key=='@') {
-      wx+=1/frameRate()*PI
-    }if(key=='a'||key=='A'||key=='#') {
-      wy-=1/frameRate()*PI
-    }if(key=='d'||key=='D'||key=='$') {
-      wy+=1/frameRate()*PI
-    }if(key=='e'||key=='E'||key=='%') {
-      wz-=1/frameRate()*PI
-    }if(key=='q'||key=='Q'||key=='^') {
-      wz+=1/frameRate()*PI
-    }if(keyCode==187) {
-      xy+=1/frameRate()*PI
-    }if(keyCode==189) {
-      xy-=1/frameRate()*PI
-    }if(keyCode==38) {
+      rotArr[1][0]+=1/frameRate()*PI
+    }if(keyIsDown(87)||key=='!') {
+      rotArr[2][0]-=1/frameRate()*PI
+    }if(keyIsDown(83)||key=='@') {
+      rotArr[2][0]+=1/frameRate()*PI
+    }if(keyIsDown(65)||key=='#') {
+      rotArr[2][1]-=1/frameRate()*PI
+    }if(keyIsDown(68)||key=='$') {
+      rotArr[2][1]+=1/frameRate()*PI
+    }if(keyIsDown(69)||key=='%') {
+      rotArr[2][2]-=1/frameRate()*PI
+    }if(keyIsDown(81)||key=='^') {
+      rotArr[2][2]+=1/frameRate()*PI
+    }if(keyIsDown(187)) {
+      rotArr[0][0]+=1/frameRate()*PI
+    }if(keyIsDown(189)) {
+      rotArr[0][0]-=1/frameRate()*PI
+    }if(keyIsDown(38)) {
       zoom*=1.1
-    }if(keyCode==40) {
+    }if(keyIsDown(40)) {
       zoom/=1.1
-    }
-  }
-  if(dimentionCount<4) {
-    wx=0
-    wy=0
-    wz=0
-    if(dimentionCount<3) {
-      xz=0
-      yz=0
+    }if(keyIsDown(82)) {
+      var D=inpy.value()*1
+      var D2=inpy2.value()*1
+      if(D>D2&&dimentionCount>=D&&D>4&&D2>0) {
+        rotArr[D-2][D2-1]=1/frameRate()*PI
+      }
+    }if(keyIsDown(71)) {
+      var D=inpy.value()*1
+      var D2=inpy2.value()*1
+      if(D>D2&&dimentionCount>=D&&D>4&&D2>0) {
+        rotArr[D-2][D2-1]-=1/frameRate()*PI
+      }
     }
   }
   background(0)
-  if(wx!==0||wy!==0||wz!==0||xy!==0||yz!==0||xz!==0) {
-    var cwx = cos(wx)
-    var swx = sin(wx)
-    var cwy = cos(wy)
-    var swy = sin(wy)
-    var cwz = cos(wz)
-    var swz = sin(wz)
-    var cxy = cos(xy)
-    var sxy = sin(xy)
-    var cyz = cos(yz)
-    var syz = sin(yz)
-    var cxz = cos(xz)
-    var sxz = sin(xz)
-    for(var h = 0; h<vertexData.length; h++) {
-      var x = vertexData[h][0]
-      var y = vertexData[h][3]
-      vertexData[h][0]=x*cwx-y*swx
-      vertexData[h][3]=y*cwx+x*swx
-      var x = vertexData[h][1]
-      var y = vertexData[h][3]
-      vertexData[h][1]=x*cwy-y*swy
-      vertexData[h][3]=y*cwy+x*swy
-      var x = vertexData[h][2]
-      var y = vertexData[h][3]
-      vertexData[h][2]=x*cwz-y*swz
-      vertexData[h][3]=y*cwz+x*swz
-      var x = vertexData[h][0]
-      var y = vertexData[h][1]
-      vertexData[h][0]=x*cxy-y*sxy
-      vertexData[h][1]=y*cxy+x*sxy
-      var x = vertexData[h][1]
-      var y = vertexData[h][2]
-      vertexData[h][1]=x*cyz-y*syz
-      vertexData[h][2]=y*cyz+x*syz
-      var x = vertexData[h][0]
-      var y = vertexData[h][2]
-      vertexData[h][0]=x*cxz-y*sxz
-      vertexData[h][2]=y*cxz+x*sxz
+  for(var h = 0; h<vertexData.length; h++) {
+    for(var i = rotArr.length-1; i>=0; i--) {
+      for(var j = 0; j<rotArr[i].length; j++) {
+        var s = sin(rotArr[i][j])
+        var c = cos(rotArr[i][j])
+        var x = vertexData[h][j]
+        var y = vertexData[h][i+1]
+        vertexData[h][j]=x*c-y*s
+        vertexData[h][i+1]=y*c+x*s
+      }
+    }
+  }
+  rotArr=[]
+  for(var i = 1; i<dimentionCount; i++) {
+    rotArr[i-1]=[]
+    for(var j = 0; j<i; j++) {
+      rotArr[i-1][j]=0
     }
   }
   var vertexDataProjected = []
@@ -1949,9 +1910,25 @@ function draw() {
   if(faces>0) {
     var frct = zoom*height/tan(PI/6)/4
     for(var i = 0; i<faceData.length; i++) {
+      var V1 = []
+      V1[0]=vertexDataProjected[faceData[i][1]][0]-vertexDataProjected[faceData[i][0]][0]
+      V1[1]=vertexDataProjected[faceData[i][1]][1]-vertexDataProjected[faceData[i][0]][1]
+      V1[2]=vertexDataProjected[faceData[i][1]][2]-vertexDataProjected[faceData[i][0]][2]
+      var V2 = []
+      V2[0]=vertexDataProjected[faceData[i][2]][0]-vertexDataProjected[faceData[i][0]][0]
+      V2[1]=vertexDataProjected[faceData[i][2]][1]-vertexDataProjected[faceData[i][0]][1]
+      V2[2]=vertexDataProjected[faceData[i][2]][2]-vertexDataProjected[faceData[i][0]][2]
+      var Xx=V1[1]*V2[2]-V1[2]*V2[1]
+      var Yy=V1[0]*V2[2]-V1[2]*V2[0]
+      var Zz=V1[0]*V2[1]-V1[1]*V2[0]
       fill(360*col3%360,100,100)
       beginShape(TESS)
       noStroke()
+      if(Yy<Zz) {
+        normal(Xx,Yy,Zz)
+      }else {
+        normal(-Xx,-Yy,-Zz)
+      }
       for(var j = 0; j<faceData[i].length; j++) {
         var J = faceData[i][j]
         vertex(vertexDataProjected[J][0]*frct,vertexDataProjected[J][1]*frct,vertexDataProjected[J][2]*frct)
@@ -1960,17 +1937,14 @@ function draw() {
       endShape()
     }
   }
-  xy = 0
-  yz = 0
-  xz = 0
-  wx = 0
-  wy = 0
-  wz = 0
 }
 function project(aa) {
   var vertexDProjected=[]
   for(var i = 0; i<aa.length; i++) {
     var fact = 1/(fct-aa[i][aa[i].length-2]*f)
+    if(fact>1000000||fact!==fact) {
+      fact=1000000
+    }
     if(orthoOn>0) {
       fact = 1
     }if(dimentionCount<4) {
@@ -1983,6 +1957,7 @@ function project(aa) {
       for(var j = 0; j<aa[i].length-2; j++) {
         vertexDProjected[i][j]=aa[i][j]*fact
       }
+      var bobby = aa[i][aa[i].length-1]*fact
       vertexDProjected[i][vertexDProjected[i].length]=aa[i][aa[i].length-1]*fact
     }
     if(orthoOn>0) {
@@ -2017,7 +1992,7 @@ function renderVertex(arr) {
   col2+=(1/A_)%1
   pop()
 }
-function renderLine(arr1,arr2,Q) {
+function renderLine(a1,a2,Q) {
   fill(0,0,100)
   stroke(0,0,100)
   if(Q==2) {
@@ -2033,22 +2008,46 @@ function renderLine(arr1,arr2,Q) {
   var frct = zoom*height/tan(PI/6)/4
   if(simpleM>0) {
     strokeWeight(1)
-   line(arr1[0]*frct,arr1[1]*frct,arr1[2]*frct,arr2[0]*frct,arr2[1]*frct,arr2[2]*frct)
+    line(a1[0]*frct,a1[1]*frct,a1[2]*frct,a2[0]*frct,a2[1]*frct,a2[2]*frct)
   }else {
     beginShape()
     noStroke()
-    var res=24
-    var ft1 = 1/(arr1[2]*frct-height/2/tan(PI/6))
-    var ft2 = 1/(arr2[2]*frct-height/2/tan(PI/6))
-    var a = atan((arr1[1]*ft1-arr2[1]*ft2)/(arr1[0]*ft1-arr2[0]*ft2))+PI/2
+    var ft1 = 1/(a1[2]*frct-height/2*sqrt(3))
+    var ft2 = 1/(a2[2]*frct-height/2*sqrt(3))
+    var a = atan((a1[1]*ft1-a2[1]*ft2)/(a1[0]*ft1-a2[0]*ft2))+PI/2
+    if(a!==a) {
+      a=0
+    }
     var ci = cos(a)
     var si = sin(a)
     var x = ci/sqrt(sqrt(L))*frct/16
     var y = si/sqrt(sqrt(L))*frct/16
-    vertex(arr1[0]*frct+x*arr1[3],arr1[1]*frct+y*arr1[3],arr1[2]*frct)
-    vertex(arr1[0]*frct-x*arr1[3],arr1[1]*frct-y*arr1[3],arr1[2]*frct)
-    vertex(arr2[0]*frct-x*arr2[3],arr2[1]*frct-y*arr2[3],arr2[2]*frct)
-    vertex(arr2[0]*frct+x*arr2[3],arr2[1]*frct+y*arr2[3],arr2[2]*frct)
+    var f1 = a1[3]
+    var f2 = a2[3]
+    if(f1>1000) {
+      f1=f2
+    }else if(f2>1000) {
+      f2=f1
+    }
+    var V1 = []
+    V1[0]=(a1[0]*frct-x*f1)-(a1[0]*frct+x*f1)
+    V1[1]=(a1[1]*frct-y*f1)-(a1[1]*frct+y*f1)
+    var V2 = []
+    V2[0]=a2[0]*frct-x*f2-(a1[0]*frct+x*f1)
+    V2[1]=a2[1]*frct-y*f2-(a1[1]*frct+y*f1)
+    V2[2]=a2[2]*frct-(a1[2]*frct)
+    var Xx=V1[1]*V2[2]
+    var Yy=V1[0]*V2[2]
+    var Zz=V1[0]*V2[1]-V1[1]*V2[0]
+    if(Yy<Zz) {
+      normal(Xx,Yy,Zz)
+    }else {
+      normal(-Xx,-Yy,-Zz)
+    }
+    vertex(a1[0]*frct+x*f1,a1[1]*frct+y*f1,a1[2]*frct)
+    vertex(a1[0]*frct-x*f1,a1[1]*frct-y*f1,a1[2]*frct)
+    vertex(a2[0]*frct-x*f2,a2[1]*frct-y*f2,a2[2]*frct)
+    vertex(a2[0]*frct+x*f2,a2[1]*frct+y*f2,a2[2]*frct)
     endShape(CLOSE)
   }
 }
