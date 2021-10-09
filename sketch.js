@@ -2224,29 +2224,29 @@ function draw() {
   fdiv.html(10**fspeed.value()+' cycles of face color/second')
   vdiv.html(10**vspeed.value()+' cycles of vertex color/second')
   if(keyIsPressed) {
-    if(key=='Q'||key=='%') {
+    if((key=='Q'||key=='%')&&dimentionCount>2) {
       rotArr[0][0]+=1/frameRate()*PI
-    }if(key=='E'||key=='^') {
+    }if((key=='E'||key=='^')&&dimentionCount>2) {
       rotArr[0][0]-=1/frameRate()*PI
-    }if(key=='W'||key=='@') {
+    }if((key=='W'||key=='@')&&dimentionCount>2) {
       rotArr[1][1]-=1/frameRate()*PI
-    }if(key=='S'||key=='!') {
+    }if((key=='S'||key=='!')&&dimentionCount>2) {
       rotArr[1][1]+=1/frameRate()*PI
-    }if(key=='A'||key=='$') {
+    }if((key=='A'||key=='$')&&dimentionCount>2) {
       rotArr[1][0]-=1/frameRate()*PI
-    }if(key=='D'||key=='#') {
+    }if((key=='D'||key=='#')&&dimentionCount>2) {
       rotArr[1][0]+=1/frameRate()*PI
-    }if(keyIsDown(87)||key=='!') {
+    }if((keyIsDown(87)||key=='!')&&dimentionCount>3) {
       rotArr[2][0]-=1/frameRate()*PI
-    }if(keyIsDown(83)||key=='@') {
+    }if((keyIsDown(83)||key=='@')&&dimentionCount>3) {
       rotArr[2][0]+=1/frameRate()*PI
-    }if(keyIsDown(65)||key=='#') {
+    }if((keyIsDown(65)||key=='#')&&dimentionCount>3) {
       rotArr[2][1]-=1/frameRate()*PI
-    }if(keyIsDown(68)||key=='$') {
+    }if((keyIsDown(68)||key=='$')&&dimentionCount>3) {
       rotArr[2][1]+=1/frameRate()*PI
-    }if(keyIsDown(69)||key=='%') {
+    }if((keyIsDown(69)||key=='%')&&dimentionCount>3) {
       rotArr[2][2]-=1/frameRate()*PI
-    }if(keyIsDown(81)||key=='^') {
+    }if((keyIsDown(81)||key=='^')&&dimentionCount>3) {
       rotArr[2][2]+=1/frameRate()*PI
     }if(keyIsDown(187)) {
       rotArr[0][0]+=1/frameRate()*PI
