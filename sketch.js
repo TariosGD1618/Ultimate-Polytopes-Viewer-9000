@@ -703,6 +703,9 @@ function resetCamera() {
         faceData[i][j/B/gcm]=j%(A*gcm)+i
       }
     }
+    if(A==2) {
+      faceData=[]
+    }
     edgeLength=sqrt(sq(1-cos(PI*2/A*B))+sq(sin(PI*2/A*B)))
   }else {
     switch(polytopeID) {
