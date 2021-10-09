@@ -89,7 +89,7 @@ function changeDimension() {
   inp.show()
   dimentionCount=inp2.value()*1
   if(dimentionCount==4) {
-    inp.html('<option value="0">pen</option><option value="1">tes</option><option value="2">hex</option><option value="3">ico</option><option value="4">hi</option><option value="5">ex</option><option value="6">fix</option><option value="7">sishi</option><option value="8">gohi</option><option value="9">gahi</option><option value="10">gishi</option><option value="11">gashi</option><option value="12">gaghi</option><option value="13">gofix</option><option value="14">gax</option><option value="15">gogishi</option>')
+    inp.html('<option value="0">pen</option><option value="1">tes</option><option value="2">hex</option><option value="3">ico</option><option value="4">hi</option><option value="5">ex</option><option value="6">fix</option><option value="7">sishi</option><option value="8">gohi</option><option value="9">gahi</option><option value="10">gishi</option><option value="11">gashi</option><option value="12">gaghi</option><option value="13">gofix</option><option value="14">gax</option><option value="15">gogishi</option><option value="16">tho</option><option value="17">sidtixhi</option><option value="18">gidtixhi</option><option value="19">dittady</option>')
     if(polytopeID ==0) {
       inp.selected(0)
     }else if(polytopeID==1) {
@@ -104,7 +104,7 @@ function changeDimension() {
     inp2.style('width','40px')
     inp.position(40,0)
   }else if(dimentionCount==3){
-    inp.html('<option value="0">tet</option><option value="1">cube</option><option value="2">oct</option><option value="3">doe</option><option value="4">ike</option>  <option value="5">sissid</option><option value="6">gad</option><option value="7">gissid</option><option value="8">gike</option>')
+    inp.html('<option value="0">tet</option><option value="1">cube</option><option value="2">oct</option><option value="3">doe</option><option value="4">ike</option>  <option value="5">sissid</option><option value="6">gad</option><option value="7">gissid</option><option value="8">gike</option>  <option value="9">ca</option><option value="10">id</option><option value="11">gid</option><option value="12">did</option><option value="13">thah</option><option value="14">oho</option><option value="15">seihid</option><option value="16">geihid</option><option value="17">sidhei</option>    <option value="18">cho<option value="19">sidhid</option><option value="20">gidhid</option><option value="21">gidhei</option>      <option value="22">ditdid</option><option value="23">sidtid</option><option value="24">gidtid</option>')
     if(polytopeID==0) {
       inp.selected(0)
     }else if(polytopeID==1) {
@@ -120,8 +120,8 @@ function changeDimension() {
     inp.position(40,0)
   }else if(inp2.value()==5) {
     dimentionCount=inp3.value()*1
-    if(inp.html()=='<option value="0">simplex</option><option value="1">hypercube</option><option value="2">orthoplex</option>') {}else {
-      inp.html('<option value="0">simplex</option><option value="1">hypercube</option><option value="2">orthoplex</option>')
+    if(inp.html()=='<option value="0">simplex</option><option value="1">hypercube</option><option value="2">orthoplex</option><option value="3">demicross</option>') {}else {
+      inp.html('<option value="0">simplex</option><option value="1">hypercube</option><option value="2">orthoplex</option><option value="3">demicross</option>')
     }
     inp3.show()
     inp2.style('width','50px')
@@ -333,9 +333,6 @@ function resetCamera() {
       zoom = 1/20
       L=720
       s=0.25
-      rotArr[2][0] = atan(1/sqrt(5))
-      rotArr[2][1] = atan(1/sqrt(6))
-      rotArr[2][2] = atan(1/sqrt(7))
       L2=L
       break
       case 14:
@@ -360,6 +357,54 @@ function resetCamera() {
         s=0.1
         L2=L
         faceData=frag(gogishif,5)
+      break
+      case 16:
+        vertexData = conv([[11,0,0,0],[0,11,0,0],[0,0,11,0],[0,0,0,11]])
+        edgeLength = sqrt(2)
+        intersectionD=2
+        circumR = 1
+        fct = 0.75
+        zoom = 1/6
+        L=28
+        rotArr[2][0] = PI/4
+        rotArr[2][1] = PI/5
+        rotArr[2][2] = PI/6
+        s=1
+        L2=24
+        faceData=[[0,2,4],[0,2,5],[0,3,4],[0,3,5],[1,2,4],[1,2,5],[1,3,4],[1,3,5],[0,2,6],[0,2,7],[0,3,6],[0,3,7],[1,2,6],[1,2,7],[1,3,6],[1,3,7],[0,4,6],[0,4,7],[0,5,6],[0,5,7],[1,4,6],[1,4,7],[1,5,6],[1,5,7],[2,4,6],[2,4,7],[2,5,6],[2,5,7],[3,4,6],[3,4,7],[3,5,6],[3,5,7]]
+      break
+      case 17:
+      vertexData = frag(ex,4)
+      edgeLength=phi
+      intersectionD=2.802517076888151
+      circumR=phi
+      fct = 1.1
+      zoom = 1/8
+      L=1200*2
+      s=0.25
+      L2=1200
+      break
+      case 18:
+      vertexData = frag(ex,4)
+      edgeLength=phi
+      intersectionD=3.0776835371752536
+      circumR=phi
+      fct = 1.1
+      zoom = 1/8
+      L=1200*2
+      s=0.25
+      L2=1200
+      break
+      case 19:
+      vertexData = frag(ex,4)
+      edgeLength=phi
+      intersectionD=2.2882456112707406
+      circumR=phi
+      fct = 1.1
+      zoom = 1/8
+      L=1200*2
+      s=0.25
+      L2=1200
       break
     }
   }else if(dimentionCount==3&&inp2.value()==3) {
@@ -457,6 +502,173 @@ function resetCamera() {
         L2=30
         faceData=[[4,5,10],[6,7,9],[0,1,7],[2,3,4],[0,9,11],[3,8,10],[2,6,9],[1,5,10],[3,6,8],[0,5,11],[2,4,11],[1,7,8],[6,7,8],[4,5,11],[2,3,6],[0,1,5],[2,9,11],[1,8,10],[3,4,10],[0,7,9]]
       break
+      case 9:
+        var AA = [10+sqrt(0.5)]
+        vertexData = conv([[AA,AA,0,0],[AA,0,AA,0],[0,AA,AA,0]])
+        circumR=1
+        edgeLength=1
+        L=24
+        s=1
+        L2=L
+        faceData=[[10,6,8,4],[11,7,9,5],[11,3,10,1],[9,2,8,0],[7,3,6,2],[5,1,4,0],[1,4,10],[2,7,9],[3,6,10],[0,5,9],[0,4,8],[3,7,11],[2,6,8],[1,5,11]]
+      break
+      case 10:
+        var _1 = (sqrt(5)+3)/4+10
+        var _2 = phi/2+10
+        var _3 = 10.5
+        vertexData = conv([[phi+10,0,0,0],[0,phi+10,0,0],[0,0,phi+10,0],[_1,_2,_3,0],[_3,_1,_2,0],[_2,_3,_1,0]])
+        circumR=phi
+        edgeLength=1
+        L=60
+        s=1
+        L2=L
+        faceData=[[4,26,28],[5,23,25],[12,20,28],[7,15,23],[1,12,13],[0,6,7],[1,10,11],[0,8,9],[10,18,26],[9,17,25],[6,14,22],[13,21,29],[5,27,29],[4,22,24],[11,19,27],[8,16,24],[3,16,20],[2,15,19],[2,14,18],[3,17,21],[28,26,10,1,12],[7,0,9,25,23],[16,24,4,28,20],[15,23,5,27,19],[14,22,4,26,18],[17,25,5,29,21],[12,20,3,21,13],[6,14,2,15,7],[6,0,8,24,22],[11,1,13,29,27],[10,18,2,19,11],[8,16,3,17,9]]
+      break
+      case 11:
+        vertexData = frag(gid,4)
+        circumR=phi_1
+        edgeLength=1
+        L=60
+        s=1
+        L2=L
+        faceData=gidf
+      break
+      case 12:
+        vertexData = doWeird(frag(did,4),1)
+        circumR=1
+        edgeLength=1
+        intersectionD=1.2360679774997894
+        L=250
+        s=1
+        L2=60
+        faceData=frag(didf,5)
+      break
+      case 13:
+        vertexData = conv([[11,0,0,0],[0,11,0,0],[0,0,11,0]])
+        circumR=1
+        edgeLength=sqrt(2)
+        intersectionD=2
+        L=15
+        s=1
+        L2=12
+        faceData=[[0,2,4],[3,4,1],[2,1,5],[5,3,0],[0,3,1,2],[4,0,5,1],[2,4,3,5]]
+      break
+      case 14:
+        var AA = [10+sqrt(0.5)]
+        vertexData = conv([[AA,AA,0,0],[AA,0,AA,0],[0,AA,AA,0]])
+        circumR=1
+        edgeLength=1
+        intersectionD=2
+        L=28
+        s=1
+        L2=24
+        faceData=[[1,4,10],[2,7,9],[3,6,10],[0,5,9],[0,4,8],[3,7,11],[2,6,8],[1,5,11],[5,1,10,6,2,9],[11,5,0,8,6,3],[11,1,4,8,2,7],[3,10,4,0,9,7]]
+      break
+      case 15:
+        vertexData = frag(seihid,4)
+        circumR=phi
+        edgeLength=1
+        intersectionD=phi*2
+        L=60+15
+        s=1
+        L2=60
+        faceData=[[4,12,18],[4,2,0],[0,3,6],[6,13,22],[2,17,9],[20,17,28],[3,10,20],[18,29,22],[26,14,12],[9,26,11],[27,10,15],[21,24,28],[13,27,16],[23,25,29],[25,16,19],[7,24,15],[19,1,7],[11,21,5],[8,1,5],[14,8,23],[0,6,13,16,19,1,5,11,9,2],[2,4,18,29,25,19,7,24,28,17],[24,21,11,26,12,18,22,13,27,15],[6,3,20,28,21,5,8,23,29,22],[3,0,4,12,14,8,1,7,15,10],[20,17,9,26,14,23,25,16,27,10]]
+      break
+      case 16:
+        vertexData = frag(gid,4)
+        circumR=phi_1
+        edgeLength=1
+        intersectionD=phi_1*2
+        L=60+15
+        s=1
+        L2=60
+        faceData=[[13,25,21],[7,8,21],[6,24,3],[17,15,26],[9,11,10],[7,6,11],[29,26,28],[28,18,27],[24,27,13],[1,20,12],[29,25,20],[4,5,14],[0,3,19],[18,19,16],[8,12,2],[2,10,4],[0,22,9],[23,16,15],[3,1,5,17],[22,23,14],[0,19,18,28,29,20,12,2,10,9],[29,26,15,23,22,9,11,7,21,25],[8,7,6,3,19,16,15,17,1,12],[3,0,22,14,5,1,20,25,13,24],[27,24,6,11,10,4,5,17,26,28],[8,2,4,14,23,16,18,27,13,21]]
+      break
+      case 17:
+        vertexData = doWeird(frag(did,4),1)
+        circumR=1
+        edgeLength=1
+        intersectionD=1.7480640977952844
+        intersectionD2=2
+        L=90
+        s=1
+        L2=60
+        faceData=[[7,13,29,1,2],[6,9,4,12,21],[11,2,5,23,0],[17,29,27,19,23],[24,7,10,22,19],[4,1,26,16,22],[5,15,28,25,12],[26,18,24,21,20],[13,6,0,16,28],[8,11,3,27,25],[17,14,10,8,20],[14,15,18,3,9],[13,7,10,14,15,28],[0,11,8,20,26,16],[29,13,6,9,14,17],[18,24,7,2,5,15],[21,6,0,23,17,20],[12,4,22,19,27,25],[9,3,27,29,1,4],[10,8,25,28,16,22],[21,24,19,23,5,12],[1,2,11,3,18,26]]
+      break
+      case 18:
+        var AA = [10+sqrt(0.5)]
+        vertexData = conv([[AA,AA,0,0],[AA,0,AA,0],[0,AA,AA,0]])
+        circumR=1
+        edgeLength=1
+        intersectionD=2
+        L=24+6
+        s=1
+        L2=24
+        faceData=[[10,6,8,4],[11,7,9,5],[11,3,10,1],[9,2,8,0],[7,3,6,2],[5,1,4,0],[5,1,10,6,2,9],[11,5,0,8,6,3],[11,1,4,8,2,7],[3,10,4,0,9,7]]
+      break
+      case 19:
+        vertexData = frag(seihid,4)
+        circumR=phi
+        edgeLength=1
+        intersectionD=phi*2
+        L=60
+        s=1
+        L2=60+15
+        faceData=[[18,22,6,0,4],[9,11,21,28,17],[2,4,12,26,9],[0,2,17,20,3],[13,6,3,10,27],[12,14,23,29,18],[15,24,28,20,10],[16,27,15,7,19],[29,25,16,13,22],[25,23,8,1,19],[1,7,24,21,5],[26,14,8,5,11],[2,0,6,13,16,19,1,5,11,9],[4,18,29,25,19,7,24,28,17,2],[4,12,14,8,1,7,15,10,3,0],[14,23,25,16,27,10,20,17,9,26],[21,11,26,12,18,22,13,27,15,24],[20,3,6,22,29,23,8,5,21,28]]
+      break
+      case 20:
+        vertexData = frag(gid,4)
+        circumR=phi_1
+        edgeLength=1
+        intersectionD=phi_1*2
+        L=60+15
+        s=1
+        L2=60
+        faceData=[[5,1,12,2,4],[10,2,8,7,11],[0,3,6,11,9],[27,13,25,29,28],[16,19,0,22,23],[1,20,29,26,17],[21,13,24,6,7],[4,14,22,9,10],[8,12,20,25,21],[23,14,5,17,15],[15,16,18,28,26],[18,19,3,24,27],[0,19,18,28,29,20,12,2,10,9],[29,26,15,23,22,9,11,7,21,25],[8,7,6,3,19,16,15,17,1,12],[3,0,22,14,5,1,20,25,13,24],[27,24,6,11,10,4,5,17,26,28],[8,2,4,14,23,16,18,27,13,21]]
+      break
+      case 21:
+        vertexData = doWeird(frag(did,4),1)
+        circumR=1
+        edgeLength=1
+        intersectionD=1.2360679774997894
+        intersectionD2=2
+        intersectionD3=1.7480640977952844
+        L=250
+        s=1
+        L2=60
+        faceData=[[19,23,0,16,22],[17,20,26,1,29],[21,6,13,7,24],[3,11,0,6,9],[17,23,5,15,14],[24,19,27,3,18],[20,8,25,12,21],[16,26,18,15,28],[13,28,25,27,29],[1,2,5,12,4],[2,11,8,10,7],[4,22,10,14,9 ],[13,7,10,14,15,28 ],[0,11,8,20,26,16],[29,13,6,9,14,17],[18,24,7,2,5,15],[21,6,0,23,17,20 ],[12,4,22,19,27,25],[9,3,27,29,1,4 ],[10,8,25,28,16,22],[21,24,19,23,5,12],[1,2,11,3,18,26]]
+      break
+      case 22:
+        vertexData = frag(ditdid,4)
+        circumR=2/sqrt(3)
+        edgeLength=1
+        intersectionD=phi
+        L=90
+        s=1
+        L2=60
+        faceData=frag(ditdidf,5)
+      break
+      case 23:
+        vertexData = doWeird(frag(ditdid,4),1)
+        circumR=2/sqrt(3)
+        edgeLength=1
+        intersectionD=phi_2
+        L=436
+        s=1
+        L2=60
+        faceData=[[16,4,6],[16,14,18,5,6],[4,3,18,12,16],[8,18,9,4,6],[3,4,11],[18,5,3],[9,18,14],[11,8,12,0,4],[0,9,4],[11,7,12,19,3],[7,16,10,3,5],[12,16,7],[0,19,12],[10,3,19],[16,10,14],[15,11,7],[7,1,5],[1,7,15,10,19],[6,13,9,14,2],[6,2,8],[14,10,13,5,1],[2,1,17,13,15],[14,2,1],[17,19,0,15,11],[17,9,0,2,8],[15,13,10],[2,15,0],[13,9,17],[8,12,18],[6,5,13],[19,17,1],[17,11,8]]
+      break
+      case 24:
+        vertexData = doWeird(frag(ditdid,4),1)
+        circumR=2/sqrt(3)
+        edgeLength=1
+        intersectionD=phi_2
+        intersectionD2=phi_1
+        L=436
+        s=1
+        L2=60
+        faceData=[[16,4,6],[3,4,11],[18,5,3],[9,18,14],[0,9,4],[12,16,7],[0,19,12],[10,3,19],[16,10,14],[15,11,7],[7,1,5],[6,2,8],[14,2,1],[15,13,10],[2,15,0],[13,9,17],[8,12,18],[6,5,13],[19,17,1],[17,11,8],[0,15,10,16,4],[17,1,5,18,8],[19,0,9,14,10],[7,11,8,6,5],[10,3,4,9,13],[5,13,17,11,3],[18,12,19,1,14],[6,4,11,15,13],[16,6,2,15,7],[3,18,9,17,19],[7,1,2,8,12],[2,0,12,16,14]]
+      break
     }
   }else if(inp2.value()==-1){
     fct = 2
@@ -470,7 +682,7 @@ function resetCamera() {
       B=A-B
       inp5.value(B)
     }
-    var gcm = 1
+    gcm = 1
     for(var i = 1; i<A; i++) {
       if(floor(B/i)==B/i&&floor(A/i)==A/i) {
         gcm=i
@@ -478,15 +690,18 @@ function resetCamera() {
     }
     A/=gcm
     B/=gcm
-    L=A
-    L2=A
+    L=A*gcm
+    L2=A*gcm
     vertexData=[]
-    for(var i = 0; i<A; i++) {
-      vertexData[i]=[cos(PI*2/A*i),sin(PI*2/A*i),0,0]
+    for(var i = 0; i<A*gcm; i++) {
+      vertexData[i]=[cos(PI*2/A/gcm*i),sin(PI*2/A/gcm*i),0,0]
     }
     faceData=[[]]
-    for(var j = 0; j<A*B/gcm; j+=B) {
-      faceData[0][j/B]=j%A
+    for(var i = 0; i<gcm; i++) {
+      faceData[i]=[]
+      for(var j = 0; j<A*B*gcm; j+=B*gcm) {
+        faceData[i][j/B/gcm]=j%(A*gcm)+i
+      }
     }
     edgeLength=sqrt(sq(1-cos(PI*2/A*B))+sq(sin(PI*2/A*B)))
   }else {
@@ -536,6 +751,7 @@ function resetCamera() {
       L2=L
       break
       case 2:
+      case 3:
       var array=[]
       for(var i = 0; i<dimentionCount; i++) {
         array[i*2]=[]
@@ -559,6 +775,10 @@ function resetCamera() {
       }
       break
     }
+  }
+  if(polytopeID==3) {
+    L+=dimentionCount
+    intersectionD=2
   }
   mrSlider.value(fct)
   if(orthoOn>0) {
@@ -971,6 +1191,10 @@ function verf() {
       inp2.value(4)
     }
     changeDimension()
+    if(inp.value()==4&&inp2.value()==4) {
+      inp.value(16)
+      changePolytope()
+    }
   }else if(inp2.value()==3) {
     inp2.value(2)
     inp5.value(1)
@@ -1160,6 +1384,13 @@ function STFCT() {
     case 2:
       inp.value(0)
     break
+    case 3:
+      if(random(2)<1) {
+        inp.value(0)
+      }else {
+        inp.value(2)
+      }
+    break
   }
   if(inp3.value()==4) {
     inp2.value(4)
@@ -1335,6 +1566,7 @@ function changePolytope() {
   polytopeID=inp.value()*1
   intersectionD = NaN
   intersectionD2 = NaN
+  intersectionD3 = NaN
   resetCamera()
   if(dimentionCount==4&&inp2.value()==4) {
     div2.html(L2+' edges')
@@ -1468,6 +1700,38 @@ function changePolytope() {
         div6.html('names: great grand stellated 120-cell, great grand stellated polydodecahedron, great grand stellated hecatonicosachoron')
         div8.html('vertex figure: tet {3,3}')
       break
+      case 16:
+        div.html('8 terahedron {3,3}, 4 octahedron {3,4} cells')
+        div1.html('32 triangle {3} faces')
+        div4.html('Coexter Diagram (x3o3o3o3/2*a)/2')
+        div5.html('Dual to tesseractihemioctacron')
+        div6.html('tesseractihemioctachoron')
+        div8.html('vertex figure: thah')
+      break
+      case 17:
+        div.html('600 terahedron {3,3}, 120 great icosahedron {3,5/2} cells')
+        div1.html('2400 triangle {3} faces')
+        div4.html('Coexter Diagram x3o3o3o5/2*b')
+        div5.html('Dual to small triambic icosahedral hecatonicosachoron')
+        div6.html('small ditrigonary hexacosihecatonicosachoron')
+        div8.html('vertex figure: sidtid')
+      break
+      case 18:
+        div.html('600 terahedron {3,3}, 120 icosahedron {3,5/2} cells')
+        div1.html('2400 triangle {3} faces')
+        div4.html('Coexter Diagram x3o3o3/2o5*b')
+        div5.html('Dual to great triambic icosahedral hecatonicosachoron')
+        div6.html('great ditrigonary hexacosihecatonicosachoron')
+        div8.html('vertex figure: gidtid')
+      break
+      case 19:
+        div.html('120 icosahedron {3,3}, 120 great icosahedron {3,5/2} cells')
+        div1.html('2400 triangle {3} faces')
+        div4.html('Coexter Diagram x3o5o3o5/3*b')
+        div5.html('Dual to medial triambic icosahedral hecatonicosachoron')
+        div6.html('ditrigonary dishecatonicosachoron')
+        div8.html('vertex figure: ditdid')
+      break
     }
   }else if(dimentionCount==3){
     div1.html(L2+' edges')
@@ -1545,24 +1809,164 @@ function changePolytope() {
         div6.html('vertex figure: pentagram {5/2}')
         div8.html('')
       break
+      case 9:
+        div.html('8 triangle {3}, 6 square {4} faces')
+        div3.html('Schläfli symbol r{3,4}/r{4,3}')
+        div4.html('Dual to rad')
+        div5.html('cuboctahedron')
+        div6.html('vertex figure: rectangle (side lengths 1, sqrt(2)')
+        div8.html('')
+      break
+      case 10:
+        div.html('20 triangle {3}, 12 pentagon {5} faces')
+        div3.html('Schläfli symbol r{5,3}/r{3,5}')
+        div4.html('Dual to rhote')
+        div5.html('icosidodecahedron')
+        div6.html('vertex figure: rectangle (side lengths 1, 0.5+sqrt(1.25)')
+        div8.html('')
+      break
+      case 11:
+        div.html('20 triangle {3}, 12 pentagram {5/2} faces')
+        div3.html('Schläfli symbol r{5/2,3}/r{3,5/2}')
+        div4.html('Dual to grhote')
+        div5.html('great icosidodecahedron')
+        div6.html('vertex figure: rectangle (side lengths 1, sqrt(1.25)-0.5')
+        div8.html('')
+      break
+      case 12:
+        div.html('12 pentagon {5}, 12 pentagram {5/2} faces')
+        div3.html('Schläfli symbol r{5/2,5}/r{5,5/2}')
+        div4.html('Dual to mrhote')
+        div5.html('dodecadodecahedron')
+        div6.html('vertex figure: rectangle (side lengths 0.5+sqrt(1.25), sqrt(1.25)-0.5')
+        div8.html('')
+      break
+      case 13:
+        div.html('4 triangle {3}, 3 square {4} faces')
+        div3.html('Coxeter diagram: (x3/2o3x)/2')
+        div4.html('Dual to tetrahemihexacron')
+        div5.html('names: tetrahemihexahedron, tetrahemicube, 3-demicube')
+        div6.html('vertex figure: bowtie (side lengths 1, sqrt(2)')
+        div8.html('')
+      break
+      case 14:
+        div.html('8 triangle {3}, 4 hexagon {6} faces')
+        div3.html('Coxeter diagram: x3/2o3x3*a')
+        div4.html('Dual to tetrahemihexacron')
+        div5.html('octahemioctacron')
+        div6.html('vertex figure: bowtie (side lengths 1, sqrt(3)')
+        div8.html('')
+      break
+      case 15:
+        div.html('20 triangle {3}, 6 decagon {10} faces')
+        div3.html('Coxeter diagram: (x3/2o3x5*a)/2')
+        div4.html('Dual to small icosihemidodecacron')
+        div5.html('small icosihemidodecahedron')
+        div6.html('vertex figure: bowtie (side lengths 1, sqrt((5+sqrt(5))/2)')
+        div8.html('')
+      break
+      case 16:
+        div.html('20 triangle {3}, 6 decagram {10/3} faces')
+        div3.html('Coxeter diagram: (o3/2x5/3x3*a)/2')
+        div4.html('Dual to great icosihemidodecacron')
+        div5.html('great icosihemidodecahedron')
+        div6.html('vertex figure: bowtie (side lengths 1, sqrt((5-sqrt(5))/2)')
+        div8.html('')
+      break
+      case 17:
+        div.html('12 pentagram {5/2}, 10 hexagon {6} faces')
+        div3.html('Coxeter diagram: (x5/3o5/2x3*a)/2')
+        div4.html('Dual to small dodecahemicosacron')
+        div5.html('small dodecahemicosahedron')
+        div6.html('vertex figure: bowtie (side lengths sqrt(1.25)-0.5, sqrt(3)')
+        div8.html('')
+      break
+      case 18:
+        div.html('6 square {4}, 4 hexagon {6} faces')
+        div3.html('Coxeter diagram: (o4/3x3x4*a)/2')
+        div4.html('Dual to hexahemioctacron')
+        div5.html('cubohemioctahedron')
+        div6.html('vertex figure: bowtie (side lengths sqrt(2), sqrt(3)')
+        div8.html('')
+      break
+      case 19:
+        div.html('12 pentagon {5}, 6 decagon {10} faces')
+        div3.html('Coxeter diagram: (x5/4o5x5*a)/2')
+        div4.html('Dual to great dodecahemidodecahedron')
+        div5.html('small dodecahemidodecahedron')
+        div6.html('vertex figure: bowtie (side lengths 0.5+sqrt(1.25), sqrt((5+sqrt(5))/2)')
+        div8.html('')
+      break
+      case 20:
+        div.html('12 pentagram {5/2}, 6 decagram {10/3} faces')
+        div3.html('Coxeter diagram: (x5/3x5/3o5/2*a)/2')
+        div4.html('Dual to great dodecahemidodecacron')
+        div5.html('great dodecahemidodecahedron')
+        div6.html('vertex figure: bowtie (side lengths sqrt(1.25)-0.5, sqrt((5-sqrt(5))/2)')
+        div8.html('')
+      break
+      case 21:
+        div.html('12 pentagon {5}, 10 hexagon {6} faces')
+        div3.html('Coxeter diagram: (o5/4x3x5*a)/2')
+        div4.html('Dual to great dodecahemicosacron')
+        div5.html('great dodecahemicosahedron')
+        div6.html('vertex figure: bowtie (side lengths 0.5+sqrt(1.25), sqrt(3)')
+        div8.html('')
+      break
+      case 22:
+        div.html('12 pentagon {5}, 12 pentagram {5/2} faces')
+        div3.html('Coxeter diagram: (o5/4x3x5*a)/2')
+        div4.html('Dual to medial triambic icosahedron')
+        div5.html('ditrigonary dodecadodecahedron')
+        div6.html('vertex figure: tripod (side lengths 0.5+sqrt(1.25), sqrt(1.25)-0.5')
+        div8.html('')
+      break
+      case 23:
+        div.html('20 triangle {3}, 12 pentagram {5/2} faces')
+        div3.html('Coxeter diagram: x5/2o3o3*a')
+        div4.html('Dual to small triambic icosahedron')
+        div5.html('small ditrigonary icosidodecahedron')
+        div6.html('vertex figure: ditrigon (side lengths 1, sqrt(1.25)-0.5')
+        div8.html('')
+      break
+      case 24:
+        div.html('20 triangle {3}, 12 pentagon {5/2} faces')
+        div3.html('Coxeter diagram: x5/2o3o3*a')
+        div4.html('Dual to great triambic icosahedron')
+        div5.html('great ditrigonary icosidodecahedron')
+        div6.html('vertex figure: tripod (side lengths 1, sqrt(1.25)+0.5')
+        div8.html('')
+      break
     }
   }else if(dimentionCount==2&&inp2.value()==2) {
     div8.html('')
-    div.html(A+' edges')
-    div1.html(A+' verticies')
-    if(B==1) {
+    div.html(A*gcm+' edges')
+    div1.html(A*gcm+' verticies')
+    if(B*gcm==1) {
       div2.html('Schläfli symbol {'+A+'}')
     }else {
-      div2.html('Schläfli symbol {'+A+'/'+B+'}')
+      div2.html('Schläfli symbol {'+A*gcm+'/'+B*gcm+'}')
     }
     div3.html('Self-dual')
     if(A<5) {
       if(A==2) {
-        div4.html('Dyad')
+        if(gcm==0) {
+          div4.html('Dyad')
+        }else {
+          div4.html('compound of '+gcm+' Dyads')
+        }
       }if(A==3) {
-        div4.html('Triangle')
+        if(gcm==0) {
+          div4.html('Triangle')
+        }else {
+          div4.html('compound of '+gcm+' Triangles')
+        }
       }if(A==4) {
-        div4.html('Square')
+        if(gcm==0) {
+          div4.html('Square')
+        }else {
+          div4.html('compound of '+gcm+' Squares')
+        }
       }
     }else {
       var str = ''
@@ -1689,6 +2093,10 @@ function changePolytope() {
       }else {
         str+='gram'
       }
+      if(gcm>1) {
+        str='compound of '+gcm+' '+str
+        str+='s'
+      }
       div4.html(str)
     }
     div5.html('')
@@ -1733,6 +2141,16 @@ function changePolytope() {
         div8.html('')
         div6.html('')
         div5.html('vertex figure: '+(dimentionCount-1)+'-orthoplex {'+shclaf.substring(2,shclaf.length)+',4'+'}')
+      break
+      case 3:
+        div.html(pow(2,dimentionCount-1)+' '+(dimentionCount-1)+'-simplex, '+dimentionCount+' '+(dimentionCount-1)+'-orthoplex'+' facets')
+        div1.html(2*sq(dimentionCount)-2*dimentionCount+' edges')
+        div2.html(dimentionCount*2+' verticies')
+        div3.html('Dual to dual to '+dimentionCount+'-demicross')
+        div4.html('Coexter Diagram: Coexter Diagram for '+dimentionCount+'-demicross')
+        div8.html('')
+        div6.html('')
+        div5.html('vertex figure: '+(dimentionCount-1)+'-demicross')
       break
     }
   }
@@ -1885,9 +2303,17 @@ function draw() {
   var l = 0
     for(var k = 0; k<vertexData.length;k++) {
       for(var k2 = 0; k2<vertexData.length;k2++) {
+        var BBBBB=areConnected(vertexData[k],vertexData[k2],edgeLength)
         if((areConnected(vertexData[k],vertexData[k2],edgeLength)==2||areConnected(vertexData[k],vertexData[k2],edgeLength)==1)&&k2>k) {
-          renderLine(vertexDataProjected[k],vertexDataProjected[k2],areConnected(vertexData[k],vertexData[k2],edgeLength))
-          l++
+          if((((areConnected(vertexData[k],vertexData[k2],edgeLength)==2||BBBBB==='1')&&k<30&&k2<30)||dimentionCount!==3||(polytopeID!==12&&polytopeID!==21&&polytopeID!==17)&&  ((areConnected(vertexData[k],vertexData[k2],edgeLength)==2)&&k<20&&k2<20)||dimentionCount!==3||(polytopeID!==23&&polytopeID!==24))&&(polytopeID!==24||(BBBBB==='1')==false)) {
+            renderLine(vertexDataProjected[k],vertexDataProjected[k2],areConnected(vertexData[k],vertexData[k2],edgeLength))
+            l++
+          }else if(areConnected(vertexData[k],vertexData[k2],edgeLength)*1!==2) {
+            if(((k<30||k2<30)&&dimentionCount==3&&(polytopeID==12||polytopeID==21||polytopeID==17))||((k<20||k2<20)&&dimentionCount==3)) {}else {
+            renderLine(vertexDataProjected[k],vertexDataProjected[k2],areConnected(vertexData[k],vertexData[k2],edgeLength))
+              l++
+            }
+          }
         }
       }
       if(L==l) {
@@ -1902,7 +2328,7 @@ function draw() {
   }
   if(verticies>0) {
     for(var j = 0; j<vertexData.length; j++) {
-      if(((inp.value()>8||inp.value()<8||j<12)&&dimentionCount==3)||((inp.value()>14||inp.value()<14||j<120)&&dimentionCount==4)||dimentionCount>4||dimentionCount==2) {
+      if(((inp.value()>8||inp.value()<8||j<12)&&(inp.value()*1!==12||j<30)&&(inp.value()*1!==21||j<30)&&(inp.value()*1!==17||j<30)&&(inp.value()*1!==23||j<20)&&(inp.value()*1!==24||j<20)&&dimentionCount==3)||((inp.value()>14||inp.value()<14||j<120)&&dimentionCount==4)||dimentionCount>4||dimentionCount==2) {
         renderVertex(vertexDataProjected[j])
       }
     }
@@ -1910,24 +2336,26 @@ function draw() {
   if(faces>0) {
     var frct = zoom*height/tan(PI/6)/4
     for(var i = 0; i<faceData.length; i++) {
-      var V1 = []
-      V1[0]=vertexDataProjected[faceData[i][1]][0]-vertexDataProjected[faceData[i][0]][0]
-      V1[1]=vertexDataProjected[faceData[i][1]][1]-vertexDataProjected[faceData[i][0]][1]
-      V1[2]=vertexDataProjected[faceData[i][1]][2]-vertexDataProjected[faceData[i][0]][2]
-      var V2 = []
-      V2[0]=vertexDataProjected[faceData[i][2]][0]-vertexDataProjected[faceData[i][0]][0]
-      V2[1]=vertexDataProjected[faceData[i][2]][1]-vertexDataProjected[faceData[i][0]][1]
-      V2[2]=vertexDataProjected[faceData[i][2]][2]-vertexDataProjected[faceData[i][0]][2]
-      var Xx=V1[1]*V2[2]-V1[2]*V2[1]
-      var Yy=V1[0]*V2[2]-V1[2]*V2[0]
-      var Zz=V1[0]*V2[1]-V1[1]*V2[0]
-      fill(360*col3%360,100,100)
-      beginShape(TESS)
-      noStroke()
-      if(Yy<Zz) {
-        normal(Xx,Yy,Zz)
-      }else {
-        normal(-Xx,-Yy,-Zz)
+      if(faceData[i][0]!==undefined) {
+        var V1 = []
+        V1[0]=vertexDataProjected[faceData[i][1]][0]-vertexDataProjected[faceData[i][0]][0]
+        V1[1]=vertexDataProjected[faceData[i][1]][1]-vertexDataProjected[faceData[i][0]][1]
+        V1[2]=vertexDataProjected[faceData[i][1]][2]-vertexDataProjected[faceData[i][0]][2]
+        var V2 = []
+        V2[0]=vertexDataProjected[faceData[i][2]][0]-vertexDataProjected[faceData[i][0]][0]
+        V2[1]=vertexDataProjected[faceData[i][2]][1]-vertexDataProjected[faceData[i][0]][1]
+        V2[2]=vertexDataProjected[faceData[i][2]][2]-vertexDataProjected[faceData[i][0]][2]
+        var Xx=V1[1]*V2[2]-V1[2]*V2[1]
+        var Yy=V1[0]*V2[2]-V1[2]*V2[0]
+        var Zz=V1[0]*V2[1]-V1[1]*V2[0]
+        fill(360*col3%360,100,100)
+        beginShape(TESS)
+        noStroke()
+        if(Yy<Zz) {
+          normal(Xx,Yy,Zz)
+        }else {
+          normal(-Xx,-Yy,-Zz)
+        }
       }
       for(var j = 0; j<faceData[i].length; j++) {
         var J = faceData[i][j]
@@ -1979,9 +2407,9 @@ function renderVertex(arr) {
     fill(verCol.value())
   }
   if(simpleM>0) {
-    sphere(arr[3]*s*frct/40/circumR)
+    sphere(arr[3]*s*frct/40)
   }else {
-    sphere(arr[3]*frct/10*s/circumR)
+    sphere(arr[3]*frct/10*s)
   }
   var A_ = vertexData.length
   if(inp.value()==8&&dimentionCount==3) {
@@ -2061,7 +2489,9 @@ function areConnected(arr1,arr2,d) {
   }
   if(sq(Dist-d*d)<0.000001) {
     return 2
-  }if(sq(Dist-intersectionD*intersectionD)<0.000001||sq(Dist-intersectionD2*intersectionD2)<0.000001) {
+  }if(sq(Dist-intersectionD2*intersectionD2)<0.000001||sq(Dist-intersectionD3*intersectionD3)<0.000001) {
+    return '1'
+  }if(sq(Dist-intersectionD*intersectionD)<0.000001) {
     return 1
   }
   return false
