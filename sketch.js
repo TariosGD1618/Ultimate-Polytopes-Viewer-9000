@@ -89,12 +89,13 @@ function comp(a,b) {
   return 0
 }
 function windowResized() {//do stuff when window resized
-  UseT.position(width-158,60)
+  UseT.position(width-UseT.style('width').slice(0,UseT.style('width').length-2)*1-10,60)
   yoMama.position(0,height-140)
   lspeed.position(0,windowHeight/2+20)
   vspeed.position(0,windowHeight/2+40)
   fspeed.position(0,windowHeight/2+60)
   resizeCanvas(windowWidth,windowHeight)
+  Ortho2.position(width-Ortho2.style('width').slice(0,Ortho2.style('width').length-2)*1-10,80)
   ldiv.position(0,height-120)
   vdiv.position(0,height-100)
   fdiv.position(0,height-80)
@@ -110,7 +111,7 @@ function windowResized() {//do stuff when window resized
   rainbowVerticies.position(0,height-40)
   verCol.position(width/2-50,height-30)
   edgeCol.position(width/2,height-30)
-  Ortho.position(width-140,40)
+  Ortho.position(width-Ortho.style('width').slice(0,Ortho.style('width').length-2)*1-10,40)
   opt.position(0,height/2-10)
 }
 function changeDimension() {
@@ -120,7 +121,9 @@ function changeDimension() {
   inp4.hide()
   inp5.hide()
   inp.show()
-  dimentionCount=inp2.value()*1
+  if(inp2.value()*1!==-1) {
+    dimentionCount=inp2.value()*1
+  }
   if(dimentionCount==4) {
     var A = yoMama.selected()
     yoMama.html('<option value="R">regulars</option><option value="QR">quairegulars</option>')
@@ -144,43 +147,44 @@ function changeDimension() {
       inp.selected(4)
     }else if(polytopeID==4) {
       inp.selected(5)
-    }else if(polytopeID==10||polytopeID==25) {
+    }else if(polytopeID==10||polytopeID==9) {
+      inp.html('<option value="0">pen</option><option value="1">tes</option><option value="2">hex</option><option value="3">ico</option><option value="4">hi</option><option value="5">ex</option><option value="6">fix</option><option value="7">sishi</option><option value="8">gohi</option><option value="9">gahi</option><option value="10">gishi</option><option value="11">gashi</option><option value="12">gaghi</option><option value="13">gofix</option><option value="14">gax</option><option value="15">gogishi</option>')
       inp.selected(3)
     }
     inp2.style('width','40px')
     inp.position(40,0)
   }else if(dimentionCount==3){
-    var A = yoMama.selected()
-    if(A==undefined) {
-      A='R'
+    var A_ = yoMama.selected()
+    if(A_==undefined) {
+      A_='R'
     }
     yoMama.html('<option value="R">regulars</option><option value="QR">quairegulars</option><option value="QRD">quairegular duals</option><option value="U">uniforms</option><option value="UD">uniform duals</option><option value="NTO">noble two-orbits</option><option value="RC">regular compounds</option><option value="N">nobles</option>')
-    inp.html('<option value="0">tet</option><option value="1">cube</option><option value="2">oct</option><option value="3">doe</option><option value="4">ike</option>  <option value="5">sissid</option><option value="6">gad</option><option value="7">gissid</option><option value="8">gike</option>')
-    yoMama.selected(A)
-    switch(A) {
+    inp.html('<option value="0">tet</option><option value="1">cube</option><option value="2">oct</option><option value="3">doe</option><option value="4">ike</option><option value="5">sissid</option><option value="6">gad</option><option value="7">gissid</option><option value="8">gike</option>')
+    yoMama.selected(A_)
+    switch(A_) {
       case 'R':
         inp.html('<option value="0">tet</option><option value="1">cube</option><option value="2">oct</option><option value="3">doe</option><option value="4">ike</option>  <option value="5">sissid</option><option value="6">gad</option><option value="7">gissid</option><option value="8">gike</option>')
       break
       case 'QR':
-        inp.html('<option value="9">co</option><option value="10">id</option><option value="11">gid</option><option value="12">did</option><option value="13">thah</option><option value="14">oho</option><option value="15">seihid</option><option value="16">geihid</option><option value="17">sidhei</option><option value="18">cho<option value="19">sidhid</option><option value="20">gidhid</option><option value="21">gidhei</option><option value="22">ditdid</option><option value="23">sidtid</option><option value="24">gidtid</option>')
+        inp.html('<option value="9">co</option><option value="11">id</option><option value="13">did</option><option value="15">gid</option><option value="17">thah</option><option value="18">oho</option><option value="19">cho</option><option value="20">seihid</option><option value="21">sidhid</option><option value="22">gidhei</option><option value="23">sidhei</option><option value="24">gidhid</option><option value="25">geihid</option><option value="26">ditdid</option><option value="28">sidtid</option>  <option value="30">gidtid</option>')
       break
       case 'QRD':
-        inp.html('<option value="25">rad</option><option value="26">rhote</option><option value="27">gort</option><option value="28">mort</option><option value="29">matai</option><option value="30">stai</option><option value="31">gatai</option>')
+        inp.html('<option value="10">rad</option><option value="12">rhote</option><option value="14">mort</option><option value="16">gort</option><option value="27">matai</option><option value="29">stai</option><option value="31">gatai</option>')
       break
       case 'U':
-        inp.html('<option value="32">tic</option><option value="34">toe</option><option value="36">sirco</option><option value="38">girco</option><option value="40">tut</option><option value="42">snic</option><option value="44">tid</option><option value="46">ti</option><option value="48">srid</option><option value="50">grid</option><option value="52">snid</option><option value="54">gocco</option><option value="56">querco</option><option value="58">groh</option><option value="60">quith</option><option value="62">socco</option><option value="64">sroh</option><option value="66">cotco</option><option value="68">siddy</option><option value="70">sird</option><option value="72">saddid</option><option value="74">ri</option><option value="76">giid</option><option value="78">quitco</option><option value="80">tigid</option>')
+        inp.html('<option value="32">tic</option><option value="34">toe</option><option value="36">sirco</option><option value="38">girco</option><option value="40">tut</option><option value="42">snic</option><option value="44">tid</option><option value="46">ti</option><option value="48">srid</option><option value="50">grid</option><option value="52">snid</option><option value="54">gocco</option><option value="56">querco</option><option value="58">groh</option><option value="60">quith</option><option value="62">socco</option><option value="64">sroh</option><option value="66">cotco</option><option value="68">siddy</option><option value="70">sird</option><option value="72">saddid</option><option value="74">ri</option><option value="76">giid</option><option value="78">quitco</option><option value="80">tigid</option><option value="82">quit sissid</option><option value="84">quit gissid</option><option value="86">tiggy</option><option value="88">giddy</option><option value="90">gird</option><option value="92">ided</option><option value="94">sidditdid</option><option value="96">gidditdid</option><option value="98">gaddid</option><option value="100">siid</option><option value="130">prism</option>')
       break
       case 'UD':
-        inp.html('<option value="33">tikko</option><option value="35">tekah</option><option value="37">sladid</option><option value="39">siddykid</option><option value="41">tikit</option><option value="43">pedid</option><option value="45">tiki</option><option value="47">pakid</option><option value="49">sladit</option><option value="51">siddykit</option><option value="53">sapedit</option><option value="55">gocco dual</option><option value="57">querco dual</option><option value="59">groh dual</option><option value="61">quith dual</option><option value="63">socco dual</option><option value="65">sroh dual</option><option value="67">cotco dual</option><option value="69">siddy dual</option><option value="71">sird dual</option><option value="73">saddid dual</option><option value="75">ri dual</option><option value="77">giid dual</option><option value="79">quitco dual</option><option value="81">tigid dual</option>')
+        inp.html('<option value="33">tikko</option><option value="35">tekah</option><option value="37">sladid</option><option value="39">siddykid</option><option value="41">tikit</option><option value="43">pedid</option><option value="45">tiki</option><option value="47">pakid</option><option value="49">sladit</option><option value="51">siddykit</option><option value="53">sapedit</option><option value="55">gocco dual</option><option value="57">querco dual</option><option value="59">groh dual</option><option value="61">quith dual</option><option value="63">socco dual</option><option value="65">sroh dual</option><option value="67">cotco dual</option><option value="69">siddy dual</option><option value="71">sird dual</option><option value="73">saddid dual</option><option value="75">ri dual</option><option value="77">giid dual</option><option value="79">quitco dual</option><option value="81">tigid dual</option><option value="83">quit sissid dual</option><option value="85">quit gissid dual</option><option value="87">tiggy dual</option><option value="89">giddy dual</option><option value="91">gird dual</option><option value="93">ided dual</option><option value="95">sidditdid dual</option><option value="97">gidditdid dual</option><option value="99">gaddid dual</option><option value="101">siid dual</option><option value="131">tegum</option>')
       break
       case 'NTO':
-        inp.html('<option value="127">ditti</option>')
+        inp.html('<option value="134">ditti</option>')
       break
       case 'RC':
-        inp.html('<option value="128">so</option><option value="129">ki</option><option value="130">e</option><option value="131">rhom</option><option value="132">se</option>')
+        inp.html('<option value="135">so</option><option value="136">ki</option><option value="137">e</option><option value="138">rhom</option><option value="139">se</option>')
       break
       case 'N':
-        inp.html('<option value="137">echnidahedron</option><option value="138">Crennell 4 icosahedron stellation</option><option value="139">Verf of paphacki</option><option value="140">Verf of paphicki</option>')
+        inp.html('<option value="140">Noble faceting of tic</option><option value="141">Noble faceting of sirco</option><option value="142">Noble faceting of snic</option><option value="143">Noble faceting of nonuniform snic</option><option value="144">echnidahedron</option><option value="145">Verf of paphacki</option><option value="146">Crennell 4 icosahedron stellation</option><option value="147">Verf of paphicki</option>')
       break
     }
     if(polytopeID==0) {
@@ -201,10 +205,18 @@ function changeDimension() {
     inp2.style('width','40px')
     inp.position(40,0)
   }else if(inp2.value()==5) {
+    var A_ = yoMama.selected()
     yoMama.html('<option value="R">regulars</option><option value="QR">quairegulars</option>')
+    yoMama.selected(A_)
     dimentionCount=inp3.value()*1
-    if(inp.html()=='<option value="0">simplex</option><option value="1">hypercube</option><option value="2">orthoplex</option><option value="3">demicross</option>') {}else {
-      inp.html('<option value="0">simplex</option><option value="1">hypercube</option><option value="2">orthoplex</option><option value="3">demicross</option>')
+    if(A_=='R') {
+      if(inp.html()=='<option value="0">simplex</option><option value="1">hypercube</option><option value="2">orthoplex</option>') {}else {
+        inp.html('<option value="0">simplex</option><option value="1">hypercube</option><option value="2">orthoplex</option>')
+      }
+    }else {
+      if(inp.html()!=='<option value="3">demicross</option>') {
+        inp.html('<option value="3">demicross</option>')
+      }
     }
     inp3.show()
     inp2.style('width','50px')
@@ -214,10 +226,11 @@ function changeDimension() {
   }else if(inp2.value()==2) {
     inp.hide()
     inp4.show()
+    inp4.position(40,-2)
     inp5.show()
+    inp5.position(85,-2)
   }if(inp2.value()==-1) {
     poltopeID=-1
-    dimentionCount=4
     inp.html('')
     inp.hide()
     inp2.style('width','100px')
@@ -346,97 +359,101 @@ function resetCamera() {
         JL=vertexData.length
       break
       case 7:
-      vertexData = frag(ex,4)
-      edgeLength=phi
-      circumR=phi
-      fct = 1.1
-      zoom = 1/4
-      L=1200
-      s=0.25
-      L2=L
+        vertexData=sishi
+        edgeLength=1
+        circumR=1
+        fct = 1.1
+        zoom = 1/4
+        L=1200
+        s=0.25
+        L2=L
         JL=vertexData.length
+        faceData=sishif
       break
       case 8:
-      vertexData = frag(ex,4)
-      edgeLength=1
-      intersectionD=phi2
-      circumR=phi
-      fct = 1.1
-      zoom = 1/4
-      L=1440
-      s=0.25
-      L2=720
+        vertexData = gohi
+        edgeLength=1
+        intersectionD=phi2
+        circumR=phi
+        fct = 1.1
+        zoom = 1/4
+        L=1440
+        s=0.25
+        L2=720
         JL=vertexData.length
+        faceData=gohif
       break
       case 9:
-      vertexData = frag(ex,4)
-      edgeLength=1
-      intersectionD=phi2
-      intersectionD2=2.8284271247461903*phi/2
-      circumR=phi
-      fct = 1.1
-      zoom = 1/4
-      L=1440
-      s=0.25
-      L2=720
+        vertexData = gohi
+        edgeLength=1
+        intersectionD=phi2
+        intersectionD2=2.8284271247461903*phi/2
+        circumR=phi
+        fct = 1.1
+        zoom = 1/4
+        L=1440
+        s=0.25
+        L2=720
         JL=vertexData.length
+        faceData=gohif
       break
       case 10:
-      vertexData = frag(ex,4)
-      edgeLength=phi2
-      intersectionD=phi
-      circumR=phi
-      fct = 1.1
-      zoom = 1/4
-      L=720
-      s=0.25
-      L2=L
+        vertexData = gishi
+        edgeLength=1
+        circumR=phi_1
+        fct = 1.1
+        zoom = 1/4
+        L=720
+        s=0.25
+        L2=L
         JL=vertexData.length
+        faceData=gishif
       break
       case 11:
-      vertexData = frag(ex,4)
-      edgeLength=phi2
-      intersectionD=phi
-      intersectionD2=phi
-      circumR=phi
-      fct = 1.1
-      zoom = 1/4
-      L=1920+720
-      s=0.25
-      L2=720
+        vertexData = gishi
+        edgeLength=1
+        intersectionD=phi_1
+        circumR=phi_1
+        fct = 1.1
+        zoom = 1/4
+        L=1920+720
+        s=0.25
+        L2=720
         JL=vertexData.length
+        faceData=gishif
       break
       case 12:
-      vertexData = frag(ex,4)
-      edgeLength=phi
-      intersectionD=phi2
-      circumR=phi
-      fct = 1.1
-      zoom = 1/4
-      L=1920
-      s=0.25
-      L2=1200
+        vertexData = gaghi
+        edgeLength=1
+        circumR=1
+        fct = 1.1
+        zoom = 1/4
+        L=1920
+        s=0.25
+        L2=1200
         JL=vertexData.length
+        faceData=gaghif
       break
       case 13:
-      vertexData = frag(ex,4)
-      edgeLength=phi2
-      circumR=phi
-      fct = 0.95
-      zoom = 1/4
-      L=720
-      s=0.25
-      L2=L
+        vertexData = gofix
+        edgeLength=1
+        circumR=phi_1
+        fct = 1.1
+        zoom = 1/4
+        L=720
+        s=0.25
+        L2=L
         JL=vertexData.length
+        faceData=gofixf
       break
       case 14:
-        vertexData = frag(gax,4)
+        vertexData = gax
         edgeLength=(sqrt(5)+3)*phi2*phi
         circumR=(sqrt(5)+3)*phi2
         fct = 1.1
         zoom = 1/4
         L=1440
-        s=1
+        s=1/4
         L2=720
         faceData = frag(gaxf,3)
         JL=vertexData.length
@@ -507,6 +524,8 @@ function resetCamera() {
       break
     }
   }else if(dimentionCount==3&&inp2.value()==3) {
+    inp4.hide()
+    inp5.hide()
     edgesData=[]
     switch(polytopeID) {
       case 0:
@@ -625,6 +644,16 @@ function resetCamera() {
         JL=vertexData.length
       break
       case 10:
+        vertexData = conv([[0,0,2*sqrt(3)/3+10,0],[2*sqrt(3)/3+10,0,0,0],[0,2*sqrt(3)/3+10,0,0],[10+sqrt(3)/3,10+sqrt(3)/3,10+sqrt(3)/3,0]])
+        circumR=2*sqrt(3)/3
+        edgeLength=1
+        L=24
+        s=1
+        L2=L
+        faceData=[[6,0,8,2],[6,2,7,4],[6,4,10,0],[9,1,7,2],[9,2,8,5],[9,5,13,1],[11,1,13,3],[11,3,10,4],[11,4,7,1],[12,0,10,3],[12,3,13,5],[12,5,8,0]]
+        JL=vertexData.length
+      break
+      case 11:
         var _1 = (sqrt(5)+3)/4+10
         var _2 = phi/2+10
         var _3 = 10.5
@@ -637,7 +666,44 @@ function resetCamera() {
         faceData=[[4,26,28],[5,23,25],[12,20,28],[7,15,23],[1,12,13],[0,6,7],[1,10,11],[0,8,9],[10,18,26],[9,17,25],[6,14,22],[13,21,29],[5,27,29],[4,22,24],[11,19,27],[8,16,24],[3,16,20],[2,15,19],[2,14,18],[3,17,21],[28,26,10,1,12],[7,0,9,25,23],[16,24,4,28,20],[15,23,5,27,19],[14,22,4,26,18],[17,25,5,29,21],[12,20,3,21,13],[6,14,2,15,7],[6,0,8,24,22],[11,1,13,29,27],[10,18,2,19,11],[8,16,3,17,9]]
         JL=vertexData.length
       break
-      case 11:
+      case 12:
+        var a0 = sqrt(5)/4
+        var a1 = (5+sqrt(5))/8
+        var a2 = (5+3*sqrt(5))/8
+        vertexData = conv([[10+a1,0,10+a2,0],[10+a2,10+a1,0,0],[0,10+a2,10+a1,0],[0,10+a0,10+a2,0],[10+a2,0,10+a0,0],[a0+10,a2+10,0,0],[10+a1,10+a1,10+a1,0]])
+        circumR=sqrt(3)*a1
+        edgeLength=1.063313510440049
+        L=60
+        s=1
+        L2=L
+        faceData=[[0,12,2,14],[0,14,10,26],[0,26,5,16],[1,13,9,25],[1,25,4,17],[1,17,5,27],[2,28,6,18],[2,18,7,30],[2,30,10,14],[3,19,6,29],[3,29,9,13],[3,13,1,15],[4,20,8,24],[4,24,0,16],[4,16,5,17],[7,18,6,19],[7,19,3,31],[7,31,11,23],[8,22,6,28],[8,28,2,12],[8,12,0,24],[9,29,6,22],[9,22,8,20],[9,20,4,25],[10,30,7,23],[10,23,11,21],[10,21,5,26],[11,31,3,15],[11,15,1,27],[11,27,5,21]]
+        JL=vertexData.length
+      break
+      case 13:
+        vertexData = doWeird(frag(did,4),1,phi)
+        circumR=1
+        edgeLength=1
+        L=90
+        s=1
+        L2=60
+        faceData=frag(didf,5)
+        JL=30
+        intData=[[30,52],[31,53],[32,50],[33,51],[34,70],[35,71],[36,72],[37,73],[38,78],[39,40],[41,81],[42,55],[43,54],[44,57],[45,56],[46,82],[47,83],[48,84],[49,85],[58,60],[59,61],[62,75],[63,74],[64,77],[65,76],[66,88],[67,89],[68,86],[69,87],[79,80]]
+      break
+      case 14:
+        var a0 = 3*(sqrt(5)-1)/8
+        var a1 = 3*(1+sqrt(5))/8
+        vertexData = doWeird2(conv([[10.75,0,10+a1,0],[10+a1,10.75,0,0],[0,10+a1,10.75,0],[10+a0,0,10.75,0],[10.75,10+a0,0,0],[0,10.75,10+a0,0]]),sqrt(3)*3/4,phi)
+        circumR=sqrt(3)*a1
+        edgeLength=sqrt(3)*3/4
+        intersectionD=0.88167787843871
+        L=120
+        s=1
+        L2=60
+        faceData=[[0,14,7,22],[0,22,11,17],[0,17,1,16],[0,16,9,20],[0,20,6,14],[3,13,5,23],[3,23,10,19],[3,19,2,18],[3,18,8,21],[3,21,4,13],[1,15,6,21],[1,21,8,16],[2,19,11,22],[2,22,5,12],[4,21,6,20],[4,20,2,12],[5,13,9,16],[5,16,8,12],[6,15,11,19],[6,19,10,14],[7,15,1,23],[7,23,5,22],[8,18,7,14],[8,14,10,12],[9,15,7,18],[9,18,2,20],[10,23,1,17],[10,17,4,12],[11,15,9,13],[11,13,4,17]]
+        JL=24
+      break
+      case 15:
         vertexData = doWeird(frag(gid,4),1,phi2*phi)
         circumR=phi_1
         edgeLength=1
@@ -649,18 +715,22 @@ function resetCamera() {
         intData=[[30,71],[31,70],[32,73],[33,72],[34,84],[35,85],[36,57],[37,56],[38,55],[39,54],[40,68],[41,69],[42,66],[43,67],[44,45],[46,87],[47,86],[48,89],[49,88],[50,78],[51,79],[52,76],[53,77],[58,59],[60,61],[62,83],[63,82],[64,81],[65,80],[74,75]]
         intData.push([30,48],[31,49],[32,46],[33,47],[34,35],[36,62],[37,63],[38,64],[39,65],[40,51],[41,50],[42,53],[43,52],[44,74],[45,75],[54,80],[55,81],[56,82],[57,83],[58,60],[59,61],[66,77],[67,76],[68,79],[69,78],[70,88],[71,89],[72,86],[73,87],[84,85])
       break
-      case 12:
-        vertexData = doWeird(frag(did,4),1,phi)
-        circumR=1
-        edgeLength=1
-        L=90
+      case 16:
+        var a0 = (3*sqrt(5)-5)/8
+        var a1 = (5-sqrt(5))/8
+        var a2 = sqrt(5)/4
+        vertexData = doWeird(conv([[0,10+a1,10+a0,0],[10+a1,10+a0,0,0],[10+a0,0,10+a1,0],[10+a2,0,10+a0,0],[0,10+a0,10+a2,0],[a0+10,a2+10,0,0],[10+a1,10+a1,10+a1,0]]),sqrt(10*(5-sqrt(5)))/8,phi)
+        circumR=sqrt(3)*a1
+        edgeLength=sqrt(10*(5-sqrt(5)))/8
+        L=180
         s=1
         L2=60
-        faceData=frag(didf,5)
-        JL=30
-        intData=[[30,52],[31,53],[32,50],[33,51],[34,70],[35,71],[36,72],[37,73],[38,78],[39,40],[41,81],[42,55],[43,54],[44,57],[45,56],[46,82],[47,83],[48,84],[49,85],[58,60],[59,61],[62,75],[63,74],[64,77],[65,76],[66,88],[67,89],[68,86],[69,87],[79,80]]
+        faceData=[[0,12,2,14],[0,12,9,29],[0,14,11,25],[0,18,5,25],[0,18,7,29],[1,13,3,15],[1,15,10,24],[2,12,9,31],[2,14,11,27],[2,16,4,27],[2,16,6,31],[3,13,8,30],[3,15,10,26],[3,17,4,26],[3,17,6,30],[4,16,6,17],[4,22,10,26],[4,22,11,27],[5,18,7,19],[5,23,10,24],[5,24,1,19],[6,20,9,31],[7,21,8,28],[7,21,9,29],[7,28,1,19],[8,13,1,28],[8,20,9,21],[10,22,11,23],[6,20,8,30],[5,23,11,25]]
+        JL=32
+        intData=[[0,35],[0,42],[0,58],[0,70],[0,77],[1,36],[1,41],[1,59],[1,69],[1,78],[2,35],[2,44],[2,54],[2,72],[2,77],[3,36],[3,43],[3,55],[3,71],[3,78],[4,43],[4,44],[4,54],[4,55],[4,61],[5,41],[5,42],[5,58],[5,59],[5,66],[6,47],[6,54],[6,55],[6,71],[6,72],[7,52],[7,58],[7,59],[7,69],[7,70],[8,36],[8,47],[8,52],[8,69],[8,71],[9,35],[9,47],[9,52],[9,70],[9,72],[10,41],[10,43],[10,61],[10,66],[10,78],[11,42],[11,44],[11,61],[11,66],[11,77]]
+        intData.push([32,61],[32,66],[33,55],[33,71],[34,54],[34,72],[35,57],[35,67],[35,73],[36,56],[36,68],[36,74],[37,59],[37,69],[38,58],[38,70],[39,44],[39,77],[40,43],[40,78],[41,46],[41,63],[41,79],[42,45],[42,62],[42,80],[43,65],[43,75],[44,64],[44,76],[45,77],[46,78],[47,50],[47,51],[47,81],[48,52],[48,70],[49,52],[49,69],[50,72],[51,71],[52,81],[53,58],[53,59],[54,60],[54,76],[55,60],[55,75],[56,78],[57,77],[58,80],[59,79],[61,64],[61,65],[62,66],[63,66],[67,72],[68,71],[69,74],[70,73])
       break
-      case 13:
+      case 17:
         vertexData = conv([[11,0,0,0],[0,11,0,0],[0,0,11,0]])
         circumR=1
         edgeLength=sqrt(2)
@@ -671,7 +741,7 @@ function resetCamera() {
         faceData=[[0,2,4],[3,4,1],[2,1,5],[5,3,0],[0,3,1,2],[4,0,5,1],[2,4,3,5]]
         JL=vertexData.length
       break
-      case 14:
+      case 18:
         var AA = [10+sqrt(0.5)]
         vertexData = conv([[AA,AA,0,0],[AA,0,AA,0],[0,AA,AA,0]])
         circumR=1
@@ -683,7 +753,19 @@ function resetCamera() {
         faceData=[[1,4,10],[2,7,9],[3,6,10],[0,5,9],[0,4,8],[3,7,11],[2,6,8],[1,5,11],[5,1,10,6,2,9],[11,5,0,8,6,3],[11,1,4,8,2,7],[3,10,4,0,9,7]]
         JL=vertexData.length
       break
-      case 15:
+      case 19:
+        var AA = [10+sqrt(0.5)]
+        vertexData = conv([[AA,AA,0,0],[AA,0,AA,0],[0,AA,AA,0]])
+        circumR=1
+        edgeLength=1
+        intersectionD=2
+        L=24+6
+        s=1
+        L2=24
+        faceData=[[10,6,8,4],[11,7,9,5],[11,3,10,1],[9,2,8,0],[7,3,6,2],[5,1,4,0],[5,1,10,6,2,9],[11,5,0,8,6,3],[11,1,4,8,2,7],[3,10,4,0,9,7]]
+        JL=vertexData.length
+      break
+      case 20:
         vertexData = frag(seihid,4)
         circumR=phi
         edgeLength=1
@@ -694,7 +776,54 @@ function resetCamera() {
         faceData=[[4,12,18],[4,2,0],[0,3,6],[6,13,22],[2,17,9],[20,17,28],[3,10,20],[18,29,22],[26,14,12],[9,26,11],[27,10,15],[21,24,28],[13,27,16],[23,25,29],[25,16,19],[7,24,15],[19,1,7],[11,21,5],[8,1,5],[14,8,23],[0,6,13,16,19,1,5,11,9,2],[2,4,18,29,25,19,7,24,28,17],[24,21,11,26,12,18,22,13,27,15],[6,3,20,28,21,5,8,23,29,22],[3,0,4,12,14,8,1,7,15,10],[20,17,9,26,14,23,25,16,27,10]]
         JL=vertexData.length
       break
-      case 16:
+      case 21:
+        vertexData = frag(seihid,4)
+        circumR=phi
+        edgeLength=1
+        intersectionD=phi*2
+        L=60
+        s=1
+        L2=60+15
+        faceData=[[18,22,6,0,4],[9,11,21,28,17],[2,4,12,26,9],[0,2,17,20,3],[13,6,3,10,27],[12,14,23,29,18],[15,24,28,20,10],[16,27,15,7,19],[29,25,16,13,22],[25,23,8,1,19],[1,7,24,21,5],[26,14,8,5,11],[2,0,6,13,16,19,1,5,11,9],[4,18,29,25,19,7,24,28,17,2],[4,12,14,8,1,7,15,10,3,0],[14,23,25,16,27,10,20,17,9,26],[21,11,26,12,18,22,13,27,15,24],[20,3,6,22,29,23,8,5,21,28]]
+        JL=vertexData.length
+      break
+      case 22:
+        vertexData = doWeird(frag(did,4),1,phi)
+        circumR=1
+        edgeLength=1
+        L=250
+        s=1
+        L2=60
+        faceData=[[19,23,0,16,22],[17,20,26,1,29],[21,6,13,7,24],[3,11,0,6,9],[17,23,5,15,14],[24,19,27,3,18],[20,8,25,12,21],[16,26,18,15,28],[13,28,25,27,29],[1,2,5,12,4],[2,11,8,10,7],[4,22,10,14,9 ],[13,7,10,14,15,28 ],[0,11,8,20,26,16],[29,13,6,9,14,17],[18,24,7,2,5,15],[21,6,0,23,17,20 ],[12,4,22,19,27,25],[9,3,27,29,1,4 ],[10,8,25,28,16,22],[21,24,19,23,5,12],[1,2,11,3,18,26]]
+        JL=30
+        intData=[[30,52],[31,53],[32,50],[33,51],[34,70],[35,71],[36,72],[37,73],[38,78],[39,40],[41,81],[42,55],[43,54],[44,57],[45,56],[46,82],[47,83],[48,84],[49,85],[58,60],[59,61],[62,75],[63,74],[64,77],[65,76],[66,88],[67,89],[68,86],[69,87],[79,80],[0,20],[1,3],[2,18],[4,27],[5,24],[6,17],[7,15],[8,16],[9,29],[10,28],[11,26],[12,19],[13,14],[21,23],[22,25],[30,89],[31,88],[32,87],[33,86],[34,85],[35,84],[36,83],[37,82],[38,81],[39,80],[40,79],[41,78],[42,77],[43,76],[44,75],[45,74],[46,73],[47,72],[48,71],[49,70],[50,69],[51,68],[52,67],[53,66],[54,65],[55,64],[56,63],[57,62],[58,61],[59,60],[30,57],[30,72],[31,56],[31,73],[32,55],[32,70],[33,54],[33,71],[34,60],[34,82],[35,61],[35,83],[36,58],[36,84],[37,59],[37,85],[38,74],[38,75],[39,51],[39,53],[40,50],[40,52],[41,76],[41,77],[42,43],[42,78],[43,78],[44,45],[44,81],[45,81],[46,63],[46,88],[47,62],[47,89],[48,65],[48,86],[49,64],[49,87],[50,52],[51,53],[54,71],[55,70],[56,73],[57,72],[58,84],[59,85],[60,82],[61,83],[62,89],[63,88],[64,87],[65,86],[66,68],[66,80],[67,69],[67,79],[68,80],[69,79],[74,75],[76,77]]
+      break
+      case 23:
+        vertexData = doWeird(frag(did,4),1,phi)
+        circumR=1
+        edgeLength=1
+        intersectionD=1.7480640977952844
+        intersectionD2=2
+        L=60+45
+        s=1
+        L2=60
+        faceData=[[7,13,29,1,2],[6,9,4,12,21],[11,2,5,23,0],[17,29,27,19,23],[24,7,10,22,19],[4,1,26,16,22],[5,15,28,25,12],[26,18,24,21,20],[13,6,0,16,28],[8,11,3,27,25],[17,14,10,8,20],[14,15,18,3,9],[13,7,10,14,15,28],[0,11,8,20,26,16],[29,13,6,9,14,17],[18,24,7,2,5,15],[21,6,0,23,17,20],[12,4,22,19,27,25],[9,3,27,29,1,4],[10,8,25,28,16,22],[21,24,19,23,5,12],[1,2,11,3,18,26]]
+        JL=30
+      break
+      case 24:
+        vertexData = doWeird(frag(gid,4),1,phi2*phi)
+        circumR=phi_1
+        edgeLength=1
+        intersectionD=phi_1*2
+        L=60+45
+        s=1
+        L2=60
+        faceData=[[5,1,12,2,4],[10,2,8,7,11],[0,3,6,11,9],[27,13,25,29,28],[16,19,0,22,23],[1,20,29,26,17],[21,13,24,6,7],[4,14,22,9,10],[8,12,20,25,21],[23,14,5,17,15],[15,16,18,28,26],[18,19,3,24,27],[0,19,18,28,29,20,12,2,10,9],[29,26,15,23,22,9,11,7,21,25],[8,7,6,3,19,16,15,17,1,12],[3,0,22,14,5,1,20,25,13,24],[27,24,6,11,10,4,5,17,26,28],[8,2,4,14,23,16,18,27,13,21]]
+        JL=30
+        intData=[[0,20],[1,3],[2,18],[4,27],[5,24],[6,17],[7,15],[8,16],[9,29],[10,28],[11,26],[12,19],[13,14],[21,23],[22,25]]
+        intData.push([30,48],[31,49],[32,46],[33,47],[34,35],[36,62],[37,63],[38,64],[39,65],[40,51],[41,50],[42,53],[43,52],[44,74],[45,75],[54,80],[55,81],[56,82],[57,83],[58,60],[59,61],[66,77],[67,76],[68,79],[69,78],[70,88],[71,89],[72,86],[73,87],[84,85])
+      break
+      case 25:
         vertexData = doWeird(frag(gid,4),1,phi2*phi)
         var BB = doWeird(frag(gid,4),1,phi)
         for(var i = 30; i<BB.length; i++) {
@@ -712,66 +841,7 @@ function resetCamera() {
         intData.push([0,20],[1,3],[2,18],[4,27],[5,24],[6,17],[7,15],[8,16],[9,29],[10,28],[11,26],[12,19],[13,14],[21,23],[22,25])
         intData.push([90,103],[90,104],[90,105],[90,106],[91,98],[91,100],[91,109],[91,111],[92,97],[92,99],[92,110],[92,112],[93,96],[93,102],[93,107],[93,113],[94,95],[94,101],[94,108],[94,114],[95,101],[95,108],[95,115],[96,102],[96,107],[96,116],[97,99],[97,110],[97,117],[98,100],[98,109],[98,118],[99,112],[99,117],[100,111],[100,118],[101,114],[101,115],[102,113],[102,116],[103,104],[103,105],[103,119],[104,106],[104,119],[105,106],[105,119],[106,119],[107,113],[107,116],[108,114],[108,115],[109,111],[109,118],[110,112],[110,117],[111,118],[112,117],[113,116],[114,115])
       break
-      case 17:
-        vertexData = doWeird(frag(did,4),1,phi)
-        circumR=1
-        edgeLength=1
-        intersectionD=1.7480640977952844
-        intersectionD2=2
-        L=60+45
-        s=1
-        L2=60
-        faceData=[[7,13,29,1,2],[6,9,4,12,21],[11,2,5,23,0],[17,29,27,19,23],[24,7,10,22,19],[4,1,26,16,22],[5,15,28,25,12],[26,18,24,21,20],[13,6,0,16,28],[8,11,3,27,25],[17,14,10,8,20],[14,15,18,3,9],[13,7,10,14,15,28],[0,11,8,20,26,16],[29,13,6,9,14,17],[18,24,7,2,5,15],[21,6,0,23,17,20],[12,4,22,19,27,25],[9,3,27,29,1,4],[10,8,25,28,16,22],[21,24,19,23,5,12],[1,2,11,3,18,26]]
-        JL=30
-      break
-      case 18:
-        var AA = [10+sqrt(0.5)]
-        vertexData = conv([[AA,AA,0,0],[AA,0,AA,0],[0,AA,AA,0]])
-        circumR=1
-        edgeLength=1
-        intersectionD=2
-        L=24+6
-        s=1
-        L2=24
-        faceData=[[10,6,8,4],[11,7,9,5],[11,3,10,1],[9,2,8,0],[7,3,6,2],[5,1,4,0],[5,1,10,6,2,9],[11,5,0,8,6,3],[11,1,4,8,2,7],[3,10,4,0,9,7]]
-        JL=vertexData.length
-      break
-      case 19:
-        vertexData = frag(seihid,4)
-        circumR=phi
-        edgeLength=1
-        intersectionD=phi*2
-        L=60
-        s=1
-        L2=60+15
-        faceData=[[18,22,6,0,4],[9,11,21,28,17],[2,4,12,26,9],[0,2,17,20,3],[13,6,3,10,27],[12,14,23,29,18],[15,24,28,20,10],[16,27,15,7,19],[29,25,16,13,22],[25,23,8,1,19],[1,7,24,21,5],[26,14,8,5,11],[2,0,6,13,16,19,1,5,11,9],[4,18,29,25,19,7,24,28,17,2],[4,12,14,8,1,7,15,10,3,0],[14,23,25,16,27,10,20,17,9,26],[21,11,26,12,18,22,13,27,15,24],[20,3,6,22,29,23,8,5,21,28]]
-        JL=vertexData.length
-      break
-      case 20:
-        vertexData = doWeird(frag(gid,4),1,phi2*phi)
-        circumR=phi_1
-        edgeLength=1
-        intersectionD=phi_1*2
-        L=60+45
-        s=1
-        L2=60
-        faceData=[[5,1,12,2,4],[10,2,8,7,11],[0,3,6,11,9],[27,13,25,29,28],[16,19,0,22,23],[1,20,29,26,17],[21,13,24,6,7],[4,14,22,9,10],[8,12,20,25,21],[23,14,5,17,15],[15,16,18,28,26],[18,19,3,24,27],[0,19,18,28,29,20,12,2,10,9],[29,26,15,23,22,9,11,7,21,25],[8,7,6,3,19,16,15,17,1,12],[3,0,22,14,5,1,20,25,13,24],[27,24,6,11,10,4,5,17,26,28],[8,2,4,14,23,16,18,27,13,21]]
-        JL=30
-        intData=[[0,20],[1,3],[2,18],[4,27],[5,24],[6,17],[7,15],[8,16],[9,29],[10,28],[11,26],[12,19],[13,14],[21,23],[22,25]]
-        intData.push([30,48],[31,49],[32,46],[33,47],[34,35],[36,62],[37,63],[38,64],[39,65],[40,51],[41,50],[42,53],[43,52],[44,74],[45,75],[54,80],[55,81],[56,82],[57,83],[58,60],[59,61],[66,77],[67,76],[68,79],[69,78],[70,88],[71,89],[72,86],[73,87],[84,85])
-      break
-      case 21:
-        vertexData = doWeird(frag(did,4),1,phi)
-        circumR=1
-        edgeLength=1
-        L=250
-        s=1
-        L2=60
-        faceData=[[19,23,0,16,22],[17,20,26,1,29],[21,6,13,7,24],[3,11,0,6,9],[17,23,5,15,14],[24,19,27,3,18],[20,8,25,12,21],[16,26,18,15,28],[13,28,25,27,29],[1,2,5,12,4],[2,11,8,10,7],[4,22,10,14,9 ],[13,7,10,14,15,28 ],[0,11,8,20,26,16],[29,13,6,9,14,17],[18,24,7,2,5,15],[21,6,0,23,17,20 ],[12,4,22,19,27,25],[9,3,27,29,1,4 ],[10,8,25,28,16,22],[21,24,19,23,5,12],[1,2,11,3,18,26]]
-        JL=30
-        intData=[[30,52],[31,53],[32,50],[33,51],[34,70],[35,71],[36,72],[37,73],[38,78],[39,40],[41,81],[42,55],[43,54],[44,57],[45,56],[46,82],[47,83],[48,84],[49,85],[58,60],[59,61],[62,75],[63,74],[64,77],[65,76],[66,88],[67,89],[68,86],[69,87],[79,80],[0,20],[1,3],[2,18],[4,27],[5,24],[6,17],[7,15],[8,16],[9,29],[10,28],[11,26],[12,19],[13,14],[21,23],[22,25],[30,89],[31,88],[32,87],[33,86],[34,85],[35,84],[36,83],[37,82],[38,81],[39,80],[40,79],[41,78],[42,77],[43,76],[44,75],[45,74],[46,73],[47,72],[48,71],[49,70],[50,69],[51,68],[52,67],[53,66],[54,65],[55,64],[56,63],[57,62],[58,61],[59,60],[30,57],[30,72],[31,56],[31,73],[32,55],[32,70],[33,54],[33,71],[34,60],[34,82],[35,61],[35,83],[36,58],[36,84],[37,59],[37,85],[38,74],[38,75],[39,51],[39,53],[40,50],[40,52],[41,76],[41,77],[42,43],[42,78],[43,78],[44,45],[44,81],[45,81],[46,63],[46,88],[47,62],[47,89],[48,65],[48,86],[49,64],[49,87],[50,52],[51,53],[54,71],[55,70],[56,73],[57,72],[58,84],[59,85],[60,82],[61,83],[62,89],[63,88],[64,87],[65,86],[66,68],[66,80],[67,69],[67,79],[68,80],[69,79],[74,75],[76,77]]
-      break
-      case 22:
+      case 26:
         vertexData = doWeird(ditdid,1,phi)
         circumR=2/sqrt(3)
         edgeLength=1
@@ -783,83 +853,7 @@ function resetCamera() {
         intData=[[0,10],[0,14],[0,16],[1,8],[1,12],[1,18],[2,7],[2,12],[2,16],[3,9],[3,13],[3,17],[4,10],[4,13],[4,15],[5,8],[5,11],[5,17],[6,7],[6,11],[6,15],[7,8],[9,10],[9,19],[11,13],[12,14],[14,19],[15,16],[17,18],[18,19]]
         intData.push([20,78],[21,79],[22,71],[23,70],[24,69],[25,68],[26,61],[27,60],[28,77],[29,76],[30,75],[31,74],[32,57],[33,56],[34,55],[35,54],[36,53],[37,52],[38,73],[39,72],[40,41],[42,67],[43,66],[44,65],[45,64],[46,63],[47,62],[48,50],[49,51],[58,59])
       break
-      case 23:
-        vertexData = doWeird(ditdid,1,phi)
-        circumR=2/sqrt(3)
-        edgeLength=1
-        L=90
-        s=1
-        L2=60
-        faceData=[[16,4,6],[16,14,18,5,6],[4,3,18,12,16],[8,18,9,4,6],[3,4,11],[18,5,3],[9,18,14],[11,8,12,0,4],[0,9,4],[11,7,12,19,3],[7,16,10,3,5],[12,16,7],[0,19,12],[10,3,19],[16,10,14],[15,11,7],[7,1,5],[1,7,15,10,19],[6,13,9,14,2],[6,2,8],[14,10,13,5,1],[2,1,17,13,15],[14,2,1],[17,19,0,15,11],[17,9,0,2,8],[15,13,10],[2,15,0],[13,9,17],[8,12,18],[6,5,13],[19,17,1],[17,11,8]]
-        JL=20
-        intData=[[20,21],[22,28],[23,29],[24,30],[25,31],[26,38],[27,39],[32,42],[33,43],[34,44],[35,45],[36,46],[37,47],[40,58],[41,59],[48,49],[50,51],[52,62],[53,63],[54,64],[55,65],[56,66],[57,67],[60,72],[61,73],[68,74],[69,75],[70,76],[71,77],[78,79]]
-      break
-      case 24:
-        vertexData = doWeird(ditdid,1,phi)
-        circumR=2/sqrt(3)
-        edgeLength=1
-        L=210
-        s=1
-        L2=60
-        faceData=[[16,4,6],[3,4,11],[18,5,3],[9,18,14],[0,9,4],[12,16,7],[0,19,12],[10,3,19],[16,10,14],[15,11,7],[7,1,5],[6,2,8],[14,2,1],[15,13,10],[2,15,0],[13,9,17],[8,12,18],[6,5,13],[19,17,1],[17,11,8],[0,15,10,16,4],[17,1,5,18,8],[19,0,9,14,10],[7,11,8,6,5],[10,3,4,9,13],[5,13,17,11,3],[18,12,19,1,14],[6,4,11,15,13],[16,6,2,15,7],[3,18,9,17,19],[7,1,2,8,12],[2,0,12,16,14]]
-        JL=20
-        intData=[[20,21],[22,28],[23,29],[24,30],[25,31],[26,38],[27,39],[32,42],[33,43],[34,44],[35,45],[36,46],[37,47],[40,58],[41,59],[48,49],[50,51],[52,62],[53,63],[54,64],[55,65],[56,66],[57,67],[60,72],[61,73],[68,74],[69,75],[70,76],[71,77],[78,79]]
-        intData.push([20,78],[21,79],[22,71],[23,70],[24,69],[25,68],[26,61],[27,60],[28,77],[29,76],[30,75],[31,74],[32,57],[33,56],[34,55],[35,54],[36,53],[37,52],[38,73],[39,72],[40,41],[42,67],[43,66],[44,65],[45,64],[46,63],[47,62],[48,50],[49,51],[58,59])
-        intData.push([0,10],[0,14],[0,16],[1,8],[1,12],[1,18],[2,7],[2,12],[2,16],[3,9],[3,13],[3,17],[4,10],[4,13],[4,15],[5,8],[5,11],[5,17],[6,7],[6,11],[6,15],[7,8],[9,10],[9,19],[11,13],[12,14],[14,19],[15,16],[17,18],[18,19])
-        intData.push([20,30],[20,31],[21,28],[21,29],[22,24],[22,44],[23,25],[23,45],[24,46],[25,47],[26,34],[26,49],[27,35],[27,48],[28,38],[29,39],[30,42],[31,43],[32,36],[32,51],[33,37],[33,50],[34,62],[35,63],[36,64],[37,65],[38,39],[40,52],[40,54],[41,53],[41,55],[42,43],[44,58],[45,59],[46,58],[47,59],[48,67],[49,66],[50,73],[51,72],[52,74],[53,75],[54,76],[55,77],[56,57],[56,68],[57,69],[60,61],[60,70],[61,71],[62,66],[63,67],[64,72],[65,73],[68,79],[69,79],[70,78],[71,78],[74,76],[75,77])
-      break
-      case 25:
-        vertexData = conv([[0,0,2*sqrt(3)/3+10,0],[2*sqrt(3)/3+10,0,0,0],[0,2*sqrt(3)/3+10,0,0],[10+sqrt(3)/3,10+sqrt(3)/3,10+sqrt(3)/3,0]])
-        circumR=2*sqrt(3)/3
-        edgeLength=1
-        L=24
-        s=1
-        L2=L
-        faceData=[[6,0,8,2],[6,2,7,4],[6,4,10,0],[9,1,7,2],[9,2,8,5],[9,5,13,1],[11,1,13,3],[11,3,10,4],[11,4,7,1],[12,0,10,3],[12,3,13,5],[12,5,8,0]]
-        JL=vertexData.length
-      break
-      case 26:
-        var a0 = sqrt(5)/4
-        var a1 = (5+sqrt(5))/8
-        var a2 = (5+3*sqrt(5))/8
-        vertexData = conv([[10+a1,0,10+a2,0],[10+a2,10+a1,0,0],[0,10+a2,10+a1,0],[0,10+a0,10+a2,0],[10+a2,0,10+a0,0],[a0+10,a2+10,0,0],[10+a1,10+a1,10+a1,0]])
-        circumR=sqrt(3)*a1
-        edgeLength=1.063313510440049
-        L=60
-        s=1
-        L2=L
-        faceData=[[0,12,2,14],[0,14,10,26],[0,26,5,16],[1,13,9,25],[1,25,4,17],[1,17,5,27],[2,28,6,18],[2,18,7,30],[2,30,10,14],[3,19,6,29],[3,29,9,13],[3,13,1,15],[4,20,8,24],[4,24,0,16],[4,16,5,17],[7,18,6,19],[7,19,3,31],[7,31,11,23],[8,22,6,28],[8,28,2,12],[8,12,0,24],[9,29,6,22],[9,22,8,20],[9,20,4,25],[10,30,7,23],[10,23,11,21],[10,21,5,26],[11,31,3,15],[11,15,1,27],[11,27,5,21]]
-        JL=vertexData.length
-      break
       case 27:
-        var a0 = (3*sqrt(5)-5)/8
-        var a1 = (5-sqrt(5))/8
-        var a2 = sqrt(5)/4
-        vertexData = doWeird(conv([[0,10+a1,10+a0,0],[10+a1,10+a0,0,0],[10+a0,0,10+a1,0],[10+a2,0,10+a0,0],[0,10+a0,10+a2,0],[a0+10,a2+10,0,0],[10+a1,10+a1,10+a1,0]]),sqrt(10*(5-sqrt(5)))/8,phi)
-        circumR=sqrt(3)*a1
-        edgeLength=sqrt(10*(5-sqrt(5)))/8
-        L=180
-        s=1
-        L2=60
-        faceData=[[0,12,2,14],[0,12,9,29],[0,14,11,25],[0,18,5,25],[0,18,7,29],[1,13,3,15],[1,15,10,24],[2,12,9,31],[2,14,11,27],[2,16,4,27],[2,16,6,31],[3,13,8,30],[3,15,10,26],[3,17,4,26],[3,17,6,30],[4,16,6,17],[4,22,10,26],[4,22,11,27],[5,18,7,19],[5,23,10,24],[5,24,1,19],[6,20,9,31],[7,21,8,28],[7,21,9,29],[7,28,1,19],[8,13,1,28],[8,20,9,21],[10,22,11,23],[6,20,8,30],[5,23,11,25]]
-        JL=32
-        intData=[[0,35],[0,42],[0,58],[0,70],[0,77],[1,36],[1,41],[1,59],[1,69],[1,78],[2,35],[2,44],[2,54],[2,72],[2,77],[3,36],[3,43],[3,55],[3,71],[3,78],[4,43],[4,44],[4,54],[4,55],[4,61],[5,41],[5,42],[5,58],[5,59],[5,66],[6,47],[6,54],[6,55],[6,71],[6,72],[7,52],[7,58],[7,59],[7,69],[7,70],[8,36],[8,47],[8,52],[8,69],[8,71],[9,35],[9,47],[9,52],[9,70],[9,72],[10,41],[10,43],[10,61],[10,66],[10,78],[11,42],[11,44],[11,61],[11,66],[11,77]]
-        intData.push([32,61],[32,66],[33,55],[33,71],[34,54],[34,72],[35,57],[35,67],[35,73],[36,56],[36,68],[36,74],[37,59],[37,69],[38,58],[38,70],[39,44],[39,77],[40,43],[40,78],[41,46],[41,63],[41,79],[42,45],[42,62],[42,80],[43,65],[43,75],[44,64],[44,76],[45,77],[46,78],[47,50],[47,51],[47,81],[48,52],[48,70],[49,52],[49,69],[50,72],[51,71],[52,81],[53,58],[53,59],[54,60],[54,76],[55,60],[55,75],[56,78],[57,77],[58,80],[59,79],[61,64],[61,65],[62,66],[63,66],[67,72],[68,71],[69,74],[70,73])
-      break
-      case 28:
-        var a0 = 3*(sqrt(5)-1)/8
-        var a1 = 3*(1+sqrt(5))/8
-        vertexData = doWeird2(conv([[10.75,0,10+a1,0],[10+a1,10.75,0,0],[0,10+a1,10.75,0],[10+a0,0,10.75,0],[10.75,10+a0,0,0],[0,10.75,10+a0,0]]),sqrt(3)*3/4,phi)
-        circumR=sqrt(3)*a1
-        edgeLength=sqrt(3)*3/4
-        intersectionD=0.88167787843871
-        L=120
-        s=1
-        L2=60
-        faceData=[[0,14,7,22],[0,22,11,17],[0,17,1,16],[0,16,9,20],[0,20,6,14],[3,13,5,23],[3,23,10,19],[3,19,2,18],[3,18,8,21],[3,21,4,13],[1,15,6,21],[1,21,8,16],[2,19,11,22],[2,22,5,12],[4,21,6,20],[4,20,2,12],[5,13,9,16],[5,16,8,12],[6,15,11,19],[6,19,10,14],[7,15,1,23],[7,23,5,22],[8,18,7,14],[8,14,10,12],[9,15,7,18],[9,18,2,20],[10,23,1,17],[10,17,4,12],[11,15,9,13],[11,13,4,17]]
-        JL=24
-      break
-      case 29:
         var a0 = phi_2
         vertexData = doWeird2(conv([[10+phi,0,10+phi2,0],[10+phi2,10+phi,0,0],[0,10+phi2,10+phi,0],[10+a0,0,10+phi_1,0],[10+phi_1,10+a0,0,0],[0,10+phi_1,10+a0,0]]),sqrt(8),2*phi_1)
         circumR=sqrt(phi2+phi2*phi2)
@@ -872,7 +866,18 @@ function resetCamera() {
         faceData=[[0,14,6,19,11,22],[0,22,7,23,1,17],[0,17,11,13,9,16],[0,16,1,21,6,20],[0,20,9,18,7,14],[3,13,4,17,10,23],[3,23,5,22,2,19],[3,19,10,14,8,18],[3,18,2,20,4,21],[3,21,8,16,5,13],[12,2,22,11,17,4],[12,4,20,6,14,10],[12,10,17,1,16,8],[12,8,14,7,22,5],[12,5,16,9,20,2],[15,1,23,10,19,6],[15,6,21,4,13,11],[15,11,19,2,18,9],[15,9,13,5,23,7],[15,7,18,8,21,1]]
         JL=24
       break
-      case 30:
+      case 28:
+        vertexData = doWeird(ditdid,1,phi)
+        circumR=2/sqrt(3)
+        edgeLength=1
+        L=90
+        s=1
+        L2=60
+        faceData=[[16,4,6],[16,14,18,5,6],[4,3,18,12,16],[8,18,9,4,6],[3,4,11],[18,5,3],[9,18,14],[11,8,12,0,4],[0,9,4],[11,7,12,19,3],[7,16,10,3,5],[12,16,7],[0,19,12],[10,3,19],[16,10,14],[15,11,7],[7,1,5],[1,7,15,10,19],[6,13,9,14,2],[6,2,8],[14,10,13,5,1],[2,1,17,13,15],[14,2,1],[17,19,0,15,11],[17,9,0,2,8],[15,13,10],[2,15,0],[13,9,17],[8,12,18],[6,5,13],[19,17,1],[17,11,8]]
+        JL=20
+        intData=[[20,21],[22,28],[23,29],[24,30],[25,31],[26,38],[27,39],[32,42],[33,43],[34,44],[35,45],[36,46],[37,47],[40,58],[41,59],[48,49],[50,51],[52,62],[53,63],[54,64],[55,65],[56,66],[57,67],[60,72],[61,73],[68,74],[69,75],[70,76],[71,77],[78,79]]
+      break
+      case 29:
         var a0 = (5-sqrt(5))/10
         var a1 = (3-sqrt(5))/2
         var a2 = sqrt(5)/5
@@ -886,6 +891,20 @@ function resetCamera() {
         L2=60
         faceData=[[12,0,14,30,22,26],[12,26,17,5,16,24],[12,24,20,28,14,2],[12,2,22,9,17,4],[12,4,16,8,20,0],[15,1,13,27,23,31],[15,31,19,6,18,29],[15,29,21,25,13,3],[15,3,23,11,19,7],[15,7,18,10,21,1],[13,1,21,8,16,5],[13,5,17,9,23,3],[13,25,16,4,17,27],[14,0,20,10,18,6],[14,6,19,11,22,2],[14,28,18,7,19,30],[20,8,21,29,18,28],[20,24,16,25,21,10],[22,11,23,27,17,26],[22,30,19,31,23,9]]
         JL=vertexData.length
+      break
+      case 30:
+        vertexData = doWeird(ditdid,1,phi)
+        circumR=2/sqrt(3)
+        edgeLength=1
+        L=210
+        s=1
+        L2=60
+        faceData=[[16,4,6],[3,4,11],[18,5,3],[9,18,14],[0,9,4],[12,16,7],[0,19,12],[10,3,19],[16,10,14],[15,11,7],[7,1,5],[6,2,8],[14,2,1],[15,13,10],[2,15,0],[13,9,17],[8,12,18],[6,5,13],[19,17,1],[17,11,8],[0,15,10,16,4],[17,1,5,18,8],[19,0,9,14,10],[7,11,8,6,5],[10,3,4,9,13],[5,13,17,11,3],[18,12,19,1,14],[6,4,11,15,13],[16,6,2,15,7],[3,18,9,17,19],[7,1,2,8,12],[2,0,12,16,14]]
+        JL=20
+        intData=[[20,21],[22,28],[23,29],[24,30],[25,31],[26,38],[27,39],[32,42],[33,43],[34,44],[35,45],[36,46],[37,47],[40,58],[41,59],[48,49],[50,51],[52,62],[53,63],[54,64],[55,65],[56,66],[57,67],[60,72],[61,73],[68,74],[69,75],[70,76],[71,77],[78,79]]
+        intData.push([20,78],[21,79],[22,71],[23,70],[24,69],[25,68],[26,61],[27,60],[28,77],[29,76],[30,75],[31,74],[32,57],[33,56],[34,55],[35,54],[36,53],[37,52],[38,73],[39,72],[40,41],[42,67],[43,66],[44,65],[45,64],[46,63],[47,62],[48,50],[49,51],[58,59])
+        intData.push([0,10],[0,14],[0,16],[1,8],[1,12],[1,18],[2,7],[2,12],[2,16],[3,9],[3,13],[3,17],[4,10],[4,13],[4,15],[5,8],[5,11],[5,17],[6,7],[6,11],[6,15],[7,8],[9,10],[9,19],[11,13],[12,14],[14,19],[15,16],[17,18],[18,19])
+        intData.push([20,30],[20,31],[21,28],[21,29],[22,24],[22,44],[23,25],[23,45],[24,46],[25,47],[26,34],[26,49],[27,35],[27,48],[28,38],[29,39],[30,42],[31,43],[32,36],[32,51],[33,37],[33,50],[34,62],[35,63],[36,64],[37,65],[38,39],[40,52],[40,54],[41,53],[41,55],[42,43],[44,58],[45,59],[46,58],[47,59],[48,67],[49,66],[50,73],[51,72],[52,74],[53,75],[54,76],[55,77],[56,57],[56,68],[57,69],[60,61],[60,70],[61,71],[62,66],[63,67],[64,72],[65,73],[68,79],[69,79],[70,78],[71,78],[74,76],[75,77])
       break
       case 31:
         var a0 = (5-sqrt(5))/10
@@ -1178,7 +1197,6 @@ function resetCamera() {
         circumR=a8-10
         L=180
         L2=L
-        //edgeLength=dist(vertexData[8][0],vertexData[8][1],vertexData[8][2],vertexData[18][0],vertexData[18][1],vertexData[18][2])
         faceData=[[0,6,18],[0,6,20],[0,8,18],[0,8,20],[1,7,19],[1,7,21],[1,9,19],[1,9,21],[2,10,22],[2,10,23],[2,11,22],[2,11,23],[3,12,24],[3,12,25],[3,13,24],[3,13,25],[4,14,26],[4,14,27],[4,16,26],[4,16,27],[5,15,28],[5,15,29],[5,17,28],[5,17,29],[6,18,30],[6,20,34],[6,26,30],[6,26,34],[7,19,31],[7,21,35],[7,27,31],[7,27,35],[8,18,32],[8,20,36],[8,28,32],[8,28,36],[9,19,33],[9,21,37],[9,29,33],[9,29,37],[10,18,38],[10,18,40],[10,22,38],[10,23,40],[11,19,39],[11,19,41],[11,22,39],[11,23,41],[12,20,42],[12,20,44],[12,24,42],[12,25,44],[13,21,43],[13,21,45],[13,24,43],[13,25,45],[14,22,46],[14,22,47],[14,26,46],[14,27,47],[15,23,48],[15,23,49],[15,28,48],[15,29,49],[16,24,50],[16,24,51],[16,26,50],[16,27,51],[17,25,52],[17,25,53],[17,28,52],[17,29,53],[18,30,54],[18,32,56],[18,38,54],[18,40,56],[19,31,55],[19,39,55],[19,41,57],[19,57,33],[20,34,58],[20,36,60],[20,42,58],[20,60,44],[21,35,59],[21,37,61],[21,45,61],[21,59,43],[22,38,54],[22,39,55],[22,46,54],[22,47,55],[23,40,56],[23,41,57],[23,48,56],[23,49,57],[24,42,58],[24,43,59],[24,50,58],[24,51,59],[25,44,60],[25,45,61],[25,52,60],[25,53,61],[26,30,54],[26,34,58],[26,46,54],[26,50,58],[27,31,55],[27,35,59],[27,47,55],[27,51,59],[28,32,56],[28,36,60],[28,48,56],[28,52,60],[29,33,57],[29,37,61],[29,49,57],[29,53,61]]
         edgesData=[[0,6],[0,8],[0,18],[0,20],[1,7],[1,9],[1,19],[1,21],[2,10],[2,11],[2,22],[2,23],[3,12],[3,13],[3,24],[3,25],[4,14],[4,16],[4,26],[4,27],[5,15],[5,17],[5,28],[5,29],[6,18],[6,20],[6,26],[6,30],[6,34],[7,19],[7,21],[7,27],[7,31],[7,35],[8,18],[8,20],[8,28],[8,32],[8,36],[9,19],[9,21],[9,29],[9,33],[9,37],[10,18],[10,22],[10,23],[10,38],[10,40],[11,19],[11,22],[11,23],[11,39],[11,41],[12,20],[12,24],[12,25],[12,42],[12,44],[13,21],[13,24],[13,25],[13,43],[13,45],[14,22],[14,26],[14,27],[14,46],[14,47],[15,23],[15,28],[15,29],[15,48],[15,49],[16,24],[16,26],[16,27],[16,50],[16,51],[17,25],[17,28],[17,29],[17,52],[17,53],[18,30],[18,32],[18,38],[18,40],[18,54],[18,56],[19,31],[19,33],[19,39],[19,41],[19,55],[19,57],[20,34],[20,36],[20,42],[20,44],[20,58],[20,60],[21,35],[21,37],[21,43],[21,45],[21,59],[21,61],[22,38],[22,39],[22,46],[22,47],[22,54],[22,55],[23,40],[23,41],[23,48],[23,49],[23,56],[23,57],[24,42],[24,43],[24,50],[24,51],[24,58],[24,59],[25,44],[25,45],[25,52],[25,53],[25,60],[25,61],[26,30],[26,34],[26,46],[26,50],[26,54],[26,58],[27,31],[27,35],[27,47],[27,51],[27,55],[27,59],[28,32],[28,36],[28,48],[28,52],[28,56],[28,60],[29,33],[29,37],[29,49],[29,53],[29,57],[29,61],[30,54],[31,55],[32,56],[33,57],[34,58],[35,59],[36,60],[37,61],[38,54],[39,55],[40,56],[41,57],[42,58],[43,59],[44,60],[45,61],[46,54],[47,55],[48,56],[49,57],[50,58],[51,59],[52,60],[53,61]]
         JL=vertexData.length
@@ -1692,7 +1710,6 @@ function resetCamera() {
         var a3 = 10+(5+3*sqrt(5))/4
         vertexData = conv([[a2,0,a3],[a3,a2,0],[0,a3,a2],[a0,0,a1],[a1,a0,0],[0,a1,a0]])
         circumR=sqrt(5*(5+2*sqrt(5)))/2
-        edgeLength=dist(vertexData[5][0],vertexData[5][1],vertexData[5][2],vertexData[2][0],vertexData[2][1],vertexData[2][2])
         L=90
         L2=L
         faceData=[[12,2,5],[12,5,8],[12,8,10],[12,10,4],[12,4,2],[13,3,4],[13,4,11],[13,11,9],[13,9,5],[13,5,3],[14,0,6],[14,6,10],[14,10,8],[14,8,7],[14,7,0],[15,1,7],[15,7,9],[15,9,11],[15,11,6],[15,6,1],[16,0,1],[16,1,8],[16,8,5],[16,5,9],[16,9,0],[17,1,0],[17,0,11],[17,11,4],[17,4,10],[17,10,1],[18,3,2],[18,2,9],[18,9,7],[18,7,8],[18,8,3],[19,2,3],[19,3,10],[19,10,6],[19,6,11],[19,11,2],[20,0,9],[20,9,2],[20,2,4],[20,4,6],[20,6,0],[21,1,6],[21,6,4],[21,4,3],[21,3,8],[21,8,1],[22,0,7],[22,7,5],[22,5,2],[22,2,11],[22,11,0],[23,1,10],[23,10,3],[23,3,5],[23,5,7],[23,7,1]]
@@ -1700,8 +1717,434 @@ function resetCamera() {
         s=1
         edgesData=[[0,14],[0,16],[0,17],[0,20],[0,22],[1,15],[1,16],[1,17],[1,21],[1,23],[2,12],[2,18],[2,19],[2,20],[2,22],[3,13],[3,18],[3,19],[3,21],[3,23],[4,12],[4,13],[4,17],[4,20],[4,21],[5,12],[5,13],[5,16],[5,22],[5,23],[6,14],[6,15],[6,19],[6,20],[6,21],[7,14],[7,15],[7,18],[7,22],[7,23],[8,12],[8,14],[8,16],[8,18],[8,21],[9,13],[9,15],[9,16],[9,18],[9,20],[10,12],[10,14],[10,17],[10,19],[10,23],[11,13],[11,15],[11,17],[11,19],[11,22],[12,13],[12,18],[12,19],[12,21],[12,23],[13,18],[13,19],[13,20],[13,22],[14,15],[14,16],[14,17],[14,21],[14,23],[15,16],[15,17],[15,20],[15,22],[16,18],[16,22],[16,23],[17,19],[17,20],[17,21],[18,22],[18,23],[19,20],[19,21],[20,22],[21,23]]
         edgesData.push([0,1],[0,6],[0,7],[0,9],[0,11],[1,6],[1,7],[1,8],[1,10],[2,3],[2,4],[2,5],[2,9],[2,11],[3,4],[3,5],[3,8],[3,10],[4,6],[4,10],[4,11],[5,7],[5,8],[5,9],[6,10],[6,11],[7,8],[7,9],[8,10],[9,11])
+      break      
+      case 82:
+        var a0 = 10+(3-sqrt(5))/4
+        var a1 = 10-phi_1/2
+        var a2 = 10-phi_1
+        var a3 = 10+(5-sqrt(5))/4
+        var a4 = 10-phi/2
+        vertexData = conv([[0,10.5,a3],[10.5,a3,0],[a3,0,10.5],[10.5,a1,a2],[a1,a2,10.5],[a2,10.5,a1],[a4,a0,a0],[a0,a0,a4],[a0,a4,a0]])
+        circumR=sqrt(2*(17-5*sqrt(5)))/4
+        edgeLength=1
+        L=90
+        L2=L
+        faceData=[[0,2,42,26,51,35,33,49,24,40],[1,3,39,23,46,30,28,44,21,37],[2,0,36,20,45,29,31,47,22,38],[3,1,41,25,48,32,34,50,27,43],[4,6,49,33,59,19,15,55,29,45],[6,4,44,28,54,14,18,58,32,48],[5,7,50,34,56,16,12,52,30,46],[7,5,47,31,53,13,17,57,35,51],[8,9,55,15,43,27,26,42,14,54],[9,8,52,12,40,24,25,41,13,53],[10,11,57,17,37,21,20,36,16,56],[11,10,58,18,38,22,23,39,19,59],[0,40,12,16,36],[1,37,17,13,41],[2,38,18,14,42],[3,43,15,19,39],[4,45,20,21,44],[6,48,25,24,49],[5,46,23,22,47],[7,51,26,27,50],[8,54,28,30,52],[9,53,31,29,55],[10,56,34,32,58],[11,59,33,35,57]]
+        s=1
+        JL=60
       break
-      case 127:
+      case 83:
+        var a0 = 10-(3*sqrt(5)-5)/4
+        var a1 = 10+(5-sqrt(5))/4
+        var a2 = 10-5*(1+sqrt(5))/4
+        var a3 = 10+5*(3+sqrt(5))/4
+        vertexData = conv([[0,a1,a0],[a1,a0,0],[a0,0,a1],[0,a3,a2],[a3,a2,0],[a2,0,a3]])
+        circumR=5*sqrt(5+2*sqrt(5))/2
+        edgeLength=dist(vertexData[2][0],vertexData[2][1],vertexData[2][2],vertexData[6][0],vertexData[6][1],vertexData[6][2])
+        L=90
+        L2=L
+        faceData=[[12,2,6],[12,6,8],[12,8,10],[12,10,4],[12,4,2],[13,3,4],[13,4,11],[13,11,9],[13,9,6],[13,6,3],[14,0,5],[14,5,10],[14,10,8],[14,8,7],[14,7,0],[15,1,7],[15,7,9],[15,9,11],[15,11,5],[15,5,1],[16,0,1],[16,1,8],[16,8,6],[16,6,9],[16,9,0],[18,1,0],[18,0,11],[18,11,4],[18,4,10],[18,10,1],[17,3,2],[17,2,9],[17,9,7],[17,7,8],[17,8,3],[19,2,3],[19,3,10],[19,10,5],[19,5,11],[19,11,2],[20,0,9],[20,9,2],[20,2,4],[20,4,5],[20,5,0],[21,1,5],[21,5,4],[21,4,3],[21,3,8],[21,8,1],[22,0,7],[22,7,6],[22,6,2],[22,2,11],[22,11,0],[23,1,10],[23,10,3],[23,3,6],[23,6,7],[23,7,1]]
+        JL=24
+        s=1/2
+        edgesData=[[0,14],[0,16],[0,18],[0,20],[0,22],[1,15],[1,16],[1,18],[1,21],[1,23],[2,12],[2,17],[2,19],[2,20],[2,22],[3,13],[3,17],[3,19],[3,21],[3,23],[4,12],[4,13],[4,18],[4,20],[4,21],[5,14],[5,15],[5,19],[5,20],[5,21],[6,12],[6,13],[6,16],[6,22],[6,23],[7,14],[7,15],[7,17],[7,22],[7,23],[8,12],[8,14],[8,16],[8,17],[8,21],[9,13],[9,15],[9,16],[9,17],[9,20],[10,12],[10,14],[10,18],[10,19],[10,23],[11,13],[11,15],[11,18],[11,19],[11,22]]
+        edgesData.push([0,1],[0,5],[0,7],[0,9],[0,11],[1,5],[1,7],[1,8],[1,10],[2,3],[2,4],[2,6],[2,9],[2,11],[3,4],[3,6],[3,8],[3,10],[4,5],[4,10],[4,11],[5,10],[5,11],[6,7],[6,8],[6,9],[7,8],[7,9],[8,10],[9,11])
+      break
+      case 84:
+        var a0 = 10-(sqrt(5)-2)/2
+        var a1 = 10+(3-sqrt(5))/4
+        var a2 = 10+(3-sqrt(5))/2
+        var a3 = 10-(3*sqrt(5)-5)/4
+        var a4 = 10-phi_1
+        vertexData = conv([[10.5,0,a3],[0,a3,10.5],[a3,10.5,0],[a1,10.5,a2],[10.5,a2,a1],[a2,a1,10.5],[a4,a1,a0],[a1,a0,a4],[a0,a4,a1]])
+        circumR=sqrt(2*(37-15*sqrt(5)))/4
+        edgeLength=1
+        L=90
+        L2=L
+        faceData=[[0,2,16,40,48,24,20,44,36,12],[1,3,19,43,51,27,23,47,39,15],[2,0,14,38,46,22,26,50,42,18],[3,1,13,37,45,21,25,49,41,17],[4,5,21,45,53,29,28,52,44,20],[5,4,24,48,56,32,33,57,49,25],[6,7,27,51,59,35,34,58,50,26],[7,6,22,46,54,30,31,55,47,23],[8,9,30,54,38,14,12,36,52,28],[10,11,35,59,43,19,17,41,57,33],[9,8,29,53,37,13,15,39,55,31],[11,10,32,56,40,16,18,42,58,34],[0,12,14],[1,15,13],[2,18,16],[3,17,19],[4,20,24],[5,25,21],[6,26,22],[7,23,27],[8,28,29],[10,33,32],[9,31,30],[11,34,35],[36,44,52],[37,53,45],[40,56,48],[41,49,57],[38,54,46],[39,47,55],[42,50,58],[43,59,51]]
+        s=1
+        JL=60
+      break
+      case 85:
+        vertexData = [[0,-0.42705098312484235,0.6909830056250527],[-0.42705098312484224,0.6909830056250524,0],[0,0.4270509831248423,-0.6909830056250524],[-0.6909830056250525,0,-0.4270509831248423],[0,-0.4270509831248422,-0.6909830056250525],[0,0.4270509831248423,0.6909830056250524],[0.6909830056250525,0,0.4270509831248423],[0.42705098312484235,-0.6909830056250524,0],[0.6909830056250527,0,-0.42705098312484235],[-0.42705098312484235,-0.6909830056250525,0],[-0.6909830056250525,0,0.4270509831248423],[0.42705098312484235,0.6909830056250525,0],[-0.20677955823875582,0,0.5413559116477511],[0.3345763534089954,-0.3345763534089955,0.3345763534089954],[0.20677955823875577,0,-0.5413559116477511],[0,-0.5413559116477511,-0.2067795582387557],[0,-0.5413559116477511,0.20677955823875577],[-0.5413559116477513,-0.20677955823875593,0],[0,0.5413559116477511,-0.20677955823875585],[0.5413559116477511,0.20677955823875585,0],[-0.3345763534089952,0.33457635340899533,-0.3345763534089953],[-0.3345763534089952,0.33457635340899533,0.33457635340899533],[-0.3345763534089953,-0.3345763534089954,0.3345763534089953],[0.20677955823875582,0,0.5413559116477511],[0.3345763534089953,0.3345763534089954,0.3345763534089953],[0.5413559116477513,-0.20677955823875566,0],[-0.5413559116477513,0.20677955823875566,0],[-0.20677955823875566,0,-0.5413559116477513],[-0.3345763534089954,-0.33457635340899533,-0.33457635340899533],[0.3345763534089952,-0.33457635340899533,-0.3345763534089953],[0.3345763534089952,0.3345763534089954,-0.3345763534089954],[0,0.5413559116477511,0.2067795582387557]]
+        circumR=sqrt(0.6598300562505259)
+        edgesData=[[1,0],[10,2],[10,4],[10,6],[10,7],[11,0],[11,10],[11,3],[11,4],[11,7],[12,11],[12,3],[12,7],[13,10],[13,11],[13,4],[14,1],[14,6],[14,9],[15,10],[15,2],[15,6],[16,3],[16,5],[16,8],[17,2],[17,5],[17,7],[18,10],[18,4],[18,6],[19,0],[19,1],[19,4],[20,5],[20,8],[20,9],[21,2],[21,6],[21,9],[22,1],[22,4],[22,6],[23,1],[23,8],[23,9],[24,10],[24,2],[24,7],[25,2],[25,5],[25,9],[26,0],[26,11],[26,4],[27,10],[27,11],[27,7],[28,0],[28,1],[28,8],[29,0],[29,11],[29,3],[3,0],[30,3],[30,5],[30,7],[31,0],[31,3],[31,8],[4,0],[4,1],[5,2],[5,3],[6,1],[6,2],[6,4],[7,2],[7,3],[7,5],[8,0],[8,1],[8,3],[8,5],[9,1],[9,2],[9,5],[9,6],[9,8]]
+        L=90
+        L2=L
+        faceData=[[10,11,13],[0,1,19],[6,10,18],[0,11,26],[1,6,22],[6,9,21],[5,7,17],[6,10,15],[5,9,25],[7,10,24],[1,9,23],[0,3,31],[5,9,20],[0,1,28],[3,5,16],[3,11,12],[2,10,24],[3,5,30],[10,11,27],[2,5,17],[2,6,21],[1,8,23],[2,5,25],[1,6,14],[5,8,20],[7,11,12],[0,8,31],[5,7,30],[0,11,29],[5,8,16],[3,7,12],[0,4,26],[7,10,27],[0,3,29],[4,10,13],[2,9,21],[1,4,22],[2,10,15],[1,9,14],[4,10,18],[4,6,22],[8,9,23],[0,4,19],[6,9,14],[0,8,28],[3,8,16],[2,7,17],[8,9,20],[3,7,30],[2,9,25],[4,11,26],[3,8,31],[1,4,19],[3,11,29],[1,8,28],[4,11,13],[2,6,15],[7,11,27],[4,6,18],[2,7,24]]
+        s=1
+        JL=32
+      break
+      case 86:
+        vertexData = [[0.5,0,0.9270509831248422],[0,0.9270509831248422,0.5],[0.9270509831248422,0.5,0],[-0.5,0,0.9270509831248422],[0,-0.9270509831248422,0.5],[-0.9270509831248422,0.5,0],[0.5,0,-0.9270509831248422],[0,0.9270509831248422,-0.5],[0.9270509831248422,-0.5,0],[-0.5,0,-0.9270509831248422],[0,-0.9270509831248422,-0.5],[-0.9270509831248422,-0.5,0],[1,0.3090169943749474,0.11803398874989485],[0.3090169943749474,0.11803398874989485,1],[0.11803398874989485,1,0.3090169943749474],[-1,0.3090169943749474,0.11803398874989485],[-0.3090169943749474,0.11803398874989485,1],[-0.11803398874989485,1,0.3090169943749474],[1,-0.3090169943749474,0.11803398874989485],[0.3090169943749474,-0.11803398874989485,1],[0.11803398874989485,-1,0.3090169943749474],[-1,-0.3090169943749474,0.11803398874989485],[-0.3090169943749474,-0.11803398874989485,1],[-0.11803398874989485,-1,0.3090169943749474],[1,0.3090169943749474,-0.11803398874989485],[0.3090169943749474,0.11803398874989485,-1],[0.11803398874989485,1,-0.3090169943749474],[-1,0.3090169943749474,-0.11803398874989485],[-0.3090169943749474,0.11803398874989485,-1],[-0.11803398874989485,1,-0.3090169943749474],[1,-0.3090169943749474,-0.11803398874989485],[0.3090169943749474,-0.11803398874989485,-1],[0.11803398874989485,-1,-0.3090169943749474],[-1,-0.3090169943749474,-0.11803398874989485],[-0.3090169943749474,-0.11803398874989485,-1],[-0.11803398874989485,-1,-0.3090169943749474],[0.6909830056250525,0.5,phi_1],[0.5,phi_1,0.6909830056250525],[phi_1,0.6909830056250525,0.5],[-0.6909830056250525,0.5,phi_1],[-0.5,phi_1,0.6909830056250525],[-phi_1,0.6909830056250525,0.5],[0.6909830056250525,-0.5,phi_1],[0.5,-phi_1,0.6909830056250525],[phi_1,-0.6909830056250525,0.5],[-0.6909830056250525,-0.5,phi_1],[-0.5,-phi_1,0.6909830056250525],[-phi_1,-0.6909830056250525,0.5],[0.6909830056250525,0.5,-phi_1],[0.5,phi_1,-0.6909830056250525],[phi_1,0.6909830056250525,-0.5],[-0.6909830056250525,0.5,-phi_1],[-0.5,phi_1,-0.6909830056250525],[-phi_1,0.6909830056250525,-0.5],[0.6909830056250525,-0.5,-phi_1],[0.5,-phi_1,-0.6909830056250525],[phi_1,-0.6909830056250525,-0.5],[-0.6909830056250525,-0.5,-phi_1],[-0.5,-phi_1,-0.6909830056250525],[-phi_1,-0.6909830056250525,-0.5]]
+        circumR=sqrt(10-9/phi)/2
+        edgeLength=1
+        L=90
+        L2=L
+        faceData=[[32,44,56,20,8],[59,47,35,11,23],[15,3,21,39,45],[1,13,40,37,16],[50,38,26,2,14],[18,0,12,42,36],[4,22,43,46,19],[27,9,33,51,57],[17,53,41,29,5],[25,7,28,49,52],[34,10,31,58,55],[30,6,24,54,48],[46,43,30,6,9,33],[41,53,34,10,4,22],[0,3,15,52,49,12],[13,40,27,57,32,44],[4,19,38,50,31,10],[48,30,43,22,41,29],[26,38,19,46,33,51],[1,13,44,56,25,7],[8,20,45,39,14,2],[16,1,7,28,59,47],[29,5,11,35,54,48],[37,16,47,35,54,24],[45,15,52,25,56,20],[50,14,39,21,58,31],[32,8,2,26,51,57],[37,40,27,9,6,24],[42,36,17,5,11,23],[21,3,0,18,55,58],[59,23,42,12,49,28],[18,36,17,53,34,55]]
+        s=1
+        JL=60
+      break
+      case 87:
+        vertexData = [[0.4950402498354017,-0.8009919500329199,0],[-0.4950402498354016,-0.8009919500329197,0],[-0.8009919500329197,0,0.49504024983540174],[0,0.49504024983540174,0.8009919500329198],[0.4950402498354016,0.8009919500329197,0],[0.8009919500329197,0,0.49504024983540174],[0,-0.49504024983540174,0.8009919500329198],[-0.8009919500329196,0,-0.4950402498354018],[-0.49504024983540185,0.8009919500329199,0],[0,0.49504024983540174,-0.8009919500329197],[0,-0.49504024983540174,-0.8009919500329197],[0.8009919500329196,0,-0.4950402498354018],[0,-2.427050983124842,-0.9270509831248415],[-2.427050983124843,-0.9270509831248426,0],[0,2.4270509831248424,0.9270509831248422],[-1.5,-1.5,1.5],[2.427050983124842,-0.9270509831248421,0],[1.5,1.5,1.5],[-1.5,1.5,1.5],[2.427050983124843,0.9270509831248425,0],[0.9270509831248425,0,2.427050983124843],[-2.4270509831248415,0.9270509831248421,0],[-0.9270509831248427,0,-2.4270509831248432],[1.5,-1.5,1.5],[-1.5,-1.5,-1.5],[-1.5,1.5,-1.5],[0.9270509831248427,0,-2.4270509831248432],[0,2.427050983124842,-0.9270509831248415],[-0.927050983124843,0,2.4270509831248432],[0,-2.427050983124843,0.9270509831248424],[1.5,-1.5,-1.5],[1.5,1.5,-1.5]]
+        circumR=3*sqrt(3)/2
+        edgesData=[[12,11],[12,6],[12,7],[13,10],[13,6],[13,8],[14,2],[14,5],[14,9],[15,0],[15,3],[15,7],[16,10],[16,13],[16,4],[16,6],[17,11],[17,12],[17,13],[17,6],[17,8],[18,12],[18,16],[18,4],[18,6],[18,7],[19,0],[19,15],[19,3],[19,9],[20,0],[20,2],[20,4],[21,1],[21,19],[21,3],[21,9],[22,1],[22,11],[22,17],[22,8],[23,1],[23,11],[23,21],[23,22],[23,3],[24,0],[24,14],[24,19],[24,2],[24,20],[24,9],[25,10],[25,16],[25,2],[25,20],[25,4],[26,0],[26,15],[26,18],[26,20],[26,4],[26,7],[27,11],[27,12],[27,15],[27,23],[27,3],[27,7],[28,1],[28,22],[28,5],[28,8],[29,10],[29,14],[29,2],[29,25],[29,5],[30,1],[30,14],[30,21],[30,28],[30,5],[30,9],[31,10],[31,13],[31,28],[31,29],[31,5],[31,8]]
+        L=90
+        L2=L
+        faceData=[[5,14,29],[3,19,21],[4,20,26],[2,14,29],[6,13,16],[8,22,28],[11,12,27],[9,19,21],[0,20,26],[7,12,27],[10,13,16],[1,22,28],[5,14,30],[3,15,19],[4,20,25],[2,14,24],[3,21,23],[8,28,31],[5,29,31],[6,16,18],[0,20,24],[2,25,29],[6,13,17],[1,28,30],[11,23,27],[9,19,24],[4,18,26],[7,15,27],[9,21,30],[8,17,22],[11,12,17],[10,16,25],[0,15,26],[7,12,18],[10,13,31],[1,22,23],[5,28,31],[3,23,27],[4,16,18],[2,20,25],[3,15,27],[8,13,17],[5,28,30],[6,12,17],[0,15,19],[2,20,24],[6,12,18],[1,21,23],[11,17,22],[9,14,30],[4,16,25],[7,18,26],[9,14,24],[8,13,31],[11,22,23],[10,29,31],[0,19,24],[7,15,26],[10,25,29],[1,21,30]]
+        s=1
+        JL=32
+      break
+      case 88:
+        var a0 = (3-sqrt(5))/4
+        var a1 = sqrt(5)/2
+        var a2 = phi/2
+        vertexData = [[-a0,0.5,1],[-a0,-0.5,1],[0.5,-1,a0],[-0.5,1,a0],[-0.5,-1,a0],[0.5,-1,-a0],[-1,a0,0.5],[1,-a0,0.5],[-1,-a0,0.5],[1,-a0,-0.5],[a1,0,a0],[a1,0,-a0],[phi_1,-a2,0.5],[phi_1,-a2,-0.5],[a2,-0.5,phi_1],[a2,-0.5,-phi_1],[0,a0,a1],[-phi_1,-a2,0.5],[0,a0,-a1],[-0.5,1,-a0],[-phi_1,a2,-0.5],[0,-a0,a1],[0,-a0,-a1],[-0.5,-1,-a0],[-phi_1,-a2,-0.5],[a0,a1,0],[1,a0,0.5,0],[a2,0.5,phi_1],[-a0,a1,0],[a0,-a1,0],[a2,0.5,-phi_1],[-a0,-a1,0],[1,a0,-0.5,0],[-a2,0.5,phi_1],[-a2,-0.5,phi_1],[-a1,0,a0],[-1,a0,-0.5],[-a2,0.5,-phi_1],[-a1,0,-a0],[-1,-a0,-0.5],[-a2,-0.5,-phi_1],[a0,0.5,1],[0.5,phi_1,a2],[-0.5,phi_1,a2],[a0,-0.5,1],[0.5,-phi_1,a2],[a0,0.5,-1],[0.5,phi_1,-a2],[0.5,-phi_1,-a2],[-a0,0.5,-1],[-0.5,-phi_1,a2],[a0,-0.5,-1],[-0.5,phi_1,-a2],[-a0,-0.5,-1],[-0.5,-phi_1,-a2],[0.5,1,a0],[phi_1,a2,0.5],[0.5,1,-a0],[phi_1,a2,-0.5],[-phi_1,a2,0.5]]
+        circumR=sqrt(2*(17-3*sqrt(5)))/4
+        edgeLength=1
+        L=120
+        L2=L
+        faceData=[[15,2,7,9,5,14,11,13,12,10],[14,21,42,7,44,41,26,45,16,27],[11,27,57,32,26,55,30,10,56,58],[45,50,31,12,1,4,2,44,17,29],[22,15,30,18,48,32,46,51,9,47],[53,23,5,51,24,29,48,54,31,13],[39,8,4,40,35,17,24,38,34,23],[6,0,1,8,43,21,34,33,16,50],[0,3,55,41,59,25,42,43,28,56],[46,57,19,49,58,28,52,47,25,20],[18,37,40,22,52,39,53,49,36,54],[3,6,36,19,33,38,20,59,35,37],[56,58,49,36,6,0],[14,27,57,46,51,5],[41,26,32,46,20,59],[43,42,7,2,4,8],[3,6,50,45,26,55],[32,57,19,36,54,48],[5,9,47,52,39,23],[34,33,19,49,53,23],[37,40,4,1,0,3],[44,41,55,30,15,2],[44,17,24,51,9,7],[33,16,45,29,24,38],[13,31,50,16,27,11],[10,56,28,52,22,15],[35,17,29,48,18,37],[31,12,10,30,18,54],[1,8,39,53,13,12],[25,42,21,34,38,20],[14,21,43,28,58,11],[22,40,35,59,25,47]]
+        s=1
+        JL=60
+      break
+      case 89:
+        var a0 = 3/4*(sqrt(5)-1)
+        var a1 = 3/4*(3-sqrt(5))
+        var a2 = (5-sqrt(5))/4
+        var a3 = (5+sqrt(5))/4
+        var a4 = sqrt(5)/2
+        vertexData = [[a0,-a1,0],[a1,0,a0],[a0,a1,0],[0,-a0,a1],[a1,0,-a0],[0,-a0,-a1],[-a0,-a1,0],[-a1,0,a0],[0,a0,a1],[0,a0,-a1],[-a1,0,-a0],[-a0,a1,0],[-a2,a3,0],[a3,0,-a2],[a2,a3,0],[0,-a2,a3],[0,a2,a3],[0,a2,-a3],[0,-a2,-a3],[-a3,0,-a2],[-a3,0,a2],[a3,0,a2],[a2,-a3,0],[-a4,-a4,a4],[a4,-a4,a4],[a4,a4,-a4],[-a4,-a4,-a4],[a4,-a4,-a4],[-a2,-a3,0],[-a4,a4,a4],[a4,a4,a4],[-a4,a4,-a4]]
+        circumR=sqrt(15)/2
+        edgesData=[[12,10],[12,11],[12,2],[12,7],[12,8],[12,9],[13,0],[13,1],[13,2],[13,4],[13,5],[13,9],[14,1],[14,11],[14,2],[14,4],[14,8],[14,9],[15,0],[15,1],[15,3],[15,6],[15,7],[15,8],[16,1],[16,11],[16,2],[16,3],[16,7],[16,8],[17,10],[17,11],[17,2],[17,4],[17,5],[17,9],[18,0],[18,10],[18,4],[18,5],[18,6],[18,9],[19,10],[19,11],[19,5],[19,6],[19,7],[19,9],[20,10],[20,11],[20,3],[20,6],[20,7],[20,8],[21,0],[21,1],[21,2],[21,3],[21,4],[21,8],[22,0],[22,1],[22,3],[22,4],[22,5],[22,6],[23,1],[23,11],[23,3],[23,5],[23,6],[23,7],[24,0],[24,1],[24,2],[24,3],[24,5],[24,7],[25,0],[25,10],[25,2],[25,4],[25,8],[25,9],[26,10],[26,11],[26,3],[26,4],[26,5],[26,6],[27,0],[27,10],[27,2],[27,3],[27,4],[27,5],[28,0],[28,10],[28,3],[28,5],[28,6],[28,7],[29,1],[29,11],[29,6],[29,7],[29,8],[29,9],[30,0],[30,1],[30,2],[30,7],[30,8],[30,9],[31,10],[31,11],[31,4],[31,6],[31,8],[31,9]]
+        L=120
+        L2=L
+        faceData=[[7,12,8,20],[3,20,7,28],[0,15,3,21],[8,16,11,20],[3,15,6,20],[0,13,5,18],[7,12,11,16],[0,15,1,22],[6,15,7,28],[0,18,4,22],[0,25,2,27],[0,24,2,30],[0,27,3,28],[0,24,5,28],[0,13,1,30],[0,21,4,25],[1,23,7,24],[3,22,6,26],[4,26,10,27],[9,17,11,19],[9,14,11,29],[1,29,7,30],[4,25,10,31],[5,18,6,19],[5,22,6,23],[8,29,9,31],[1,14,2,16],[1,13,2,24],[8,25,9,30],[3,23,5,26],[2,21,4,27],[3,24,5,27],[2,14,4,17],[7,19,11,23],[6,19,7,29],[6,26,11,31],[10,12,11,17],[10,20,11,26],[6,23,11,29],[6,18,10,28],[6,20,10,31],[1,14,8,21],[1,15,8,29],[7,15,8,30],[1,21,3,22],[1,16,3,23],[4,13,9,14],[4,18,9,31],[4,17,5,26],[9,12,10,19],[3,16,7,24],[4,13,5,22],[9,18,10,25],[5,19,10,28],[5,17,10,27],[2,16,8,21],[2,12,8,25],[2,13,9,17],[2,12,9,30],[8,14,11,31]]
+        s=1
+        JL=vertexData.length
+      break
+      case 90:
+        var a0 = (sqrt(5)-2)/2
+        var a1 = (3-sqrt(5))/4
+        var a2 = phi_1/2
+        var a4 = (5-sqrt(5))/4
+        vertexData = [[a1,0,a4],[0,a4,a1],[a4,a1,0],[-a1,0,a4],[0,a4,-a1],[-a4,a1,0],[a1,0,-a4],[0,-a4,a1],[a4,-a1,0],[-a1,0,-a4],[0,-a4,-a1],[-a4,-a1,0],[0.5,a0,0.5],[a0,0.5,0.5],[0.5,0.5,a0],[-0.5,a0,0.5],[-a0,0.5,0.5],[-0.5,0.5,a0],[0.5,-a0,0.5],[a0,-0.5,0.5],[0.5,-0.5,a0],[-0.5,-a0,0.5],[-a0,-0.5,0.5],[-0.5,-0.5,a0],[0.5,a0,-0.5],[a0,0.5,-0.5],[0.5,0.5,-a0],[-0.5,a0,-0.5],[-a0,0.5,-0.5],[-0.5,0.5,-a0],[0.5,-a0,-0.5],[a0,-0.5,-0.5],[0.5,-0.5,-a0],[-0.5,-a0,-0.5],[-a0,-0.5,-0.5],[-0.5,-0.5,-a0],[a1,phi_1,a2],[phi_1,a2,a1],[-a2,a1,phi_1],[-a1,phi_1,a2],[-phi_1,a2,a1],[a2,-a1,phi_1],[a1,-phi_1,a2],[phi_1,-a2,a1],[-a2,-a1,phi_1],[-a1,-phi_1,a2],[-phi_1,-a2,a1],[a2,a1,-phi_1],[a1,phi_1,-a2],[phi_1,a2,-a1],[-a2,a1,-phi_1],[-a1,phi_1,-a2],[-phi_1,a2,-a1],[a2,-a1,-phi_1],[a1,-phi_1,-a2],[phi_1,-a2,-a1],[-a2,-a1,-phi_1],[-a1,-phi_1,-a2],[-phi_1,-a2,-a1],[a2,a1,phi_1]]
+        circumR=sqrt(11-4*sqrt(5))/2
+        edgeLength=1
+        L=120
+        L2=L
+        faceData=[[22,16,28,34],[19,13,25,31],[3,37,53,35],[58,6,14,38],[13,43,57,5],[52,34,8,36],[23,20,14,17],[35,32,26,29],[0,40,56,32],[59,17,9,55],[28,58,42,2],[19,37,51,11],[45,33,4,59],[56,7,12,48],[45,5,25,55],[8,48,40,22],[3,43,47,29],[52,6,20,44],[16,46,54,2],[10,44,36,24],[1,47,57,21],[21,18,30,33],[15,12,24,27],[46,0,26,50],[23,41,49,9],[39,41,10,27],[54,18,1,50],[38,4,30,42],[15,7,53,51],[48,12,15,51,37,3,29,26,0,40],[8,22,16,2,42,38,14,20,44,36],[57,21,18,54,46,0,32,35,3,43],[5,13,19,11,39,41,23,17,59,45],[6,14,17,9,49,39,27,24,36,52],[9,23,20,6,58,42,30,33,45,55],[31,19,37,53,7,12,24,10,41,49],[16,28,58,38,4,33,21,1,50,46],[30,18,1,47,43,13,25,55,59,4],[47,29,35,53,51,11,31,25,5,57],[27,15,7,56,40,22,34,52,44,10],[31,49,39,11],[32,26,50,54,2,28,34,8,48,56]]
+        s=1
+        JL=60
+      break
+      case 91:
+        var a0 = (3-sqrt(5))/2
+        var a2 = (5-sqrt(5))/4
+        var a3 = sqrt(5)/2
+        var a4 = (5+sqrt(5))/4
+        var a5 = sqrt(5)
+        vertexData = [[-a5,0,0],[a5,0,0],[a3,-a4,a2],[-a3,a4,-a2],[-a2,-a3,a4],[a2,a3,-a4],[0,0,a5],[0,0,-a5],[-a3,-a4,a2],[a3,a4,-a2],[a2,-a3,-a4],[-a2,a3,a4],[-a4,a2,a3],[a4,-a2,-a3],[-a2,-a3,-a4],[a2,a3,a4],[a3,a4,a2],[-a3,-a4,-a2],[a2,-a3,a4],[a4,-a2,a3],[-a4,a2,-a3],[0,-a5,0],[0,a5,0],[-a3,a4,a2],[a3,-a4,-a2],[-a4,-a2,a3],[a4,a2,-a3],[a4,a2,a3],[-a4,-a2,-a3],[0,phi_1,a0],[a0,0,phi_1],[0,-phi_1,a0],[-a0,0,phi_1],[0,phi_1,-a0],[0,-phi_1,-a0],[phi_1,-a0,0],[-phi_1,a0,0],[phi_1,a0,0],[-a0,0,-phi_1],[-phi_1,-a0,0],[-a2,a3,-a4],[a0,0,-phi_1]]
+        circumR=sqrt(5)
+        edgesData=[[29,11],[29,13],[29,15],[29,16],[29,2],[29,22],[29,23],[29,28],[29,7],[29,8],[30,0],[30,10],[30,15],[30,17],[30,18],[30,19],[30,27],[30,3],[30,5],[30,6],[31,16],[31,18],[31,2],[31,20],[31,21],[31,23],[31,26],[31,4],[31,7],[31,8],[32,1],[32,11],[32,12],[32,14],[32,24],[32,25],[32,4],[32,6],[32,9],[33,17],[33,19],[33,22],[33,24],[33,25],[33,3],[33,5],[33,6],[33,9],[34,10],[34,12],[34,14],[34,17],[34,21],[34,24],[34,27],[34,3],[34,6],[34,9],[35,1],[35,11],[35,13],[35,19],[35,2],[35,22],[35,24],[35,25],[35,28],[36,0],[36,10],[36,12],[36,18],[36,20],[36,21],[36,23],[36,26],[36,27],[36,3],[37,1],[37,12],[37,14],[37,16],[37,20],[37,21],[37,26],[37,27],[37,4],[37,9],[38,1],[38,11],[38,14],[38,16],[38,2],[38,20],[38,28],[38,4],[38,7],[39,0],[39,13],[39,15],[39,17],[39,19],[39,22],[39,25],[39,28],[39,5],[39,8],[40,32],[40,33],[40,35],[40,38],[41,0],[41,10],[41,13],[41,15],[41,18],[41,23],[41,26],[41,5],[41,7],[41,8]]
+        L=120
+        L2=L
+        faceData=[[8,29,23,31],[20,36,26,37],[10,30,18,41],[2,29,16,31],[12,36,27,37],[4,32,14,38],[3,33,17,34],[13,35,28,39],[5,30,15,41],[9,33,24,34],[19,35,25,39],[11,32,40,38],[13,29,22,35],[1,32,4,37],[3,30,6,33],[22,29,28,39],[0,30,18,36],[6,32,9,33],[21,31,26,37],[1,32,11,35],[6,30,17,34],[20,31,21,36],[0,30,15,39],[6,32,24,34],[19,33,22,35],[1,37,14,38],[7,29,23,41],[22,33,25,39],[0,36,10,41],[7,29,16,38],[21,34,27,37],[1,35,40,38],[7,31,8,41],[12,34,21,36],[0,39,5,41],[2,31,7,38],[5,30,19,33],[2,29,11,35],[3,30,27,36],[25,32,40,33],[8,29,15,39],[24,32,25,35],[10,30,27,34],[4,31,16,37],[17,30,19,39],[12,32,14,34],[18,31,23,36],[16,37,20,38],[13,29,15,41],[24,33,40,35],[23,36,26,41],[11,29,28,38],[5,33,17,39],[2,35,28,38],[18,31,26,41],[9,34,14,37],[8,39,13,41],[4,31,20,38],[3,34,10,36],[9,32,12,37]]
+        s=1
+        JL=vertexData.length
+      break
+      case 92:
+        var a0 = 10+(3 - sqrt(5)) / 4
+        var a1 = 10+phi_1/2
+        var a2 = 10+phi/2
+        var a3 = 10+sqrt(5)/2
+        var a4 = 10+phi2/2
+        vertexData = conv([[a0,0,a4],[a4,a0,0],[0,a4,a0],[10.5,10.5,a3],[a3,10.5,10.5],[10.5,a3,10.5],[a1,a2,11],[11,a1,a2],[a2,11,a1]])
+        circumR=sqrt(7)/2
+        edgeLength=1
+        L=120
+        L2=L
+        faceData=[[0,42,10,55,5,44],[0,46,4,53,8,40],[2,36,8,57,6,50],[2,48,7,59,10,38],[15,13,53,20,22,55],[15,19,49,33,29,45],[17,13,47,31,35,51],[17,19,59,26,24,57],[30,46,12,16,50,34],[30,42,26,27,43,31],[32,48,18,14,44,28],[32,36,20,21,37,33],[39,23,22,38,34,35],[39,11,58,7,49,3],[41,25,24,40,28,29],[41,9,52,4,47,1],[54,11,43,1,45,5],[54,23,21,52,12,14],[56,9,37,3,51,6],[56,25,27,58,18,16],[0,40,24,26,42],[1,43,27,25,41],[2,38,22,20,36],[3,37,21,23,39],[4,46,30,31,47],[5,45,29,28,44],[6,51,35,34,50],[7,48,32,33,49],[8,53,13,17,57],[9,56,16,12,52],[10,59,19,15,55],[11,54,14,18,58],[0,44,14,12,46],[1,47,13,15,45],[2,50,16,18,48],[3,49,19,17,51],[4,52,21,20,53],[5,55,22,23,54],[6,57,24,25,56],[7,58,27,26,59],[8,36,32,28,40],[9,41,29,33,37],[10,42,30,34,38],[11,39,35,31,43]]
+        s=1
+        JL=vertexData.length
+      break
+      case 93:
+        var a0 = 10+phi_1
+        var a1 = 10+3*(7-sqrt(5))/22
+        var a2 = 10+3*(3*sqrt(5)-1)/22
+        var a3 = 10+3*(1+3*sqrt(5))/22
+        var a4 = 10+3*(7+sqrt(5))/22
+        var a5 = 10+phi
+        vertexData = conv([[0,a0,a5],[a5,0,a0],[a0,a5,0],[a2,0,a4],[a4,a2,0],[0,a4,a2],[a1,0,a3],[a3,a1,0],[0,a3,a1],[11,11,11]])
+        circumR=sqrt(3)
+        edgesData=[[0,16],[0,18],[0,22],[1,16],[1,18],[1,23],[2,17],[2,19],[2,20],[3,17],[3,19],[3,21],[4,13],[4,20],[4,22],[5,12],[5,21],[5,23],[6,15],[6,20],[6,22],[7,14],[7,21],[7,23],[8,12],[8,13],[8,18],[9,12],[9,13],[9,19],[10,14],[10,15],[10,16],[11,14],[11,15],[11,17],[12,40],[12,42],[13,41],[13,43],[14,36],[14,38],[15,37],[15,39],[16,38],[16,39],[17,36],[17,37],[18,42],[18,43],[19,40],[19,41],[20,37],[20,41],[21,36],[21,40],[22,39],[22,43],[23,38],[23,42]]
+        edgesData.push([0,24],[0,26],[0,32],[1,25],[1,27],[1,33],[2,24],[2,26],[2,34],[3,25],[3,27],[3,35],[4,24],[4,28],[4,29],[5,25],[5,28],[5,29],[6,26],[6,30],[6,31],[7,27],[7,30],[7,31],[8,28],[8,32],[8,33],[9,29],[9,34],[9,35],[10,30],[10,32],[10,33],[11,31],[11,34],[11,35],[24,36],[24,38],[25,37],[25,39],[26,40],[26,42],[27,41],[27,43],[28,36],[28,37],[29,38],[29,39],[30,40],[30,41],[31,42],[31,43],[32,36],[32,40],[33,37],[33,41],[34,38],[34,42],[35,39],[35,43])
+        L=120
+        L2=L
+        faceData=[[12,5,28,8],[12,8,32,40],[12,40,26,42],[12,42,34,9],[12,9,29,5],[13,4,29,9],[13,9,35,43],[13,43,27,41],[13,41,33,8],[13,8,28,4],[14,7,31,11],[14,11,34,38],[14,38,24,36],[14,36,32,10],[14,10,30,7],[15,6,30,10],[15,10,33,37],[15,37,25,39],[15,39,35,11],[15,11,31,6],[16,1,33,10],[16,10,32,0],[16,0,24,38],[16,38,29,39],[16,39,25,1],[17,2,34,11],[17,11,35,3],[17,3,25,37],[17,37,28,36],[17,36,24,2],[18,0,32,8],[18,8,33,1],[18,1,27,43],[18,43,31,42],[18,42,26,0],[19,2,26,40],[19,40,30,41],[19,41,27,3],[19,3,35,9],[19,9,34,2],[20,2,24,4],[20,4,28,37],[20,37,33,41],[20,41,30,6],[20,6,26,2],[21,3,27,7],[21,7,30,40],[21,40,32,36],[21,36,28,5],[21,5,25,3],[22,0,26,6],[22,6,31,43],[22,43,35,39],[22,39,29,4],[22,4,24,0],[23,1,25,5],[23,5,29,38],[23,38,34,42],[23,42,31,7],[23,7,27,1]]
+        s=1
+        JL=vertexData.length
+      break
+      case 94:
+        var a0 = 10+phi_1/2
+        var a1 = 10+sqrt(5)/2
+        var a2 = 10+phi2/2
+        var a3 = 10+phi
+        var a4 = 10
+        vertexData = conv([[10.5,a0,a3],[a3,10.5,a0],[a0,a3,10.5],[0,a1,a2],[a2,0,a1],[a1,a2,0],[11,10.5,a2],[a2,11,10.5],[10.5,a2,11]])
+        circumR=sqrt(2*(17+3*sqrt(5)))/4
+        edgeLength=1
+        L=120
+        L2=L
+        faceData=[[0,4,30,14,51,59,55,47,10,28],[0,38,46,47,39,1,25,21,20,24],[2,26,22,23,27,3,37,45,44,36],[2,28,8,45,53,57,49,12,30,6],[5,1,29,11,46,54,58,50,15,31],[5,43,51,50,42,4,24,16,17,25],[7,27,19,18,26,6,40,48,49,41],[7,31,13,48,56,52,44,9,29,3],[33,11,9,32,16,56,40,42,58,18],[33,19,59,43,41,57,17,32,8,10],[34,13,15,35,22,54,38,36,52,20],[34,21,53,37,39,55,23,35,14,12],[24,20,52,56,16],[25,17,57,53,21],[26,18,58,54,22],[27,23,55,59,19],[28,2,36,38,0],[29,1,39,37,3],[30,4,42,40,6],[31,7,41,43,5],[32,9,44,45,8],[33,10,47,46,11],[34,12,49,48,13],[35,15,50,51,14],[24,4,0],[25,1,5],[26,2,6],[27,7,3],[28,10,8],[29,9,11],[30,12,14],[31,15,13],[32,17,16],[33,18,19],[34,20,21],[35,23,22],[36,44,52],[37,53,45],[38,54,46],[39,47,55],[40,56,48],[41,49,57],[42,50,58],[43,59,51]]
+        s=1
+        JL=vertexData.length
+      break
+      case 95:
+        var a0 = 10+3*(9*sqrt(5)-5)/76
+        var a1 = 10+3*(15-sqrt(5))/44
+        var a2 = 10+3*(10+sqrt(5))/38
+        var a3 = 10+3*(5+7*sqrt(5))/44
+        var a4 = 10+3*(15+11*sqrt(5))/76
+        var a5 = 10+3*phi/2
+        var a6 = 10+3*phi2/2
+        vertexData = conv([[a5,0,a6],[a6,a5,0],[0,a6,a5],[0,a0,a4],[a4,0,a0],[a0,a4,0],[a1,0,a3],[a3,a1,0],[0,a3,a1],[a2,a2,a2]])
+        circumR=3*sqrt(5+2*sqrt(5))/2
+        edgeLength=dist(vertexData[0][0],vertexData[0][1],vertexData[0][2],vertexData[26][0],vertexData[26][1],vertexData[26][2])
+        edgesData=[[0,17],[0,20],[0,21],[0,40],[0,42],[1,16],[1,20],[1,21],[1,41],[1,43],[2,19],[2,22],[2,23],[2,36],[2,38],[3,18],[3,22],[3,23],[3,37],[3,39],[4,12],[4,13],[4,22],[4,38],[4,39],[5,14],[5,15],[5,23],[5,36],[5,37],[6,12],[6,13],[6,20],[6,42],[6,43],[7,14],[7,15],[7,21],[7,40],[7,41],[8,14],[8,16],[8,18],[8,37],[8,41],[9,15],[9,17],[9,19],[9,36],[9,40],[10,12],[10,16],[10,18],[10,39],[10,43],[11,13],[11,17],[11,19],[11,38],[11,42]]
+        edgesData.push([0,26],[0,28],[0,29],[0,32],[0,34],[1,27],[1,28],[1,29],[1,33],[1,35],[2,24],[2,30],[2,31],[2,32],[2,34],[3,25],[3,30],[3,31],[3,33],[3,35],[4,24],[4,25],[4,29],[4,32],[4,33],[5,24],[5,25],[5,28],[5,34],[5,35],[6,26],[6,27],[6,31],[6,32],[6,33],[7,26],[7,27],[7,30],[7,34],[7,35],[8,24],[8,26],[8,28],[8,30],[8,33],[9,25],[9,27],[9,28],[9,30],[9,32],[10,24],[10,26],[10,29],[10,31],[10,35],[11,25],[11,27],[11,29],[11,31],[11,34])
+        L=120
+        L2=L
+        faceData=[[24,2,38,4],[24,4,12,10],[24,10,16,8],[24,8,14,5],[24,5,36,2],[25,4,39,3],[25,3,37,5],[25,5,15,9],[25,9,17,11],[25,11,13,4],[26,0,40,7],[26,7,14,8],[26,8,18,10],[26,10,12,6],[26,6,42,0],[27,1,43,6],[27,6,13,11],[27,11,19,9],[27,9,15,7],[27,7,41,1],[28,0,17,9],[28,9,36,5],[28,5,37,8],[28,8,16,1],[28,1,20,0],[29,0,21,1],[29,1,16,10],[29,10,39,4],[29,4,38,11],[29,11,17,0],[30,2,22,3],[30,3,18,8],[30,8,41,7],[30,7,40,9],[30,9,19,2],[31,2,19,11],[31,11,42,6],[31,6,43,10],[31,10,18,3],[31,3,23,2],[32,0,20,6],[32,6,12,4],[32,4,22,2],[32,2,36,9],[32,9,40,0],[33,1,41,8],[33,8,37,3],[33,3,22,4],[33,4,13,6],[33,6,20,1],[34,0,42,11],[34,11,38,2],[34,2,23,5],[34,5,14,7],[34,7,21,0],[35,1,21,7],[35,7,15,5],[35,5,23,3],[35,3,39,10],[35,10,43,1]]
+        s=1
+        JL=vertexData.length
+      break
+      case 96:
+        var a0 = 10+phi/2
+        var a1 = 10+sqrt(5)/2
+        var a2 = 10-phi_2/2
+        var a3 = 10+phi_1
+        vertexData = conv([[9.5,a0,a3],[a3,9.5,a0],[a0,a3,9.5],[0,a1,a2],[a2,0,a1],[a1,a2,0],[9,9.5,a2],[a2,9,9.5],[9.5,a2,9]])
+        circumR=sqrt(2*(17-3*sqrt(5)))/4
+        edgeLength=1
+        L=120
+        L2=L
+        faceData=[[0,4,30,14,51,59,55,47,10,28],[0,38,46,47,39,1,25,21,20,24],[2,26,22,23,27,3,37,45,44,36],[2,28,8,45,53,57,49,12,30,6],[5,1,29,11,46,54,58,50,15,31],[5,43,51,50,42,4,24,16,17,25],[7,27,19,18,26,6,40,48,49,41],[7,31,13,48,56,52,44,9,29,3],[33,11,9,32,16,56,40,42,58,18],[33,19,59,43,41,57,17,32,8,10],[34,13,15,35,22,54,38,36,52,20],[34,21,53,37,39,55,23,35,14,12],[24,20,52,56,16],[25,17,57,53,21],[26,18,58,54,22],[27,23,55,59,19],[28,2,36,38,0],[29,1,39,37,3],[30,4,42,40,6],[31,7,41,43,5],[32,9,44,45,8],[33,10,47,46,11],[34,12,49,48,13],[35,15,50,51,14],[24,4,0],[25,1,5],[26,2,6],[27,7,3],[28,10,8],[29,9,11],[30,12,14],[31,15,13],[32,17,16],[33,18,19],[34,20,21],[35,23,22],[36,44,52],[37,53,45],[38,54,46],[39,47,55],[40,56,48],[41,49,57],[42,50,58],[43,59,51]]
+        s=1
+        JL=vertexData.length
+      break
+      case 97:
+        var a0 = 10+3*(11*sqrt(5)-15)/76
+        var a1 = 10-3*(3-sqrt(5))/4
+        var a2 = 10-3*(10-sqrt(5))/38
+        var a3 = 10+3*(7*sqrt(5)-5)/44
+        var a4 = 10+3*(sqrt(5)-1)/4
+        var a5 = 10+3*(5+9*sqrt(5))/76
+        var a6 = 10-3*(15+sqrt(5))/44
+        vertexData = conv([[0,a4,a1],[a4,a1,0],[a1,0,a4],[a5,0,a0],[0,a0,a5],[a0,a5,0],[0,a6,a3],[a6,a3,0],[a3,0,a6],[a2,a2,a2]])
+        circumR=3*sqrt(5*(25-2*sqrt(5)))/22
+        edgeLength=dist(vertexData[0][0],vertexData[0][1],vertexData[0][2],vertexData[26][0],vertexData[26][1],vertexData[26][2])
+        edgesData=[[0,17],[0,20],[0,22],[0,38],[0,42],[1,16],[1,20],[1,22],[1,39],[1,43],[2,19],[2,21],[2,23],[2,36],[2,40],[3,18],[3,21],[3,23],[3,37],[3,41],[4,12],[4,13],[4,21],[4,40],[4,41],[6,14],[6,15],[6,23],[6,36],[6,37],[5,12],[5,13],[5,20],[5,42],[5,43],[7,14],[7,15],[7,22],[7,38],[7,39],[8,14],[8,16],[8,18],[8,37],[8,39],[9,15],[9,17],[9,19],[9,36],[9,38],[10,12],[10,16],[10,18],[10,41],[10,43],[11,13],[11,17],[11,19],[11,40],[11,42]]
+        edgesData.push([0,26],[0,28],[0,30],[0,32],[0,34],[1,27],[1,28],[1,30],[1,33],[1,35],[2,24],[2,29],[2,31],[2,32],[2,34],[3,25],[3,29],[3,31],[3,33],[3,35],[4,24],[4,25],[4,30],[4,32],[4,33],[6,24],[6,25],[6,28],[6,34],[6,35],[5,26],[5,27],[5,31],[5,32],[5,33],[7,26],[7,27],[7,29],[7,34],[7,35],[8,24],[8,26],[8,28],[8,29],[8,33],[9,25],[9,27],[9,28],[9,29],[9,32],[10,24],[10,26],[10,30],[10,31],[10,35],[11,25],[11,27],[11,30],[11,31],[11,34])
+        L=120
+        L2=L
+        faceData=[[24,2,40,4],[24,4,12,10],[24,10,16,8],[24,8,14,6],[24,6,36,2],[25,4,41,3],[25,3,37,6],[25,6,15,9],[25,9,17,11],[25,11,13,4],[26,0,38,7],[26,7,14,8],[26,8,18,10],[26,10,12,5],[26,5,42,0],[27,1,43,5],[27,5,13,11],[27,11,19,9],[27,9,15,7],[27,7,39,1],[28,0,17,9],[28,9,36,6],[28,6,37,8],[28,8,16,1],[28,1,20,0],[30,0,22,1],[30,1,16,10],[30,10,41,4],[30,4,40,11],[30,11,17,0],[29,2,21,3],[29,3,18,8],[29,8,39,7],[29,7,38,9],[29,9,19,2],[31,2,19,11],[31,11,42,5],[31,5,43,10],[31,10,18,3],[31,3,23,2],[32,0,20,5],[32,5,12,4],[32,4,21,2],[32,2,36,9],[32,9,38,0],[33,1,39,8],[33,8,37,3],[33,3,21,4],[33,4,13,5],[33,5,20,1],[34,0,42,11],[34,11,40,2],[34,2,23,6],[34,6,14,7],[34,7,22,0],[35,1,22,7],[35,7,15,6],[35,6,23,3],[35,3,41,10],[35,10,43,1]]
+        s=1
+        JL=vertexData.length
+      break
+      case 98:
+        var a0 = (sqrt(5)-2)/2
+        var a1 = phi_2/2
+        var a2 = phi_1/2
+        var a4 = (5-sqrt(5))/4
+        vertexData = [[a1,0,a4],[0,a4,a1],[a4,a1,0],[-a1,0,a4],[0,a4,-a1],[-a4,a1,0],[a1,0,-a4],[0,-a4,a1],[a4,-a1,0],[-a1,0,-a4],[0,-a4,-a1],[-a4,-a1,0],[0.5,a0,0.5],[a0,0.5,0.5],[0.5,0.5,a0],[-0.5,a0,0.5],[-a0,0.5,0.5],[-0.5,0.5,a0],[0.5,-a0,0.5],[a0,-0.5,0.5],[0.5,-0.5,a0],[-0.5,-a0,0.5],[-a0,-0.5,0.5],[-0.5,-0.5,a0],[0.5,a0,-0.5],[a0,0.5,-0.5],[0.5,0.5,-a0],[-0.5,a0,-0.5],[-a0,0.5,-0.5],[-0.5,0.5,-a0],[0.5,-a0,-0.5],[a0,-0.5,-0.5],[0.5,-0.5,-a0],[-0.5,-a0,-0.5],[-a0,-0.5,-0.5],[-0.5,-0.5,-a0],[a1,phi_1,a2],[phi_1,a2,a1],[-a2,a1,phi_1],[-a1,phi_1,a2],[-phi_1,a2,a1],[a2,-a1,phi_1],[a1,-phi_1,a2],[phi_1,-a2,a1],[-a2,-a1,phi_1],[-a1,-phi_1,a2],[-phi_1,-a2,a1],[a2,a1,-phi_1],[a1,phi_1,-a2],[phi_1,a2,-a1],[-a2,a1,-phi_1],[-a1,phi_1,-a2],[-phi_1,a2,-a1],[a2,-a1,-phi_1],[a1,-phi_1,-a2],[phi_1,-a2,-a1],[-a2,-a1,-phi_1],[-a1,-phi_1,-a2],[-phi_1,-a2,-a1],[a2,a1,phi_1]]
+        circumR=sqrt(11-4*sqrt(5))/2
+        edgeLength=1
+        L=120
+        L2=L
+        faceData=[[44,10,41,23,20],[43,3,37,19,13],[40,0,46,16,22],[59,4,38,14,17],[24,12,48,8,36],[56,7,53,35,32],[52,6,58,28,34],[21,33,45,5,57],[51,15,27,39,11],[47,1,50,26,29],[31,49,9,55,25],[54,18,30,42,2],[9,17,23],[3,29,35],[18,21,1],[15,7,12],[22,34,8],[20,6,14],[28,16,2],[13,25,5],[38,58,42],[11,19,31],[55,45,59],[0,32,26],[41,49,39],[36,52,44],[37,53,51],[50,46,54],[43,47,57],[10,24,27],[40,56,48],[4,30,33],[59,17,23,41,39,11,19,13,5,45],[48,12,15,51,37,3,29,26,0,40],[8,22,16,2,42,38,14,20,44,36],[57,21,18,54,46,0,32,35,3,43],[6,14,17,9,49,39,27,24,36,52],[9,23,20,6,58,42,30,33,45,55],[31,19,37,53,7,12,24,10,41,49],[16,28,58,38,4,33,21,1,50,46],[30,18,1,47,43,13,25,55,59,4],[47,29,35,53,51,11,31,25,5,57],[27,15,7,56,40,22,34,52,44,10],[50,54,2,28,34,8,48,56,32,26]]
+        s=1
+        JL=vertexData.length
+      break
+      case 99:
+        var a0 = (25-9*sqrt(5))/22
+        var a1 = (3*sqrt(5)-5)/6
+        var a2 = (4*sqrt(5)-5)/11
+        var a4 = (5-sqrt(5))/6
+        var a5 = (15 - sqrt(5)) / 22
+        vertexData = [[0,-a4,a1],[a1,0,a4],[-a1,0,a4],[0,a4,a1],[a4,a1,0],[0,-a4,-a1],[-a1,0,-a4],[-a4,-a1,0],[-a4,a1,0],[0,a4,-a1],[a1,0,-a4],[a4,-a1,0],[-a5,0,-a0],[-a5,0,a0],[0,a0,a5],[0,-a0,a5],[a0,-a5,0],[a5,0,-a0],[a0,a5,0],[-a0,a5,0],[-a2,-a2,a2],[-a0,-a5,-0],[a2,-a2,a2],[a5,0,a0],[a2,a2,a2],[-a2,a2,a2],[a2,a2,-a2],[-a2,-a2,-a2],[a2,-a2,-a2],[0,-a0,-a5],[-a2,a2,-a2],[0,a0,-a5],[-phi_2,0,phi_1],[0,phi_1,phi_2],[phi_2,0,phi_1],[0,-phi_1,phi_2],[0,phi_1,-phi_2],[0,-phi_1,-phi_2],[phi_1,-phi_2,0],[-phi_1,phi_2,0],[phi_1,phi_2,0],[-phi_2,0,-phi_1],[-phi_1,-phi_2,0],[phi_2,0,-phi_1]]
+        circumR=sqrt(5-2*sqrt(5))
+        edgesData=[[32,0],[32,1],[32,12],[32,19],[32,21],[32,22],[32,24],[32,3],[32,7],[32,8],[33,1],[33,13],[33,15],[33,2],[33,23],[33,26],[33,30],[33,4],[33,8],[33,9],[34,0],[34,11],[34,16],[34,17],[34,18],[34,2],[34,20],[34,25],[34,3],[34,4],[35,1],[35,11],[35,13],[35,14],[35,2],[35,23],[35,27],[35,28],[35,5],[35,7],[36,10],[36,12],[36,17],[36,24],[36,25],[36,29],[36,3],[36,4],[36,6],[36,8],[37,0],[37,10],[37,11],[37,12],[37,17],[37,20],[37,22],[37,31],[37,6],[37,7],[38,0],[38,1],[38,10],[38,15],[38,21],[38,24],[38,26],[38,29],[38,4],[38,5],[39,14],[39,18],[39,2],[39,20],[39,27],[39,3],[39,31],[39,6],[39,7],[39,9],[40,1],[40,10],[40,11],[40,14],[40,19],[40,22],[40,28],[40,3],[40,31],[40,9],[41,10],[41,13],[41,19],[41,21],[41,26],[41,28],[41,5],[41,7],[41,8],[41,9],[42,0],[42,15],[42,16],[42,2],[42,25],[42,29],[42,30],[42,5],[42,6],[42,8],[43,11],[43,16],[43,18],[43,23],[43,27],[43,30],[43,4],[43,5],[43,6],[43,9]]
+        L=120
+        L2=L
+        faceData=[[2,33,23,35],[9,39,14,40],[11,34,18,43],[1,33,13,35],[3,39,31,40],[7,32,19,41],[6,36,17,37],[5,38,15,42],[4,34,16,43],[10,36,12,37],[0,38,29,42],[8,32,21,41],[4,33,15,38],[1,32,19,40],[3,34,17,36],[8,33,15,42],[2,34,18,39],[3,32,12,36],[11,35,14,40],[1,32,21,38],[0,34,17,37],[7,35,14,39],[2,34,16,42],[0,32,12,37],[4,36,29,38],[10,40,19,41],[9,33,23,43],[8,36,29,42],[6,39,18,43],[9,33,13,41],[11,37,31,40],[10,38,21,41],[5,35,23,43],[7,37,31,39],[6,42,16,43],[5,35,13,41],[4,34,25,36],[1,33,26,38],[3,34,20,39],[8,32,24,36],[2,33,30,42],[0,32,24,38],[11,34,20,37],[1,35,28,40],[0,34,25,42],[7,32,22,37],[2,35,27,39],[9,40,28,41],[4,33,30,43],[10,36,24,38],[9,39,27,43],[8,33,26,41],[6,36,25,42],[5,38,26,41],[11,35,27,43],[10,37,22,40],[5,42,30,43],[7,35,28,41],[6,37,20,39],[3,32,22,40]]
+        s=1
+        JL=vertexData.length
+      break
+      case 100:
+        var a0 = phi_1/2
+        var a1 = sqrt(5)/2
+        var a2 = phi2/2
+        vertexData = [[a0,0.5,phi],[0.5,1,a2],[0,a2,a1],[-0.5,1,a2],[-a0,0.5,phi],[-a0,-0.5,phi],[-0.5,-1,a2],[0,-a2,a1],[0.5,-1,a2],[a0,-0.5,phi],[-a1,0,a2],[-a2,0.5,1],[-phi,a0,0.5],[-phi,-a0,0.5],[-a2,-0.5,1],[-1,a2,0.5],[-0.5,phi,a0],[-0.5,phi,-a0],[-1,a2,-0.5],[-a2,a1,0],[0.5,phi,a0],[1,a2,0.5],[a2,a1,0],[1,a2,-0.5],[0.5,phi,-a0],[a1,0,a2],[a2,0.5,1],[phi,a0,0.5],[phi,-a0,0.5],[a2,-0.5,1],[-1,-a2,0.5],[-a2,-a1,0],[-1,-a2,-0.5],[-0.5,-phi,-a0],[-0.5,-phi,a0],[-phi,a0,-0.5],[-phi,-a0,-0.5],[-a2,-0.5,-1],[-a1,0,-a2],[-a2,0.5,-1],[0.5,-phi,a0],[1,-a2,0.5],[a2,-a1,0],[1,-a2,-0.5],[0.5,-phi,-a0],[0,-a2,-a1],[-0.5,-1,-a2],[-a0,-0.5,-phi],[a0,-0.5,-phi],[0.5,-1,-a2],[-0.5,1,-a2],[0,a2,-a1],[0.5,1,-a2],[a0,0.5,-phi],[-a0,0.5,-phi],[phi,-a0,-0.5],[a2,-0.5,-1],[a1,0,-a2],[a2,0.5,-1],[phi,a0,-0.5]]
+        circumR=sqrt(2*(17+3*sqrt(5)))/4
+        edgeLength=1
+        L=120
+        L2=L
+        faceData=[[2,0,3,1,4],[10,4,5],[5,8,6,9,7],[12,10,13,11,14],[9,6,14,11,3,0],[17,15,18,16,19],[4,2,16,19,12,10],[3,15,11],[24,17,15,3,1,21],[23,21,24,22,20],[20,2,16],[28,25,27,29,26],[8,5,4,1,26,29],[27,25,0,2,20,22],[26,1,21],[9,25,0],[32,30,33,31,34],[13,10,5,7,34,31],[14,6,30],[35,38,36,39,37],[18,15,11,13,36,39],[36,13,31],[35,12,14,30,32,37],[19,35,12],[44,41,43,40,42],[30,6,8,41,44,33],[40,34,7],[41,8,29],[40,7,9,25,28,42],[47,45,48,46,49],[32,46,49,43,40,34],[37,46,32],[45,44,33],[38,47,45,33,31,36],[53,51,54,52,50],[52,23,20,16,18,50],[51,24,17],[50,18,39],[54,38,47],[17,19,35,38,54,51],[48,53,50,39,37,46],[56,59,57,55,58],[42,55,28],[43,56,49],[56,59,27,29,41,43],[57,55,42,44,45,48],[53,57,48],[27,22,59],[59,22,24,51,53,57],[55,28,26,21,23,58],[56,58,52,54,47,49],[58,52,23]]
+        //dist(vertexData[14][0],vertexData[14][1],vertexData[14][2],vertexData[30][0],vertexData[30][1],vertexData[30][2])
+        s=1
+        JL=vertexData.length
+      break
+      case 101:
+        var a0 = 3*(9*sqrt(5)-5)/76
+        var a1 = (5-sqrt(5))/4
+        var a2 = 3*(15-sqrt(5))/44
+        var a3 = 3*(10+sqrt(5))/38
+        var a4 = sqrt(5)/2
+        var a5 = 3*(5+7*sqrt(5))/44
+        var a6 = 3*(15+11*sqrt(5))/76
+        var a7 = (5+sqrt(5))/4
+        vertexData = [[0,a2,a5],[-a0,0,a6],[0,-a2,a5],[-a5,0,a2],[-a1,0,a7],[-a2,a5,0],[-a4,a4,a4],[-a3,a3,a3],[0,a7,a1],[a2,a5,0],[0,a6,a0],[a5,0,a2],[a1,0,a7],[a4,a4,a4],[a3,a3,a3],[a0,0,a6],[-a2,-a5,0],[-a4,-a4,a4],[-a3,-a3,a3],[-a5,0,-a2],[-a7,a1,0],[-a6,-a0,0],[-a7,-a1,0],[-a6,a0,0],[a2,-a5,0],[0,-a7,a1],[0,-a6,a0],[a3,-a3,a3],[a4,-a4,a4],[0,-a2,-a5],[0,-a7,-a1],[-a3,-a3,-a3],[0,-a6,-a0],[-a4,-a4,-a4],[0,a2,-a5],[0,a7,-a1],[0,a6,-a0],[-a3,a3,-a3],[-a0,0,-a6],[-a4,a4,-a4],[-a1,0,-a7],[a5,0,-a2],[a6,-a0,0],[a3,-a3,-a3],[a7,-a1,0],[a4,-a4,-a4],[a0,0,-a6],[a6,a0,0],[a4,a4,-a4],[a7,a1,0],[a1,0,-a7],[a3,a3,-a3]]
+        circumR=sqrt(15)/2
+        edgesData=[[10,6],[12,0],[12,1],[12,11],[12,2],[13,0],[13,10],[13,11],[13,9],[14,12],[14,8],[15,13],[15,4],[17,1],[17,16],[17,2],[17,3],[18,4],[20,19],[20,3],[20,5],[20,7],[21,17],[21,20],[22,16],[22,18],[22,19],[22,3],[23,22],[23,6],[25,16],[25,18],[25,2],[25,24],[26,17],[27,12],[27,25],[28,11],[28,15],[28,2],[28,24],[28,26],[30,16],[30,24],[30,26],[30,29],[31,22],[31,30],[32,25],[33,16],[33,19],[33,21],[33,29],[33,32],[35,10],[35,34],[35,5],[35,9],[36,8],[37,20],[37,35],[38,33],[39,19],[39,23],[39,34],[39,36],[39,38],[39,5],[4,0],[4,2],[4,3],[40,19],[40,29],[40,31],[40,34],[40,37],[42,28],[43,30],[44,11],[44,24],[44,27],[44,41],[44,43],[45,24],[45,29],[45,32],[45,41],[45,42],[46,40],[46,45],[47,13],[47,44],[48,34],[48,36],[48,41],[48,46],[48,47],[48,9],[49,11],[49,14],[49,41],[49,42],[49,9],[50,29],[50,34],[50,38],[50,41],[50,43],[51,35],[51,49],[51,50],[6,0],[6,1],[6,3],[6,5],[7,4],[8,0],[8,5],[8,7],[9,8]]
+        L=120
+        L2=L
+        faceData=[[0,4,15,13],[0,8,14,12],[0,6,10,13],[0,4,7,8],[0,6,1,12],[1,12,2,17],[2,4,18,25],[2,17,26,28],[2,12,27,25],[2,4,15,28],[1,6,3,17],[3,4,7,20],[3,6,23,22],[3,17,21,20],[3,4,18,22],[5,8,7,20],[5,6,10,35],[5,8,36,39],[5,20,37,35],[5,6,23,39],[9,13,10,35],[8,9,49,14],[9,13,47,48],[9,35,51,49],[8,9,48,36],[11,13,15,28],[11,12,14,49],[11,13,47,44],[11,28,42,49],[11,12,27,44],[16,22,18,25],[16,17,21,33],[16,22,31,30],[16,25,32,33],[16,17,26,30],[19,22,23,39],[19,20,21,33],[19,22,31,40],[19,33,38,39],[19,20,37,40],[24,28,26,30],[24,25,27,44],[24,28,42,45],[24,30,43,44],[24,25,32,45],[29,33,32,45],[29,30,31,40],[29,33,38,50],[29,40,46,45],[29,30,43,50],[34,35,37,40],[34,39,36,48],[34,35,51,50],[34,40,46,48],[34,39,38,50],[41,45,42,49],[41,44,43,50],[41,45,46,48],[41,49,51,50],[41,44,47,48]]
+        s=1
+        JL=vertexData.length
+      break
+      case 130:
+        var wid = inp.style('width').slice(0,inp.style('width').length-2)*1
+        var wid2 = inp2.style('width').slice(0,inp2.style('width').length-2)*1
+        inp4.show()
+        inp4.position(wid+wid2,-2)
+        inp5.show()
+        inp5.position(wid+wid2+48,-2)
+        edgesData=[]
+        A = inp4.value()*1
+        B = inp5.value()*1%A
+        s=5/A
+        s2=s
+        if(B>A/2) {
+          B=A-B
+          inp5.value(B)
+        }else if(inp5.value()*1>A) {
+          inp5.value(B%A)
+        }else if(B<0) {
+          B=abs(B)
+          inp5.value(B)
+        }
+        gcm = 1
+        for(var i = 1; i<A; i++) {
+          if(floor(B/i)==B/i&&floor(A/i)==A/i) {
+            gcm=i
+          }
+        }
+        A/=gcm
+        B/=gcm
+        L=A*gcm
+        L2=A*gcm  
+        edgeLength=sqrt(sq(1-cos(PI*2/A*B))+sq(sin(PI*2/A*B)))
+        vertexData=[]
+        var ang = 0
+        if(A*gcm*B%2==0) {
+          ang+=PI/A*B
+        }
+        for(var i = 0; i<A*gcm; i++) {
+          vertexData.push([sin(PI*2/A/gcm*i+ang),-cos(PI*2/A/gcm*i+ang),edgeLength/2,0],[sin(PI*2/A/gcm*i+ang),-cos(PI*2/A/gcm*i+ang),-edgeLength/2,0])
+        }
+        faceData=[[],[]]
+        for(var i = 0; i<gcm; i++) {
+          for(var j = 0; j<A*B*gcm; j+=B*gcm) {
+            faceData[0][faceData[0].length]=(j%(A*gcm)+i)*2
+            faceData[1][faceData[1].length]=(j%(A*gcm)+i)*2+1
+          }
+          if(i<gcm-1) {
+            faceData[0][faceData[0].length]=undefined
+            faceData[1][faceData[1].length]=undefined
+          }
+        }
+        var NnNn = 0
+        for(var i = 0; i<faceData[0].length; i++) {
+          if(faceData[0][i]==undefined) {
+            NnNn=i+1
+          }
+          if(faceData[0][i]!==undefined&&faceData[0][i+1]!==undefined) {
+            faceData.push([faceData[0][i],faceData[1][i],faceData[1][i+1],faceData[0][i+1]])
+          }else if(faceData[0][i]!==undefined) {
+            faceData.push([faceData[0][i],faceData[1][i],faceData[1][NnNn],faceData[0][NnNn]])
+          }
+        }
+        if(A==2) {
+          faceData=[]
+        }
+        s=1
+        JL=vertexData.length
+        circumR=sqrt(1+edgeLength**2)
+      break
+      case 131:
+        var wid = inp.style('width').slice(0,inp.style('width').length-2)*1
+        var wid2 = inp2.style('width').slice(0,inp2.style('width').length-2)*1
+        inp4.show()
+        inp4.position(wid+wid2,-2)
+        inp5.show()
+        inp5.position(wid+wid2+48,-2)
+        edgesData=[]
+        A = inp4.value()*1
+        B = inp5.value()*1%A
+        s=5/A
+        s2=s
+        if(B>A/2) {
+          B=A-B
+          inp5.value(B)
+        }else if(inp5.value()*1>A) {
+          inp5.value(B%A)
+        }else if(B<0) {
+          B=abs(B)
+          inp5.value(B)
+        }
+        gcm = 1
+        for(var i = 1; i<A; i++) {
+          if(floor(B/i)==B/i&&floor(A/i)==A/i) {
+            gcm=i
+          }
+        }
+        A/=gcm
+        B/=gcm
+        L=A*gcm
+        L2=A*gcm
+        vertexData=[]
+        var ang = 0
+        if(A*gcm*B%2==0) {
+          ang+=PI/A*B
+        }
+        for(var i = 0; i<A*gcm; i++) {
+          vertexData.push([sin(PI*2/A/gcm*i+ang),-cos(PI*2/A/gcm*i+ang),0,0])
+        }
+        var valu = A/B
+        vertexData.push([0,0,1/tan(PI/valu)],[0,0,-1/tan(PI/valu)])
+        if(1/tan(PI/valu)>1) {
+          circumR=1/tan(PI/valu)
+        }
+        faceData=[]
+        edgesData=[]
+        for(var i = 0; i<gcm; i++) {
+          for(var j = 0; j<A*B*gcm; j+=B*gcm) {
+            edgesData.push([(j%(A*gcm)+i),((j+B*gcm)%(A*gcm)+i)])
+          }
+        }
+        for(var i = 0; i<edgesData.length; i++) {
+          faceData.push([edgesData[i][0],edgesData[i][1],vertexData.length-1],[edgesData[i][0],edgesData[i][1],vertexData.length-2])
+        }
+        for(var i = 0; i<vertexData.length; i++) {
+          edgesData.push([i,vertexData.length-1],[i,vertexData.length-2])
+        }
+        if(A==2) {
+          faceData=[]
+        }
+        s=1
+        JL=vertexData.length
+        circumR=sqrt(1+edgeLength**2)
+      break
+      case 134:
         vertexData = dodecahedron
         edgeLength= (sqrt(5)-1)*phi2
         circumR=sqrt(3)
@@ -1714,7 +2157,7 @@ function resetCamera() {
         edgesData=[[0,8],[0,12],[0,16],[1,9],[1,13],[1,16],[2,8],[2,14],[2,17],[3,9],[3,15],[3,17],[4,10],[4,12],[4,18],[5,11],[5,13],[5,18],[6,10],[6,14],[6,19],[7,11],[7,15],[7,19],[8,10],[9,11],[12,13],[14,15],[16,17],[18,19]]
         edgesData.push([0,11],[0,15],[0,19],[1,10],[1,14],[1,19],[2,11],[2,13],[2,18],[3,10],[3,12],[3,18],[4,9],[4,15],[4,17],[5,8],[5,14],[5,17],[6,9],[6,13],[6,16],[7,8],[7,12],[7,16],[8,9],[10,11],[12,14],[13,15],[16,18],[17,19])
       break
-      case 128:
+      case 135:
         vertexData=conv([[11,11,11]])
         edgeLength=2*sqrt(2)
         circumR=sqrt(3)
@@ -1724,7 +2167,7 @@ function resetCamera() {
         faceData=[[0,5,6],[0,5,3],[0,3,6],[6,5,3],[1,2,4],[1,4,7],[1,2,7],[4,7,2]]
         JL=vertexData.length
       break
-      case 129:
+      case 136:
         vertexData=[[0.4292702547728914,0.3821897762668929,-0.2113244502755862,0],[-0.19704266088471925,0.26253383465003394,-0.516962450720956,0],[0.5141132989650508,-0.31289725532933965,-0.11306114909480411,0],[-0.1121996166925596,-0.4325531969461986,-0.41869914954017395,0],[0.1121996166925596,0.4325531969461986,0.41869914954017395,0],[-0.5141132989650508,0.31289725532933965,0.11306114909480411,0],[0.19704266088471925,-0.26253383465003394,0.516962450720956,0],[-0.4292702547728914,-0.3821897762668929,0.2113244502755862,0],[0.48047985005364796,0.31159739557884736,0.21690130649883663,0],[-0.5329157350734122,0.11799001508689638,-0.27763136647532777,0],[-0.48047985005364796,-0.31159739557884736,-0.21690130649883663,0],[0.5329157350734122,-0.11799001508689638,0.27763136647532777,0],[0.02934075097816906,0.5467740682462281,-0.2741846797789876,0],[-0.1666196801900925,0.5779003740157485,0.11519131862171438,0],[0.1666196801900925,-0.5779003740157485,-0.11519131862171438,0],[-0.02934075097816906,-0.5467740682462281,0.2741846797789876,0],[0.45005686935902156,-0.003769143786867101,-0.4152524628438344,0],[-0.06297419988957165,0.07772058266195898,0.6041471353726287,0],[0.06297419988957165,-0.07772058266195898,-0.6041471353726287,0],[-0.45005686935902156,0.003769143786867101,0.4152524628438344,0]]
         circumR=sqrt(0.375)
         L=30
@@ -1734,7 +2177,7 @@ function resetCamera() {
         edgesData=[[10,6],[11,3],[12,11],[12,3],[13,10],[13,6],[14,0],[14,9],[15,5],[15,8],[16,10],[16,13],[16,6],[17,0],[17,14],[17,9],[18,15],[18,5],[18,8],[19,11],[19,12],[19,3],[2,1],[4,1],[4,2],[7,1],[7,2],[7,4],[8,5],[9,0]]
         JL=vertexData.length
       break
-      case 130:
+      case 137:
         vertexData=dodecahedron
         edgeLength=2*sqrt(2)
         circumR=sqrt(3)
@@ -1744,7 +2187,7 @@ function resetCamera() {
         faceData=[[0,18,14,,12,2,19],[2,12,9,,8,13,3],[9,2,19,,17,6,11],[12,9,19,,4,7,1],[1,4,2,,13,10,17],[2,4,7,,8,18,15],[2,1,7,,14,16,11],[0,18,9,,4,11,16],[0,9,14,,8,1,15],[14,9,18,,6,3,5],[0,5,6,,8,13,19],[0,5,3,,12,17,11],[0,6,3,,10,15,16],[10,13,7,,6,12,11],[6,17,12,,14,16,4],[1,8,18,,16,10,5],[1,15,18,,13,19,3],[3,8,19,,17,10,7],[4,11,14,,10,5,15],[7,17,13,,15,16,5]]
         JL=vertexData.length
       break
-      case 131:
+      case 138:
         vertexData=dodecahedron
         edgeLength=2
         circumR=sqrt(3)
@@ -1754,7 +2197,7 @@ function resetCamera() {
         faceData=[[0,4,6,2],[0,1,5,4],[0,1,3,2],[7,3,2,6],[7,6,4,5],[7,5,1,3],[0,13,18,10],[0,13,9,17],[0,10,14,17],[7,14,17,9],[7,14,10,18],[7,9,13,18],[2,15,19,10],[2,16,12,10],[2,16,9,15],[5,19,15,9],[5,19,10,12],[5,9,16,12],[1,11,15,17],[1,12,8,17],[1,11,18,12],[6,18,12,8],[6,15,17,8],[6,15,11,18],[3,14,19,11],[3,16,8,14],[3,11,13,16],[4,8,14,19],[4,13,16,8],[4,19,11,13]]
         JL=vertexData.length
       break
-      case 132:
+      case 139:
         var a0 = 10+sqrt(2)/2
         var a1 = 10+sqrt(2)/4
         var a2 = 10+(sqrt(2)+sqrt(10))/8
@@ -1768,7 +2211,62 @@ function resetCamera() {
         faceData=[[0,2,4,,24,18,7],[1,3,5,,27,17,12],[1,2,4,,28,14,11],[0,3,5,,23,8,21],[0,4,3,,22,20,9],[1,5,2,,10,15,29],[1,3,4,,26,13,16],[0,2,5,,25,6,19],[6,19,26,,18,7,27],[6,26,16,,22,10,20],[6,25,16,,14,8,23],[13,19,26,,28,11,21],[25,16,13,,17,24,12],[13,25,19,,9,15,29],[7,27,17,,11,21,23],[18,24,12,,14,8,28],[18,12,27,,20,29,10],[7,24,17,,15,9,22],[11,14,23,,10,22,15],[20,9,29,,8,21,28]]
         JL=vertexData.length
       break
-      case 137:
+      case 140:
+        vertexData=conv([[11.207106781186548,10.5,11.207106781186548],[11.207106781186548,11.207106781186548,10.5],[10.5,11.207106781186548,11.207106781186548]])
+        edgeLength=dist(vertexData[0][0],vertexData[0][1],vertexData[0][2],vertexData[15][0],vertexData[15][1],vertexData[15][2])
+        edgesData=[[0,12],[0,17],[1,13],[1,16],[2,14],[2,19],[3,15],[3,18],[4,8],[4,21],[5,9],[5,20],[6,10],[6,23],[7,11],[7,22],[8,18],[9,19],[10,16],[11,17],[12,22],[13,23],[14,20]]
+        edgesData.push([0,5],[0,15],[0,23],[1,4],[1,14],[1,22],[2,7],[2,13],[2,21],[3,6],[3,12],[3,20],[4,11],[4,19],[5,10],[5,18],[6,9],[6,17],[7,8],[7,16],[8,14],[8,23],[9,15],[9,22],[10,12],[10,21],[11,13],[11,20],[12,19],[13,18],[14,17],[15,16],[15,21],[16,19],[17,18],[20,23],[21,22])
+        circumR=sqrt(3.1642135623730967)
+        L=60
+        s=1
+        L2=L
+        faceData=[[16,15,0,12,10],[8,23,13,11,7],[15,0,23,6,3],[16,7,8,4,1],[0,23,8,18,17],[7,16,15,21,22],[0,12,3,20,5],[11,4,19,2,7],[0,5,9,6,17],[14,1,22,7,2],[2,14,8,18,13],[5,10,21,15,9],[19,2,21,10,16],[13,18,5,20,23],[16,1,22,9,19],[6,17,14,20,23],[11,4,8,14,20],[3,12,19,9,15],[11,20,3,18,17],[12,19,4,21,22],[22,9,6,10,12],[1,14,17,11,13],[10,5,18,3,6],[21,2,13,1,4]]
+        JL=vertexData.length
+      break
+      case 141:
+      var a0 = 10+(1+sqrt(2))/2
+        vertexData=conv([[10.5,a0,10.5],[10.5,10.5,a0],[a0,10.5,10.5]])
+        edgesData=[[0,5],[0,12],[0,17],[1,4],[1,13],[1,16],[2,7],[2,14],[2,19],[3,6],[3,15],[3,18],[4,8],[4,21],[5,9],[5,20],[6,10],[6,23],[7,11],[7,22],[8,14],[8,18],[9,15],[9,19],[10,12],[10,16],[11,13],[11,17],[12,22],[13,23],[14,20],[15,21],[16,19],[17,18],[20,23],[21,22]]
+        edgesData.push([0,15],[0,23],[1,14],[1,22],[2,13],[2,21],[3,12],[3,20],[4,11],[4,19],[5,10],[5,18],[6,9],[6,17],[7,8],[7,16],[8,23],[9,22],[10,21],[11,20],[12,19],[13,18],[14,17],[15,16])
+        circumR=sqrt(3.1642135623730967)
+        L=60
+        s=1/2
+        L2=L
+        faceData=[[0,5,10,6,23],[1,13,2,7,16],[0,12,22,9,15],[14,17,11,7,8],[0,17,11,20,23],[19,16,7,22,12],[0,5,18,3,15],[2,7,8,4,21],[0,17,6,3,12],[22,7,11,4,1],[9,19,2,21,22],[14,20,5,18,17],[1,4,19,2,14],[6,3,20,5,9],[2,13,11,20,14],[10,12,19,9,5],[18,17,6,23,13],[22,21,10,16,1],[15,9,6,10,16],[23,13,1,14,8],[16,19,4,21,15],[20,23,8,18,3],[11,13,18,8,4],[10,12,3,15,21]]
+        JL=vertexData.length
+      break
+      case 142:
+        var a0 = sqrt(3*(4-cbrt(17+3*sqrt(33))-cbrt(17-3*sqrt(33))))/6
+        var a1 = sqrt(3*(2+cbrt(17+3*sqrt(33))+cbrt(17-3*sqrt(33))))/6
+        var a2 = sqrt(3*(4+cbrt(199+3*sqrt(33))+cbrt(199-3*sqrt(33))))/6
+        vertexData = [[a1,-a0,a2],[a1,a0,-a2],[-a1,a0,a2],[-a1,-a0,-a2],[a2,-a1,a0],[a2,a1,-a0],[-a2,a1,a0],[-a2,-a1,-a0],[a0,-a2,a1],[a0,a2,-a1],[-a0,a2,a1],[-a0,-a2,-a1],[a0,a1,a2],[a0,-a1,-a2],[-a0,-a1,a2],[-a0,a1,-a2],[a2,a0,a1],[a2,-a0,-a1],[-a2,-a0,a1],[-a2,a0,-a1],[a1,a2,a0],[a1,-a2,-a0],[-a1,-a2,a0],[-a1,a2,-a0]]
+        edgesData=[[0,2],[1,3],[4,5],[6,7],[8,11],[9,10],[12,14],[13,15],[16,17],[18,19],[20,23],[21,22]]
+        edgesData.push([0,20],[0,21],[1,20],[1,21],[2,22],[2,23],[3,22],[3,23],[4,13],[4,14],[5,12],[5,15],[6,12],[6,15],[7,13],[7,14],[8,16],[8,18],[9,17],[9,19],[10,16],[10,18],[11,17],[11,19])
+        edgesData.push([0,4],[0,8],[1,5],[1,9],[2,6],[2,10],[3,7],[3,11],[4,8],[5,9],[6,10],[7,11],[12,16],[12,20],[13,17],[13,21],[14,18],[14,22],[15,19],[15,23],[16,20],[17,21],[18,22],[19,23])
+        circumR=1.3437133737446016
+        L=60
+        s=1/2
+        L2=L
+        faceData=[[0,4,14,22,21],[0,8,16,17,21],[22,18,8,0,2],[0,4,5,12,20],[20,16,10,2,0],[1,3,11,17,21],[1,5,15,23,20],[1,9,17,16,20],[1,3,23,19,9],[1,21,13,4,5],[2,10,18,19,23],[2,6,7,14,22],[2,6,12,20,23],[7,3,22,21,13],[3,11,19,18,22],[23,15,6,7,3],[4,8,11,17,13],[4,8,16,12,14],[5,9,17,13,15],[5,12,16,10,9],[6,10,18,14,12],[15,19,9,10,6],[7,11,8,18,14],[7,11,19,15,13]]
+        JL=vertexData.length
+      break
+      case 143:
+        var a0 = 1
+        var a1 = sqrt(2)+1
+        var a2 = 2*sqrt(2)+3
+        vertexData = [[a1,-a0,a2],[a1,a0,-a2],[-a1,a0,a2],[-a1,-a0,-a2],[a2,-a1,a0],[a2,a1,-a0],[-a2,a1,a0],[-a2,-a1,-a0],[a0,-a2,a1],[a0,a2,-a1],[-a0,a2,a1],[-a0,-a2,-a1],[a0,a1,a2],[a0,-a1,-a2],[-a0,-a1,a2],[-a0,a1,-a2],[a2,a0,a1],[a2,-a0,-a1],[-a2,-a0,a1],[-a2,a0,-a1],[a1,a2,a0],[a1,-a2,-a0],[-a1,-a2,a0],[-a1,a2,-a0]]
+        edgeLength=dist(vertexData[0][0],vertexData[0][1],vertexData[0][2],vertexData[15][0],vertexData[15][1],vertexData[15][2])
+        edgesData=[[0,1],[0,13],[0,19],[1,12],[1,18],[2,3],[2,15],[2,17],[3,14],[3,16],[4,7],[4,18],[4,23],[5,6],[5,19],[5,22],[6,16],[6,21],[7,17],[7,20],[8,10],[8,15],[8,20],[9,11],[9,14],[9,21],[10,13],[10,22],[11,12],[11,23],[12,15],[13,14],[16,18],[17,19],[20,21],[22,23]] 
+        edgesData.push([0,16],[1,17],[2,18],[3,19],[4,21],[5,20],[6,23],[7,22],[8,14],[9,15],[10,12],[11,13])
+        edgesData.push([0,15],[1,14],[2,13],[3,12],[4,19],[5,18],[6,17],[7,16],[8,23],[9,22],[10,21],[11,20])
+        circumR=sqrt(sq(a0)+sq(a1)+sq(a2))
+        L=60
+        s=1/2
+        L2=L
+        faceData=[[1,17,2,15,0],[3,19,0,13,2],[15,2,13,14,8],[1,0,16,3,14],[19,0,16,18,5],[17,2,18,16,7],[13,0,15,12,10],[3,2,18,1,12],[12,1,14,13,11],[18,1,17,19,4],[17,19,3,16,6],[14,3,12,15,9],[4,18,5,6,23],[23,4,21,20,11],[6,16,7,4,21],[5,19,4,7,22],[7,17,6,5,20],[22,5,20,21,10],[21,6,23,22,9],[8,23,22,7,20],[8,14,9,21,10],[23,8,10,12,11],[11,20,8,15,9],[22,9,11,13,10]]
+        JL=vertexData.length
+      break
+      case 144:
         vertexData=[[13.708203932499348,-13.708203932499385,3.2360679774998347],[-5.236067977499781,16.94427190999917,-8.472135954999585],[-13.708203932499364,-13.70820393249939,3.2360679774997383],[5.236067977499826,16.944271909999138,-8.472135954999583],[13.708203932499366,-13.708203932499355,-3.236067977499786],[-5.236067977499837,16.94427190999916,8.472135954999535],[18.944271909999156,-5.236067977499798,0],[-18.94427190999916,-5.23606797749981,-2.1444060197827303e-14],[-13.708203932499366,-13.708203932499355,-3.236067977499786],[5.236067977499826,16.944271909999138,8.472135954999583],[13.708203932499385,-3.2360679774998347,13.708203932499348],[-16.94427190999916,8.47213595499954,-5.236067977499826],[13.708203932499341,-3.236067977499796,-13.708203932499373],[-16.944271909999177,8.472135954999562,5.236067977499785],[-13.708203932499385,-3.2360679774998347,13.708203932499348],[16.944271909999163,8.472135954999546,-5.236067977499816],[-13.708203932499385,-3.2360679774998347,-13.708203932499348],[16.944271909999177,8.472135954999562,5.236067977499785],[5.2360679774998,0,18.94427190999916],[5.236067977499758,-1.0722030098913655e-14,-18.944271909999173],[13.708203932499393,3.2360679774997387,13.708203932499366],[-16.944271909999177,-8.472135954999558,-5.236067977499778],[13.708203932499393,3.2360679774997387,-13.708203932499366],[-16.944271909999177,-8.472135954999562,5.236067977499785],[-13.708203932499385,3.2360679774998347,13.708203932499348],[16.944271909999163,-8.472135954999546,-5.236067977499816],[-13.708203932499385,3.2360679774998347,-13.708203932499348],[16.944271909999163,-8.472135954999546,5.236067977499816],[-5.236067977499758,-1.0722030098913655e-14,18.944271909999173],[-5.2360679774998,0,-18.94427190999916],[-3.236067977499717,13.708203932499385,13.708203932499375],[8.47213595499956,-5.236067977499815,-16.944271909999152],[-3.236067977499796,-13.708203932499373,13.708203932499341],[8.47213595499956,5.236067977499815,-16.944271909999152],[3.2360679774998125,13.708203932499343,13.70820393249939],[-8.472135954999562,-5.236067977499785,-16.944271909999177],[5.506345130134894e-16,18.94427190999916,5.2360679774998],[-2.1444060197827312e-14,-18.944271909999166,5.236067977499802],[3.2360679774997387,-13.708203932499366,13.708203932499393],[-8.47213595499956,5.236067977499815,-16.944271909999152],[8.472135954999562,-5.236067977499785,16.944271909999177],[-3.2360679774998125,13.708203932499343,-13.70820393249939],[-3.2360679774997387,-13.708203932499366,-13.708203932499393],[8.472135954999562,5.236067977499785,16.944271909999177],[3.236067977499717,13.708203932499385,-13.708203932499375],[-8.472135954999588,-5.236067977499792,16.94427190999914],[2.1444060197827312e-14,18.944271909999166,-5.236067977499802],[2.1444060197827312e-14,-18.944271909999166,-5.236067977499802],[3.2360679774998125,-13.708203932499343,-13.70820393249939],[-8.472135954999588,5.236067977499792,16.94427190999914],[13.708203932499348,13.708203932499385,-3.2360679774998347],[-5.236067977499826,-16.944271909999138,8.472135954999583],[-13.708203932499366,13.708203932499355,-3.236067977499786],[5.236067977499781,-16.94427190999917,8.472135954999585],[13.708203932499348,13.708203932499385,3.2360679774998347],[-5.236067977499837,-16.94427190999916,-8.472135954999535],[-13.708203932499364,13.70820393249939,3.2360679774997383],[5.236067977499781,-16.94427190999917,-8.472135954999585],[18.94427190999916,5.23606797749981,-2.1444060197827303e-14],[-18.94427190999916,5.23606797749981,-2.1444060197827303e-14]]
         edgesData=[[1,0],[11,0],[11,10],[11,6],[13,12],[13,4],[13,6],[14,12],[15,14],[15,2],[15,7],[16,10],[17,16],[17,7],[17,8],[19,18],[21,20],[23,22],[24,22],[25,24],[26,20],[27,26],[29,28],[3,2],[31,24],[31,28],[31,30],[32,3],[33,14],[33,28],[33,32],[35,18],[35,20],[35,34],[37,1],[37,3],[37,36],[38,1],[39,10],[39,18],[39,38],[40,26],[40,29],[41,32],[41,40],[42,30],[42,9],[43,16],[43,29],[43,42],[44,38],[45,19],[45,22],[45,44],[47,46],[47,5],[47,9],[48,34],[48,5],[49,12],[49,19],[49,48],[5,4],[50,23],[50,8],[51,44],[51,46],[51,50],[52,27],[52,4],[53,41],[53,46],[53,52],[54,2],[54,21],[55,34],[55,36],[55,54],[56,0],[56,25],[57,30],[57,36],[57,56],[58,21],[58,23],[59,25],[59,27],[59,58],[7,6],[9,8]]
         circumR=sqrt(386.3018460649821)
@@ -1778,7 +2276,7 @@ function resetCamera() {
         faceData=[[0,1,38,44,45,22,24,25,56],[4,5,48,34,35,20,26,27,52],[2,54,55,34,48,49,12,14,15],[8,50,51,44,38,39,10,16,17],[2,3,32,41,40,26,20,21,54],[8,9,42,30,31,24,22,23,50],[0,56,57,30,42,43,16,10,11],[4,52,53,41,32,33,14,12,13],[23,50,51,46,53,52,27,59,58],[21,54,55,36,57,56,25,59,58],[0,1,37,3,2,15,7,6,11],[4,5,47,9,8,17,7,6,13],[6,11,10,39,18,19,49,12,13],[7,15,14,33,28,29,43,16,17],[18,19,45,22,23,58,21,20,35],[24,25,59,27,26,40,29,28,31],[3,32,33,28,31,30,57,36,37],[1,38,39,18,35,34,55,36,37],[9,42,43,29,40,41,53,46,47],[5,48,49,19,45,44,51,46,47]]
         JL=vertexData.length
       break
-      case 138:
+      case 146:
         vertexData=[[0.5,0.5,2.118033988749895,0],[0.5,0.5,-2.118033988749895,0],[0.5,-0.5,2.118033988749895,0],[-0.5,0.5,2.118033988749895,0],[0.5,-0.5,-2.118033988749895,0],[-0.5,-0.5,2.118033988749895,0],[-0.5,0.5,-2.118033988749895,0],[-0.5,-0.5,-2.118033988749895,0],[0.5,2.118033988749895,0.5,0],[-0.5,2.118033988749895,0.5,0],[0.5,-2.118033988749895,0.5,0],[0.5,2.118033988749895,-0.5,0],[0.5,-2.118033988749895,-0.5,0],[-0.5,2.118033988749895,-0.5,0],[-0.5,-2.118033988749895,0.5,0],[-0.5,-2.118033988749895,-0.5,0],[2.118033988749895,0.5,0.5,0],[2.118033988749895,0.5,-0.5,0],[2.118033988749895,-0.5,-0.5,0],[-2.118033988749895,0.5,-0.5,0],[2.118033988749895,-0.5,0.5,0],[-2.118033988749895,-0.5,0.5,0],[-2.118033988749895,-0.5,-0.5,0],[-2.118033988749895,0.5,0.5,0],[1.3090169943749475,0.8090169943749475,1.618033988749895,0],[1.3090169943749475,-0.8090169943749475,1.618033988749895,0],[1.3090169943749475,0.8090169943749475,-1.618033988749895,0],[-1.3090169943749475,0.8090169943749475,1.618033988749895,0],[-1.3090169943749475,-0.8090169943749475,1.618033988749895,0],[1.3090169943749475,-0.8090169943749475,-1.618033988749895,0],[-1.3090169943749475,0.8090169943749475,-1.618033988749895,0],[-1.3090169943749475,-0.8090169943749475,-1.618033988749895,0],[0.8090169943749475,1.618033988749895,1.3090169943749475,0],[0.8090169943749475,1.618033988749895,-1.3090169943749475,0],[0.8090169943749475,-1.618033988749895,1.3090169943749475,0],[-0.8090169943749475,1.618033988749895,1.3090169943749475,0],[-0.8090169943749475,1.618033988749895,-1.3090169943749475,0],[-0.8090169943749475,-1.618033988749895,1.3090169943749475,0],[0.8090169943749475,-1.618033988749895,-1.3090169943749475,0],[-0.8090169943749475,-1.618033988749895,-1.3090169943749475,0],[1.618033988749895,1.3090169943749475,0.8090169943749475,0],[1.618033988749895,1.3090169943749475,-0.8090169943749475,0],[1.618033988749895,-1.3090169943749475,0.8090169943749475,0],[-1.618033988749895,1.3090169943749475,0.8090169943749475,0],[-1.618033988749895,-1.3090169943749475,0.8090169943749475,0],[-1.618033988749895,1.3090169943749475,-0.8090169943749475,0],[1.618033988749895,-1.3090169943749475,-0.8090169943749475,0],[-1.618033988749895,-1.3090169943749475,-0.8090169943749475,0],[1.8090169943749475,0,1.3090169943749475,0],[1.8090169943749475,0,-1.3090169943749475,0],[-1.8090169943749475,0,1.3090169943749475,0],[-1.8090169943749475,0,-1.3090169943749475,0],[0,1.3090169943749475,1.8090169943749475,0],[0,1.3090169943749475,-1.8090169943749475,0],[0,-1.3090169943749475,1.8090169943749475,0],[0,-1.3090169943749475,-1.8090169943749475,0],[1.3090169943749475,1.8090169943749475,0,0],[-1.3090169943749475,1.8090169943749475,0,0],[1.3090169943749475,-1.8090169943749475,0,0],[-1.3090169943749475,-1.8090169943749475,0,0]]
         edgesData=[[11,9],[13,8],[14,12],[15,10],[18,16],[20,17],[21,19],[23,22],[24,14],[24,16],[25,20],[25,9],[26,15],[26,17],[27,10],[27,23],[28,21],[28,8],[29,13],[29,18],[3,2],[30,12],[30,19],[31,11],[31,22],[32,0],[32,19],[33,1],[33,23],[34,2],[34,22],[35,17],[35,3],[36,16],[36,6],[37,18],[37,5],[38,21],[38,4],[39,20],[39,7],[40,4],[40,8],[41,11],[41,2],[42,1],[42,10],[43,7],[43,9],[44,14],[44,6],[45,13],[45,5],[46,0],[46,12],[47,15],[47,3],[48,40],[48,42],[49,41],[49,46],[5,0],[50,43],[50,44],[50,48],[51,45],[51,47],[51,49],[52,24],[52,27],[53,26],[53,30],[53,52],[54,25],[54,28],[55,29],[55,31],[55,54],[56,32],[56,33],[57,35],[57,36],[58,34],[58,38],[58,56],[59,37],[59,39],[59,57],[6,4],[7,1]] 
         circumR=sqrt(sq(sqrt(5)/2+1)+0.5)
@@ -1788,7 +2286,7 @@ function resetCamera() {
         faceData=[[2,3,35,17,20,25,9,11,41],[38,4,6,44,14,12,30,19,21],[33,56,32,19,30,53,52,27,23],[20,25,54,55,29,18,37,59,39],[22,23,27,10,15,47,3,2,34],[29,18,16,36,6,4,40,8,13],[0,5,37,18,16,24,14,12,46],[11,9,43,7,1,33,23,22,31],[32,19,21,28,8,13,45,5,0],[15,10,42,1,7,39,20,17,26],[25,9,43,50,48,40,8,28,54],[12,46,49,51,47,15,26,53,30],[58,34,2,41,49,46,0,32,56],[7,39,59,57,36,6,44,50,43],[14,44,50,48,42,10,27,52,24],[49,41,11,31,55,29,13,45,51],[36,16,24,52,53,26,17,35,57],[21,28,54,55,31,22,34,58,38],[42,48,40,4,38,58,56,33,1],[57,35,3,47,51,45,5,37,59]]
         JL=vertexData.length
       break
-      case 139:
+      case 145:
         vertexData=dodecahedron
         edgesData=[[0,11],[0,15],[0,19],[1,10],[1,14],[1,19],[2,11],[2,13],[2,18],[3,10],[3,12],[3,18],[4,9],[4,15],[4,17],[5,8],[5,14],[5,17],[6,9],[6,13],[6,16],[7,8],[7,12],[7,16],[8,9],[10,11],[12,14],[13,15],[16,18],[17,19]]
         edgesData.push([0,3],[0,5],[0,6],[0,9],[0,14],[0,18],[1,2],[1,4],[1,7],[1,8],[1,15],[1,18],[2,4],[2,7],[2,9],[2,12],[2,19],[3,5],[3,6],[3,8],[3,13],[3,19],[4,7],[4,11],[4,14],[4,16],[5,6],[5,10],[5,15],[5,16],[6,11],[6,12],[6,17],[7,10],[7,13],[7,17],[8,13],[8,15],[8,18],[8,19],[9,12],[9,14],[9,18],[9,19],[10,13],[10,15],[10,16],[10,17],[11,12],[11,14],[11,16],[11,17],[12,17],[12,19],[13,17],[13,19],[14,16],[14,18],[15,16],[15,18])
@@ -1799,7 +2297,7 @@ function resetCamera() {
         faceData=[[0,3,18],[0,3,19],[0,5,14],[0,5,15],[0,6,9],[0,6,11],[0,9,19],[0,11,14],[0,15,18],[1,2,18],[1,2,19],[1,4,14],[1,4,15],[1,7,8],[1,7,10],[1,8,19],[1,10,15],[1,14,18],[2,4,9],[2,4,11],[2,7,12],[2,7,13],[2,9,18],[2,11,12],[2,13,19],[3,5,8],[3,5,10],[3,6,12],[3,6,13],[3,8,18],[3,10,13],[3,12,19],[4,7,16],[4,7,17],[4,9,14],[4,11,17],[4,15,16],[5,6,16],[5,6,17],[5,8,15],[5,10,17],[5,14,16],[6,9,12],[6,11,16],[6,13,17],[7,8,13],[7,10,16],[7,12,17],[8,9,18],[8,9,19],[8,13,15],[9,12,14],[10,11,16],[10,11,17],[10,13,15],[11,12,14],[12,17,19],[13,17,19],[14,16,18],[15,16,18]]
         JL=vertexData.length
       break
-      case 140:
+      case 147:
         vertexData=dodecahedron
         edgesData=[[0,8],[0,12],[0,16],[1,9],[1,13],[1,16],[2,8],[2,14],[2,17],[3,9],[3,15],[3,17],[4,10],[4,12],[4,18],[5,11],[5,13],[5,18],[6,10],[6,14],[6,19],[7,11],[7,15],[7,19],[8,10],[9,11],[12,13],[14,15],[16,17],[18,19]]
         edgesData.push([0,3],[0,5],[0,6],[0,9],[0,14],[0,18],[1,2],[1,4],[1,7],[1,8],[1,15],[1,18],[2,4],[2,7],[2,9],[2,12],[2,19],[3,5],[3,6],[3,8],[3,13],[3,19],[4,7],[4,11],[4,14],[4,16],[5,6],[5,10],[5,15],[5,16],[6,11],[6,12],[6,17],[7,10],[7,13],[7,17],[8,13],[8,15],[8,18],[8,19],[9,12],[9,14],[9,18],[9,19],[10,13],[10,15],[10,16],[10,17],[11,12],[11,14],[11,16],[11,17],[12,17],[12,19],[13,17],[13,19],[14,16],[14,18],[15,16],[15,18])
@@ -1821,8 +2319,15 @@ function resetCamera() {
     rotArr=[0]
     A = inp4.value()*1
     B = inp5.value()*1%A
+    s=5/A
+    s2=s
     if(B>A/2) {
       B=A-B
+      inp5.value(B)
+    }else if(inp5.value()*1>A) {
+      inp5.value(B%A)
+    }else if(B<0) {
+      B=abs(B)
       inp5.value(B)
     }
     gcm = 1
@@ -2182,6 +2687,7 @@ function interpretOFF(off) {
     str+=jjjj.charAt(i)
   }
   str=trim(atob(str))
+  str+=' '
   str=splitTokens(str,'\n')
   var str2 = []
   for(var i = 0; i<str.length; i++) {
@@ -2337,45 +2843,45 @@ function dual() {
         inp.value(7)
       break
       case 9:
-        inp.value(25)
-      break
-      case 25:
-        inp.value(9)
-      break
-      case 26:
         inp.value(10)
       break
       case 10:
-        inp.value(26)
+        inp.value(9)
       break
-      case 27:
+      case 12:
         inp.value(11)
       break
       case 11:
-        inp.value(27)
-      break
-      case 28:
         inp.value(12)
       break
-      case 12:
-        inp.value(28)
+      case 16:
+        inp.value(15)
+      break
+      case 15:
+        inp.value(16)
+      break
+      case 14:
+        inp.value(13)
+      break
+      case 13:
+        inp.value(14)
+      break
+      case 27:
+        inp.value(26)
+      break
+      case 26:
+        inp.value(27)
       break
       case 29:
-        inp.value(22)
+        inp.value(28)
       break
-      case 22:
+      case 28:
         inp.value(29)
       break
-      case 30:
-        inp.value(23)
-      break
-      case 23:
+      case 31:
         inp.value(30)
       break
-      case 31:
-        inp.value(24)
-      break
-      case 24:
+      case 30:
         inp.value(31)
       break
       case 32:
@@ -2522,29 +3028,107 @@ function dual() {
       case 79:
         inp.value(78)
       break
-      case 131:
-        inp.value(132)
+      case 80:
+        inp.value(81)
       break
-      case 132:
+      case 81:
+        inp.value(80)
+      break
+      case 82:
+        inp.value(83)
+      break
+      case 83:
+        inp.value(82)
+      break
+      case 84:
+        inp.value(85)
+      break
+      case 85:
+        inp.value(84)
+      break
+      case 86:
+        inp.value(87)
+      break
+      case 87:
+        inp.value(86)
+      break
+      case 88:
+        inp.value(89)
+      break
+      case 89:
+        inp.value(88)
+      break
+      case 90:
+        inp.value(91)
+      break
+      case 91:
+        inp.value(90)
+      break
+      case 92:
+        inp.value(93)
+      break
+      case 93:
+        inp.value(92)
+      break
+      case 94:
+        inp.value(95)
+      break
+      case 95:
+        inp.value(94)
+      break
+      case 96:
+        inp.value(97)
+      break
+      case 97:
+        inp.value(96)
+      break
+      case 98:
+        inp.value(99)
+      break
+      case 99:
+        inp.value(98)
+      break
+      case 100:
+        inp.value(101)
+      break
+      case 101:
+        inp.value(100)
+      break
+      case 130:
         inp.value(131)
       break
-      case 133:
-        inp.value(134)
+      case 131:
+        inp.value(130)
       break
-      case 134:
+      case 132:
         inp.value(133)
       break
-      case 137:
-        inp.value(139)
-      break
-      case 139:
-        inp.value(137)
+      case 133:
+        inp.value(132)
       break
       case 138:
-        inp.value(140)
+        inp.value(132)
+      break
+      case 139:
+        inp.value(138)
       break
       case 140:
-        inp.value(138)
+        inp.value(141)
+      break
+      case 141:
+        inp.value(140)
+      break
+      case 144:
+        inp.value(145)
+      break
+      case 145:
+        inp.value(144)
+      break
+      case 146:
+        inp.value(147)
+      break
+      case 147:
+        inp.value(146)
       break
     }
   }else {
@@ -2574,9 +3158,9 @@ function dual() {
         inp.value(9)
       break
       case 12:
-        inp.value(13)
+        inp.value(26)
       break
-      case 13:
+      case 17:
         inp.value(12)
       break
       case 14:
@@ -2587,7 +3171,7 @@ function dual() {
       break
     }
   }
-  if(polytopeID!==129) {
+  if(polytopeID!==136) {
     changePolytope()
   }else {
     mrror()
@@ -2627,13 +3211,30 @@ function verf() {
       case 66:
       case 68:
       case 80:
-      case 128:
-      case 129:
-      case 137:
-      case 138:
+      case 82:
+      case 84:
+      case 86:
+      case 130:
+      case 135:
+      case 136:
+      case 144:
+      case 146:
         inp4.value(3)
       break
       case 2:
+      case 9:
+      case 11:
+      case 15:
+      case 13:
+      case 17:
+      case 18:
+      case 19:
+      case 20:
+      case 21:
+      case 22:
+      case 23:
+      case 24:
+      case 25:
       case 36:
       case 48:
       case 54:
@@ -2646,55 +3247,51 @@ function verf() {
       case 72:
       case 74:
       case 76:
+      case 88:
+      case 90:
+      case 92:
+      case 94:
+      case 96:
+      case 98:
+      case 100:
+      case 132:
         inp4.value(4)
       break
       case 4:
       case 5:
       case 42:
       case 52:
+      case 140:
+      case 142:
+      case 143:
         inp4.value(5)
       break
       case 6:
       case 8:
+      case 141:
         inp4.value(5)
         inp5.value(2)
       break
-      case 9:
-      case 10:
-      case 11:
-      case 12:
-      case 13:
-      case 14:
-      case 15:
-      case 16:
-      case 17:
-      case 18:
-      case 19:
-      case 20:
-      case 21:
-        inp4.value(4)
-        inp5.value(1)
-      break
-      case 22:
-      case 23:
-      case 24:
-      case 127:
+      case 26:
+      case 28:
+      case 30:
+      case 134:
         inp4.value(6)
         inp5.value(1)
       break
-      case 130:
-      case 131:
+      case 137:
+      case 138:
         inp4.value(6)
         inp5.value(2)
       break
-      case 25:
+      case 10:
         if(random(7)<4) {
           inp4.value(3)
         }else {
           inp4.value(4)
         }
       break
-      case 26:
+      case 12:
       case 31:
         if(random(8)<5) {
           inp4.value(3)
@@ -2702,8 +3299,8 @@ function verf() {
           inp4.value(5)
         }
       break
-      case 27:
-      case 30:
+      case 16:
+      case 29:
         if(random(8)<5) {
           inp4.value(3)
         }else {
@@ -2711,8 +3308,8 @@ function verf() {
           inp5.value(2)
         }
       break
-      case 28:
-      case 29:
+      case 14:
+      case 27:
       inp4.value(5)
         if(random(2)<1) {
           inp5.value(2)
@@ -2919,11 +3516,111 @@ function verf() {
           inp5.value(2)
         }
       break
-      case 139:
+      case 83:
+        if(random(2)<1) {
+          inp4.value(10)
+          inp5.value(3)
+        }else {
+          inp4.value(5)
+        }
+      break
+      case 85:
+        if(random(32)<12) {
+          inp4.value(10)
+          inp5.value(3)
+        }else {
+          inp4.value(3)
+        }
+      break
+      case 87:
+        if(random(32)<12) {
+          inp4.value(5)
+          inp5.value(2)
+        }else {
+          inp4.value(6)
+        }
+      break
+      case 89:
+        if(random(32)<12) {
+          inp4.value(10)
+          inp5.value(3)
+        }else {
+          inp4.value(6)
+        }
+      break
+      case 91:
+        if(random(42)<12) {
+          inp4.value(10)
+          inp5.value(3)
+        }else {
+          inp4.value(4)
+        }
+      break
+      case 93:
+        if(random(44)<12) {
+          inp4.value(5)
+          inp5.value(2)
+        }else if(random(32)<12) {
+          inp4.value(5)
+        }else {
+          inp4.value(6)
+        }
+      break
+      case 95:
+        if(random(44)<12) {
+          inp4.value(10)
+        }else if(random(32)<12) {
+          inp4.value(5)
+        }else {
+          inp4.value(3)
+        }
+      break
+      case 97:
+        if(random(44)<12) {
+          inp4.value(10)
+          inp5.value(3)
+        }else if(random(32)<12) {
+          inp4.value(5)
+        }else {
+          inp4.value(3)
+        }
+      break
+      case 99:
+        if(random(44)<12) {
+          inp4.value(10)
+          inp5.value(3)
+        }else if(random(32)<12) {
+          inp4.value(5)
+          inp5.value(2)
+        }else {
+          inp4.value(3)
+        }
+      break
+      case 101:
+        if(random(52)<20) {
+          inp4.value(6)
+        }else if(random(32)<12) {
+          inp4.value(5)
+          inp5.value(2)
+        }else {
+          inp4.value(3)
+        }
+      break
+      case 131:
+        if(random(A*gcm+2)>2) {
+          inp4.value(4)
+        }
+      break
+      case 133:
+        if(random(A*gcm*2+2)>2) {
+          inp4.value(3)
+        }
+      break
+      case 145:
         inp4.value(9)
         inp5.value(4)
       break
-      case 140:
+      case 147:
         inp4.value(9)
         inp5.value(2)
       break
@@ -2933,49 +3630,49 @@ function verf() {
       case 9:
         rectan(1,sqrt(2),true)
       break
-      case 10:
+      case 11:
         rectan(1,phi,true)
       break
-      case 11:
+      case 15:
         rectan(1,phi_1,true)
       break
-      case 12:
+      case 13:
         rectan(phi,phi_1,true)
       break
-      case 13:
+      case 17:
         bwtie(1,sqrt(2),true)
       break
-      case 14:
+      case 18:
         bwtie(1,sqrt(3),true)
       break
-      case 15:
+      case 20:
         bwtie(1,sqrt((5+sqrt(5))/2),true)
       break
-      case 16:
+      case 25:
         bwtie(1,sqrt((5-sqrt(5))/2),true)
       break
-      case 17:
+      case 23:
         bwtie(phi_1,sqrt(3),true)
       break
-      case 18:
+      case 19:
         bwtie(sqrt(2),sqrt(3),true)
       break
-      case 19:
+      case 21:
         bwtie(phi,sqrt((5+sqrt(5))/2),true)
       break
-      case 20:
+      case 24:
         bwtie(phi_1,sqrt((5-sqrt(5))/2),true)
       break
-      case 21:
+      case 22:
         bwtie(phi,sqrt(3),true)
       break
-      case 22:
+      case 26:
         tripod(phi_1,phi,true)
       break
-      case 23:
+      case 28:
         ditrigon(1,phi_1,true)
       break
-      case 24:
+      case 30:
         tripod(1,phi,true)
       break
       case 32:
@@ -3053,21 +3750,57 @@ function verf() {
       case 80:
         icot(sqrt((5+sqrt(5))/2),phi_1,true)
       break
-      case 127:
+      case 82:
+        icot(sqrt((5-sqrt(5))/2),phi,true)
+      break
+      case 84:
+        icot(sqrt((5-sqrt(5))/2),1,true)
+      break
+      case 86:
+        icot(sqrt(3),phi_1,true)
+      break
+      case 88:
+        traz(1,phi,-sqrt((5-sqrt(5))/2),true)
+      break
+      case 90:
+        traz(1,phi_1,-sqrt((5-sqrt(5))/2),true)
+      break
+      case 92:
+        traz(-phi_1,phi,sqrt(3),true)
+      break
+      case 94:
+        traz(-phi_1,1,sqrt((5+sqrt(5))/2),true)
+      break
+      case 96:
+        traz(1,phi,sqrt((5-sqrt(5))/2),true)
+      break
+      case 98:
+        traz(1,phi_1,sqrt((5-sqrt(5))/2),true)
+      break
+      case 100:
+        traz(1,phi_1,sqrt(3),true)
+      break
+      case 130:
+        icot(sqrt(2+2*cos(2*PI/A*B)),sqrt(2),true)
+      break
+      case 132:
+        traz(1,sqrt(2+2*cos(2*PI/A*B)),1,true)
+      break
+      case 134:
         nct(1,1+phi,true)
         s=1
       break
-      case 130:
-      case 131:
+      case 137:
+      case 138:
         vertexData=[[(3*sqrt(5)-1)/8,-sqrt(3)*phi/4,0],[-1/2,-sqrt(3)/2,0],[(-1-3*sqrt(5))/8,(sqrt(3)-sqrt(15))/8,0],[-1/2,sqrt(3)/2,0],[1/4,sqrt(15)/4,0],[1,0,0]]
       break
-      case 137:
+      case 144:
         icot(5.7888543819998,4,true)
       break
-      case 138:
+      case 146:
         icot(5.7888543819998,6+2*sqrt(5),true)
       break
-      case 139:
+      case 145:
         vertexData=[[-3-sqrt(5),-6.75973469215556,0],[1+sqrt(5),7.91443523053481,0],[0,-phi2-2,0],[-1-sqrt(5),7.91443523053481,0],[3+sqrt(5),-6.75973469215556,0],[-4,(phi+3)/2,0],[8.4721359549996,-sqrt(3/4),0],[-8.4721359549996,-sqrt(3/4),0],[4,(phi+3)/2,0]]
         faceData=[[0,1,2,3,4,5,6,7,8]]
         edgesData=[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,0]]
@@ -3080,6 +3813,42 @@ function verf() {
         div3.html('dual to irregular great nonagram')
       break
       case 140:
+        vertexData=[[2.519035170799437,-2.710764105139476,0],[0.611220424720422,1.001351008382214,0],[-0.611220424720422,1.001351008382214,0],[-2.519035170799437,-2.710764105139475,0],[0,-1.173155680028652,0]]
+        faceData=[[0,1,2,3,4]]
+        edgesData=[[0,1],[1,2],[2,3],[3,4],[4,0]]
+        div4.html('irregular pentagon')
+        div3.html('dual to irregular pentagon')
+      break
+      case 141:
+        vertexData=[[0,7.1529207901013,0],[-0.8584387437193,1.3543327936703,0],[7.0758021163802,-1.0475209970652,0],[-7.0758021163802,-1.0475209970652,0],[0.8584387437193,1.3543327936703,0]]
+        for(var i = 0; i<vertexData.length; i++) {
+          for(var j = 0; j<2; j++) {
+            vertexData[i][j]/=7.1529207901013
+          }
+        }
+        faceData=[[0,1,2,3,4]]
+        edgesData=[[0,1],[1,2],[2,3],[3,4],[4,0]]
+        div4.html('irregular pentagram')
+        div3.html('dual to irregular pentagram')
+        s=1/2
+        s2=1/2
+      break
+      case 142:
+        vertexData=[[-0.1491726481383,1.091552968917734,0],[-1.432838831871845,0,0],[0.928191377985572,-2.007678918345082,0],[0.928191377985572,-0.593465355971987,0],[2.1185756179116,0,0]]
+        faceData=[[0,1,2,3,4]]
+        edgesData=[[0,1],[1,2],[2,3],[3,4],[4,0]]
+        div4.html('irregular pentagon')
+        div3.html('dual to irregular pentagon')
+      break
+      case 143:
+        vertexData=[[6.595900090165,-14.5215497497666,0],[0,2.9189785561943,0],[-1.9307228355051,-2.182339171457,0],[0.8967552941335,-0.6930731234461,0],[0.3769970839518,-2.894530879126,0]]
+        faceData=[[0,1,2,3,4]]
+        edgesData=[[0,1],[1,2],[2,3],[3,4],[4,0]]
+        div4.html('irregular pentagon')
+        div3.html('dual to irregular pentagon')
+        //s=1/2
+      break
+      case 147:
         vertexData=[[0.583592135001261,-0.336937076239927,0],[0.068883707497266,0.168468538119963,0],[-0.068883707497266,0.168468538119963,0],[-0.583592135001261,-0.336937076239927,0],[0.111456180001682,-0.143889309659471,0],[10*phi-16 
 ,-0.024579228460493,0],[0,0.673874152479852,0],[16-10*phi,-0.024579228460493,0],[-0.111456180001682,-0.143889309659471,0]]
         faceData=[[0,1,2,3,4,5,6,7,8]]
@@ -3133,16 +3902,16 @@ function verf() {
         inp.value(7)
       break
       case 17:
-        inp.value(23)
+        inp.value(28)
       break
       case 18:
-        inp.value(24)
+        inp.value(30)
       break
       case 19:
-        inp.value(22)
+        inp.value(26)
       break
       case 16:
-        inp.value(13)
+        inp.value(17)
       break;
     }
     changePolytope()
@@ -3345,9 +4114,9 @@ function STF() {
   var angArr=[]
   var dArr=[]
   for(var i = 0; i<face.length; i++) {
-    var v1 = vertexData[face[(i-1+face.length)%face.length]].slice(0,vertexData[face[(i-1+face.length)%face.length]].length)
-    var v2 = vertexData[face[i]].slice(0,vertexData[face[i]].length)
-    var v3 = vertexData[face[(i+1)%face.length]].slice(0,vertexData[face[(i+1)%face.length]].length)
+    var v1 = vertexData[face[(i-1+face.length)%face.length]].slice()
+    var v2 = vertexData[face[i]].slice()
+    var v3 = vertexData[face[(i+1)%face.length]].slice()
     for(var j = 0; j<v2.length; j++) {
       v1[j]-=v2[j]
       v3[j]-=v2[j]
@@ -3366,27 +4135,32 @@ function STF() {
       v3[j]/=sqrt(s3)
       res+=v1[j]*v3[j]
     }
-    angArr[i]=acos(res)
+    var crss = v1[0]*v3[1]-v1[1]*v3[0]
+    if(crss>0) {
+      angArr[i]=acos(res)
+    }else {
+      angArr[i]=2*PI-acos(res)
+    }
   }
   var tot = 0
   for(var i = 0; i<angArr.length; i++) {
-    tot+=angArr[i]/2/PI
+    tot+=(PI-angArr[i])/2/PI
   }
   tot=abs(tot)
-  densi=ceil(tot-face.length/3)
+  densi=ceil(tot)
   inp2.value(2)
   inp4.value(face.length)
-  inp5.value(densi)
+  if(face.length/densi>2) {
+    inp5.value(densi)
+  }
   var a = true
-  var isAlternating = false
   if(val==3) {
-    inp5.value(1)
     changeDimension()
     switch(polytopeID) {
-      case 29:
+      case 27:
         nct(phi_1,phi)
       break
-      case 30:
+      case 29:
         triambus(1,phi_1)
       break
       case 31:
@@ -3416,43 +4190,62 @@ function STF() {
       break
       case 59:
         traz((sqrt(2)-1)*2,sqrt(2),-sqrt(2*(2-sqrt(2))))
-        isAlternating = true
       break
       case 65:
         traz(sqrt(2),2*sqrt(2)+2,-sqrt(2*(2+sqrt(2))))
-        isAlternating = true
       break
       case 69:
         traz(sqrt(5),7.854101966249685,-sqrt(6*(5+sqrt(5)))/2)
-        isAlternating = true
       break
       case 71:
         traz(1.0104862091886,2.3659451072949,-1.2154880882994)
-        isAlternating = true
       break
       case 73:
         kite(sqrt(5)+1,2.408659879620652,-0.967056766951233)
       break
       case 75:
         traz(1.31640786499874,2,-(5*sqrt(6)+sqrt(30))/10)
-        isAlternating = true
       break
       case 77:
         kite(sqrt(5),0.749922451819567,-2.3264375042337)
       break
-      case 127:
+      case 89:
+        var b1 = 2.37248552003061075//±1.5e-15
+        var b2 = (sqrt(sq(b1)+36*sqrt(5)-60)-b1)/2
+        traz(b1,b2,-sqrt(3*(5-2*sqrt(5))))
+      break
+      case 91:
+        var b1 = 1+phi2
+        var b2 = sqrt(5)-1
+        traz(b1,b2,-sqrt(5-sqrt(5)))
+      break
+      case 93:
+        kite(2,sqrt(203+84*sqrt(5))/11,-sqrt(203-84*sqrt(5))/11)
+      break
+      case 95:
+        kite(3*phi2,sqrt(8577/2888+(3645*sqrt(5))/2888),-3*sqrt(346+18*sqrt(5))/44)
+      break
+      case 97:
+        kite(3*phi_2,sqrt(8577/2888-(3645*sqrt(5))/2888),3*sqrt(346-18*sqrt(5))/44)
+      break
+      case 99:
+        kite(sqrt(5)-1,sqrt(53/2-(23*sqrt(5))/2)/3,sqrt(157/2-(31*sqrt(5))/2)/11)
+      break
+      case 101:
+        kite(sqrt(5),sqrt(1345-570*sqrt(5))/22,sqrt(745-30*sqrt(5))/38)
+      break
+      case 134:
         tripod(1,1+phi)
         doggo=false
       break
-      case 130:
-      case 132:
+      case 137:
+      case 139:
         a=false
         inp5.value(2)
       break
     }
   }else {
     changeDimension()
-    inp5.value(1)
     switch(polytopeID) {
       case 0:
       case 2:
@@ -3488,13 +4281,9 @@ function STF() {
     var tAng=0
     vertexData=[[-dArr[0]/2,0,0],[dArr[0]/2,0,0]]
     for(var i = 0; i<angArr.length-2; i++) {
-      if(isAlternating) {
-        tAng+=PI-angArr[i]*(i%2-0.5)*2
-      }else {
-        tAng+=PI-angArr[i]
-      }
-      var x = cos(tAng)*dArr[i+1]
-      var y = sin(tAng)*dArr[i+1]
+      tAng+=PI-angArr[i]
+      var x = cos(tAng)*dArr[(i+1)%dArr.length]
+      var y = sin(tAng)*dArr[(i+1)%dArr.length]
       vertexData[vertexData.length]=[vertexData[vertexData.length-1][0]+x,vertexData[vertexData.length-1][1]+y,0]
     }
     var tx =0
@@ -3586,8 +4375,8 @@ function STF() {
     changeDimension()
   }
   switch(polytopeID) {
-    case 130:
-    case 132:
+    case 137:
+    case 139:
       vertexData=[[(3*sqrt(5)-1)/8,-sqrt(3)*phi/4,0],[-1/2,-sqrt(3)/2,0],[(-1-3*sqrt(5))/8,(sqrt(3)-sqrt(15))/8,0],[-1/2,sqrt(3)/2,0],[1/4,sqrt(15)/4,0],[1,0,0]]
     break
   }
@@ -3813,11 +4602,16 @@ function setup() {
   verCol=createColorPicker('#00ffff')
   verCol.position(width/2-50,height-30)
   rainbowVerticies.changed(vS)
-  Ortho = createCheckbox('ortographic mode', true)
-  Ortho.position(width-140,40)
+  Ortho = createCheckbox('orthographic mode', true)
+  Ortho.position(width-150,40)
   Ortho.style('color','#ffffff')
   Ortho.checked(false)
   Ortho.changed(toggOrtho)
+  Ortho2 = createCheckbox('orthographic mode (3D➡2D)', true)
+  Ortho2.position(width-220,80)
+  Ortho2.style('color','#ffffff')
+  Ortho2.checked(false)
+  Ortho2.changed(toggOrtho2)
   opt = createCheckbox('simpler graphics', true)
   opt.position(0,height/2-10)
   opt.style('color','#ffffff')
@@ -3841,8 +4635,15 @@ function setup() {
   yoMama.position(0,height-140)
   UseT=createCheckbox('use traditional filling')
   UseT.style('color','#ffffff')
-  UseT.position(width-158,60)
+  UseT.position(width-160,60)
   UseT.changed(cUseTT)
+}
+function toggOrtho2() {
+  if(Ortho2.checked()) {
+    ortho()
+  }else {
+    perspective()
+  }
 }
 UseTT=-1
 function cUseTT() {
@@ -4075,7 +4876,7 @@ function changePolytope() {
         div.html('12 pentagon {5} faces')
         div3.html('Schläfli symbol {5,3}')
         div4.html('Dual to ike {3,5}')
-        div5.html('dodecahedron')
+        div5.html('Dodecahedron')
         div6.html('vertex figure: triangle {3}')
         div8.html('')
       break
@@ -4091,7 +4892,7 @@ function changePolytope() {
         div.html('12 pentagram {5/2} faces')
         div3.html('Schläfli symbol {5/2,5}')
         div4.html('Dual to gad {5,5/2}')
-        div5.html('small stellated dodecahedron')
+        div5.html('Small stellated dodecahedron')
         div6.html('vertex figure: pentagon {5}')
         div8.html('')
       break
@@ -4099,7 +4900,7 @@ function changePolytope() {
         div.html('12 pentagon {5} faces')
         div3.html('Schläfli symbol {5,5/2}')
         div4.html('Dual to sissid {5/2,5}')
-        div5.html('great dodecahedron')
+        div5.html('Great dodecahedron')
         div6.html('vertex figure: pentagram {5/2}')
         div8.html('')
       break
@@ -4107,7 +4908,7 @@ function changePolytope() {
         div.html('12 pentagram {5/2} faces')
         div3.html('Schläfli symbol {5/2,3}')
         div4.html('Dual to gike {3,5/2}')
-        div5.html('great stellated dodecahedron')
+        div5.html('Great stellated dodecahedron')
         div6.html('vertex figure: trangle {3}')
         div8.html('')
       break
@@ -4115,7 +4916,7 @@ function changePolytope() {
         div.html('20 triangle {3} faces')
         div3.html('Schläfli symbol {3,5/2}')
         div4.html('Dual to gissid {5/2,3}')
-        div5.html('great icosahedron')
+        div5.html('Great icosahedron')
         div6.html('vertex figure: pentagram {5/2}')
         div8.html('')
       break
@@ -4123,35 +4924,51 @@ function changePolytope() {
         div.html('8 triangle {3}, 6 square {4} faces')
         div3.html('Schläfli symbol r{3,4}/r{4,3}')
         div4.html('Dual to rad')
-        div5.html('cuboctahedron')
-        div6.html('vertex figure: rectangle (side lengths 1, sqrt(2)')
+        div5.html('Cuboctahedron')
+        div6.html('vertex figure: rectangle (side lengths 1, sqrt(2))')
         div8.html('')
       break
       case 10:
-        div.html('20 triangle {3}, 12 pentagon {5} faces')
-        div3.html('Schläfli symbol r{5,3}/r{3,5}')
-        div4.html('Dual to rhote')
-        div5.html('icosidodecahedron')
-        div6.html('vertex figure: rectangle (side lengths 1, phi')
+        div.html('12 rhombus faces')
+        div3.html('Coxeter diagram: o4m3o')
+        div4.html('Dual to co')
+        div5.html('Rhombic dodecahedron')
+        div6.html('vertex figure: 6 squares, 8 triangles')
         div8.html('')
       break
       case 11:
-        div.html('20 triangle {3}, 12 pentagram {5/2} faces')
-        div3.html('Schläfli symbol r{5/2,3}/r{3,5/2}')
-        div4.html('Dual to gort')
-        div5.html('great icosidodecahedron')
-        div6.html('vertex figure: rectangle (side lengths 1, 1/phi')
+        div.html('20 triangle {3}, 12 pentagon {5} faces')
+        div3.html('Schläfli symbol r{5,3}/r{3,5}')
+        div4.html('Dual to rhote')
+        div5.html('Icosidodecahedron')
+        div6.html('vertex figure: rectangle (side lengths 1, (1+sqrt(5))/2)')
         div8.html('')
       break
       case 12:
-        div.html('12 pentagon {5}, 12 pentagram {5/2} faces')
-        div3.html('Schläfli symbol r{5/2,5}/r{5,5/2}')
-        div4.html('Dual to mort')
-        div5.html('dodecadodecahedron')
-        div6.html('vertex figure: rectangle (side lengths 0.5+sqrt(1.25), sqrt(1.25)-0.5')
+        div.html('30 rhombus faces')
+        div3.html('Coxeter diagram: o5m3o')
+        div4.html('Dual to id')
+        div5.html('Rhombic triacontahedron')
+        div6.html('vertex figure: 12 pentagons, 20 triangles')
+        div8.html('')
+      break
+      case 15:
+        div.html('20 triangle {3}, 12 pentagram {5/2} faces')
+        div3.html('Schläfli symbol r{5/2,3}/r{3,5/2}')
+        div4.html('Dual to gort')
+        div5.html('Great icosidodecahedron')
+        div6.html('vertex figure: rectangle (side lengths 1, (sqrt(5)-1)/2)')
         div8.html('')
       break
       case 13:
+        div.html('12 pentagon {5}, 12 pentagram {5/2} faces')
+        div3.html('Schläfli symbol r{5/2,5}/r{5,5/2}')
+        div4.html('Dual to mort')
+        div5.html('Dodecadodecahedron')
+        div6.html('vertex figure: rectangle (side lengths 0.5+sqrt(1.25), sqrt(1.25)-0.5)')
+        div8.html('')
+      break
+      case 17:
         div.html('4 triangle {3}, 3 square {4} faces')
         div3.html('Coxeter diagram: (x3/2o3x)/2')
         div4.html('Dual to tetrahemihexacron')
@@ -4159,139 +4976,123 @@ function changePolytope() {
         div6.html('vertex figure: bowtie (side lengths 1, sqrt(2))')
         div8.html('')
       break
-      case 14:
+      case 18:
         div.html('8 triangle {3}, 4 hexagon {6} faces')
         div3.html('Coxeter diagram: x3/2o3x3*a')
-        div4.html('Dual to tetrahemihexacron')
-        div5.html('octahemioctacron')
+        div4.html('Dual to octahemioctacron')
+        div5.html('Octahemioctahedron')
         div6.html('vertex figure: bowtie (side lengths 1, sqrt(3))')
         div8.html('')
       break
-      case 15:
+      case 20:
         div.html('20 triangle {3}, 6 decagon {10} faces')
         div3.html('Coxeter diagram: (x3/2o3x5*a)/2')
         div4.html('Dual to small icosihemidodecacron')
-        div5.html('small icosihemidodecahedron')
+        div5.html('Small icosihemidodecahedron')
         div6.html('vertex figure: bowtie (side lengths 1, sqrt((5+sqrt(5))/2))')
         div8.html('')
       break
-      case 16:
+      case 25:
         div.html('20 triangle {3}, 6 decagram {10/3} faces')
         div3.html('Coxeter diagram: (o3/2x5/3x3*a)/2')
         div4.html('Dual to great icosihemidodecacron')
-        div5.html('great icosihemidodecahedron')
+        div5.html('Great icosihemidodecahedron')
         div6.html('vertex figure: bowtie (side lengths 1, sqrt((5-sqrt(5))/2))')
         div8.html('')
       break
-      case 17:
+      case 23:
         div.html('12 pentagram {5/2}, 10 hexagon {6} faces')
         div3.html('Coxeter diagram: (x5/3o5/2x3*a)/2')
         div4.html('Dual to small dodecahemicosacron')
-        div5.html('small dodecahemicosahedron')
+        div5.html('Small dodecahemicosahedron')
         div6.html('vertex figure: bowtie (side lengths 1/phi, sqrt(3))')
         div8.html('')
       break
-      case 18:
+      case 19:
         div.html('6 square {4}, 4 hexagon {6} faces')
         div3.html('Coxeter diagram: (o4/3x3x4*a)/2')
         div4.html('Dual to hexahemioctacron')
-        div5.html('cubohemioctahedron')
+        div5.html('Cubohemioctahedron')
         div6.html('vertex figure: bowtie (side lengths sqrt(2), sqrt(3))')
         div8.html('')
       break
-      case 19:
+      case 21:
         div.html('12 pentagon {5}, 6 decagon {10} faces')
         div3.html('Coxeter diagram: (x5/4o5x5*a)/2')
         div4.html('Dual to great dodecahemidodecahedron')
-        div5.html('small dodecahemidodecahedron')
+        div5.html('Small dodecahemidodecahedron')
         div6.html('vertex figure: bowtie (side lengths phi, sqrt((5+sqrt(5))/2))')
         div8.html('')
       break
-      case 20:
+      case 24:
         div.html('12 pentagram {5/2}, 6 decagram {10/3} faces')
         div3.html('Coxeter diagram: (x5/3x5/3o5/2*a)/2')
         div4.html('Dual to great dodecahemidodecacron')
-        div5.html('great dodecahemidodecahedron')
+        div5.html('Great dodecahemidodecahedron')
         div6.html('vertex figure: bowtie (side lengths 1/phi, sqrt((5-sqrt(5))/2))')
         div8.html('')
       break
-      case 21:
+      case 22:
         div.html('12 pentagon {5}, 10 hexagon {6} faces')
         div3.html('Coxeter diagram: (o5/4x3x5*a)/2')
         div4.html('Dual to great dodecahemicosacron')
-        div5.html('great dodecahemicosahedron')
+        div5.html('Great dodecahemicosahedron')
         div6.html('vertex figure: bowtie (side lengths phi, sqrt(3))')
         div8.html('')
       break
-      case 22:
+      case 26:
         div.html('12 pentagon {5}, 12 pentagram {5/2} faces')
         div3.html('Coxeter diagram: (o5/4x3x5*a)/2')
         div4.html('Dual to matai')
-        div5.html('ditrigonary dodecadodecahedron')
+        div5.html('Ditrigonary dodecadodecahedron')
         div6.html('vertex figure: tripod (side lengths phi, 1/phi)')
         div8.html('')
       break
-      case 23:
+      case 28:
         div.html('20 triangle {3}, 12 pentagram {5/2} faces')
         div3.html('Coxeter diagram: x5/2o3o3*a')
         div4.html('Dual to stai')
-        div5.html('small ditrigonary icosidodecahedron')
+        div5.html('Small ditrigonary icosidodecahedron')
         div6.html('vertex figure: ditrigon (side lengths 1, 1/phi)')
         div8.html('')
       break
-      case 24:
+      case 30:
         div.html('20 triangle {3}, 12 pentagon {5/2} faces')
         div3.html('Coxeter diagram: x5/2o3o3*a')
         div4.html('Dual to gatai')
-        div5.html('great ditrigonary icosidodecahedron')
+        div5.html('Great ditrigonary icosidodecahedron')
         div6.html('vertex figure: tripod (side lengths 1, phi)')
         div8.html('')
       break
-      case 25:
-        div.html('12 rhombus faces')
-        div3.html('Coxeter diagram: o4m3o')
-        div4.html('Dual to co')
-        div5.html('rhombic dodecahedron')
-        div6.html('vertex figure: 6 squares, 8 triangles')
-        div8.html('')
-      break
-      case 26:
-        div.html('30 rhombus faces')
-        div3.html('Coxeter diagram: o5m3o')
-        div4.html('Dual to id')
-        div5.html('rhombic triacontahedron')
-        div6.html('vertex figure: 12 pentagons, 20 triangles')
-        div8.html('')
-      break
-      case 27:
+      case 16:
         div.html('30 rhombus faces')
         div3.html('Coxeter diagram: o5/2m3o')
         div4.html('Dual to gid')
-        div5.html('great rhombic triacontahedron')
+        div5.html('Great rhombic triacontahedron')
         div6.html('vertex figure: 12 pentagrams, 20 triangles')
         div8.html('')
       break
-      case 28:
+      case 14:
         div.html('30 rhombus faces')
         div3.html('Coxeter diagram: o5/2m5o')
         div4.html('Dual to did')
-        div5.html('medial rhombic triacontahedron')
+        div5.html('Medial rhombic triacontahedron')
+        div6.html('vertex figure: 12 pentagrams, 12 pentagons')
+        div8.html('')
+      break
+      case 27:
+        div.html('20 triambus faces')
+        div3.html('Coxeter diagram: m5/3o3o5*a')
+        div4.html('Dual to ditdid')
+        div5.html('Medial triambic icosahedron')
         div6.html('vertex figure: 12 pentagrams, 12 pentagons')
         div8.html('')
       break
       case 29:
         div.html('20 triambus faces')
-        div3.html('Coxeter diagram: m5/3o3o5*a')
-        div4.html('Dual to ditdid')
-        div5.html('medial triambic icosahedron')
-        div6.html('vertex figure: 12 pentagrams, 12 pentagons')
-        div8.html('')
-      break
-      case 30:
-        div.html('20 triambus faces')
         div3.html('Coxeter diagram: m5/2o3o3*a')
         div4.html('Dual to sitdid')
-        div5.html('small triambic icosahedron')
+        div5.html('Small triambic icosahedron')
         div6.html('vertex figure: 12 pentagrams, 20 triangles')
         div8.html('')
       break
@@ -4299,7 +5100,7 @@ function changePolytope() {
         div.html('20 triambus faces')
         div3.html('Coxeter diagram: m3/2o3o5*a')
         div4.html('Dual to gitdid')
-        div5.html('great triambic icosahedron')
+        div5.html('Great triambic icosahedron')
         div6.html('vertex figure: 12 pentagons, 20 triangles')
         div8.html('')
       break
@@ -4323,7 +5124,7 @@ function changePolytope() {
         div.html('8 hexagon, 6 triangle faces')
         div3.html('Coxeter diagram: o4x3x')
         div4.html('Dual to tekah')
-        div5.html('truncated octahedron')
+        div5.html('Truncated octahedron')
         div6.html('vertex figure: icosoles triangle (base length sqrt(2), leg length sqrt(3))')
         div8.html('')
       break
@@ -4371,7 +5172,7 @@ function changePolytope() {
         div.html('4 triangle, 4 hexagon faces')
         div3.html('Coxeter diagram: x3x3o')
         div4.html('Dual to tikit')
-        div5.html('truncated tetrahedron')
+        div5.html('Truncated tetrahedron')
         div6.html('vertex figure: icosoles triangle (base length 1, leg length sqrt(3))')
         div8.html('')
       break
@@ -4379,7 +5180,7 @@ function changePolytope() {
         div.html('48 icosoles triangle (base length 5/3, leg length 1) faces')
         div3.html('Coxeter diagram: m3m3o')
         div4.html('Dual to tut')
-        div5.html('triakis tetrahedron')
+        div5.html('Triakis tetrahedron')
         div6.html('vertex figure: 4 triangles, 4 hexagons')
         div8.html('')
       break
@@ -4403,7 +5204,7 @@ function changePolytope() {
         div.html('20 triangle, 12 decagon faces')
         div3.html('Coxeter diagram: x5x3o')
         div4.html('Dual to tiki')
-        div5.html('truncated dodecahedron')
+        div5.html('Truncated dodecahedron')
         div6.html('vertex figure: isosceles triangle (base length 1, leg length 1.902113032590307)')
         div8.html('')
       break
@@ -4411,7 +5212,7 @@ function changePolytope() {
         div.html('60 isosceles triangle (base length 1.723606797749979, leg length 1)')
         div3.html('Coxeter diagram: m5m3o')
         div4.html('Dual to tid')
-        div5.html('triakis icosahedron')
+        div5.html('Triakis icosahedron')
         div6.html('vertex figure: 20 triangles, 12 decagon')
         div8.html('')
       break
@@ -4419,7 +5220,7 @@ function changePolytope() {
         div.html('20 hexagon, 12 pentagon faces')
         div3.html('Coxeter diagram: o5x3x')
         div4.html('Dual to pakid')
-        div5.html('truncated icosahedron')
+        div5.html('Truncated icosahedron')
         div6.html('vertex figure: isosceles triangle (base length phi, leg length sqrt(3))')
         div8.html('')
       break
@@ -4427,7 +5228,7 @@ function changePolytope() {
         div.html('60 isosceles triangle (base length 1.127322003750035, leg length 1)')
         div3.html('Coxeter diagram: o5m3m')
         div4.html('Dual to ti')
-        div5.html('pentakis dodecahedron')
+        div5.html('Pentakis dodecahedron')
         div6.html('vertex figure: 20 hexagons, 12 pentagons')
         div8.html('')
       break
@@ -4435,7 +5236,7 @@ function changePolytope() {
         div.html('60 isosceles triangle (base length 1.723606797749979, leg length 1)')
         div3.html('Coxeter diagram: m5m3o')
         div4.html('Dual to tid')
-        div5.html('triakis icosahedron')
+        div5.html('Triakis icosahedron')
         div6.html('vertex figure: 20 triangles, 12 decagon')
         div8.html('')
       break
@@ -4491,7 +5292,7 @@ function changePolytope() {
         div.html('8 triangle, 6 square, 8 octagram faces')
         div3.html('Coxeter diagram: x4/3x3o4*a')
         div4.html('Dual to great hexacronic icositetrahedron')
-        div5.html('great cubicuboctahedron')
+        div5.html('Great cubicuboctahedron')
         div6.html('vertex figure: icosoles trapezoid (base lengths: 1, sqrt(2); leg length 0.7653668647301795)')
         div8.html('')
       break
@@ -4499,7 +5300,7 @@ function changePolytope() {
         div.html('24 dart (width 2*sqrt(2-1), top height 0.3849167582902855; bottom height 1.4736257582079) faces')
         div3.html('Coxeter diagram: m4/3m3o4*a')
         div4.html('Dual to gocco')
-        div5.html('great hexacronic icositetrahedron')
+        div5.html('Great hexacronic icositetrahedron')
         div6.html('vertex figure: 8 triangles, 6 squares, 8 octagrams')
         div8.html('')
       break
@@ -4515,7 +5316,7 @@ function changePolytope() {
         div.html('24 dart (width sqrt(2), top height -0.6570940082697; bottom height 2.5156365247678854) faces')
         div3.html('Coxeter diagram: m4/3o3m')
         div4.html('Dual to querco')
-        div5.html('great deltoidal icositetrahedron')
+        div5.html('Great deltoidal icositetrahedron')
         div6.html('vertex figure: 8 triangles, 18 squares')
         div8.html('')
       break
@@ -4531,7 +5332,7 @@ function changePolytope() {
         div.html('24 butterfly (width: sqrt(2), diagonal 2sqrt(2-sqrt(2)); leg length sqrt(2(2-sqrt(2)))) faces')
         div3.html('')
         div4.html('Dual to groh')
-        div5.html('great rhombihexacron')
+        div5.html('Great rhombihexacron')
         div6.html('vertex figure: 6 octagrams, 12 squares')
         div8.html('')
       break
@@ -4547,7 +5348,7 @@ function changePolytope() {
         div.html('24 isosceles triangle (base length 1-sqrt(2), leg length 2) faces')
         div3.html('Coxeter diagram: m4/3m3o')
         div4.html('Dual to quith')
-        div5.html('great triakis octahedron')
+        div5.html('Great triakis octahedron')
         div6.html('vertex figure: 6 octagrams, 8 triangles')
         div8.html('')
       break
@@ -4555,7 +5356,7 @@ function changePolytope() {
         div.html('8 triangle, 6 square, 8 octagon faces')
         div3.html('Coxeter diagram: x4/3o3x4*a')
         div4.html('Dual to small hexacronic icositetrahedron')
-        div5.html('small cubicuboctahedron')
+        div5.html('Small cubicuboctahedron')
         div6.html('vertex figure: crossed icosoles trapezoid (base lengths: 1, sqrt(2); leg length sqrt(2+sqrt(2)))')
         div8.html('')
       break
@@ -4563,7 +5364,7 @@ function changePolytope() {
         div.html('24 dart (width 2+2sqrt(2), top height 2.7979326519318; bottom height -1.5302401796955) faces')
         div3.html('Coxeter diagram: m4/3o3m4*a')
         div4.html('Dual to socco')
-        div5.html('small hexacronic icositetrahedron')
+        div5.html('Small hexacronic icositetrahedron')
         div6.html('vertex figure: 8 triangles, 6 squares, 8 octagons')
         div8.html('')
       break
@@ -4571,7 +5372,7 @@ function changePolytope() {
         div.html('12 square, 8 octagon faces')
         div3.html('')
         div4.html('Dual to small rhombihexacron')
-        div5.html('small rhombihexahedron')
+        div5.html('Small rhombihexahedron')
         div6.html('vertex figure: butterfly (width: sqrt(2), diagonal 1.8477590650225737; leg length sqrt(2))')
         div8.html('')
       break
@@ -4579,7 +5380,7 @@ function changePolytope() {
         div.html('24 butterfly (width: 2+2sqrt(2), diagonal 2sqrt(2+sqrt(2)); leg length sqrt(2(2+sqrt(2)))) faces')
         div3.html('')
         div4.html('Dual to sroh')
-        div5.html('small rhombihexacron')
+        div5.html('Small rhombihexacron')
         div6.html('vertex figure: 12 squares, 8 octagons')
         div8.html('')
       break
@@ -4595,7 +5396,7 @@ function changePolytope() {
         div.html('48 scalene triangle (lengths 5.531658196681838, 6.272310825528027, -4.83743295509943) faces')
         div3.html('Coxeter diagram: m4/3m3m4*a')
         div4.html('Dual to cotco')
-        div5.html('tetradyakis hexahedron')
+        div5.html('Tetradyakis hexahedron')
         div6.html('vertex figure: 8 hexagons, 8 octagons, 8 octagrams')
         div8.html('')
       break
@@ -4711,15 +5512,215 @@ function changePolytope() {
         div6.html('vertex figure: 12 decagons, 12 pentagrams')
         div8.html('')
       break
-      case 127:
-        div.html('20 tripod (edge lengths: 1, 2.618033988749895) faces')
+      case 82:
+        div.html('12 decagram, 12 pentagon faces')
+        div3.html('Coexter diagram: x5/3x5o')
+        div4.html('Dual to great pentakis dodecahedron')
+        div5.html('names: quasitruncated small stellated dodecahedron, small stellated truncated dodecahedron')
+        div6.html('vertex figure: isosceles triangle (base length (1+sqrt(5))/2, leg length sqrt((5-sqrt(5))/2)')
+        div8.html('')
+      break
+      case 83:
+        div.html('60 isosceles triangle (base length 0.8541019662496823, leg length 8.090169943749448) faces')
+        div3.html('Coexter diagram: m5/3m5o')
+        div4.html('Dual to quit sissid')
+        div5.html('Great pentakis dodecahedron')
+        div6.html('vertex figure: 12 decagrams, 12 pentagons')
+        div8.html('')
+      break
+      case 84:
+        div.html('12 decagram, 20 triangle faces')
+        div3.html('Coexter diagram: x5/3x3o')
+        div4.html('Dual to great triakis icosahedron')
+        div5.html('names: quasitruncated great stellated dodecahedron, great stellated truncated dodecahedron')
+        div6.html('vertex figure: isosceles triangle (base length 1, leg length sqrt((5-sqrt(5))/2)')
+        div8.html('')
+      break
+      case 85:
+        div.html('60 isosceles triangle (base length (5-sqrt(5))/2, leg length 5*((7-sqrt(5))/22) faces')
+        div3.html('Coexter diagram: m5/3m3o')
+        div4.html('Dual to quit gissid')
+        div5.html('Great triakis icosahedron')
+        div6.html('vertex figure: 20 triangles, 12 decagrams')
+        div8.html('')
+      break
+      case 86:
+        div.html('12 pentagram, 20 hexagon faces')
+        div3.html('Coexter diagram: o5/2x3x')
+        div4.html('Dual to great stellapentakis dodecahedron')
+        div5.html('names: truncated great icosahedron, great truncated icosahedron')
+        div6.html('vertex figure: isosceles triangle (base length (sqrt(5)-1)/2, leg length sqrt(3)')
+        div8.html('')
+      break
+      case 87:
+        div.html('60 isosceles triangle (base length 9*(1+2*sqrt(5))/19, leg length 3*((1+sqrt(5))/2) faces')
+        div3.html('Coexter diagram: o5/2m3m')
+        div4.html('Dual to tiggy')
+        div5.html('Great stellapentakis dodecahedron')
+        div6.html('vertex figure: 20 hexagons, 12 pentagrams')
+        div8.html('')
+      break
+      case 88:
+        div.html('12 decagram, 20 hexagon faces')
+        div3.html('')
+        div4.html('Dual to great dodecicosacron')
+        div5.html('Great dodecicosahedron')
+        div6.html('vertex figure: butterfly (width: (1+sqrt(5))/2, diagonal sqrt(3); leg length sqrt((5-sqrt(5))/2))')
+        div8.html('')
+      break
+      case 89:
+        div.html('60 butterfly (width: 2.3724855200306108, diagonal 2.1983388520507723; leg length 1.2584085723648186) faces')
+        div3.html('')
+        div4.html('Dual to giddy')
+        div5.html('Great dodecicosacron')
+        div6.html('vertex figure: 20 hexagons, 12 decagrams')
+        div8.html('')
+      break
+      case 90:
+        div.html('12 decagram, 30 square faces')
+        div3.html('')
+        div4.html('Dual to great rhombidodecacron')
+        div5.html('Great rhombidodecahedron')
+        div6.html('vertex figure: butterfly (width: 1, diagonal sqrt(2); leg length sqrt((5-sqrt(5))/2))')
+        div8.html('')
+      break
+      case 91:
+        div.html('60 butterfly (width: (5+sqrt(5))/2, diagonal 5+sqrt(5); leg length 5-sqrt(5)) faces')
+        div3.html('')
+        div4.html('Dual to gird')
+        div5.html('Great rhombidodecacron')
+        div6.html('vertex figure: 30 squares, 12 decagrams')
+        div8.html('')
+      break
+      case 92:
+        div.html('12 pentagram, 12 pentagon, 20 hexagon faces')
+        div3.html('Coexter diagram: o5/3x3x5*a')
+        div4.html('Dual to medial icosacronic hexecontahedron')
+        div5.html('Icosidodecadodecahedron')
+        div6.html('vertex figure: crossed icosoles trapezoid (base lengths: (sqrt(5)-1)/2, (1+sqrt(5))/2; leg length sqrt(3))')
+        div8.html('')
+      break
+      case 93:
+        div.html('60 dart (width 2, top height sqrt(203+84*sqrt(5))/11; bottom height -sqrt(203-84*sqrt(5))/11') 
+        div3.html('Coexter diagram: o5/3m3m5*a')
+        div4.html('Dual to Ided')
+        div5.html('Medial icosacronic hexecontahedron')
+        div6.html('vertex figure: 12 pentagrams, 12 pentagons, 20 hexagons')
+        div8.html('')
+      break
+      case 94:
+        div.html('12 pentagram, 12 decagon, 20 triangle faces')
+        div3.html('Coexter diagram: x5/3o3x5*a')
+        div4.html('Dual to small ditrigonal dodecacronic hexecontahedron')
+        div5.html('Small ditrigonal dodecicosidodecahedron')
+        div6.html('vertex figure: crossed icosoles trapezoid (base lengths: (sqrt(5)-1)/2, 1; leg length sqrt((5+sqrt(5))/2))')
+        div8.html('')
+      break
+      case 95:
+        div.html('60 dart (width 3*phi^2, top height sqrt(8577/2888+(3645*sqrt(5))/2888); bottom height -3*sqrt(346+18*sqrt(5))/44') 
+        div3.html('Coexter diagram: m5/3o3m5*a')
+        div4.html('Dual to sidditdid')
+        div5.html('Small ditrigonal dodecacronic hexecontahedron')
+        div6.html('vertex figure: 12 pentagrams, 12 decagons, 20 triangles')
+        div8.html('')
+      break
+      case 96:
+        div.html('12 pentagon, 12 decagram, 20 triangle faces')
+        div3.html('Coexter diagram: x5/3x3o5*a')
+        div4.html('Dual to great ditrigonal dodecacronic hexecontahedron')
+        div5.html('Great ditrigonal dodecicosidodecahedron')
+        div6.html('vertex figure: icosoles trapezoid (base lengths: 1, (1+sqrt(5))/2; leg length sqrt((5-sqrt(5))/2))')
+        div8.html('')
+      break
+      case 97:
+        div.html('60 kite (width 3/phi^2, top height sqrt(8577/2888-(3645*sqrt(5))/2888); bottom height 3*sqrt(346-18*sqrt(5))/44') 
+        div3.html('Coexter diagram: m5/3m3o5*a')
+        div4.html('Dual to gidditdid')
+        div5.html('Great ditrigonal dodecacronic hexecontahedron')
+        div6.html('vertex figure: 12 pentagons, 12 decagrams, 20 triangles')
+        div8.html('')
+      break
+      case 98:
+        div.html('12 pentagram, 12 decagram, 20 triangle faces')
+        div3.html('Coexter diagram:  x5/3x5/2o3*a')
+        div4.html('Dual to great dodecacronic hexecontahedron')
+        div5.html('Great dodecicosidodecahedron')
+        div6.html('vertex figure: icosoles trapezoid (base lengths: 1, (sqrt(5)-1)/2; leg length sqrt((5-sqrt(5))/2))')
+        div8.html('')
+      break
+      case 99:
+        div.html('60 kite (width sqrt(5)-1, top height sqrt(53/2-(23*sqrt(5))/2)/3; bottom height sqrt(157/2-(31*sqrt(5))/2)/11')
+        div3.html('Coexter diagram: m5/3m5/2o3*a')
+        div4.html('Dual to gaddid')
+        div5.html('Great dodecacronic hexecontahedron')
+        div6.html('vertex figure: 12 pentagrams, 12 decagrams, 20 triangles')
+        div8.html('')
+      break
+      case 100:
+        div.html('12 pentagram, 20 hexagon, 20 triangle faces')
+        div3.html('Coexter diagram: x5/2o3x3*a')
+        div4.html('Dual to great dodecacronic hexecontahedron')
+        div5.html('Great dodecicosidodecahedron')
+        div6.html('vertex figure: icosoles trapezoid (base lengths: 1, (sqrt(5)-1)/2; leg length sqrt(3)')
+        div8.html('')
+      break
+      case 101:
+        div.html('60 kite (width sqrt(5), top height sqrt(1345-570*sqrt(5))/22; sqrt(1345-570*sqrt(5))/22')
+        div3.html('Coexter diagram: m5/2o3m3*a')
+        div4.html('Dual to siid')
+        div5.html('Small icosacronic hexecontahedron')
+        div6.html('vertex figure: 12 pentagrams, 20 hexagons, 20 triangles')
+        div8.html('')
+      break
+      case 130:
+        div.html(A*gcm+' square, 2 '+GetName()+' faces')
+        if(gcm==1) {
+          if(B==1) {
+            div3.html('Coexter diagram: x x'+A+'o')
+          }else {
+            div3.html('Coexter diagram: x x'+A+'/'+B+'o')
+          }
+        }else {
+          div3.html('')
+        }
+        div5.html(GetName('gonal','grammic')+' prism')
+        div4.html('Dual to '+GetName('gonal','grammic')+' tegum')
+        if(gcm>1) {
+          div5.html(GetName('gonal','grammic')+' prisms')
+          div4.html('Dual to '+GetName('gonal','grammic')+' tegums')
+        }
+        div6.html('vertex figure: icosoles triangle (base length sqrt(2), leg length '+sqrt(2+2*cos(2*PI/A*B))+')')
+        div8.html('')
+      break
+      case 131:
+        div.html(A*gcm*2+' icocoles triangle faces')
+        if(gcm==1) {
+          if(B==1) {
+            div3.html('Coexter diagram: oxo'+A+'ooo&#xt')
+          }else {
+            div3.html('Coexter diagram: oxo'+A+'/'+B+'ooo&#xt')
+          }
+        }else {
+          div3.html('')
+        }
+        div5.html(GetName('gonal','grammic')+' tegum')
+        div4.html('Dual to '+GetName('gonal','grammic')+' prism')
+        if(gcm>1) {
+          div5.html(GetName('gonal','grammic')+' tegums')
+          div4.html('Dual to '+GetName('gonal','grammic')+' prisms')
+        }
+        div6.html('vertex figure: '+'A*gcm*2'+' squares, 2 '+GetName()+'s')
+        div8.html('')
+      break
+      case 134:
+        div.html('20 tripod (edge lengths: 1, (3+sqrt(5))/2) faces')
         div3.html('')
         div4.html('Self-Dual')
         div5.html('names: ditrigonal icosahedron, excavated dodecahedron, Hugel\'s polyhedron')
         div6.html('vertex figure: triambus (dual edge lengths: 1, 2.618033988749895)')
         div8.html('')
       break
-      case 128:
+      case 135:
         div.html('8 triangle {3} faces')
         div3.html('Coexter symbol {4,3}[2{3,3}]{3,4}')
         div4.html('Self-Dual')
@@ -4727,7 +5728,7 @@ function changePolytope() {
         div6.html('vertex figure: triangle {3}')
         div8.html('')
       break
-      case 129:
+      case 136:
         div.html('20 triangle {3} faces')
         div3.html('Coexter symbol {5,3}[5{3,3}]{3,5}')
         div4.html('Dual to its enantiomorph pair')
@@ -4735,7 +5736,7 @@ function changePolytope() {
         div6.html('vertex figure: triangle {3}')
         div8.html('')
       break
-      case 130:
+      case 137:
         div.html('20 uniform hexagram {6/2} faces')
         div3.html('Coexter symbol 2{5,3}[10{3,3}]2{3,5}')
         div4.html('Self-Dual')
@@ -4743,7 +5744,7 @@ function changePolytope() {
         div6.html('vertex figure: uniform hexagram {6/2}')
         div8.html('')
       break
-      case 131:
+      case 138:
         div.html('30 square {4} faces')
         div3.html('Coexter symbol 2{5,3}[5{4,3}]')
         div4.html('dual to se')
@@ -4751,7 +5752,7 @@ function changePolytope() {
         div6.html('vertex figure: uniform hexagram {6/2}')
         div8.html('')
       break
-      case 132:
+      case 139:
         div.html('20 uniform hexagram {6/2} faces')
         div3.html('Coexter symbol [5{3,4}]2{3,5}')
         div4.html('dual to rhom')
@@ -4759,7 +5760,39 @@ function changePolytope() {
         div6.html('vertex figure: square {4}')
         div8.html('')
       break
-      case 137:
+      case 140:
+        div.html('20 irregular pentagram faces')
+        div3.html('')
+        div4.html('dual to noble faceting of sirco')
+        div5.html('Noble faceting of truncated cube')
+        div6.html('vertex figure: irregular pentagon')
+        div8.html('')
+      break
+      case 141:
+        div.html('20 irregular pentagon faces')
+        div3.html('')
+        div4.html('dual to noble faceting of tic')
+        div5.html('Noble faceting of small rhombicuboctahedron')
+        div6.html('vertex figure: irregular pentagram')
+        div8.html('')
+      break
+      case 142:
+        div.html('24 irregular pentagon faces')
+        div3.html('')
+        div4.html('Self-Dual')
+        div5.html('Noble faceting of snub cube')
+        div6.html('vertex figure: irregular pentagon')
+        div8.html('')
+      break
+      case 143:
+        div.html('24 irregular pentagon faces')
+        div3.html('')
+        div4.html('Self-Dual')
+        div5.html('Noble faceting of nonuniform snub cube')
+        div6.html('vertex figure: irregular pentagon')
+        div8.html('')
+      break
+      case 144:
         div.html('20 irregular great enneagram faces')
         div3.html('')
         div4.html('dual to verf of paphacki')
@@ -4767,7 +5800,7 @@ function changePolytope() {
         div6.html('vertex figure: isosceles triangle (base length 4, leg length 5.7888543819998)')
         div8.html('')
       break
-      case 138:
+      case 146:
         div.html('20 irregular enneagram faces')
         div3.html('')
         div4.html('dual to verf of paphicki')
@@ -4775,7 +5808,7 @@ function changePolytope() {
         div6.html('vertex figure: isosceles triangle (base length 6+2*sqrt(5), leg length 5.7888543819998)')
         div8.html('')
       break
-      case 139:
+      case 145:
         div.html('20 isosceles triangle (base length 1+sqrt(5), leg length 2*sqrt(2)) faces')
         div3.html('')
         div4.html('dual to echidnahedron')
@@ -4783,7 +5816,7 @@ function changePolytope() {
         div6.html('vertex figure: irregular great nonagram')
         div8.html('')
       break
-      case 140:
+      case 147:
         div.html('20 isosceles triangle (base length sqrt(5)-1, leg length 2*sqrt(2))')
         div3.html('')
         div4.html('dual to crennell 4 icosahedron stellation')
@@ -4802,157 +5835,7 @@ function changePolytope() {
       div2.html('Schläfli symbol {'+A*gcm+'/'+B*gcm+'}')
     }
     div3.html('Self-dual')
-    if(A<5) {
-      if(A==2) {
-        if(gcm==1) {
-          div4.html('Dyad')
-        }else {
-          div4.html('compound of '+gcm+' Dyads')
-        }
-      }if(A==3) {
-        if(gcm==1) {
-          div4.html('Triangle')
-        }else {
-          div4.html('compound of '+gcm+' Triangles')
-        }
-      }if(A==4) {
-        if(gcm==1) {
-          div4.html('Square')
-        }else {
-          div4.html('compound of '+gcm+' Squares')
-        }
-      }
-    }else {
-      var str = ''
-      var a = ''
-      if(A%100==12||A%100==11||A%100==19) {
-        switch(A%100) {
-          case 11:
-            a='hendeca'
-          break
-          case 12:
-            a='dodeca'
-          break
-          case 19:
-            a='enneadeca'
-          break
-        }
-      }else {
-        switch(floor((A%1000)/100)) {
-          case 1:
-            str+='hecto'
-          break
-          case 2:
-            str+='diacos'
-          break
-          case 3:
-            str+='triacos'
-          break
-          case 4:
-            str+='tetracos'
-          break
-          case 5:
-            str+='pentacos'
-          break
-          case 6:
-            str+='hexacos'
-          break
-          case 7:
-            str+='heptacos'
-          break
-          case 8:
-            str+='octacos'
-          break
-          case 9:
-            str+='eneacos'
-          break
-        }
-        if(A%100==0) {
-          if(floor((A%1000)/100)==1) {}else {
-            str+='a'
-          }
-        }else {
-          if(floor((A%1000)/100)==1) {
-            str+='n'
-          }else if(A>=100) {
-            str+='i'
-          }
-        }
-        switch(floor((A%100)/10)) {
-          case 1:
-            str+='deca'
-          break
-          case 2:
-            if(A%10==0) {
-              str+='icosa'
-            }else {
-              str+='icosi'
-            }
-          break
-          case 3:
-            str+='triaconta'
-          break
-          case 4:
-            str+='tetraconta'
-          break
-          case 5:
-            str+='pentaconta'
-          break
-          case 6:
-            str+='hexaconta'
-          break
-          case 7:
-            str+='heptaconta'
-          break
-          case 8:
-            str+='octaconta'
-          break
-          case 9:
-            str+='enneaconta'
-          break
-        }
-        switch(A%10) {
-          case 1:
-            str+='hena'
-          break
-          case 2:
-            str+='di'
-          break
-          case 3:
-            str+='tri'
-          break
-          case 4:
-            str+='tetra'
-          break
-          case 5:
-            str+='penta'
-          break
-          case 6:
-            str+='hexa'
-          break
-          case 7:
-            str+='hepta'
-          break
-          case 8:
-            str+='octa'
-          break
-          case 9:
-            str+='nona'
-          break
-        }
-      }
-      str+=a
-      if(B==1) {
-        str+='gon'
-      }else {
-        str+='gram'
-      }
-      if(gcm>1) {
-        str='compound of '+gcm+' '+str
-        str+='s'
-      }
-      div4.html(str)
-    }
+    div4.html(GetName())
     div5.html('')
     div6.html('')
   }else {
@@ -5289,15 +6172,6 @@ function draw() {
             var _2 = dat[valu]
             var _3 = dat[valu1]
             var __i = dat[i_]
-            //x_1=_1[0]
-            //y_1=_1[1]
-            //x_2=_2[0]
-            //y_2=_2[1]
-            //x_3=_3[0]
-            //y_3=_3[1]
-            
-            //x=__i[0]
-            //y=__i[1]
             var det = (_2[1]-_3[1])*(_1[0]-_3[0])+(_3[0]-_2[0])*(_1[1]-_3[1])
             var l1 = ((_2[1]-_3[1])*(__i[0]-_3[0])+(_3[0]-_2[0])*(__i[1]-_3[1]))/det
             var l2 = ((_3[1]-_1[1])*(__i[0]-_3[0])+(_1[0]-_3[0])*(__i[1]-_3[1]))/det
@@ -5333,7 +6207,6 @@ function draw() {
           dat[n]=[NaN,NaN,NaN]
           n=num
         }
-        //console.log(array)
         function intersect(a,b,c,d) {
           var x10 = a[0]
           var y10 = a[1]
@@ -5638,48 +6511,198 @@ function areConnected(arr1,arr2,d) {
   }
   return false
 }
-function conv(arr) {
-  var arr1 = []
-  for(var i = 0; i<arr.length; i++) {
-    if(arr[i][3]==undefined) {
-      arr[i][3]=0
+function GetName(a_a,b_b) {
+  if(a_a==undefined) {
+    a_a='gon'
+  }
+  if(b_b==undefined) {
+    b_b='gram'
+  }
+  if(A<5) {
+    if(A==2) {
+      if(gcm==1) {
+        if(a_a=='gonal') {
+          return 'dyadic'
+        }
+        return 'dyad'
+      }else {
+        if(a_a=='gonal') {
+          return 'compound of '+gcm+' dyadic'
+        }
+        return 'compound of '+gcm+' dyads'
+      }
+    }if(A==3) {
+      if(gcm==1) {
+        if(a_a=='gonal') {
+          return 'triangular'
+        }
+        return 'triangle'
+      }else {
+        return 'compound of '+gcm+' triangles'
+      }
+    }if(A==4) {
+      if(gcm==1) {
+        return 'square'
+      }else {
+        if(a_a=='gonal') {
+          return 'compound of '+gcm+' square'
+        }
+        return 'compound of '+gcm+' squares'
+      }
     }
-    if(arr[i][0]<5) {
-      arr1[arr1.length]=arr[i]
+  }else {
+    var str = ''
+    var a = ''
+    if(A%100>10&&A%100<10) {
+      switch(A%100) {
+        case 11:
+          a='hendeca'
+        break
+        case 12:
+          a='dodeca'
+        break
+        case 13:
+          a='trideca'
+        break
+        case 14:
+          a='tetradeca'
+        break
+        case 15:
+          a='pentadeca'
+        break
+        case 16:
+          a='hexadeca'
+        break
+        case 17:
+          a='heptadeca'
+        break
+        case 18:
+          a='octadeca'
+        break
+        case 19:
+          a='enneadeca'
+        break
+      }
     }else {
-      arr1[arr1.length]=[arr[i][0]-10,arr[i][1],arr[i][2],arr[i][3]]
-      arr1[arr1.length]=[10-arr[i][0],arr[i][1],arr[i][2],arr[i][3]]
+      switch(floor((A%1000)/100)) {
+        case 1:
+          str+='hecto'
+        break
+        case 2:
+          str+='diacos'
+        break
+        case 3:
+          str+='triacos'
+        break
+        case 4:
+          str+='tetracos'
+        break
+        case 5:
+          str+='pentacos'
+        break
+        case 6:
+          str+='hexacos'
+        break
+        case 7:
+          str+='heptacos'
+        break
+        case 8:
+          str+='octacos'
+        break
+        case 9:
+          str+='enneacos'
+        break
+      }
+      if(A%100==0) {
+        if(floor((A%1000)/100)==1) {}else {
+          str+='a'
+        }
+      }else {
+        if(floor((A%1000)/100)==1) {
+          str+='n'
+        }else if(A>=100) {
+          str+='i'
+        }
+      }
+      switch(floor((A%100)/10)) {
+        case 1:
+          str+='deca'
+        break
+        case 2:
+        if(A%10==0) {
+          str+='icosa'
+        }else {
+          str+='icosi'
+        }
+        break
+        case 3:
+          str+='triaconta'
+        break
+        case 4:
+          str+='tetraconta'
+        break
+        case 5:
+          str+='pentaconta'
+        break
+        case 6:
+          str+='hexaconta'
+        break
+        case 7:
+          str+='heptaconta'
+        break
+        case 8:
+          str+='octaconta'
+        break
+        case 9:
+          str+='enneaconta'
+        break
+      }
+      switch(A%10) {
+        case 1:
+          str+='hena'
+        break
+        case 2:
+          str+='di'
+        break
+        case 3:
+          str+='tri'
+        break
+        case 4:
+          str+='tetra'
+        break
+        case 5:
+          str+='penta'
+        break
+        case 6:
+          str+='hexa'
+        break
+        case 7:
+          str+='hepta'
+        break
+        case 8:
+          str+='octa'
+        break
+        case 9:
+          str+='ennea'
+        break
+      }
+    }
+    str+=a
+    var Bn = B
+    if(B>A/2) {
+      Bn=A-B
+    }
+    if(Bn==1) {
+      str+=a_a
+    }else {
+      str=Bn+'-'+str+b_b
+    }
+    if(gcm>1) {
+      str='compound of '+gcm+' '+str
+      if(a_a!=='gonal') {
+        str+='s'
+      }
     }
   }
-  arr = arr1
-  arr1 = []
-  for(var i = 0; i<arr.length; i++) {
-    if(arr[i][1]<5) {
-      arr1[arr1.length]=arr[i]
-    }else {
-      arr1[arr1.length]=[arr[i][0],arr[i][1]-10,arr[i][2],arr[i][3]]
-      arr1[arr1.length]=[arr[i][0],10-arr[i][1],arr[i][2],arr[i][3]]
-    }
-  }
-  arr = arr1
-  arr1 = []
-  for(var i = 0; i<arr.length; i++) {
-    if(arr[i][2]<5) {
-      arr1[arr1.length]=arr[i]
-    }else {
-      arr1[arr1.length]=[arr[i][0],arr[i][1],arr[i][2]-10,arr[i][3]]
-      arr1[arr1.length]=[arr[i][0],arr[i][1],10-arr[i][2],arr[i][3]]
-    }
-  }
-  arr = arr1
-  arr1 = []
-  for(var i = 0; i<arr.length; i++) {
-    if(arr[i][3]<5) {
-      arr1[arr1.length]=arr[i]
-    }else {
-      arr1[arr1.length]=[arr[i][0],arr[i][1],arr[i][2],arr[i][3]-10]
-      arr1[arr1.length]=[arr[i][0],arr[i][1],arr[i][2],10-arr[i][3]]
-    }
-  }
-  return arr1
+  return str
 }
