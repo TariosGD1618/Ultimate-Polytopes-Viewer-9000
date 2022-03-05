@@ -5659,8 +5659,8 @@ function changePolytope() {
       case 100:
         div.html('12 pentagram, 20 hexagon, 20 triangle faces')
         div3.html('Coexter diagram: x5/2o3x3*a')
-        div4.html('Dual to great dodecacronic hexecontahedron')
-        div5.html('Great dodecicosidodecahedron')
+        div4.html('Dual to small icosacronic hexecontahedron')
+        div5.html('Small icosicosidodecahedron')
         div6.html('vertex figure: icosoles trapezoid (base lengths: 1, (sqrt(5)-1)/2; leg length sqrt(3)')
         div8.html('')
       break
